@@ -29,8 +29,18 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Deploy on AWS Amplify
+
+This app is set up for [AWS Amplify Hosting](https://console.aws.amazon.com/amplify/):
+
+1. Open the [Amplify console](https://console.aws.amazon.com/amplify/) and choose **Create new app**.
+2. Choose your **Git provider** (e.g. GitHub), then choose **Next** (framework).
+3. Select the **phi-intelligence/dps** repository and the **main** branch, then **Next**.
+4. Let Amplify **Create and use a new service role** (or pick an existing one), then **Next**.
+5. Review and choose **Save and deploy**.
+
+Build settings are in `amplify.yml` (Next.js SSR with `baseDirectory: .next`). Amplify will build and host the app and give you a URL.
+
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You can also deploy on the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). See [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
