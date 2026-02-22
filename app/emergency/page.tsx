@@ -97,7 +97,7 @@ export default function UrgentEnquiryPage() {
       </section>
 
       {/* Form for non-critical issues */}
-      <section className="py-48 bg-brand-surface border-t border-brand-card-border">
+      <section className="py-48 bg-brand-surface">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <h3 className="text-3xl md:text-5xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase">

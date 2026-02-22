@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
 import {
   Flame,
@@ -13,6 +14,7 @@ import {
   Shield,
   Clock,
   Star,
+  ChevronDown,
 } from "lucide-react";
 import TrustBar from "@/components/ui/TrustBar";
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -20,8 +22,9 @@ import ReviewCard from "@/components/ui/ReviewCard";
 import CTABanner from "@/components/ui/CTABanner";
 import StatsCounter from "@/components/sections/StatsCounter";
 import ProcessSteps from "@/components/sections/ProcessSteps";
-import ThermalBackground from "@/components/animations/ThermalBackground";
-import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
+import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
+import Hero3DScene from "@/components/animations/Hero3DScene";
+import SectionWaves from "@/components/ui/SectionWaves";
 import { COMPANY, REVIEWS } from "@/lib/constants";
 import { registerGSAP, gsap } from "@/components/animations/gsap-init";
 
@@ -66,16 +69,30 @@ const trustPoints = [
 ];
 
 export default function HomePage() {
+  const { openQuoteModal } = useQuoteModal();
   useEffect(() => {
     registerGSAP();
   }, []);
 
   return (
     <div className="bg-brand-surface text-brand-text overflow-hidden relative">
-      <ThermalBackground />
+      <EnergyFlowBackground />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-32 pb-20 bg-brand-surface" aria-label="Hero">
+      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden" aria-label="Hero">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/blueprint-boiler-cutaway.png"
+            alt=""
+            fill
+            className="object-cover object-center opacity-20"
+            sizes="100vw"
+            priority
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-brand-surface/85" />
+        </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -100,9 +117,12 @@ export default function HomePage() {
                   alt="DPS Heating Services"
                   width={80}
                   height={80}
+                  priority
+                  loading="eager"
                   className="rounded-2xl shadow-lg shadow-brand-red/10"
+                  style={{ width: "auto", height: "auto" }}
                 />
-                <h1 className="text-6xl md:text-8xl font-technical font-bold text-brand-text leading-[1.05] tracking-tighter uppercase glow-text">
+                <h1 className="text-5xl md:text-8xl font-technical font-bold text-brand-text leading-[1.05] tracking-tighter uppercase">
                   DPS<br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-brand-purple to-brand-blue animate-gradient-x">
                     Heating.
@@ -115,14 +135,15 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-5">
-                <Link
-                  href="/contact"
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal()}
                   className="group relative inline-flex items-center justify-center gap-2 bg-brand-red text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-brand-red/80 overflow-hidden shadow-xl shadow-brand-red/20"
                 >
                   <span className="relative z-10">Get a Free Quote</span>
                   <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                   <div className="absolute inset-0 bg-brand-card-hover scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-                </Link>
+                </button>
                 <a
                   href={`tel:${COMPANY.phone}`}
                   className="inline-flex items-center justify-center gap-2 bg-transparent border border-brand-card-border-hover hover:border-brand-blue/50 hover:bg-brand-blue/5 text-brand-text px-8 py-4 rounded-full font-technical font-bold text-base tracking-widest uppercase transition-all"
@@ -133,16 +154,10 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Right Column: Blueprint Schematic */}
-            <BlueprintBillboard
-              src="/images/blueprint-boiler-cutaway.png"
-              alt="Boiler internal cross-section technical schematic"
-              theme="cool"
-              versionText="GAS SAFE REGISTERED"
-              idHash={`REG: ${COMPANY.gasSafeNumber}`}
-              statusText="FULLY OPERATIONAL"
-              className="w-full"
-            />
+            {/* Right column: 3D logo */}
+            <div className="relative w-full flex justify-center lg:justify-end">
+              <Hero3DScene className="w-full" modelPath="/dps.glb" />
+            </div>
           </div>
         </div>
 
@@ -151,8 +166,8 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block"
-          aria-hidden="true"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block z-10"
+          aria-hidden
         >
           <div className="w-5 h-8 border border-brand-card-border-hover rounded-full flex items-start justify-center pt-2">
             <motion.div
@@ -172,8 +187,9 @@ export default function HomePage() {
       </div>
 
       {/* Services Overview */}
-      <section className="py-48 relative z-10 bg-brand-steel" aria-label="Our services">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-48 relative z-10 bg-brand-steel overflow-hidden" aria-label="Our services">
+        <SectionWaves variant="cool" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -199,8 +215,8 @@ export default function HomePage() {
       </section>
 
       {/* About / Engineering Quality */}
-      <section className="py-48 bg-brand-surface border-y border-brand-card-border relative overflow-hidden">
-        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-brand-blue/[0.04] blur-[180px] rounded-full -translate-y-1/2 pointer-events-none" />
+      <section className="py-48 bg-brand-surface relative overflow-hidden">
+        <SectionWaves variant="mixed" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <motion.div
@@ -243,23 +259,27 @@ export default function HomePage() {
               </Link>
             </motion.div>
 
-            <div className="order-1 lg:order-2">
-              <BlueprintBillboard
-                src="/images/blueprint-ac-exploded.png"
-                alt="Air conditioning unit exploded technical diagram"
-                theme="cool"
-                versionText="F-GAS CERTIFIED"
-                idHash={`REG: ${COMPANY.gasSafeNumber}`}
-                statusText="ALL SYSTEMS OPERATIONAL"
-                className="w-full"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+            >
+              <Image
+                src="/images/plumbing-pipes.jpg"
+                alt="DPS qualified engineer working on plumbing and heating systems"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Engineer Photo Strip */}
-      <div className="relative h-80 overflow-hidden border-y border-brand-card-border">
+      <div className="relative h-80 overflow-hidden">
         <Image
           src="/images/hero-bg.jpg"
           alt="DPS engineer working on a boiler installation"
@@ -288,8 +308,8 @@ export default function HomePage() {
       />
 
       {/* Why Choose DPS */}
-      <section className="py-48 bg-brand-steel border-t border-brand-card-border relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-red/5 rounded-full blur-[150px] pointer-events-none" />
+      <section className="py-48 bg-brand-steel relative overflow-hidden">
+        <SectionWaves variant="warm" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

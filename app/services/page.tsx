@@ -7,6 +7,7 @@ import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
 import { COMPANY } from "@/lib/constants";
+import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
 
 const categories = [
@@ -67,6 +68,7 @@ const whyDPS = [
 ];
 
 export default function ServicesPage() {
+  const { openQuoteModal } = useQuoteModal();
   return (
     <div className="bg-brand-surface">
       <PageHero
@@ -168,19 +170,20 @@ export default function ServicesPage() {
                 <Phone size={18} />
                 {COMPANY.phone}
               </a>
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => openQuoteModal()}
                 className="flex items-center justify-center gap-4 border border-white/30 bg-white/5 backdrop-blur-md text-white px-10 py-5 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.2em] hover:bg-white/10 transition-all"
               >
                 Get a Free Quote
-              </Link>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Capability Blueprint */}
-      <section className="py-40 bg-brand-surface border-b border-brand-card-border relative overflow-hidden">
+      <section className="py-40 bg-brand-surface relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-red/[0.03] blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div

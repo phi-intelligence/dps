@@ -99,7 +99,7 @@ export default function ServiceAreasPage() {
       </section>
 
       {/* Coverage Network Section */}
-      <section className="py-40 bg-brand-navy border-y border-brand-card-border relative overflow-hidden">
+      <section className="py-40 bg-brand-navy relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-blue/[0.03] blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -144,7 +144,7 @@ export default function ServiceAreasPage() {
       </section>
 
       {/* London Aerial Photo */}
-      <section className="relative h-[420px] overflow-hidden border-y border-brand-card-border">
+      <section className="relative h-[420px] overflow-hidden">
         <Image
           src="/images/service-area-map.jpg"
           alt="Aerial view of London — DPS Heating Services coverage area"

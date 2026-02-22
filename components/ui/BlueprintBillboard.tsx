@@ -77,6 +77,7 @@ export default function BlueprintBillboard({
                         src={src}
                         alt={alt}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="hologram-v2 object-contain scale-110"
                         priority
                     />
@@ -85,7 +86,7 @@ export default function BlueprintBillboard({
                 {/* HUD Labels - Now truly floating */}
                 <div className={`absolute top-4 right-4 p-2 border-r border-t ${accentColorClass} bg-transparent`}>
                     <p className="text-[8px] font-technical uppercase tracking-[0.2em] font-bold">
-                        ARCH_LOG: {versionText}
+                        {versionText}
                     </p>
                 </div>
 
@@ -101,7 +102,7 @@ export default function BlueprintBillboard({
                     <div className="flex items-center gap-2">
                         <div className={`w-1 h-1 rounded-full animate-pulse ${theme === "urgent" ? "bg-brand-red" : "bg-brand-blue"}`} />
                         <p className="text-[8px] font-technical uppercase tracking-[0.2em] font-bold">
-                            STATUS: {statusText}
+                            {statusText}
                         </p>
                     </div>
                 </div>

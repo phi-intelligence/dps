@@ -18,19 +18,24 @@ export default function ReviewCard({ name, service, rating, quote, index = 0 }: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.15, duration: 0.5 }}
-      className="bg-brand-card backdrop-blur-xl border border-brand-card-border-hover rounded-2xl p-6"
+      className="bg-brand-steel border border-brand-card-border rounded-[2rem] p-8 premium-shadow hover:premium-shadow-hover transition-all duration-500"
     >
-      <div className="flex gap-1 mb-4" aria-label={`${rating} out of 5 stars`}>
+      <div className="flex gap-1 mb-6" aria-label={`${rating} out of 5 stars`}>
         {Array.from({ length: rating }).map((_, i) => (
-          <Star key={i} size={16} className="fill-brand-red text-brand-red" />
+          <Star key={i} size={18} className="fill-brand-orange text-brand-orange" />
         ))}
       </div>
-      <blockquote className="text-brand-text text-sm leading-relaxed mb-4 italic">
+      <blockquote className="text-brand-text text-lg leading-relaxed mb-8 font-medium">
         &ldquo;{quote}&rdquo;
       </blockquote>
-      <div>
-        <p className="font-semibold text-brand-text text-sm">{name}</p>
-        <p className="text-brand-muted text-xs">{service}</p>
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-brand-navy border border-brand-card-border flex items-center justify-center font-bold text-brand-red">
+          {name.charAt(0)}
+        </div>
+        <div>
+          <p className="font-bold text-brand-text text-base">{name}</p>
+          <p className="text-brand-muted text-sm font-medium">{service}</p>
+        </div>
       </div>
     </motion.div>
   );

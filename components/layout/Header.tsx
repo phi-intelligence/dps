@@ -7,6 +7,7 @@ import { Phone, Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { COMPANY } from "@/lib/constants";
 import { useTheme } from "@/lib/theme-provider";
+import { useQuoteModal } from "@/lib/quote-modal-context";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -28,6 +29,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { openQuoteModal } = useQuoteModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -46,23 +48,23 @@ export default function Header() {
             }`}
         >
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className="relative w-10 h-10 flex items-center justify-center">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-11 h-11 flex items-center justify-center">
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-brand-red via-brand-purple to-brand-blue rounded-full opacity-10 group-hover:opacity-20 transition-opacity"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-br from-brand-red to-brand-orange rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity"
+                animate={{ rotate: [0, 90, 180, 270, 360] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
-              <div className="w-9 h-9 rounded-full border border-brand-card-border-hover bg-brand-navy flex items-center justify-center relative z-10 overflow-hidden">
-                <Image src="/images/logo.jpg" alt="DPS Heating" width={30} height={30} className="object-contain" />
+              <div className="w-10 h-10 rounded-2xl border border-brand-card-border-hover bg-brand-surface flex items-center justify-center relative z-10 overflow-hidden shadow-sm shadow-brand-red/5 transition-transform group-hover:scale-105 duration-500">
+                <Image src="/images/logo.jpg" alt="DPS Heating" width={32} height={32} loading="eager" className="object-contain" style={{ width: "auto", height: "auto" }} />
               </div>
             </div>
-            <div className="hidden sm:block">
-              <span className="font-technical font-extrabold text-brand-text text-lg tracking-[0.2em] leading-none block uppercase">
-                DPS <span className="text-brand-red">Heating</span>
+            <div>
+              <span className="font-technical font-extrabold text-brand-text text-xl tracking-tight leading-none block uppercase">
+                DPS <span className="text-brand-text">Solutions</span>
               </span>
-              <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                Thermal Engineering
+              <span className="text-[10px] font-sans font-medium text-brand-muted tracking-tight mt-0.5 block">
+                Energy & HVAC Engineering
               </span>
             </div>
           </Link>
@@ -135,13 +137,14 @@ export default function Header() {
               <Phone size={14} className="text-brand-red animate-pulse" />
               <span>{COMPANY.phone}</span>
             </a>
-            <Link
-              href="/contact"
-              className="relative group bg-brand-red text-white px-6 py-2.5 rounded-full text-[10px] font-technical font-extrabold uppercase tracking-[0.2em] transition-all overflow-hidden shadow-lg shadow-brand-red/20"
+            <button
+              type="button"
+              onClick={() => openQuoteModal()}
+              className="relative group bg-brand-gradient text-white px-7 py-3 rounded-full text-xs font-technical font-extrabold uppercase tracking-wider transition-all overflow-hidden shadow-lg shadow-brand-red/10 active:scale-95 duration-200"
             >
-              <span className="relative z-10 transition-colors group-hover:text-white">Get a Quote</span>
-              <div className="absolute inset-0 bg-brand-red/80 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-            </Link>
+              <span className="relative z-10">Get a Free Estimate</span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -207,7 +210,7 @@ export default function Header() {
               ))}
             </nav>
 
-            <div className="mt-auto pt-12 border-t border-brand-card-border">
+            <div className="mt-auto pt-12">
               <a
                 href={`tel:${COMPANY.phone}`}
                 className="flex items-center gap-4 text-2xl font-technical font-bold mb-8 text-brand-text"
@@ -215,13 +218,16 @@ export default function Header() {
                 <Phone size={24} className="text-brand-red" />
                 {COMPANY.phone}
               </a>
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  openQuoteModal();
+                }}
                 className="block w-full text-center bg-brand-red text-white py-5 rounded-full font-technical font-extrabold uppercase tracking-widest shadow-xl shadow-brand-red/20"
-                onClick={() => setMobileOpen(false)}
               >
                 Get a Quote
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}

@@ -108,7 +108,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Approach */}
-      <section className="py-48 bg-brand-navy border-y border-brand-card-border relative overflow-hidden">
+      <section className="py-48 bg-brand-navy relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-brand-blue/5 blur-[180px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -142,7 +142,7 @@ export default function AboutPage() {
       </section>
 
       {/* Engineers at Work Photo Section */}
-      <section className="py-48 bg-brand-surface border-t border-brand-card-border overflow-hidden">
+      <section className="py-48 bg-brand-surface overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

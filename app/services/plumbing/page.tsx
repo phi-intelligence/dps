@@ -96,7 +96,7 @@ export default function PlumbingCategoryPage() {
       />
 
       {/* Intro */}
-      <section className="py-24 border-b border-brand-card-border relative overflow-hidden bg-brand-surface">
+      <section className="py-24 relative overflow-hidden bg-brand-surface">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -161,7 +161,7 @@ export default function PlumbingCategoryPage() {
       </section>
 
       {/* Technical Component Map */}
-      <section className="py-40 bg-brand-surface border-b border-brand-card-border relative overflow-hidden">
+      <section className="py-40 bg-brand-surface relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -207,7 +207,7 @@ export default function PlumbingCategoryPage() {
       </section>
 
       {/* Services grid */}
-      <section className="py-40 border-b border-brand-card-border bg-brand-steel" aria-label="Plumbing service options">
+      <section className="py-40 bg-brand-steel" aria-label="Plumbing service options">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border-hover bg-brand-card mb-6">

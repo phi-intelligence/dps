@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
 import { ThemeProvider } from "@/lib/theme-provider";
+import { QuoteModalProvider } from "@/lib/quote-modal-context";
 import { COMPANY } from "@/lib/constants";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -22,10 +23,10 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: {
     template: `%s | ${COMPANY.name}`,
-    default: `${COMPANY.name} | Heating, Plumbing & Air Conditioning`,
+    default: `${COMPANY.name} | Heating & Air Conditioning`,
   },
   description:
-    `Professional heating, plumbing and air conditioning services in ${COMPANY.areas}. Gas Safe registered engineers, fast response, free quotes.`,
+    `Professional heating and air conditioning services across ${COMPANY.areas}. Gas Safe registered engineers, fast response, free quotes.`,
   openGraph: {
     type: "website",
     siteName: COMPANY.name,
@@ -42,19 +43,21 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t=window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t='light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
           }}
         />
       </head>
       <body suppressHydrationWarning className="antialiased bg-brand-surface text-brand-text selection:bg-brand-red selection:text-white" style={{ fontFamily: "var(--font-jakarta)" }}>
         <ThemeProvider>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="relative z-10">{children}</main>
-          <Footer />
-          <ChatWidget />
+          <QuoteModalProvider>
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            <Header />
+            <main id="main-content" className="relative z-10">{children}</main>
+            <Footer />
+            <ChatWidget />
+          </QuoteModalProvider>
         </ThemeProvider>
       </body>
     </html>

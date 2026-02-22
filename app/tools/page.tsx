@@ -35,7 +35,7 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-surface border-y border-brand-card-border" aria-label="Quote calculator">
+      <section className="py-24 bg-brand-surface" aria-label="Quote calculator">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-4xl font-technical font-extrabold text-brand-text mb-4 tracking-widest uppercase">
             Instant Quote Calculator

@@ -70,7 +70,7 @@ export default function HeatingCategoryPage() {
       />
 
       {/* Intro */}
-      <section className="py-24 border-b border-brand-card-border relative overflow-hidden bg-brand-surface">
+      <section className="py-24 relative overflow-hidden bg-brand-surface">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -152,7 +152,7 @@ export default function HeatingCategoryPage() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-40 border-t border-brand-card-border bg-brand-steel" aria-label="Heating service options">
+      <section className="py-40 bg-brand-steel" aria-label="Heating service options">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-7xl font-technical font-black text-brand-text tracking-widest uppercase">

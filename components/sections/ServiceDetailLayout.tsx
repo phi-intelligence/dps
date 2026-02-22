@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Phone, ArrowRight, Activity, Zap, ShieldCheck, Cpu, Database } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import ProcessSteps, { ProcessStep } from "@/components/sections/ProcessSteps";
 import FAQAccordion, { FAQItem } from "@/components/ui/FAQAccordion";
 import QuoteForm from "@/components/ui/QuoteForm";
 import { COMPANY } from "@/lib/constants";
+import { useQuoteModal } from "@/lib/quote-modal-context";
 import { ICON_MAP, IconName } from "@/lib/icons";
 import { motion } from "framer-motion";
 
@@ -57,6 +57,7 @@ export default function ServiceDetailLayout({
   showGasSafeNote = false,
   accentColor = "red",
 }: ServiceDetailLayoutProps) {
+  const { openQuoteModal } = useQuoteModal();
   const accentClass = accentColor === "red" ? "text-brand-red" : "text-brand-blue";
   const accentBgClass = accentColor === "red" ? "bg-brand-red" : "bg-brand-blue";
   const accentBorderClass = accentColor === "red" ? "border-brand-red" : "border-brand-blue";
@@ -67,11 +68,12 @@ export default function ServiceDetailLayout({
         title={title}
         subtitle={subtitle}
         breadcrumbs={breadcrumbs}
+        preselectedService={serviceValue}
         compact
       />
 
       {/* Strategic Overview */}
-      <section className="py-32 relative overflow-hidden border-b border-brand-card-border">
+      <section className="py-32 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-red/5 blur-[150px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
@@ -111,13 +113,14 @@ export default function ServiceDetailLayout({
               )}
 
               <div className="flex flex-wrap gap-6">
-                <Link
-                  href="/contact"
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal({ preselectedService: serviceValue })}
                   className={`inline-flex items-center gap-4 bg-white text-black px-10 py-5 rounded-xl font-technical font-black text-[11px] uppercase tracking-[0.3em] transition-all hover:scale-105 shadow-2xl group`}
                 >
                   Get a Quote
                   <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </button>
                 <a
                   href={`tel:${COMPANY.phone}`}
                   className="inline-flex items-center gap-4 bg-transparent border border-brand-card-border-hover hover:bg-brand-card text-brand-text px-10 py-5 rounded-xl font-technical font-black text-[11px] uppercase tracking-[0.3em] transition-all"
@@ -167,7 +170,7 @@ export default function ServiceDetailLayout({
       </section>
 
       {/* Operational Parameters */}
-      <section className="py-32 bg-brand-navy border-b border-brand-card-border relative overflow-hidden">
+      <section className="py-32 bg-brand-navy relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-24">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border-hover bg-brand-card mb-6">
@@ -241,7 +244,7 @@ export default function ServiceDetailLayout({
       <ProcessSteps steps={steps} title="How We Work" dark={true} />
 
       {/* Assurance */}
-      <section className="py-40 bg-brand-navy border-y border-brand-card-border relative overflow-hidden">
+      <section className="py-40 bg-brand-navy relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-32">
             <h2 className="text-4xl md:text-7xl font-technical font-black text-brand-text tracking-widest uppercase">
@@ -268,7 +271,7 @@ export default function ServiceDetailLayout({
       </section>
 
       {/* FAQ */}
-      <section className="py-40 bg-brand-surface border-b border-brand-card-border">
+      <section className="py-40 bg-brand-surface">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase mb-4">

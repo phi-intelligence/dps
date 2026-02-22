@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertCircle, Send, Cpu, Activity } from "lucide-react";
 
-const services = [
+export const QUOTE_SERVICES = [
   { value: "", label: "Select service..." },
   { value: "boiler-repair", label: "Boiler Repair" },
   { value: "boiler-installation", label: "Boiler Installation" },
@@ -161,7 +161,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
               onChange={handleChange}
               className={`${inputClass} appearance-none cursor-pointer`}
             >
-              {services.map((s) => (
+              {QUOTE_SERVICES.map((s) => (
                 <option key={s.value} value={s.value} className="bg-brand-navy text-brand-text uppercase text-[10px]">
                   {s.label}
                 </option>
