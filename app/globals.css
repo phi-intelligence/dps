@@ -235,3 +235,16 @@ body {
   background-size: 200% 200%;
   animation: gradient-x 8s ease infinite;
 }
+
+/* Scroll image sequence — theme-aware canvas rendering */
+.sequence-canvas {
+  /* grayscale → invert (white bg becomes black) → blue-teal hue tint → screen blend
+     White-background frames: bg disappears, parts glow as holographic components */
+  filter: grayscale(1) invert(1) brightness(1.3) contrast(1.1) hue-rotate(200deg) saturate(2);
+  mix-blend-mode: screen;
+}
+
+[data-theme="light"] .sequence-canvas {
+  filter: contrast(1.05) brightness(0.98);
+  mix-blend-mode: normal;
+}

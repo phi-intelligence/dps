@@ -2,81 +2,67 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, Droplets, Wind, ArrowRight, Phone, Shield, Zap, Award, Cpu, Boxes, Activity } from "lucide-react";
+import { Flame, Wind, ArrowRight, Phone, Shield, Zap, Award, Activity } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
+import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
 import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
 
 const categories = [
   {
     icon: Flame,
-    title: "Thermal Architecture",
+    title: "Heating Services",
     description:
-      "Complete heating system engineering from complex diagnostics and installation to full infrastructure upgrades. Gas Safe certified.",
+      "Complete heating solutions for homes and businesses — from boiler repair and installation to central heating and power flushing. All work carried out by Gas Safe registered engineers.",
     image: "/images/central-heating.jpg",
     services: [
-      "Diagnostic Repair",
-      "System Deployment",
-      "Annual Maintenance",
-      "Network Optimization",
-      "Radiator Logistics",
+      "Boiler Repair",
+      "Boiler Installation",
+      "Boiler Servicing",
+      "Central Heating",
+      "Radiator Services",
+      "Power Flushing",
     ],
     href: "/services/heating",
-    ctaLabel: "Open Thermal Portal",
+    ctaLabel: "View Heating Services",
     accent: "brand-red",
   },
   {
-    icon: Droplets,
-    title: "Hydraulic Systems",
-    description:
-      "Precision plumbing for domestic and industrial-scale properties. Rapid tactical response for all infrastructure faults.",
-    image: "/images/plumbing-pipes.jpg",
-    services: [
-      "Fault Resolution",
-      "Mainline Ops",
-      "Leak Mitigation",
-      "Facility Install",
-      "Kitchen Hydraulics",
-    ],
-    href: "/services/plumbing",
-    ctaLabel: "Open Hydraulic Portal",
-    accent: "brand-blue",
-  },
-  {
     icon: Wind,
-    title: "Climate Control",
+    title: "Air Conditioning",
     description:
-      "Professional AC architecture and optimization for high-performance environments. Domestic and commercial grade deployment.",
+      "Professional AC installation, servicing, and repair for homes and businesses. We work with all major brands and offer both domestic and commercial solutions.",
     image: "/images/ac-unit-indoor.jpg",
     services: [
-      "AC Deployment",
-      "System Servicing",
-      "Crisis Repair",
-      "Industrial AC",
-      "Network Maintenance",
+      "AC Installation",
+      "AC Servicing",
+      "AC Repair",
+      "Domestic AC",
+      "Commercial AC",
+      "Maintenance Contracts",
     ],
     href: "/services/air-conditioning",
-    ctaLabel: "Open Climate Portal",
-    accent: "brand-purple",
+    ctaLabel: "View AC Services",
+    accent: "brand-blue",
   },
 ];
 
 const whyDPS = [
   {
     icon: Shield,
-    title: "Gas Safe Validated",
-    description: "All thermal operations executed by certified technicians.",
+    title: "Gas Safe Registered",
+    description: "All heating work carried out by certified Gas Safe registered engineers.",
   },
   {
     icon: Zap,
-    title: "Tactical Response",
-    description: "Active monitoring for rapid emergency deployment.",
+    title: "Fast Response",
+    description: "Same-day appointments available for urgent heating and AC problems.",
   },
   {
     icon: Award,
-    title: "Engineering Legacy",
-    description: "Over a decade of complex system implementation.",
+    title: "Over a Decade of Experience",
+    description: "Trusted by hundreds of customers across London for reliable, quality work.",
   },
 ];
 
@@ -84,9 +70,10 @@ export default function ServicesPage() {
   return (
     <div className="bg-brand-surface">
       <PageHero
-        title="Tactical Capabilities"
-        subtitle={`High-performance heating, plumbing and climate engineering across ${COMPANY.areas}. Protocol-driven solutions.`}
-        breadcrumbs={[{ label: "Core", href: "/" }, { label: "Capabilities" }]}
+        title="Our Services"
+        subtitle={`Professional heating and air conditioning services for homes and businesses across ${COMPANY.areas}.`}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
+        backgroundImage="/images/blueprint-commercial-system.png"
       />
 
       {/* Category Grid */}
@@ -100,7 +87,7 @@ export default function ServicesPage() {
               viewport={{ once: true }}
               className={`relative flex flex-col items-center gap-16 lg:gap-32 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
             >
-              {/* Image Matrix */}
+              {/* Image */}
               <div className="relative w-full lg:w-1/2 h-[500px] rounded-[3rem] overflow-hidden border border-brand-card-border shadow-2xl group">
                 <div className="absolute inset-0 bg-brand-steel/10 mix-blend-multiply z-10" />
                 <Image
@@ -112,20 +99,19 @@ export default function ServicesPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent z-10" />
 
-                {/* Tactical Indicator */}
                 <div className="absolute top-8 left-8 z-20">
                   <div className="px-4 py-2 bg-brand-navy/60 backdrop-blur-xl border border-brand-card-border-hover rounded-xl flex items-center gap-3">
                     <Activity size={14} className="text-brand-red" />
-                    <span className="text-[10px] font-technical font-bold text-brand-text uppercase tracking-widest">Active Node: {cat.title.split(' ')[0]}</span>
+                    <span className="text-[10px] font-technical font-bold text-brand-text uppercase tracking-widest">{cat.title}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Data Panel */}
+              {/* Content Panel */}
               <div className="lg:w-1/2">
                 <div className="inline-flex items-center gap-3 px-4 py-2 border border-brand-card-border-hover bg-brand-card rounded-full mb-8">
-                  <cat.icon size={16} className={`text-brand-red`} />
-                  <span className="text-[10px] font-technical font-bold text-brand-muted uppercase tracking-[0.3em]">Module: 0{i + 1}</span>
+                  <cat.icon size={16} className="text-brand-red" />
+                  <span className="text-[10px] font-technical font-bold text-brand-muted uppercase tracking-[0.3em]">Service 0{i + 1}</span>
                 </div>
 
                 <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text mb-8 tracking-widest uppercase leading-none">
@@ -139,8 +125,8 @@ export default function ServicesPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12 mb-16">
                   {cat.services.map((s) => (
                     <div key={s} className="flex items-center gap-4 group/item">
-                      <div className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover/item:bg-brand-red group-hover:shadow-[0_0_8px_#DC2626] transition-all" />
-                      <span className="text-[10px] font-technical font-bold text-brand-muted group-hover:text-brand-text transition-colors uppercase tracking-widest">
+                      <div className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover/item:bg-brand-red transition-all" />
+                      <span className="text-[10px] font-technical font-bold text-brand-muted group-hover/item:text-brand-text transition-colors uppercase tracking-widest">
                         {s}
                       </span>
                     </div>
@@ -160,7 +146,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Emergency Frequency Strip */}
+      {/* Need Help Now? Strip */}
       <section className="py-24 bg-brand-red relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 blur-[100px] rounded-full" />
@@ -168,14 +154,10 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left">
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-4 py-2 rounded-full mb-6">
-                <Boxes size={14} className="text-white animate-spin-slow" />
-                <span className="text-[10px] font-technical font-bold text-white uppercase tracking-[0.4em]">Urgent Dispatch Required</span>
-              </div>
               <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white mb-4 tracking-widest uppercase">
-                Emergency Signal Detected?
+                Need Help Today?
               </h2>
-              <p className="text-white/80 text-xs font-technical uppercase tracking-widest">Rapid tactical response. Available 24/7/365 for critical system restoration.</p>
+              <p className="text-white/80 text-xs font-technical uppercase tracking-widest">Call us now for same-day service. Available for urgent heating and AC issues.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 shrink-0">
@@ -187,11 +169,64 @@ export default function ServicesPage() {
                 {COMPANY.phone}
               </a>
               <Link
-                href="/emergency"
+                href="/contact"
                 className="flex items-center justify-center gap-4 border border-white/30 bg-white/5 backdrop-blur-md text-white px-10 py-5 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.2em] hover:bg-white/10 transition-all"
               >
-                Dispatch Protocol
+                Get a Free Quote
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Capability Blueprint */}
+      <section className="py-40 bg-brand-surface border-b border-brand-card-border relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-red/[0.03] blur-[150px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+              All Services
+            </span>
+            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+              Full <span className="text-brand-red">Coverage</span>
+            </h2>
+          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <BlueprintBillboard
+              src="/images/exploded-boiler.png"
+              alt="Full heating and AC system schematic"
+              theme="warm"
+              versionText="HEATING & AC SERVICES"
+              idHash={`GAS SAFE: ${COMPANY.gasSafeNumber}`}
+              statusText="ALL SYSTEMS OPERATIONAL"
+              className="w-full"
+            />
+            <div className="space-y-10">
+              <div className="space-y-6">
+                {categories.map((cat, i) => (
+                  <motion.div
+                    key={cat.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-start gap-6 p-6 rounded-2xl border border-brand-card-border bg-brand-card hover:border-brand-red/20 transition-all group"
+                  >
+                    <div className="w-12 h-12 rounded-xl border border-brand-card-border bg-brand-navy flex items-center justify-center shrink-0 group-hover:border-brand-red/20 transition-all">
+                      <cat.icon size={20} className="text-brand-red" />
+                    </div>
+                    <div>
+                      <h3 className="text-[10px] font-technical font-extrabold text-brand-text uppercase tracking-widest mb-2">{cat.title}</h3>
+                      <p className="text-[9px] font-technical text-brand-muted uppercase tracking-[0.2em] leading-relaxed">{cat.description}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -204,7 +239,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-32">
             <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
-              Operational <span className="text-brand-red">Integrity</span>
+              Why Choose <span className="text-brand-red">DPS</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16">

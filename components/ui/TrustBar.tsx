@@ -7,7 +7,7 @@ const items = [
   { icon: ShieldCheck, label: "Gas Safe Registered" },
   { icon: BadgeCheck, label: "Fully Insured" },
   { icon: MessageSquare, label: "Free Quotes" },
-  { icon: Clock, label: "Available 24/7" },
+  { icon: Clock, label: "Same-Day Service" },
 ];
 
 export default function TrustBar() {

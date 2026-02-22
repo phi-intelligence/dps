@@ -1,40 +1,39 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Shield, Cpu, Zap, Activity } from "lucide-react";
+import { Phone, Mail, Shield, Cpu, Zap, Activity } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 
 const heatingLinks = [
-  { label: "Boiler Architecture", href: "/services/heating" },
-  { label: "System Deployment", href: "/services/heating/boiler-installation" },
-  { label: "Annual Diagnostics", href: "/services/heating/boiler-servicing" },
-  { label: "Thermal Operations", href: "/services/heating" },
+  { label: "Boiler Repair", href: "/services/heating/boiler-repair" },
+  { label: "Boiler Installation", href: "/services/heating/boiler-installation" },
+  { label: "Boiler Servicing", href: "/services/heating/boiler-servicing" },
+  { label: "Central Heating", href: "/services/heating/central-heating" },
+  { label: "Power Flushing", href: "/services/heating/power-flushing" },
 ];
 
-const plumbingLinks = [
-  { label: "Emergency Resolution", href: "/services/plumbing/plumbing-repairs" },
-  { label: "Infrastructure Maintenance", href: "/services/plumbing/general-plumbing" },
-  { label: "Hydraulic Systems", href: "/services/plumbing" },
+const acLinks = [
+  { label: "AC Installation", href: "/services/air-conditioning/ac-installation" },
+  { label: "AC Servicing", href: "/services/air-conditioning/ac-servicing" },
+  { label: "AC Repairs", href: "/services/air-conditioning/ac-repairs" },
+  { label: "Commercial AC", href: "/services/air-conditioning/commercial-ac" },
+  { label: "Maintenance Contracts", href: "/services/air-conditioning/ac-maintenance" },
 ];
 
 const quickLinks = [
-  { label: "Engineering Philosophy", href: "/about" },
-  { label: "Field Coverage", href: "/service-areas" },
-  { label: "Rapid Dispatch", href: "/emergency" },
-  { label: "Initiate Uplink", href: "/contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Service Areas", href: "/service-areas" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-brand-steel border-t border-brand-card-border text-brand-muted relative overflow-hidden">
-      {/* Thermal Gradient Section Base */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-red to-transparent opacity-20" />
-
-      {/* Decorative logo geometry element */}
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-red/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
-          {/* Brand/System Column */}
+          {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-4 mb-8 group">
               <div className="w-12 h-12 rounded-full border border-brand-card-border-hover bg-brand-navy flex items-center justify-center relative overflow-hidden group-hover:border-brand-red/30 transition-all">
@@ -45,14 +44,13 @@ export default function Footer() {
                   DPS <span className="text-brand-red">HEATING</span>
                 </span>
                 <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                  Precision Thermal Systems
+                  Heating &amp; Air Conditioning
                 </span>
               </div>
             </Link>
 
             <p className="text-sm font-light leading-relaxed mb-10 max-w-sm text-brand-muted uppercase tracking-wider">
-              Providing industrial-grade heating and plumbing infrastructure for domestic and commercial properties across {COMPANY.areas}.
-              All systems engineered to the highest Gas Safe standards.
+              Professional heating and air conditioning services for homes and businesses across {COMPANY.areas}. Gas Safe registered engineers.
             </p>
 
             <div className="space-y-4">
@@ -71,11 +69,11 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Operations */}
+          {/* Column 2: Heating */}
           <div className="lg:pl-8">
             <h3 className="font-technical font-bold text-[10px] text-brand-red mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
               <Activity size={12} />
-              Heating Ops
+              Heating
             </h3>
             <ul className="space-y-4">
               {heatingLinks.map((link) => (
@@ -88,14 +86,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Maintenance */}
+          {/* Column 3: Air Conditioning */}
           <div>
             <h3 className="font-technical font-bold text-[10px] text-brand-blue mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
               <Zap size={12} />
-              Plumbing Ops
+              Air Conditioning
             </h3>
             <ul className="space-y-4">
-              {plumbingLinks.map((link) => (
+              {acLinks.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-blue hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
@@ -105,11 +103,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: System Integration */}
+          {/* Column 4: Quick Links */}
           <div>
             <h3 className="font-technical font-bold text-[10px] text-brand-text mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
               <Cpu size={12} />
-              System Links
+              Quick Links
             </h3>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
@@ -126,28 +124,24 @@ export default function Footer() {
                 <Shield size={20} className="text-brand-red" />
               </div>
               <div>
-                <p className="text-brand-text text-[10px] font-technical font-bold tracking-[0.2em] uppercase leading-none mb-1">Gas Safe Cert.</p>
+                <p className="text-brand-text text-[10px] font-technical font-bold tracking-[0.2em] uppercase leading-none mb-1">Gas Safe Registered</p>
                 <p className="text-brand-muted text-[10px] font-mono leading-none">REG: {COMPANY.gasSafeNumber}</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* System Status / Bottom bar */}
+        {/* Bottom bar */}
         <div className="mt-24 pt-8 border-t border-brand-card-border flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <p className="text-[10px] font-technical uppercase tracking-widest text-brand-muted">
-              &copy; {new Date().getFullYear()} dps heating architecture
+              &copy; {new Date().getFullYear()} DPS Heating Services Ltd. Company No: {COMPANY.companyNumber}
             </p>
-            <div className="flex items-center gap-2 text-[10px] font-mono text-green-600/80">
-              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              ALL SYSTEMS NOMINAL
-            </div>
           </div>
 
           <div className="flex gap-10 text-[10px] font-technical uppercase tracking-[0.2em]">
-            <Link href="/privacy" className="text-brand-muted hover:text-brand-text transition-colors">Data Privacy</Link>
-            <Link href="/terms" className="text-brand-muted hover:text-brand-text transition-colors">System Terms</Link>
+            <Link href="/privacy" className="text-brand-muted hover:text-brand-text transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-brand-muted hover:text-brand-text transition-colors">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>

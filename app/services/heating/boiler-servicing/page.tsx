@@ -3,117 +3,117 @@ import ServiceDetailLayout from "@/components/sections/ServiceDetailLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "System Certification",
-  description: `Annual thermal core diagnostics in ${COMPANY.areas}. Gas Safe registered operatives. Maintain operational equilibrium and warranty compliance.`,
+  title: "Boiler Servicing",
+  description: `Annual boiler service in ${COMPANY.areas}. Gas Safe registered engineers. Keep your boiler safe, efficient, and warranty compliant.`,
 };
 
 export default function BoilerServicingPage() {
   return (
     <ServiceDetailLayout
-      title="System Certification"
-      subtitle="Exhaustive annual diagnostics and safety compliance verification by certified operatives."
-      backgroundImage="/images/boiler-modern.jpg"
-      sideImage="/images/boiler-modern.jpg"
-      sideImageAlt="Tactical thermal core calibration"
-      introduction={`A strategic maintenance cycle ensures your thermal architecture maintains peak operational equilibrium and absolute safety. Our Gas Safe operatives execute an exhaustive diagnostic protocol, covering all critical interfaces and performance vectors. Regular certification is essential for proactive fault identification and sustained manufacturer warranty compliance.`}
+      title="Boiler Servicing"
+      subtitle="Annual boiler service by Gas Safe registered engineers. Keep your boiler safe, efficient, and covered under warranty."
+      backgroundImage="/images/a2361d3b-a0e7-4df7-9753-8d55f55004f5.jpg"
+      sideImage="/images/a2361d3b-a0e7-4df7-9753-8d55f55004f5.jpg"
+      sideImageAlt="Boiler installed on wall with copper pipework"
+      introduction={`An annual boiler service is the best way to keep your heating system safe and running efficiently. DPS Heating Services Ltd provides thorough boiler servicing across ${COMPANY.areas} carried out by Gas Safe registered engineers. A service can also be a condition of your boiler warranty, so it is important not to skip it.`}
       included={[
-        "Visual Integrity Inspection of Flue & Core",
-        "Operational Gas Pressure & Flow Analysis",
-        "Heat Exchange Module Triage",
-        "Precision Combustion Exhaust Analysis",
-        "Safety Loop & Control Interlock Testing",
-        "Gasket & Structural Seal Verification",
-        "Hydraulic System Pressure Calibration",
-        "Digital Service Certification & Log",
+        "Visual inspection of boiler and flue",
+        "Gas pressure and flow checks",
+        "Heat exchanger inspection",
+        "Flue gas analysis",
+        "Safety device testing",
+        "Seals and gasket check",
+        "System pressure check",
+        "Service report and certificate",
       ]}
       issues={[
         {
           icon: "settings",
-          title: "Maintenance Cycle Overdue",
-          description: "Annual certification is mandated for optimal performance and warranty preservation.",
+          title: "Annual Service Due",
+          description: "Boilers should be serviced every year to stay safe and efficient, and to maintain your warranty.",
         },
         {
           icon: "alertCircle",
-          title: "Operational Cost Variance",
-          description: "Uncalibrated cores consume excessive gas to maintain thermal output thresholds.",
+          title: "Higher Energy Bills",
+          description: "An unserviced boiler can become inefficient over time, using more gas to produce the same heat.",
         },
         {
           icon: "flame",
-          title: "Systemic Irregularities",
-          description: "Minor acoustical or olfactory deviations identified during early-stage diagnostics.",
+          title: "Strange Noises or Smells",
+          description: "Unusual sounds or a faint smell may indicate a problem that a service can identify early.",
         },
         {
           icon: "checkCircle",
-          title: "Site Acquisition",
-          description: "Verify the structural condition of thermal assets following property acquisition.",
+          title: "Moving into a New Home",
+          description: "If you have just moved in, a service will confirm the boiler is safe and working correctly.",
         },
       ]}
       steps={[
         {
           icon: "phone",
           number: "01",
-          title: "Uplink Request",
-          description: "Schedule your maintenance cycle via the primary portal or direct audio.",
+          title: "Book Your Service",
+          description: "Call us or use our online form to book a convenient appointment.",
         },
         {
           icon: "settings",
           number: "02",
-          title: "Operative Inbound",
-          description: "A certified Gas Safe engineer is dispatched to your coordinates at the target time.",
+          title: "Engineer Arrives",
+          description: "A Gas Safe registered engineer arrives at your home at the agreed time.",
         },
         {
           icon: "flame",
           number: "03",
-          title: "Diagnostic Execution",
-          description: "Exhaustive component testing and performance optimization is carried out.",
+          title: "Full Service Carried Out",
+          description: "A thorough inspection and service of all key boiler components is completed.",
         },
         {
           icon: "fileText",
           number: "04",
-          title: "System Validation",
-          description: "Generation of high-integrity service records and digital compliance logs.",
+          title: "Report Issued",
+          description: "You receive a written service report and certificate for your records.",
         },
       ]}
       trustPoints={[
         {
           icon: "shield",
-          title: "Certified Operatives",
-          description: "All diagnostic protocols executed by high-level Gas Safe registered engineers.",
+          title: "Gas Safe Registered",
+          description: "All servicing is carried out by registered Gas Safe engineers.",
         },
         {
           icon: "fileText",
-          title: "Precision Logs",
-          description: "Comprehensive digital documentation provided for insurance and warranty records.",
+          title: "Written Certificate",
+          description: "We provide a full service report and certificate for your records and warranty.",
         },
         {
           icon: "clock",
-          title: "Optimized Scheduling",
-          description: "Tactical appointment windows designed to minimize operational downtime.",
+          title: "Quick and Convenient",
+          description: "A standard boiler service takes around 45–60 minutes.",
         },
       ]}
       faqs={[
         {
-          question: "What is the frequency of certification cycles?",
-          answer: "Manufacturers and safety protocols mandate an annual maintenance cycle to maintain operational integrity.",
+          question: "How often should I have my boiler serviced?",
+          answer: "Your boiler should be serviced annually by a Gas Safe registered engineer. This is often a requirement of the manufacturer warranty.",
         },
         {
-          question: "Operational window for a standard service?",
-          answer: "A standard thermal core diagnostic typically requires 45 to 60 minutes of field time.",
+          question: "How long does a boiler service take?",
+          answer: "A standard boiler service usually takes 45–60 minutes.",
         },
         {
-          question: "Is digital documentation provided?",
-          answer: "Affirmative. A full structural service record is generated and transmitted on tactical completion.",
+          question: "Will I receive a certificate?",
+          answer: "Yes. We provide a full written service report and certificate after every service.",
         },
         {
-          question: "Does certification impact efficiency?",
-          answer: "Yes. Precision calibration of combustion and hydraulic variables often leads to immediate operational savings.",
+          question: "Can servicing reduce my heating bills?",
+          answer: "Yes. A well-maintained boiler runs more efficiently, which can reduce your gas consumption and lower your energy bills.",
         },
       ]}
       breadcrumbs={[
-        { label: "Core", href: "/" },
+        { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Thermal", href: "/services/heating" },
-        { label: "Certification" },
+        { label: "Heating", href: "/services/heating" },
+        { label: "Boiler Servicing" },
       ]}
       serviceValue="boiler-servicing"
       showGasSafeNote

@@ -3,116 +3,116 @@ import ServiceDetailLayout from "@/components/sections/ServiceDetailLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Core System Deployment",
-  description: `High-integrity boiler installation in ${COMPANY.areas}. Gas Safe registered architecture, next-gen systems, and full structural commissioning.`,
+  title: "Boiler Installation",
+  description: `New boiler installation in ${COMPANY.areas}. Gas Safe registered engineers, all major brands, full commissioning and warranty registration.`,
 };
 
 export default function BoilerInstallationPage() {
   return (
     <ServiceDetailLayout
-      title="Core Installation"
-      subtitle="High-integrity thermal architecture deployment by certified engineering operatives."
-      backgroundImage="/images/boiler-install.jpg"
-      sideImage="/images/boiler-install.jpg"
-      sideImageAlt="New tactical thermal core"
-      introduction={`The installation of a primary thermal core is a critical infrastructure decision. Our Gas Safe operatives design and deploy high-integrity systems tailored to your technical requirements. From initial site survey to structural commissioning and global warranty registration, we ensure your thermal architecture operates at peak efficiency from initial activation.`}
+      title="Boiler Installation"
+      subtitle="Professional new boiler installation by Gas Safe registered engineers. Supply, fit, and commission."
+      backgroundImage="/images/140d49a2-daf4-4c0f-b0c4-881f971b97c0.jpg"
+      sideImage="/images/140d49a2-daf4-4c0f-b0c4-881f971b97c0.jpg"
+      sideImageAlt="New boiler neatly installed in kitchen cupboard with copper pipework"
+      introduction={`A new boiler is a significant investment, and it pays to have it installed correctly. DPS Heating Services Ltd provides full boiler installation across ${COMPANY.areas}, including a free survey, system design, supply and installation of the new boiler, commissioning, and warranty registration. We are Gas Safe registered and work with all leading brands.`}
       included={[
-        "Structural Site Survey",
-        "Architecture Phase Planning",
-        "Full Deployment to Building Code",
-        "Operational Commissioning",
-        "Digital Warranty Registration",
-        "Legacy Hardware Decommissioning",
-        "Certification of Structural Integrity",
+        "Free survey and quote",
+        "Boiler and system design advice",
+        "Full installation to current regulations",
+        "Commissioning and testing",
+        "Manufacturer warranty registration",
+        "Removal and disposal of old boiler",
+        "Building regulations certificate",
       ]}
       issues={[
         {
           icon: "flame",
-          title: "Legacy Phase 10+ Years",
-          description: "Aged thermal units operate significantly below modern efficiency thresholds.",
+          title: "Boiler Over 10 Years Old",
+          description: "Older boilers are less efficient and more likely to develop faults. A new A-rated boiler can significantly reduce heating bills.",
         },
         {
           icon: "checkCircle",
-          title: "Systemic Failure Rate",
-          description: "Escalating repair frequency indicates total architecture instability.",
+          title: "Frequent Breakdowns",
+          description: "If your boiler is breaking down regularly, replacement is often more cost-effective than continued repairs.",
         },
         {
           icon: "gauge",
-          title: "High Energy Attrition",
-          description: "Inefficient cores result in excessive operational expenditure.",
+          title: "Rising Energy Bills",
+          description: "An inefficient boiler uses more gas to produce the same amount of heat, costing you more each month.",
         },
         {
           icon: "wrench",
-          title: "Infrastructure Upgrade",
-          description: "Transitioning to new property or increased thermal output requirements.",
+          title: "Moving to a New Property",
+          description: "A new property may benefit from a new boiler installation to match the size and requirements of the home.",
         },
       ]}
       steps={[
         {
           icon: "phone",
           number: "01",
-          title: "Pre-Flight Survey",
-          description: "Initial reconnaissance of site coordinates and current system architecture.",
+          title: "Free Survey",
+          description: "We visit your property to assess your heating needs and recommend the right boiler.",
         },
         {
           icon: "clipboardList",
           number: "02",
-          title: "Technical Schematic",
-          description: "Finalization of recommended hardware modules and detailed project quote.",
+          title: "Written Quote",
+          description: "You receive a clear, fixed quote with no hidden charges before any work begins.",
         },
         {
           icon: "wrench",
           number: "03",
-          title: "Active Deployment",
-          description: "Operatives execute the installation with surgical precision and site protection.",
+          title: "Installation Day",
+          description: "Our engineers install the new boiler neatly and efficiently, protecting your home throughout.",
         },
         {
           icon: "shield",
           number: "04",
-          title: "Uplink & Registry",
-          description: "Final commissioning, safety verification, and remote warranty initialization.",
+          title: "Commission & Register",
+          description: "The boiler is commissioned, tested, and registered for warranty. You receive all documentation.",
         },
       ]}
       trustPoints={[
         {
           icon: "shield",
-          title: "Absolute Compliance",
-          description: "Deployments fully certified and compliant with all technical regulations.",
+          title: "Fully Compliant",
+          description: "All installations meet current Gas Safe and building regulation requirements.",
         },
         {
           icon: "star",
-          title: "Tier 1 Modules",
-          description: "We install Worcester Bosch, Vaillant, Baxi, and high-performance industrial units.",
+          title: "Leading Brands",
+          description: "We install Worcester Bosch, Vaillant, Baxi, Ideal, and Viessmann boilers.",
         },
         {
           icon: "clock",
-          title: "Rapid Lead-Times",
-          description: "Total architecture displacement and reactivation typically completed within one operational cycle.",
+          title: "Typically One Day",
+          description: "Most boiler replacements are completed within a single working day.",
         },
       ]}
       faqs={[
         {
-          question: "What is the duration of a standard deployment?",
-          answer: "A primary core replacement typically consumes one full operational day. Complex multi-zone architectures may require extended deployment windows.",
+          question: "How long does a boiler installation take?",
+          answer: "Most boiler replacements are completed in one day. More complex installations, such as system changes, may take longer.",
         },
         {
-          question: "Which hardware platforms are supported?",
-          answer: "We support and install all Tier 1 manufacturers including Worcester Bosch, Vaillant, Baxi, Ideal, and Viessmann.",
+          question: "Which boilers do you install?",
+          answer: "We install all major brands including Worcester Bosch, Vaillant, Baxi, Ideal, and Viessmann. We can advise on the best option for your home.",
         },
         {
-          question: "Will site aesthetics be impacted?",
-          answer: "Minimal impact. We utilize high-level site protection and ensure comprehensive workspace sanitation post-deployment.",
+          question: "Will my home be left clean and tidy?",
+          answer: "Absolutely. We use protective coverings throughout and leave your home as we found it.",
         },
         {
-          question: "What assurance protocols are in place?",
-          answer: "Most primary modules include a 5-12 year structural warranty when deployed by our certified operatives. We manage all digital registration protocols.",
+          question: "What warranty comes with a new boiler?",
+          answer: "Most new boilers come with a 5–12 year manufacturer warranty when installed by a registered engineer. We handle all registration on your behalf.",
         },
       ]}
       breadcrumbs={[
-        { label: "Core", href: "/" },
+        { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Thermal", href: "/services/heating" },
-        { label: "Installation" },
+        { label: "Heating", href: "/services/heating" },
+        { label: "Boiler Installation" },
       ]}
       serviceValue="boiler-installation"
       showGasSafeNote

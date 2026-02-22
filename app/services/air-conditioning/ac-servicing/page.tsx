@@ -3,117 +3,117 @@ import ServiceDetailLayout from "@/components/sections/ServiceDetailLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Environmental Calibration",
-  description: `Strategic AC maintenance and thermal calibration in ${COMPANY.areas}. Optimize environmental output and infrastructure longevity.`,
+  title: "AC Servicing",
+  description: `Annual air conditioning service in ${COMPANY.areas}. Qualified engineers, all major brands, keep your system efficient and reliable.`,
 };
 
 export default function ACServicingPage() {
   return (
     <ServiceDetailLayout
-      title="Calibration"
-      subtitle="Exhaustive thermal maintenance and environmental calibration for sustained efficiency."
+      title="AC Servicing"
+      subtitle="Annual air conditioning service to keep your system running efficiently, reliably, and at full performance."
       backgroundImage="/images/ac-unit-indoor.jpg"
       sideImage="/images/ac-unit-indoor.jpg"
-      sideImageAlt="Tactical environmental management"
-      introduction={`Strategic maintenance modules ensure your environmental management hardware operates at maximum efficiency thresholds. DPS Heating Services Ltd executes high-level AC calibration for domestic and commercial architectures across ${COMPANY.areas}. Our operatives are specialized in refrigerant fluid dynamics and mechanical node optimization for all Tier 1 manufacturers.`}
+      sideImageAlt="Engineer servicing an air conditioning unit"
+      introduction={`Regular servicing is essential to keep your air conditioning system working efficiently and to extend its lifespan. DPS Heating Services Ltd provides professional AC servicing for domestic and commercial systems across ${COMPANY.areas}. Our engineers are experienced with all major brands and will carry out a thorough check and clean of your system.`}
       included={[
-        "Internal & External Node Inspection",
-        "Filtration Membrane Cleansing/Replacement",
-        "Thermal Coil Decontamination",
-        "Refrigerant Fluid Dynamics Analysis",
-        "Electronic Control Loop Verification",
-        "Condensate Drainage Pathway Clearing",
-        "Thermal Output Performance Matrix",
-        "Digital Operational Report",
+        "Internal and external unit inspection",
+        "Filter cleaning or replacement",
+        "Evaporator and condenser coil cleaning",
+        "Refrigerant level check",
+        "Electrical component testing",
+        "Condensate drain check and clear",
+        "Performance test and output check",
+        "Written service report",
       ]}
       issues={[
         {
           icon: "wind",
-          title: "Thermal Output Variance",
-          description: "Contaminated filtration membranes and coils significantly degrade environmental output.",
+          title: "Reduced Cooling Performance",
+          description: "Dirty filters and coils reduce efficiency. A service restores your system to full performance.",
         },
         {
           icon: "alertCircle",
-          title: "Acoustical Anomaly",
-          description: "Vibrations or olfactory deviations indicating microbial growth or mechanical wear.",
+          title: "Unusual Noises or Smells",
+          description: "Strange sounds or musty smells from your AC unit can indicate a need for cleaning or a mechanical issue.",
         },
         {
           icon: "settings",
-          title: "Cycle Overdue",
-          description: "Mandated annual maintenance for hardware platform stability.",
+          title: "Annual Service Due",
+          description: "AC systems should be serviced every year to remain efficient and to protect the warranty.",
         },
         {
           icon: "checkCircle",
-          title: "Efficiency Attrition",
-          description: "Unmaintained environmental units consume excessive energy to reach target thermal setpoints.",
+          title: "Higher Running Costs",
+          description: "A system that has not been serviced works harder and uses more electricity, increasing your energy bills.",
         },
       ]}
       steps={[
         {
           icon: "phone",
           number: "01",
-          title: "Module Request",
-          description: "Schedule your maintenance module via the secure portal or direct comms.",
+          title: "Book a Service",
+          description: "Contact us to arrange a convenient appointment for your annual AC service.",
         },
         {
           icon: "settings",
           number: "02",
-          title: "Operative Inbound",
-          description: "A certified refrigeration specialist is dispatched to your site coordinates.",
+          title: "Engineer Arrives",
+          description: "A qualified engineer visits and carries out the full service on your system.",
         },
         {
           icon: "wind",
           number: "03",
-          title: "Calibration Cycle",
-          description: "Exhaustive hardware inspection and performance optimization suite execution.",
+          title: "Service Completed",
+          description: "Your system is cleaned, checked, and performance tested to ensure it is working properly.",
         },
         {
           icon: "fileText",
           number: "04",
-          title: "System Sign-off",
-          description: "Generation of high-integrity digital service records and operational logs.",
+          title: "Report Provided",
+          description: "You receive a written service report with any findings or recommendations.",
         },
       ]}
       trustPoints={[
         {
           icon: "shield",
-          title: "Certified Specialists",
-          description: "All environmental calibration work executed by fully F-Gas certified engineering operatives.",
+          title: "Qualified Engineers",
+          description: "All AC servicing is carried out by fully qualified, F-Gas certified engineers.",
         },
         {
           icon: "fileText",
-          title: "Operational Data",
-          description: "Comprehensive digital reports provided for audit and maintenance log requirements.",
+          title: "Written Report",
+          description: "A full service report is provided after every visit for your records.",
         },
         {
           icon: "zap",
-          title: "Cross-Platform Experts",
-          description: "Specialized support for Mitsubishi, Daikin, LG, Samsung, and industrial units.",
+          title: "All Major Brands",
+          description: "We service Mitsubishi, Daikin, LG, Samsung, Panasonic, Fujitsu, and more.",
         },
       ]}
       faqs={[
         {
-          question: "Required frequency of calibration?",
-          answer: "Strategic maintenance cycles are mandated annually to ensure air quality, efficiency, and platform reliability.",
+          question: "How often should I service my air conditioning?",
+          answer: "Air conditioning systems should be serviced annually to maintain performance, efficiency, and warranty compliance.",
         },
         {
-          question: "Scope of the maintenance module?",
-          answer: "Includes exhaustive node cleansing, fluid diagnostics, electronic loop tests, and full performance matrix verification.",
+          question: "What does an AC service include?",
+          answer: "A full service includes cleaning of filters and coils, refrigerant checks, electrical testing, condensate drain clearing, and a performance test.",
         },
         {
-          question: "Efficiency impact?",
-          answer: "Yes. Optimized filtration and coil dynamics significantly reduce energy consumption and improve thermal output.",
+          question: "Will servicing reduce my energy bills?",
+          answer: "Yes. A clean, well-maintained system runs more efficiently and uses less electricity, which can noticeably reduce your energy costs.",
         },
         {
-          question: "Supported platforms?",
-          answer: "We support all major architectures including Mitsubishi Electric, Daikin, LG, Samsung, Panasonic, and Fujitsu.",
+          question: "Which brands do you service?",
+          answer: "We service all major brands including Mitsubishi Electric, Daikin, LG, Samsung, Panasonic, and Fujitsu.",
         },
       ]}
       breadcrumbs={[
-        { label: "Core", href: "/" },
+        { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Climate", href: "/services/air-conditioning" },
-        { label: "Calibration" },
+        { label: "Air Conditioning", href: "/services/air-conditioning" },
+        { label: "AC Servicing" },
       ]}
       serviceValue="ac-servicing"
       accentColor="red"

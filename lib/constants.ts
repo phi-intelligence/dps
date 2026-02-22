@@ -15,7 +15,6 @@ export const NAV_LINKS = [
     href: "/services",
     children: [
       { label: "Heating Services", href: "/services/heating" },
-      { label: "Plumbing Services", href: "/services/plumbing" },
       { label: "Air Conditioning", href: "/services/air-conditioning" },
     ],
   },
@@ -65,10 +64,10 @@ export const REVIEWS = [
   },
   {
     name: "David P.",
-    service: "Plumbing Repairs",
+    service: "Boiler Servicing",
     rating: 5,
     quote:
-      "Called them for a leaking pipe under the sink — sorted same day. No mess, no fuss, and a fair price. Will definitely use again.",
+      "Annual boiler service carried out efficiently and professionally. Engineer was friendly, thorough, and explained exactly what was checked. Will definitely use again.",
   },
   // TODO: Replace with real customer reviews
 ]

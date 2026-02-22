@@ -21,33 +21,33 @@ const defaultSteps: ProcessStep[] = [
   {
     icon: "phone",
     number: "01",
-    title: "Data Intake",
-    description: "Submit request via secure tactical portal or intelligent voice network.",
+    title: "Get in Touch",
+    description: "Call us or fill in our online form. Tell us what you need and we will get back to you promptly.",
   },
   {
     icon: "search",
     number: "02",
-    title: "Diagnostic Triage",
-    description: "Rapid situational analysis and transparent quote generation by engineering.",
+    title: "Free Quote",
+    description: "We assess the job and provide a clear, no-obligation quote before any work begins.",
   },
   {
     icon: "wrench",
     number: "03",
-    title: "Precision Execution",
-    description: "Deployment of certified technicians for flawless system implementation.",
+    title: "Work Carried Out",
+    description: "Our qualified engineers complete the job efficiently and to a high standard.",
   },
   {
     icon: "checkCircle",
     number: "04",
-    title: "System Verification",
-    description: "Rigorous testing and sign-off to ensure optimal operational integrity.",
+    title: "Job Complete",
+    description: "Everything is tested and signed off. You receive all relevant documentation.",
   },
 ];
 
 export default function ProcessSteps({
   steps = defaultSteps,
-  title = "Operational Pipeline",
-  subtitle = "Protocol-driven execution for maximum reliability.",
+  title = "How We Work",
+  subtitle = "Simple, straightforward service from first contact to job completion.",
   dark = false,
 }: ProcessStepsProps) {
   return (
@@ -65,7 +65,7 @@ export default function ProcessSteps({
           >
             <div className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
             <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-brand-red">
-              Current Protocol
+              Our Process
             </span>
           </motion.div>
 

@@ -3,119 +3,119 @@ import ServiceDetailLayout from "@/components/sections/ServiceDetailLayout";
 import { COMPANY } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Thermodynamic Repair",
-  description: `Expert hydraulic and thermal recovery in ${COMPANY.areas}. Gas Safe registered engineers, rapid fault isolation.`,
+  title: "Boiler Repair",
+  description: `Expert boiler repair in ${COMPANY.areas}. Gas Safe registered engineers, fast response, all makes and models covered.`,
 };
 
 export default function BoilerRepairPage() {
   return (
     <ServiceDetailLayout
-      title="Thermodynamic Repair"
-      subtitle="Rapid-response hydraulic and thermal system restoration by Gas Safe operatives."
-      backgroundImage="/images/boiler-repair.jpg"
-      sideImage="/images/boiler-repair.jpg"
-      sideImageAlt="Tactical boiler diagnostics"
-      introduction={`When your thermal core fails, rapid deployment is essential. DPS Heating Services Ltd provides advanced thermodynamic repair across ${COMPANY.areas}. Our Gas Safe operatives utilize high-precision diagnostics to isolate faults and restore system integrity, with a primary mission of first-visit resolution.`}
+      title="Boiler Repair"
+      subtitle="Fast, reliable boiler repairs by Gas Safe registered engineers. We aim to fix your boiler on the first visit."
+      backgroundImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
+      sideImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
+      sideImageAlt="Open boiler showing internal components during diagnosis"
+      introduction={`A broken boiler is never convenient. DPS Heating Services Ltd provides fast, professional boiler repair across ${COMPANY.areas}. Our Gas Safe registered engineers carry a wide range of parts, allowing us to diagnose and fix most faults on the first visit. We work on all major boiler brands and both domestic and commercial properties.`}
       included={[
-        "Real-time Fault Isolation",
-        "Error Code Diagnostics",
-        "Hydraulic Pressure Balancing",
-        "Critical Component Calibration",
-        "Safety Loop Verification",
-        "System Log Generation",
+        "Full boiler diagnosis",
+        "Error code analysis",
+        "Pressure check and rebalancing",
+        "Component repair or replacement",
+        "Safety checks and testing",
+        "Written job report",
       ]}
       issues={[
         {
           icon: "alertCircle",
-          title: "Acoustical Deviation",
-          description: "Kettling or internal vibrations indicating secondary heat exchange contamination or pump failure.",
+          title: "Unusual Noises",
+          description: "Banging, kettling, or rumbling sounds can indicate a build-up of limescale or a failing pump.",
         },
         {
           icon: "thermometer",
-          title: "Thermal Output Failure",
-          description: "Complete cessation of heat generation. Critical status requiring immediate triage.",
+          title: "No Heat or Hot Water",
+          description: "If your boiler is not producing heat or hot water, there may be a fault with the ignition or heat exchanger.",
         },
         {
           icon: "gauge",
-          title: "Pressure Attrition",
-          description: "Consistent hydraulic pressure loss indicative of a breach in the primary circuit.",
+          title: "Low Pressure",
+          description: "A boiler that keeps losing pressure may have a leak in the system or a faulty pressure relief valve.",
         },
         {
           icon: "flame",
-          title: "Combustion Instability",
-          description: "Pilot light failure or intermittent ignition sequence interruption.",
+          title: "Pilot Light Issues",
+          description: "If your pilot light keeps going out, this could indicate a faulty thermocouple or gas supply issue.",
         },
       ]}
       steps={[
         {
           icon: "phone",
           number: "01",
-          title: "Triage Signal",
-          description: "Connect via the uplink. Describe the system deviation for preliminary analysis.",
+          title: "Call Us",
+          description: "Get in touch by phone or our contact form. Describe the problem so we can prepare.",
         },
         {
           icon: "alertCircle",
           number: "02",
-          title: "Field Deployment",
-          description: "Our certified operative reaches your coordinates for physical diagnostics.",
+          title: "Engineer Visit",
+          description: "A Gas Safe registered engineer arrives at your property to carry out a full diagnosis.",
         },
         {
           icon: "wrench",
           number: "03",
-          title: "Node Resolution",
-          description: "System recovery is executed using high-integrity components and precision tools.",
+          title: "Repair",
+          description: "We fix the fault using quality parts, aiming to complete the repair on the same visit.",
         },
         {
           icon: "shield",
           number: "04",
-          title: "Operational Sign-off",
-          description: "Exhaustive safety matrix testing is performed before system reactivation.",
+          title: "Safety Check & Sign-off",
+          description: "Full safety testing is completed before we leave, and you receive a written report.",
         },
       ]}
       trustPoints={[
         {
           icon: "clock",
-          title: "Rapid Deployment",
-          description: "Priority routing for critical failures throughout our operational zone.",
+          title: "Fast Response",
+          description: "We aim for same-day or next-day appointments for boiler faults.",
         },
         {
           icon: "shield",
-          title: "Certified Integrity",
-          description: "All work executed by Gas Safe registered engineering operatives only.",
+          title: "Gas Safe Registered",
+          description: "All repairs are carried out by certified Gas Safe engineers.",
         },
         {
           icon: "flame",
-          title: "Multi-Platform Support",
-          description: "Expertise across all major architectures — Worcester, Vaillant, Baxi, and industrial units.",
+          title: "All Makes & Models",
+          description: "Worcester Bosch, Vaillant, Baxi, Ideal, Viessmann, and many more.",
         },
       ]}
       faqs={[
         {
-          question: "What are the logistics for repair costs?",
+          question: "How much does a boiler repair cost?",
           answer:
-            "Fees are determined by fault complexity and required hardware modules. We provide transparent transmission of costs prior to execution.",
+            "The cost depends on the fault and parts required. We provide a clear quote before any work begins so there are no surprises.",
         },
         {
-          question: "What is the timeline for system recovery?",
+          question: "How long does a boiler repair take?",
           answer:
-            "Standard repairs are typically resolved within a 2-hour operational window on the initial deployment.",
+            "Most repairs are completed within 1–2 hours on the first visit. More complex faults may require parts to be ordered.",
         },
         {
-          question: "Are component modules stored in-vehicle?",
+          question: "Do you carry parts with you?",
           answer:
-            "Affirmative. Our operatives carry an optimized inventory of high-frequency failure components.",
+            "Yes — our engineers carry a wide range of common parts to help fix most faults on the first visit.",
         },
         {
-          question: "Is decommissioning required?",
+          question: "Should I replace my boiler instead of repairing it?",
           answer:
-            "In scenarios where legacy systems are beyond structural integrity thresholds, we may recommend a total architecture upgrade.",
+            "If your boiler is over 10 years old and needs frequent repairs, replacement may be more cost-effective. We will always give you honest advice.",
         },
       ]}
       breadcrumbs={[
-        { label: "Core", href: "/" },
+        { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Thermal", href: "/services/heating" },
-        { label: "Repair" },
+        { label: "Heating", href: "/services/heating" },
+        { label: "Boiler Repair" },
       ]}
       serviceValue="boiler-repair"
       showGasSafeNote

@@ -11,16 +11,16 @@ import { useTheme } from "@/lib/theme-provider";
 const navLinks = [
   { label: "Home", href: "/" },
   {
-    label: "Capabilities",
+    label: "Services",
     href: "/services",
     children: [
-      { label: "Heating Architecture", href: "/services/heating" },
-      { label: "Plumbing Infrastructure", href: "/services/plumbing" },
-      { label: "Climate Control", href: "/services/air-conditioning" },
+      { label: "Heating Services", href: "/services/heating" },
+      { label: "Air Conditioning", href: "/services/air-conditioning" },
     ],
   },
-  { label: "About", href: "/about" },
-  { label: "Coverage", href: "/service-areas" },
+  { label: "About Us", href: "/about" },
+  { label: "Service Areas", href: "/service-areas" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {
@@ -139,7 +139,7 @@ export default function Header() {
               href="/contact"
               className="relative group bg-brand-red text-white px-6 py-2.5 rounded-full text-[10px] font-technical font-extrabold uppercase tracking-[0.2em] transition-all overflow-hidden shadow-lg shadow-brand-red/20"
             >
-              <span className="relative z-10 transition-colors group-hover:text-white">Deploy Uplink</span>
+              <span className="relative z-10 transition-colors group-hover:text-white">Get a Quote</span>
               <div className="absolute inset-0 bg-brand-red/80 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </Link>
           </div>
@@ -164,7 +164,7 @@ export default function Header() {
             className="lg:hidden fixed inset-0 z-[60] bg-brand-surface p-8 flex flex-col"
           >
             <div className="flex justify-between items-center mb-12">
-              <span className="font-technical font-bold text-lg tracking-widest uppercase text-brand-text">System Menu</span>
+              <span className="font-technical font-bold text-lg tracking-widest uppercase text-brand-text">Menu</span>
               <div className="flex items-center gap-4">
                 <button
                   onClick={toggleTheme}
@@ -220,7 +220,7 @@ export default function Header() {
                 className="block w-full text-center bg-brand-red text-white py-5 rounded-full font-technical font-extrabold uppercase tracking-widest shadow-xl shadow-brand-red/20"
                 onClick={() => setMobileOpen(false)}
               >
-                Initiate Request
+                Get a Quote
               </Link>
             </div>
           </motion.div>

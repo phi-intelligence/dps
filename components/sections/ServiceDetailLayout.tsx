@@ -81,12 +81,12 @@ export default function ServiceDetailLayout({
               <div className={`inline-flex items-center gap-2 border border-brand-card-border-hover bg-brand-card backdrop-blur-md rounded-md px-4 py-1.5 mb-8`}>
                 <div className={`w-1.5 h-1.5 rounded-full ${accentBgClass} animate-pulse`} />
                 <span className="text-brand-text/80 text-[10px] font-technical font-bold uppercase tracking-[0.3em]">
-                  Strategic Overview
+                  Service Overview
                 </span>
               </div>
 
               <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text mb-10 tracking-widest uppercase leading-tight">
-                Engineering <br /> <span className={accentClass}>Integrity.</span>
+                Professional <br /> <span className={accentClass}>Service.</span>
               </h2>
 
               <p className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.3em] leading-loose mb-12">
@@ -103,7 +103,7 @@ export default function ServiceDetailLayout({
                     <h3 className="text-brand-text font-technical font-extrabold text-sm uppercase tracking-widest">Gas Safe Registration</h3>
                   </div>
                   <p className="text-[10px] text-brand-muted font-technical uppercase tracking-widest leading-loose">
-                    All core infrastructure modifications are executed by certified technicians. Registry ID: <span className="text-brand-red font-black">{COMPANY.gasSafeNumber}</span>
+                    All work is carried out by Gas Safe registered engineers. Gas Safe Reg: <span className="text-brand-red font-black">{COMPANY.gasSafeNumber}</span>
                   </p>
                 </div>
               )}
@@ -113,7 +113,7 @@ export default function ServiceDetailLayout({
                   href="/contact"
                   className={`inline-flex items-center gap-4 bg-white text-black px-10 py-5 rounded-xl font-technical font-black text-[11px] uppercase tracking-[0.3em] transition-all hover:scale-105 shadow-2xl group`}
                 >
-                  Deploy Operation
+                  Get a Quote
                   <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
@@ -121,7 +121,7 @@ export default function ServiceDetailLayout({
                   className="inline-flex items-center gap-4 bg-transparent border border-brand-card-border-hover hover:bg-brand-card text-brand-text px-10 py-5 rounded-xl font-technical font-black text-[11px] uppercase tracking-[0.3em] transition-all"
                 >
                   <Phone size={16} className={accentClass} />
-                  Direct Audio
+                  Call Us
                 </a>
               </div>
             </motion.div>
@@ -145,14 +145,14 @@ export default function ServiceDetailLayout({
               />
 
               <div className="absolute top-10 left-10 z-30 p-4 border-l border-brand-red/50 bg-black/20 backdrop-blur-md rounded-r-xl">
-                <p className="text-[8px] font-technical text-brand-red uppercase tracking-[0.4em]">System Diagnostic Active</p>
+                <p className="text-[8px] font-technical text-brand-red uppercase tracking-[0.4em]">DPS Heating Services</p>
               </div>
 
               <div className="absolute bottom-10 left-10 right-10 z-30">
                 <div className="bg-brand-surface/80 backdrop-blur-2xl border border-brand-card-border-hover p-8 rounded-[2rem] flex items-center justify-between">
                   <div>
-                    <p className="text-[9px] text-brand-muted uppercase tracking-[0.4em] font-bold mb-2">Target Status</p>
-                    <p className="text-brand-text font-technical font-extrabold text-sm uppercase tracking-widest">Operational Ready</p>
+                    <p className="text-[9px] text-brand-muted uppercase tracking-[0.4em] font-bold mb-2">Gas Safe Registered</p>
+                    <p className="text-brand-text font-technical font-extrabold text-sm uppercase tracking-widest">Ready to Help</p>
                   </div>
                   <div className={`w-14 h-14 rounded-xl border border-brand-card-border-hover bg-brand-card flex items-center justify-center transition-all group-hover:${accentBorderClass}/50`}>
                     <Activity size={24} className={accentClass} />
@@ -170,10 +170,10 @@ export default function ServiceDetailLayout({
           <div className="text-center mb-24">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border-hover bg-brand-card mb-6">
               <Database size={12} className="text-brand-muted" />
-              <span className="text-[9px] font-technical font-bold text-brand-muted uppercase tracking-[0.3em]">Module: Specifications</span>
+              <span className="text-[9px] font-technical font-bold text-brand-muted uppercase tracking-[0.3em]">What&apos;s Included</span>
             </div>
             <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase">
-              Operational <span className={accentClass}>Parameters</span>
+              What&apos;s <span className={accentClass}>Included</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -202,10 +202,10 @@ export default function ServiceDetailLayout({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-7xl font-technical font-black text-brand-text mb-8 tracking-widest uppercase">
-              Anomaly <span className="text-brand-red">Detection</span>
+              Signs You May <span className="text-brand-red">Need This</span>
             </h2>
             <p className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.4em] max-w-2xl mx-auto leading-loose">
-              If your infrastructure exhibits any of these technical deviations, immediate diagnostic intervention is mandated.
+              If you are experiencing any of the following, get in touch and we will advise on the best course of action.
             </p>
           </div>
 
@@ -236,7 +236,7 @@ export default function ServiceDetailLayout({
       </section>
 
       {/* Process Pipeline */}
-      <ProcessSteps steps={steps} title={`Execution Protocol`} dark={true} />
+      <ProcessSteps steps={steps} title="How We Work" dark={true} />
 
       {/* Assurance */}
       <section className="py-40 bg-brand-navy border-y border-brand-card-border relative overflow-hidden">
@@ -270,9 +270,9 @@ export default function ServiceDetailLayout({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase mb-4">
-              Knowledge <span className="text-brand-red">Matrix</span>
+              Frequently Asked <span className="text-brand-red">Questions</span>
             </h2>
-            <p className="text-brand-muted text-[10px] font-technical uppercase tracking-[0.4em]">System diagnostics and operational queries.</p>
+            <p className="text-brand-muted text-[10px] font-technical uppercase tracking-[0.4em]">Common questions answered.</p>
           </div>
           <FAQAccordion faqs={faqs} />
         </div>
@@ -285,14 +285,14 @@ export default function ServiceDetailLayout({
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border bg-brand-card mb-8">
                 <span className="text-brand-text/80 text-[10px] font-technical font-bold uppercase tracking-[0.3em]">
-                  Transceiver Portal
+                  Request a Quote
                 </span>
               </div>
               <h2 className="text-4xl md:text-7xl font-technical font-black text-brand-text mb-10 tracking-widest uppercase leading-tight">
-                Initiate <br /> <span className="text-brand-red">Deployment?</span>
+                Ready to <br /> <span className="text-brand-red">Book?</span>
               </h2>
               <p className="text-brand-muted font-technical text-xs uppercase tracking-[0.3em] leading-loose mb-16 max-w-xl">
-                Transmit your system specifications through the secure uplink. A certified logistics operative will review the data and dispatch an engineer to your coordinates.
+                Fill in the form and we will get back to you with a clear, no-obligation quote. Or call us directly to speak with our team.
               </p>
 
               <div className="bg-brand-card-hover rounded-[2.5rem] p-10 border border-brand-card-border shadow-inner">
@@ -301,7 +301,7 @@ export default function ServiceDetailLayout({
                     <Phone size={32} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-brand-muted uppercase font-technical font-bold tracking-[0.4em] mb-2 text-right">Priority Comms</p>
+                    <p className="text-[10px] text-brand-muted uppercase font-technical font-bold tracking-[0.4em] mb-2 text-right">Call Us</p>
                     <p className="text-3xl md:text-4xl font-technical font-black text-brand-text tracking-tighter">{COMPANY.phone}</p>
                   </div>
                 </div>

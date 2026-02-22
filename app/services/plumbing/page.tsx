@@ -4,6 +4,7 @@ import { Droplets, Wrench, ArrowRight, Phone, Activity, Zap, ShieldCheck, Cpu } 
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import ProcessSteps from "@/components/sections/ProcessSteps";
+import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
 import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -156,6 +157,52 @@ export default function PlumbingCategoryPage() {
               {COMPANY.phone}
             </span>
           </a>
+        </div>
+      </section>
+
+      {/* Technical Component Map */}
+      <section className="py-40 bg-brand-surface border-b border-brand-card-border relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-10 order-2 lg:order-1">
+              <div>
+                <span className="text-brand-blue text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+                  Hydraulic Infrastructure Map
+                </span>
+                <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase leading-none">
+                  Pipe <span className="text-brand-blue">Architecture</span>
+                </h2>
+              </div>
+              <div className="space-y-6">
+                {[
+                  { label: "Supply Lines", detail: "Cold & hot water distribution network" },
+                  { label: "Waste Systems", detail: "Drainage and sewage routing infrastructure" },
+                  { label: "Pressure Nodes", detail: "Booster pumps and pressure regulation" },
+                  { label: "Valve Matrix", detail: "Isolation, check and gate valve arrays" },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-start gap-5 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-brand-blue/40 group-hover:bg-brand-blue mt-1.5 shrink-0 transition-colors" />
+                    <div>
+                      <p className="text-[10px] font-technical font-extrabold text-brand-text uppercase tracking-widest mb-1">{item.label}</p>
+                      <p className="text-[9px] font-technical text-brand-muted uppercase tracking-[0.2em]">{item.detail}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="order-1 lg:order-2">
+              <BlueprintBillboard
+                src="/images/radiator-pipes.png"
+                alt="Hydraulic pipe infrastructure schematic"
+                theme="cool"
+                versionText="HYDRAULIC_ARCH: V2.0"
+                idHash="SHA: 0xC3F0259F"
+                statusText="FLOW ACTIVE"
+                className="w-full"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

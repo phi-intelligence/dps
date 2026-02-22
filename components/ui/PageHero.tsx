@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Phone, ArrowRight, Gauge } from "lucide-react";
+import { ChevronRight, Phone, ArrowRight, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { COMPANY } from "@/lib/constants";
 
@@ -25,8 +26,9 @@ export default function PageHero({
   title,
   subtitle,
   breadcrumbs,
+  backgroundImage,
   showCTA = true,
-  ctaText = "Initiate Protocol",
+  ctaText = "Get a Quote",
   ctaHref = "/contact",
   compact = false,
 }: PageHeroProps) {
@@ -35,18 +37,33 @@ export default function PageHero({
       className={`relative ${compact ? "pt-36 pb-20" : "pt-48 pb-32"} overflow-hidden bg-brand-surface border-b border-brand-card-border`}
       aria-label={`${title} page hero`}
     >
-      {/* Thermal Gradient Elements */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-red/[0.03] blur-[120px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-[800px] h-[400px] bg-brand-blue/[0.03] blur-[150px] rounded-full pointer-events-none translate-y-1/2 -translate-x-1/4" />
+      {/* Background Image */}
+      {backgroundImage && (
+        <>
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="100vw"
+            priority
+            aria-hidden="true"
+          />
+          {/* Dark overlay — keeps text readable */}
+          <div className="absolute inset-0 bg-brand-surface/80" />
+          {/* Gradient fade at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-surface to-transparent" />
+        </>
+      )}
 
-      {/* Technical Grid Overlay */}
+      {/* Subtle grid overlay */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+        className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none"
         style={{ backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)", backgroundSize: "80px 80px" }}
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* Breadcrumb Matrix */}
+        {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-4 text-[10px] font-technical font-bold uppercase tracking-[0.3em] flex-wrap text-brand-muted">
             {breadcrumbs.map((crumb, i) => (
@@ -68,11 +85,11 @@ export default function PageHero({
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-red/10 bg-brand-red/5 mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-red/20 bg-brand-red/10 mb-8"
           >
-            <Gauge size={12} className="text-brand-red" />
+            <Flame size={12} className="text-brand-red" />
             <span className="text-[10px] font-technical font-bold text-brand-red uppercase tracking-[0.2em]">
-              System Node Active
+              Gas Safe Registered
             </span>
           </motion.div>
 
@@ -122,7 +139,7 @@ export default function PageHero({
         </div>
       </div>
 
-      {/* Decorative technical line */}
+      {/* Bottom rule */}
       <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-brand-red/10 via-brand-purple/10 to-brand-blue/10" />
     </section>
   );

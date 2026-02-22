@@ -4,10 +4,10 @@ import { useEffect, useRef } from "react";
 import { registerGSAP, gsap, ScrollTrigger } from "@/components/animations/gsap-init";
 
 const stats = [
-  { value: 500, suffix: "+", label: "Operations Logged" },
-  { value: 10, suffix: "+", label: "Yrs Engineering" },
-  { value: 24, suffix: "/7", label: "Active Dispatch" },
-  { value: 100, suffix: "%", label: "SLA Compliance" },
+  { value: 500, suffix: "+", label: "Jobs Completed" },
+  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 5, suffix: "★", label: "Customer Rating" },
+  { value: 100, suffix: "%", label: "Gas Safe Registered" },
 ];
 
 export default function StatsCounter() {

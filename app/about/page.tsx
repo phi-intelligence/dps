@@ -1,29 +1,29 @@
 "use client";
 
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Shield, Award, Eye, Phone, Cpu, Activity, Zap } from "lucide-react";
+import { Shield, Award, Eye, Phone, Cpu } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
+import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
 import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
 
 const approach = [
   {
     icon: Shield,
-    title: "Uncompromising Reliability",
-    description: "SLA-driven arrival protocols. Clear communication. Every deployment executed with exact situational precision.",
+    title: "Reliability You Can Count On",
+    description: "We arrive on time, communicate clearly, and complete every job to a high standard — no exceptions.",
   },
   {
     icon: Award,
-    title: "Certified Engineering",
-    description: "Gas Safe registered technicians possessing decades of cumulative infrastructure architecture experience.",
+    title: "Fully Qualified Engineers",
+    description: "Gas Safe registered engineers with years of hands-on experience across all makes and models.",
   },
   {
     icon: Eye,
-    title: "Total Transparency",
-    description: "Zero algorithmic pricing surprises. You receive a structured, fixed quote prior to system initiation.",
+    title: "Honest, Transparent Pricing",
+    description: "You receive a clear, fixed quote before any work begins. No hidden charges, no surprises.",
   },
 ];
 
@@ -31,15 +31,15 @@ export default function AboutPage() {
   return (
     <div className="bg-brand-surface text-brand-text">
       <PageHero
-        title="Engineering Philosophy"
-        subtitle="Industrial-grade heating, plumbing and climate control specialists. Protocol-driven execution for absolute reliability."
-        breadcrumbs={[{ label: "Core", href: "/" }, { label: "Philosophy" }]}
+        title="About Us"
+        subtitle="DPS Heating Services Ltd — professional heating and air conditioning engineers serving London and the surrounding areas."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
+        backgroundImage="/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg"
         compact
       />
 
       {/* Company Intro */}
       <section className="py-48 relative overflow-hidden">
-        {/* Glow Element */}
         <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-red/5 blur-[200px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -53,29 +53,29 @@ export default function AboutPage() {
               >
                 <Cpu size={14} className="text-brand-red" />
                 <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                  Mission Parameters
+                  Gas Safe Registered
                 </span>
               </motion.div>
 
               <h2 className="text-5xl md:text-7xl font-technical font-extrabold text-brand-text mb-10 tracking-widest leading-none uppercase">
-                Precision <br />
-                <span className="text-brand-muted/40">Guaranteed.</span>
+                Who We <br />
+                <span className="text-brand-muted/40">Are.</span>
               </h2>
 
               <div className="space-y-8 text-brand-muted font-light leading-relaxed text-sm uppercase tracking-wider">
                 <p>
-                  DPS Heating Services Ltd represents the apex of heating, plumbing and air conditioning
-                  engineering across {COMPANY.areas}. We have spent over a decade refining our operational
-                  logistics to deliver unparalleled system integrity.
+                  DPS Heating Services Ltd is a professional heating and air conditioning company
+                  serving {COMPANY.areas}. With over a decade of experience, we provide reliable,
+                  high-quality services to both domestic and commercial customers.
                 </p>
                 <p>
-                  Our certified engineering team specializes in deep infrastructure: boiler installation,
-                  complex diagnostics, and comprehensive climate control maintenance. We don't just resolve faults;
-                  we optimize systems for peak operational longevity.
+                  Our team specialises in boiler installation, repair and servicing, central heating
+                  systems, and air conditioning — ensuring your home or business stays comfortable
+                  all year round.
                 </p>
                 <div className="border-l-2 border-brand-red pl-8 text-brand-text font-technical font-bold py-4 my-12 bg-brand-card">
                   <p className="tracking-widest uppercase">Gas Safe Registered ({COMPANY.gasSafeNumber})</p>
-                  <p className="text-[10px] text-brand-muted mt-2 font-mono">STATUS: FULLY OPERATIONAL // INSURED</p>
+                  <p className="text-[10px] text-brand-muted mt-2 font-mono">FULLY INSURED // QUALIFIED ENGINEERS</p>
                 </div>
               </div>
 
@@ -83,37 +83,26 @@ export default function AboutPage() {
                 <div className="bg-brand-navy border border-brand-card-border rounded-[2rem] p-10 text-left relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-brand-red/5 blur-2xl group-hover:bg-brand-red/10 transition-colors" />
                   <p className="text-6xl font-technical font-extrabold text-brand-red mb-4 tracking-tighter">10+</p>
-                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Years Active</p>
+                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Years Experience</p>
                 </div>
                 <div className="bg-brand-navy border border-brand-card-border rounded-[2rem] p-10 text-left relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-brand-blue/5 blur-2xl group-hover:bg-brand-blue/10 transition-colors" />
                   <p className="text-6xl font-technical font-extrabold text-brand-blue mb-4 tracking-tighter">500+</p>
-                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Deployments</p>
+                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Jobs Completed</p>
                 </div>
               </div>
             </div>
 
-            {/* Darkened Tech Image */}
-            <div className="relative h-[700px] rounded-[3rem] overflow-hidden border border-brand-card-border shadow-2xl group">
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent z-10" />
-              <div className="absolute inset-0 bg-brand-red/5 mix-blend-overlay z-10" />
-              <Image
-                src="/images/engineer-working.jpg"
-                alt="DPS Heating Services engineer working on complex architecture"
-                fill
-                className="object-cover grayscale contrast-125 brightness-75 group-hover:scale-105 transition-transform duration-1000"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute bottom-12 left-12 z-20">
-                <div className="inline-flex items-center gap-4 bg-brand-navy/60 backdrop-blur-2xl border border-brand-card-border-hover px-8 py-5 rounded-2xl">
-                  <Activity size={20} className="text-brand-red animate-pulse" />
-                  <div className="flex flex-col">
-                    <span className="text-brand-text text-xs font-technical font-extrabold tracking-widest uppercase">System Alpha-1</span>
-                    <span className="text-[9px] text-brand-muted font-mono tracking-widest uppercase mt-1">Status: Monitoring</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Engineering Schematic */}
+            <BlueprintBillboard
+              src="/images/blueprint-boiler-exploded.png"
+              alt="DPS Heating Services — boiler system exploded diagram"
+              theme="tech"
+              versionText="GAS SAFE REGISTERED"
+              idHash={`REG: ${COMPANY.gasSafeNumber}`}
+              statusText="OPERATIONAL"
+              className="w-full"
+            />
           </div>
         </div>
       </section>
@@ -125,7 +114,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-32">
             <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
-              Operational <span className="text-brand-red">Matrix</span>
+              The <span className="text-brand-red">DPS Promise</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -152,7 +141,71 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <CTABanner />
+      {/* Engineers at Work Photo Section */}
+      <section className="py-48 bg-brand-surface border-t border-brand-card-border overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24"
+          >
+            <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+              Our Engineers
+            </span>
+            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+              Experienced. <span className="text-brand-muted/40">Qualified.</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-3xl border border-brand-card-border group"
+            >
+              <Image
+                src="/images/engineers-at-work.png"
+                alt="DPS engineers working on commercial heating installation"
+                width={600}
+                height={450}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/70 to-transparent">
+                <p className="text-white text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
+                  Commercial Heating Installation
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative overflow-hidden rounded-3xl border border-brand-card-border group"
+            >
+              <Image
+                src="/images/9687b2e0-9aaf-4272-adc5-52162cb88115.jpeg"
+                alt="DPS engineer team installing copper heating pipework"
+                width={600}
+                height={450}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/70 to-transparent">
+                <p className="text-white text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
+                  Central Heating Pipework
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <CTABanner
+        title="Get in Touch"
+        subtitle="Ready to book a service or get a free quote? Call us today or use our online form."
+      />
     </div>
   );
 }
