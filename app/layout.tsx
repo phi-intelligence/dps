@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/chat/ChatWidget";
+import LayoutShell from "@/components/layout/LayoutShell";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { QuoteModalProvider } from "@/lib/quote-modal-context";
 import { COMPANY } from "@/lib/constants";
@@ -43,20 +41,14 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t='light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t='light';document.documentElement.setAttribute('data-theme',t);if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark')}catch(e){}})()`,
           }}
         />
       </head>
       <body suppressHydrationWarning className="antialiased bg-brand-surface text-brand-text selection:bg-brand-red selection:text-white" style={{ fontFamily: "var(--font-jakarta)" }}>
         <ThemeProvider>
           <QuoteModalProvider>
-            <a href="#main-content" className="skip-link">
-              Skip to main content
-            </a>
-            <Header />
-            <main id="main-content" className="relative z-10">{children}</main>
-            <Footer />
-            <ChatWidget />
+            <LayoutShell>{children}</LayoutShell>
           </QuoteModalProvider>
         </ThemeProvider>
       </body>

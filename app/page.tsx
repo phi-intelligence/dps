@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
+
+const ServiceAreasMap = dynamic(
+  () => import("@/components/ui/ServiceAreasMap"),
+  { ssr: false, loading: () => <div className="w-full h-full bg-brand-navy animate-pulse rounded-3xl" /> }
+);
 import {
   Flame,
   Wind,
@@ -15,6 +21,7 @@ import {
   Clock,
   Star,
   ChevronDown,
+  MapPin,
 } from "lucide-react";
 import TrustBar from "@/components/ui/TrustBar";
 import ServiceCard from "@/components/ui/ServiceCard";
@@ -25,7 +32,7 @@ import ProcessSteps from "@/components/sections/ProcessSteps";
 import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
 import Hero3DScene from "@/components/animations/Hero3DScene";
 import SectionWaves from "@/components/ui/SectionWaves";
-import { COMPANY, REVIEWS } from "@/lib/constants";
+import { COMPANY, REVIEWS, SERVICE_AREAS } from "@/lib/constants";
 import { registerGSAP, gsap } from "@/components/animations/gsap-init";
 
 const services = [
@@ -86,12 +93,12 @@ export default function HomePage() {
             src="/images/blueprint-boiler-cutaway.png"
             alt=""
             fill
-            className="object-cover object-center opacity-20"
+            className="object-cover object-center opacity-30 dark:opacity-20"
             sizes="100vw"
             priority
             aria-hidden
           />
-          <div className="absolute inset-0 bg-brand-surface/85" />
+          <div className="absolute inset-0 bg-brand-surface/55 dark:bg-brand-surface/85" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -352,6 +359,87 @@ export default function HomePage() {
                 </span>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Areas Map */}
+      <section className="py-48 bg-brand-surface relative overflow-hidden" aria-label="Service areas map">
+        <SectionWaves variant="cool" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 border border-brand-red/20 bg-brand-red/5 backdrop-blur-md rounded-full px-5 py-2 mb-6">
+              <MapPin size={13} className="text-brand-red" />
+              <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
+                Coverage
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase leading-none mb-6">
+              Where We <span className="text-brand-red">Operate</span>
+            </h2>
+            <p className="text-brand-muted text-sm font-light uppercase tracking-wider max-w-xl mx-auto">
+              {SERVICE_AREAS.length}+ areas across South-West London. Click any pin to find out more.
+            </p>
+          </motion.div>
+
+          {/* Map + sidebar grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            {/* Map */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="lg:col-span-2 relative rounded-3xl overflow-hidden border border-brand-card-border shadow-2xl"
+              style={{ height: "520px" }}
+            >
+              <ServiceAreasMap />
+              {/* Gradient fade on edges */}
+              <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" />
+            </motion.div>
+
+            {/* Area list */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-brand-steel border border-brand-card-border rounded-3xl p-6 lg:p-8 self-start"
+            >
+              <h3 className="text-xs font-technical font-bold uppercase tracking-[0.3em] text-brand-red mb-6 flex items-center gap-2">
+                <MapPin size={12} />
+                Areas Covered
+              </h3>
+              <div className="grid grid-cols-2 gap-2">
+                {SERVICE_AREAS.map((area) => (
+                  <div
+                    key={area}
+                    className="flex items-center gap-2 text-[10px] font-technical font-bold uppercase tracking-widest text-brand-muted hover:text-brand-text transition-colors group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover:bg-brand-red transition-colors shrink-0" />
+                    {area}
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 pt-6 border-t border-brand-card-border">
+                <p className="text-[10px] text-brand-muted font-technical uppercase tracking-widest mb-4">
+                  Not sure we cover your area?
+                </p>
+                <Link
+                  href="/service-areas"
+                  className="inline-flex items-center gap-2 text-[10px] font-technical font-bold uppercase tracking-widest text-brand-red hover:text-brand-text transition-colors"
+                >
+                  <ArrowRight size={12} />
+                  View all service areas
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

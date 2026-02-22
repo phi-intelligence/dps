@@ -18,7 +18,7 @@ export default function ReviewCard({ name, service, rating, quote, index = 0 }: 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.15, duration: 0.5 }}
-      className="bg-brand-steel border border-brand-card-border rounded-[2rem] p-8 premium-shadow hover:premium-shadow-hover transition-all duration-500"
+      className="bg-brand-steel border border-brand-card-border rounded-2xl p-8 premium-shadow hover:premium-shadow-hover transition-all duration-500"
     >
       <div className="flex gap-1 mb-6" aria-label={`${rating} out of 5 stars`}>
         {Array.from({ length: rating }).map((_, i) => (

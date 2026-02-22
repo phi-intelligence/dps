@@ -25,10 +25,10 @@ export default function CTABanner({
         <EnergyFlowBackground />
       </div>
       <div className="max-w-7xl mx-auto">
-        <div className="bg-brand-surface dark:bg-brand-steel rounded-[3.5rem] p-12 md:p-24 relative overflow-hidden premium-shadow">
-          {/* Decorative Gradient Glows */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-red/10 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-orange/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="bg-brand-surface dark:bg-brand-steel rounded-[2rem] p-12 md:p-24 relative overflow-hidden premium-shadow">
+          {/* Decorative Gradient Glows - Refined for geometric look */}
+          <div className="absolute -top-32 -right-32 w-[30rem] h-[30rem] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 w-[30rem] h-[30rem] bg-brand-orange/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-7xl font-sans font-extrabold text-brand-text mb-8 tracking-tight">
               {title}

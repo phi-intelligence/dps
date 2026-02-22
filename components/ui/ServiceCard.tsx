@@ -27,7 +27,7 @@ export default function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="group relative bg-brand-steel border border-brand-card-border rounded-[2.5rem] p-8 transition-all duration-500 premium-shadow hover:premium-shadow-hover"
+      className="group relative bg-brand-steel border border-brand-card-border rounded-3xl p-8 transition-all duration-500 premium-shadow hover:premium-shadow-hover"
     >
       <div className="flex items-center gap-6 mb-8">
         <div className="w-16 h-16 bg-brand-navy border border-brand-card-border rounded-2xl flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-500">

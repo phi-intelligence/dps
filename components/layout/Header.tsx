@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Sun, Moon, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { COMPANY } from "@/lib/constants";
 import { useTheme } from "@/lib/theme-provider";
@@ -22,6 +22,7 @@ const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact", href: "/contact" },
+  { label: "Admin", href: "/admin/login", admin: true },
 ];
 
 export default function Header() {
@@ -39,12 +40,13 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-4" : "py-6"
-        }`}
+      className={`absolute top-0 left-0 right-0 z-50 transition-all duration-500 py-6`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-12">
         <div
-          className={`flex items-center justify-between transition-all duration-500 rounded-full px-6 md:px-8 py-3 ${scrolled ? "bg-brand-surface/80 backdrop-blur-xl border border-brand-card-border shadow-xl" : "bg-transparent border border-transparent"
+          className={`flex items-center justify-between transition-all duration-500 rounded-2xl px-10 md:px-16 py-6 ${scrolled
+              ? "bg-brand-surface/40 backdrop-blur-md shadow-lg"
+              : "bg-transparent"
             }`}
         >
           {/* Logo Section */}
@@ -55,7 +57,7 @@ export default function Header() {
                 animate={{ rotate: [0, 90, 180, 270, 360] }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
-              <div className="w-10 h-10 rounded-2xl border border-brand-card-border-hover bg-brand-surface flex items-center justify-center relative z-10 overflow-hidden shadow-sm shadow-brand-red/5 transition-transform group-hover:scale-105 duration-500">
+              <div className="w-10 h-10 rounded-2xl border border-brand-card-border bg-brand-surface flex items-center justify-center relative z-10 overflow-hidden shadow-sm shadow-brand-red/5 transition-transform group-hover:scale-105 duration-500">
                 <Image src="/images/logo.jpg" alt="DPS Heating" width={32} height={32} loading="eager" className="object-contain" style={{ width: "auto", height: "auto" }} />
               </div>
             </div>
@@ -72,52 +74,53 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map((link) =>
-              link.children ? (
-                <div key={link.href} className="relative group">
-                  <button
-                    onMouseEnter={() => setServicesOpen(true)}
-                    className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold"
+              link.admin ? null : // Exclude admin link from main nav
+                link.children ? (
+                  <div key={link.href} className="relative group">
+                    <button
+                      onMouseEnter={() => setServicesOpen(true)}
+                      className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold"
+                    >
+                      {link.label}
+                      <ChevronDown
+                        size={12}
+                        className={`transition-transform duration-300 group-hover:rotate-180 text-brand-red`}
+                      />
+                    </button>
+                    <AnimatePresence>
+                      {servicesOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          onMouseLeave={() => setServicesOpen(false)}
+                          className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/95 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
+                        >
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className="flex items-center gap-3 px-4 py-3 text-[10px] text-brand-muted font-technical uppercase tracking-widest hover:text-brand-text hover:bg-brand-steel rounded-xl transition-all group/item"
+                              onClick={() => setServicesOpen(false)}
+                            >
+                              <div className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover/item:bg-brand-red transition-colors" />
+                              {child.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold relative group"
                   >
                     {link.label}
-                    <ChevronDown
-                      size={12}
-                      className={`transition-transform duration-300 group-hover:rotate-180 text-brand-red`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {servicesOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        onMouseLeave={() => setServicesOpen(false)}
-                        className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/95 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
-                      >
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="flex items-center gap-3 px-4 py-3 text-[10px] text-brand-muted font-technical uppercase tracking-widest hover:text-brand-text hover:bg-brand-steel rounded-xl transition-all group/item"
-                            onClick={() => setServicesOpen(false)}
-                          >
-                            <div className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover/item:bg-brand-red transition-colors" />
-                            {child.label}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold relative group"
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-red transition-all group-hover:w-full" />
-                </Link>
-              )
+                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-red transition-all group-hover:w-full" />
+                  </Link>
+                )
             )}
           </nav>
 
@@ -137,10 +140,17 @@ export default function Header() {
               <Phone size={14} className="text-brand-red animate-pulse" />
               <span>{COMPANY.phone}</span>
             </a>
+            <Link
+              href="/admin/login"
+              className="w-9 h-9 rounded-xl border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red transition-all"
+              title="Admin Terminal"
+            >
+              <ShieldCheck size={16} />
+            </Link>
             <button
               type="button"
               onClick={() => openQuoteModal()}
-              className="relative group bg-brand-gradient text-white px-7 py-3 rounded-full text-xs font-technical font-extrabold uppercase tracking-wider transition-all overflow-hidden shadow-lg shadow-brand-red/10 active:scale-95 duration-200"
+              className="relative group bg-brand-gradient text-white px-8 py-4 rounded-xl text-[10px] font-technical font-extrabold uppercase tracking-[0.2em] transition-all overflow-hidden shadow-xl shadow-brand-red/10 active:scale-95 duration-200"
             >
               <span className="relative z-10">Get a Free Estimate</span>
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -171,10 +181,10 @@ export default function Header() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={toggleTheme}
-                  className="w-9 h-9 rounded-full border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-text transition-all"
+                  className="w-10 h-10 rounded-xl border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-text transition-all"
                   aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
                 >
-                  {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                  {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
                 <button onClick={() => setMobileOpen(false)} className="text-brand-text">
                   <X size={32} />
@@ -183,7 +193,7 @@ export default function Header() {
             </div>
 
             <nav className="flex flex-col gap-6">
-              {navLinks.map((link) => (
+              {navLinks.filter((link) => !link.admin).map((link) => (
                 <div key={link.href} className="space-y-4">
                   <Link
                     href={link.href}
@@ -224,9 +234,9 @@ export default function Header() {
                   setMobileOpen(false);
                   openQuoteModal();
                 }}
-                className="block w-full text-center bg-brand-red text-white py-5 rounded-full font-technical font-extrabold uppercase tracking-widest shadow-xl shadow-brand-red/20"
+                className="block w-full text-center bg-brand-gradient text-white py-5 rounded-2xl font-technical font-extrabold uppercase tracking-[0.2em] text-[11px] shadow-xl shadow-brand-red/20 active:scale-95 transition-all"
               >
-                Get a Quote
+                Get a Free Estimate
               </button>
             </div>
           </motion.div>

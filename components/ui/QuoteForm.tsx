@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertCircle, Send, Cpu, Activity } from "lucide-react";
+import { inquiryService } from "@/lib/inquiry-service";
 
 export const QUOTE_SERVICES = [
   { value: "", label: "Select service..." },
@@ -45,12 +46,20 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    // Persist inquiry data
+    inquiryService.addInquiry({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      service: form.service,
+      message: form.message,
+    });
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setStatus("success");
   };
 
   const inputClass =
-    "w-full bg-brand-navy border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[12px] font-technical uppercase tracking-widest placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-2xl";
+    "w-full bg-white dark:bg-brand-navy border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[14px] font-sans font-medium placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-sm";
 
   return (
     <div className="relative">
@@ -87,9 +96,8 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
         <div className={`grid gap-8 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
           <div>
             <div className="flex items-center gap-2 mb-3 ml-1">
-              <Cpu size={12} className="text-brand-red" />
-              <label htmlFor="name" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                IDENT: FULL_NAME
+              <label htmlFor="name" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                Full Name
               </label>
             </div>
             <input
@@ -106,9 +114,8 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
           </div>
           <div>
             <div className="flex items-center gap-2 mb-3 ml-1">
-              <Activity size={12} className="text-brand-red" />
-              <label htmlFor="phone" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                COMM_LINK: PRIMARY
+              <label htmlFor="phone" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                Phone Number
               </label>
             </div>
             <input
@@ -127,9 +134,8 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <Send size={12} className="text-brand-red" />
-            <label htmlFor="email" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-              UPLINK_NODE: SMTP
+            <label htmlFor="email" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+              Email Address
             </label>
           </div>
           <input
@@ -147,9 +153,8 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <Cpu size={12} className="text-brand-red" />
-            <label htmlFor="service" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-              SYSTEM_DIRECTIVE
+            <label htmlFor="service" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+              Required Service
             </label>
           </div>
           <div className="relative">
@@ -175,9 +180,8 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <Activity size={12} className="text-brand-red" />
-            <label htmlFor="message" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-              DIAGNOSTIC_SYMPTOMS
+            <label htmlFor="message" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+              Additional Details
             </label>
           </div>
           <textarea
@@ -194,19 +198,18 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="group relative w-full bg-white text-black py-6 rounded-xl font-technical font-extrabold text-[12px] uppercase tracking-[0.4em] overflow-hidden transition-all shadow-2xl disabled:opacity-50"
+          className="group relative w-full bg-brand-gradient text-white py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-xl shadow-brand-red/10 disabled:opacity-50"
         >
-          <div className="absolute inset-0 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-          <div className="relative z-10 flex items-center justify-center gap-4 group-hover:text-white transition-colors">
+          <div className="relative z-10 flex items-center justify-center gap-4 transition-colors">
             {status === "loading" ? (
               <>
-                <div className="w-4 h-4 border-2 border-brand-red border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 <span>Transmitting Data</span>
               </>
             ) : (
               <>
-                <Send size={14} />
-                <span>Deploy Command</span>
+                <Send size={18} />
+                <span>Request Custom Quote</span>
               </>
             )}
           </div>

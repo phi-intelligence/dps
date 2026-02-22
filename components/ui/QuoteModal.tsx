@@ -11,8 +11,20 @@ import {
   Activity,
   ChevronRight,
   Zap,
+  Flame,
+  Wind,
+  Wrench,
+  Settings,
+  ShieldCheck,
+  ClipboardList,
+  Thermometer,
 } from "lucide-react";
+import { useTheme } from "@/lib/theme-provider";
+import { useQuoteModal } from "@/lib/quote-modal-context";
+import { inquiryService } from "@/lib/inquiry-service";
 import { QUOTE_SERVICES } from "@/components/ui/QuoteForm";
+import Image from "next/image";
+import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
 
 const inputClass =
   "quote-modal-input w-full border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[12px] font-technical uppercase tracking-widest placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-2xl";
@@ -28,6 +40,21 @@ function getFocusables(container: HTMLElement): HTMLElement[] {
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
   return Array.from(container.querySelectorAll<HTMLElement>(selector));
 }
+
+const SERVICE_METADATA: Record<string, { image: string; icon: any; category: string }> = {
+  "boiler-repair": { image: "/images/boiler-repair.jpg", icon: Flame, category: "Heating" },
+  "boiler-installation": { image: "/images/boiler-install.jpg", icon: Settings, category: "Heating" },
+  "boiler-servicing": { image: "/images/boiler-modern.jpg", icon: Activity, category: "Heating" },
+  "central-heating": { image: "/images/central-heating.jpg", icon: Thermometer, category: "Heating" },
+  "radiators": { image: "/images/radiator-pipes.png", icon: Activity, category: "Heating" },
+  "power-flushing": { image: "/images/plumbing-pipes.jpg", icon: Wrench, category: "Heating" },
+  "ac-installation": { image: "/images/ac-installation.jpg", icon: Wind, category: "Climate" },
+  "ac-servicing": { image: "/images/ac-unit-indoor.jpg", icon: Activity, category: "Climate" },
+  "ac-repairs": { image: "/images/exploded-ac.png", icon: Wrench, category: "Climate" },
+  "commercial-ac": { image: "/images/blueprint-commercial-system.png", icon: Cpu, category: "Climate" },
+  "ac-maintenance": { image: "/images/team-professional.jpg", icon: ClipboardList, category: "Climate" },
+  "other": { image: "/images/logo.jpg", icon: ShieldCheck, category: "General" },
+};
 
 export default function QuoteModal({
   open,
@@ -56,6 +83,11 @@ export default function QuoteModal({
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const selectService = (value: string) => {
+    setForm((prev) => ({ ...prev, service: value }));
+    setStep(2);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (step < 3) {
@@ -63,6 +95,14 @@ export default function QuoteModal({
       return;
     }
     setStatus("loading");
+    // Persist inquiry data
+    inquiryService.addInquiry({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      service: form.service,
+      message: form.message,
+    });
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setStatus("success");
   };
@@ -136,24 +176,34 @@ export default function QuoteModal({
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="quote-modal-opaque relative z-[101] w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-[2rem] border border-brand-card-border shadow-2xl"
+            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            className={`quote-modal-opaque relative z-[101] w-full ${step === 1 ? 'max-w-6xl' : 'max-w-5xl'} max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-brand-steel border border-brand-card-border shadow-2xl premium-shadow`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="quote-modal-header sticky top-0 z-10 flex items-center justify-between px-6 py-4">
-              <h2
-                id="quote-modal-title"
-                className="text-lg font-technical font-extrabold uppercase tracking-widest text-brand-text"
-              >
-                Get a Quote
-              </h2>
+            <div className="absolute inset-0 opacity-30 pointer-events-none overflow-hidden rounded-3xl">
+              <EnergyFlowBackground />
+            </div>
+
+            <div className="quote-modal-header sticky top-0 z-30 flex items-center justify-between px-8 py-6 bg-white/80 dark:bg-brand-steel/80 backdrop-blur-md border-b border-brand-card-border">
+              <div>
+                <h2
+                  id="quote-modal-title"
+                  className="text-2xl font-sans font-extrabold text-brand-text mb-1"
+                >
+                  Request a Quote
+                </h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">Step {step} of 3</span>
+                </div>
+              </div>
               <button
                 type="button"
                 onClick={handleClose}
-                className="rounded-full p-2 text-brand-muted hover:bg-brand-card hover:text-brand-text transition-colors"
+                className="w-12 h-12 rounded-full flex items-center justify-center text-brand-muted hover:bg-brand-surface dark:hover:bg-brand-navy hover:text-brand-text transition-all premium-shadow"
                 aria-label="Close"
               >
-                <X size={20} />
+                <X size={24} />
               </button>
             </div>
 
@@ -206,170 +256,228 @@ export default function QuoteModal({
                     onSubmit={handleSubmit}
                     className="space-y-6"
                   >
-                    {/* Step 1: Service */}
+                    {/* Step 1: Service Selection Grid */}
                     {step === 1 && (
-                      <div className="space-y-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Cpu size={12} className="text-brand-red" />
-                          <label htmlFor="modal-service" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                            SYSTEM_DIRECTIVE
-                          </label>
+                      <div className="space-y-12">
+                        <div className="text-center max-w-2xl mx-auto mb-12">
+                          <h3 className="text-3xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">How can we help you today?</h3>
+                          <p className="text-brand-muted font-medium text-lg leading-relaxed">Select the service you require to begin your custom quote transmission.</p>
                         </div>
-                        <div className="relative">
-                          <select
-                            id="modal-service"
-                            name="service"
-                            required
-                            value={form.service}
-                            onChange={handleChange}
-                            className={`${inputClass} appearance-none cursor-pointer`}
-                          >
-                            {QUOTE_SERVICES.map((s) => (
-                              <option key={s.value} value={s.value} className="bg-brand-steel text-brand-text uppercase text-[10px]">
-                                {s.label}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-30">
-                            <Cpu size={14} className="text-brand-text" />
-                          </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {QUOTE_SERVICES.filter(s => s.value !== "").map((s) => {
+                            const meta = SERVICE_METADATA[s.value as keyof typeof SERVICE_METADATA] || SERVICE_METADATA["other"];
+                            const MetaIcon = meta.icon;
+
+                            return (
+                              <motion.button
+                                key={s.value}
+                                type="button"
+                                whileHover={{ y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => selectService(s.value)}
+                                className={`group relative h-52 rounded-[2rem] overflow-hidden border transition-all duration-300 bg-slate-900 ${form.service === s.value
+                                  ? "border-brand-red ring-2 ring-brand-red/30 shadow-lg shadow-brand-red/10"
+                                  : "border-white/10 hover:border-brand-red/50"
+                                  }`}
+                              >
+                                {/* Image — visible by default, full colour on hover */}
+                                <Image
+                                  src={meta.image}
+                                  alt={s.label}
+                                  fill
+                                  className="object-cover opacity-55 grayscale group-hover:opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-600"
+                                />
+                                {/* Fixed dark scrim — works in both light & dark modal */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5 z-10" />
+
+                                <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end items-start">
+                                  <div className="w-11 h-11 rounded-xl bg-white/15 border border-white/20 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300">
+                                    <MetaIcon size={22} className="text-white transition-colors" />
+                                  </div>
+                                  <div className="text-left">
+                                    <p className="text-[9px] font-sans font-bold text-brand-red uppercase tracking-[0.25em] mb-0.5">{meta.category}</p>
+                                    <h4 className="text-base font-sans font-extrabold text-white leading-tight">{s.label}</h4>
+                                  </div>
+                                </div>
+                              </motion.button>
+                            );
+                          })}
                         </div>
-                        <button
-                          type="submit"
-                          className="group relative w-full bg-white text-black py-5 rounded-xl font-technical font-extrabold text-[12px] uppercase tracking-[0.4em] overflow-hidden transition-all shadow-2xl"
-                        >
-                          <span className="relative z-10 flex items-center justify-center gap-2">
-                            Next: Your details <ChevronRight size={16} />
-                          </span>
-                        </button>
+                        <div className="flex justify-center pt-8">
+                          <p className="text-[10px] font-sans font-bold text-brand-muted uppercase tracking-[0.4em]">Proprietary Engineering Interface // DPS-QTS-2026</p>
+                        </div>
                       </div>
                     )}
 
                     {/* Step 2: Details */}
                     {step === 2 && (
-                      <div className="space-y-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="flex flex-col lg:flex-row gap-12">
+                        <div className="lg:w-2/5">
+                          <div className="relative h-64 lg:h-full min-h-[420px] rounded-3xl overflow-hidden border border-white/10 shadow-xl bg-slate-900">
+                            {(() => {
+                              const meta = SERVICE_METADATA[form.service as keyof typeof SERVICE_METADATA] || SERVICE_METADATA["other"];
+                              const MetaIcon = meta.icon;
+                              const serviceLabel = QUOTE_SERVICES.find(s => s.value === form.service)?.label || "Selected Service";
+
+                              return (
+                                <>
+                                  {/* Image — clearly visible, no grayscale */}
+                                  <Image
+                                    src={meta.image}
+                                    alt={serviceLabel}
+                                    fill
+                                    className="object-cover opacity-75 transition-all duration-700"
+                                  />
+                                  {/* Fixed dark scrim — same in both modes */}
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 z-10" />
+
+                                  <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end items-start">
+                                    <div className="w-14 h-14 rounded-2xl bg-brand-red border border-brand-red/80 flex items-center justify-center mb-5 shadow-lg shadow-brand-red/25">
+                                      <MetaIcon size={28} className="text-white" />
+                                    </div>
+                                    <div className="text-left bg-black/30 backdrop-blur-md p-4 rounded-2xl border border-white/15">
+                                      <p className="text-[11px] font-sans font-bold text-brand-red uppercase tracking-[0.3em] mb-2">{meta.category}</p>
+                                      <h4 className="text-2xl font-sans font-extrabold text-white leading-tight">{serviceLabel}</h4>
+                                    </div>
+                                  </div>
+                                </>
+                              );
+                            })()}
+                          </div>
+                        </div>
+
+                        <div className="lg:w-3/5 space-y-10 py-4">
+                          <div className="mb-8">
+                            <h3 className="text-4xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">Your Details</h3>
+                            <p className="text-brand-muted font-medium text-lg leading-relaxed">Tell us about yourself so we can establish a primary communication channel.</p>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                              <div className="flex items-center gap-2 mb-3 ml-1">
+                                <label htmlFor="modal-name" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                                  Full Name
+                                </label>
+                              </div>
+                              <input
+                                id="modal-name"
+                                name="name"
+                                type="text"
+                                required
+                                autoComplete="name"
+                                value={form.name}
+                                onChange={handleChange}
+                                placeholder="John Doe"
+                                className={`${inputClass} text-base py-4`}
+                              />
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2 mb-3 ml-1">
+                                <label htmlFor="modal-phone" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                                  Phone Number
+                                </label>
+                              </div>
+                              <input
+                                id="modal-phone"
+                                name="phone"
+                                type="tel"
+                                required
+                                autoComplete="tel"
+                                value={form.phone}
+                                onChange={handleChange}
+                                placeholder="+44 20 7123 4567"
+                                className={`${inputClass} text-base py-4`}
+                              />
+                            </div>
+                          </div>
                           <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <Cpu size={12} className="text-brand-red" />
-                              <label htmlFor="modal-name" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                                IDENT: FULL_NAME
+                            <div className="flex items-center gap-2 mb-3 ml-1">
+                              <label htmlFor="modal-email" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                                Email Address
                               </label>
                             </div>
                             <input
-                              id="modal-name"
-                              name="name"
-                              type="text"
+                              id="modal-email"
+                              name="email"
+                              type="email"
                               required
-                              autoComplete="name"
-                              value={form.name}
+                              autoComplete="email"
+                              value={form.email}
                               onChange={handleChange}
-                              placeholder="ENTER LEGAL IDENTITY"
-                              className={inputClass}
+                              placeholder="john@example.com"
+                              className={`${inputClass} text-base py-4`}
                             />
                           </div>
-                          <div>
-                            <div className="flex items-center gap-2 mb-2">
-                              <Activity size={12} className="text-brand-red" />
-                              <label htmlFor="modal-phone" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                                COMM_LINK: PRIMARY
-                              </label>
-                            </div>
-                            <input
-                              id="modal-phone"
-                              name="phone"
-                              type="tel"
-                              required
-                              autoComplete="tel"
-                              value={form.phone}
-                              onChange={handleChange}
-                              placeholder="+44 0000 000000"
-                              className={inputClass}
-                            />
+
+                          <div className="flex gap-4 pt-8">
+                            <button
+                              type="button"
+                              onClick={() => setStep(1)}
+                              className="px-10 py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-surface transition-all"
+                            >
+                              Back
+                            </button>
+                            <button
+                              type="submit"
+                              className="group relative flex-1 bg-brand-gradient text-white py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20"
+                            >
+                              <span className="relative z-10 flex items-center justify-center gap-2">
+                                Continue <ChevronRight size={20} />
+                              </span>
+                            </button>
                           </div>
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Send size={12} className="text-brand-red" />
-                            <label htmlFor="modal-email" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                              UPLINK_NODE: SMTP
-                            </label>
-                          </div>
-                          <input
-                            id="modal-email"
-                            name="email"
-                            type="email"
-                            required
-                            autoComplete="email"
-                            value={form.email}
-                            onChange={handleChange}
-                            placeholder="NODENAME@DOMAIN.SYS"
-                            className={inputClass}
-                          />
-                        </div>
-                        <div className="flex gap-3">
-                          <button
-                            type="button"
-                            onClick={() => setStep(1)}
-                            className="px-6 py-4 rounded-xl font-technical font-bold text-[12px] uppercase tracking-widest border border-brand-card-border-hover text-brand-muted hover:text-brand-text transition-colors"
-                          >
-                            Back
-                          </button>
-                          <button
-                            type="submit"
-                            className="group relative flex-1 bg-white text-black py-5 rounded-xl font-technical font-extrabold text-[12px] uppercase tracking-[0.4em] overflow-hidden transition-all shadow-2xl"
-                          >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              Next: Message <ChevronRight size={16} />
-                            </span>
-                          </button>
                         </div>
                       </div>
                     )}
 
-                    {/* Step 3: Message & submit */}
                     {step === 3 && (
-                      <div className="space-y-6">
+                      <div className="max-w-3xl mx-auto space-y-12 py-8">
+                        <div className="text-center">
+                          <h3 className="text-3xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">What's the situation?</h3>
+                          <p className="text-brand-muted font-medium text-lg leading-relaxed">Provide additional details or specific requirements for your quote.</p>
+                        </div>
+
                         <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Activity size={12} className="text-brand-red" />
-                            <label htmlFor="modal-message" className="text-[9px] font-technical font-black uppercase tracking-[0.4em] text-brand-muted">
-                              DIAGNOSTIC_SYMPTOMS
+                          <div className="flex items-center gap-2 mb-4 ml-1">
+                            <label htmlFor="modal-message" className="text-[11px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                              Technical Requirements / Symptoms
                             </label>
                           </div>
                           <textarea
                             id="modal-message"
                             name="message"
-                            rows={4}
+                            rows={8}
                             value={form.message}
                             onChange={handleChange}
-                            placeholder="INPUT ANOMALY PARAMETERS OR ARCHITECTURAL REQUIREMENTS..."
-                            className={`${inputClass} resize-none`}
+                            placeholder="Please describe the work needed in detail..."
+                            className={`${inputClass} text-base resize-none py-6 h-64 leading-relaxed`}
                           />
                         </div>
-                        <div className="flex gap-3">
+
+                        <div className="flex gap-4 pt-4">
                           <button
                             type="button"
                             onClick={() => setStep(2)}
-                            className="px-6 py-4 rounded-xl font-technical font-bold text-[12px] uppercase tracking-widest border border-brand-card-border-hover text-brand-muted hover:text-brand-text transition-colors"
+                            className="px-10 py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-surface transition-all"
                           >
                             Back
                           </button>
                           <button
                             type="submit"
                             disabled={status === "loading"}
-                            className="group relative flex-1 bg-white text-black py-5 rounded-xl font-technical font-extrabold text-[12px] uppercase tracking-[0.4em] overflow-hidden transition-all shadow-2xl disabled:opacity-50"
+                            className="group relative flex-1 bg-brand-gradient text-white py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20 disabled:opacity-50"
                           >
-                            <div className="relative z-10 flex items-center justify-center gap-4 group-hover:text-white transition-colors">
+                            <div className="relative z-10 flex items-center justify-center gap-4 transition-colors">
                               {status === "loading" ? (
                                 <>
-                                  <div className="w-4 h-4 border-2 border-brand-red border-t-transparent rounded-full animate-spin" />
-                                  <span>Transmitting Data</span>
+                                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                  <span>Transmitting...</span>
                                 </>
                               ) : (
                                 <>
-                                  <Send size={14} />
-                                  <span>Deploy Command</span>
+                                  <Send size={20} />
+                                  <span>Submit Transmission</span>
                                 </>
                               )}
                             </div>
@@ -382,15 +490,16 @@ export default function QuoteModal({
               </AnimatePresence>
             </div>
 
-            <div className="px-6 py-3 flex items-center justify-center gap-2">
-              <Zap size={12} className="text-brand-red" />
-              <span className="text-[9px] font-technical font-bold text-brand-red uppercase tracking-[0.3em]">
-                Free Quote — No Obligation
+            <div className="px-8 py-4 flex items-center justify-center gap-3 bg-brand-surface dark:bg-brand-navy/30 border-t border-brand-card-border rounded-b-3xl">
+              <Zap size={14} className="text-brand-red" />
+              <span className="text-[10px] font-sans font-black text-brand-red uppercase tracking-[0.4em]">
+                Proprietary Interface // Reliable Data Transmission // DPS Solutions
               </span>
             </div>
           </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+        </div >
+      )
+      }
+    </AnimatePresence >
   );
 }

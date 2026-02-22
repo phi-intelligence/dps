@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ICON_MAP, IconName } from "@/lib/icons";
+import { useRef } from "react";
 
 export interface ProcessStep {
   icon: IconName;
@@ -50,9 +51,18 @@ export default function ProcessSteps({
   subtitle = "Simple, straightforward service from first contact to job completion.",
   dark = false,
 }: ProcessStepsProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
     <section
-      className={`py-40 px-4 ${dark ? "bg-brand-surface" : "bg-brand-steel"}`}
+      ref={containerRef}
+      className={`py-40 px-4 overflow-hidden ${dark ? "bg-brand-surface" : "bg-brand-steel"}`}
       aria-label={title}
     >
       <div className="max-w-7xl mx-auto relative">
@@ -89,52 +99,61 @@ export default function ProcessSteps({
         </div>
 
         <div className="relative">
-          {/* Technical Connecting Line */}
-          <div className="hidden lg:block absolute top-[4.5rem] left-[10%] right-[10%] h-[1px] bg-brand-card-border z-0">
+          {/* Central Vertical Line */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-brand-card-border hidden lg:block">
             <motion.div
-              className="h-full bg-gradient-to-r from-brand-red via-brand-purple to-brand-blue origin-left"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 2, ease: "circOut", delay: 0.2 }}
-              style={{ boxShadow: "0 0 12px rgba(220,38,38,0.4), 0 0 24px rgba(37,99,235,0.2)" }}
+              className="absolute top-0 left-0 right-0 bg-brand-gradient origin-top"
+              style={{ height: lineHeight }}
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 relative z-10">
+          <div className="space-y-24 lg:space-y-0 relative z-10">
             {steps.map((step, index) => {
               const Icon = ICON_MAP[step.icon];
-              return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2, duration: 0.5 }}
-                  className="relative text-center group"
-                >
-                  <div className="relative z-10 w-24 h-24 mx-auto mb-10 bg-brand-navy border border-brand-card-border rounded-[2rem] flex items-center justify-center group-hover:border-brand-red/20 transition-all duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-red/5 to-transparent rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    {Icon && <Icon size={32} className="text-brand-muted group-hover:text-brand-red transition-all duration-500 relative z-10" />}
+              const isEven = index % 2 === 0;
 
-                    {/* Phase Number Overlay */}
-                    <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-brand-surface border border-brand-card-border-hover flex items-center justify-center text-[10px] font-technical font-bold text-brand-red">
-                      {step.number}
-                    </div>
+              return (
+                <div key={step.number} className="relative lg:flex items-center justify-between lg:h-80">
+                  {/* Content Container */}
+                  <div className={`lg:w-[45%] ${isEven ? "lg:text-right lg:order-1" : "lg:text-left lg:order-2"}`}>
+                    <motion.div
+                      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="group p-8 rounded-3xl bg-brand-navy/30 border border-brand-card-border hover:border-brand-red/20 transition-all duration-500 premium-shadow"
+                    >
+                      <div className={`flex items-center gap-4 mb-6 ${isEven ? "lg:flex-row-reverse" : ""}`}>
+                        <div className="w-16 h-16 shrink-0 bg-brand-surface border border-brand-card-border rounded-2xl flex items-center justify-center group-hover:border-brand-red/30 transition-all">
+                          {Icon && <Icon size={24} className="text-brand-red" />}
+                        </div>
+                        <div className={isEven ? "lg:text-right" : ""}>
+                          <p className="text-[10px] font-technical font-bold text-brand-red uppercase tracking-widest mb-1">Step {step.number}</p>
+                          <h3 className="text-2xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+                            {step.title}
+                          </h3>
+                        </div>
+                      </div>
+                      <p className="text-sm leading-relaxed text-brand-muted font-light uppercase tracking-widest">
+                        {step.description}
+                      </p>
+                    </motion.div>
                   </div>
 
-                  <h3 className="text-xl font-technical font-extrabold mb-4 text-brand-text tracking-widest uppercase">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs leading-relaxed text-brand-muted font-light px-4 uppercase tracking-widest">
-                    {step.description}
-                  </p>
+                  {/* Circle Indicator on the line */}
+                  <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-brand-surface border-4 border-brand-steel z-20 items-center justify-center">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                      className="w-4 h-4 rounded-full bg-brand-red shadow-[0_0_15px_rgba(239,68,68,0.5)]"
+                    />
+                  </div>
 
-                  {/* Background index number */}
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 text-[8rem] font-technical font-black text-white/[0.02] pointer-events-none -z-10 group-hover:text-brand-red/[0.03] transition-colors">
-                    {step.number}
-                  </span>
-                </motion.div>
+                  {/* Empty space for alternating layout */}
+                  <div className={`hidden lg:block lg:w-[45%] ${isEven ? "lg:order-2" : "lg:order-1"}`} />
+                </div>
               );
             })}
           </div>
