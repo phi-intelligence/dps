@@ -1,26 +1,237 @@
 @import "tailwindcss";
 
+@theme {
+  /* Static accent colors — same in both themes */
+  --color-brand-blue: #2563EB;
+  --color-brand-purple: #6B21A8;
+  --color-brand-red: #DC2626;
+  --color-brand-orange: #DC2626;
+
+  /* Font Families */
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-technical: var(--font-space-grotesk), monospace;
+  --font-heading: var(--font-space-grotesk), system-ui, sans-serif;
+}
+
+/* Theme-switching colors — dark defaults, overridden by [data-theme="light"] */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand-surface: #070707;
+  --color-brand-steel: #0A1128;
+  --color-brand-navy: #0A1128;
+  --color-brand-text: #FFFFFF;
+  --color-brand-muted: #94A3B8;
+  --color-brand-border: rgba(255, 255, 255, 0.08);
+  --color-brand-card: rgba(255, 255, 255, 0.03);
+  --color-brand-card-border: rgba(255, 255, 255, 0.08);
+  --color-brand-card-hover: rgba(255, 255, 255, 0.05);
+  --color-brand-card-border-hover: rgba(255, 255, 255, 0.10);
+  --color-brand-inverse: #000000;
+
+  --background: #070707;
+  --foreground: #FFFFFF;
+
+  --hologram-hue: 160deg;
+  --hologram-sat: 1.1;
+  --hologram-bright: 1.2;
+
+  --scrollbar-track: #0A1128;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+[data-theme="light"] {
+  --color-brand-surface: #FFFFFF;
+  --color-brand-steel: #F1F5F9;
+  --color-brand-navy: #F8FAFC;
+  --color-brand-text: #0F172A;
+  --color-brand-muted: #64748B;
+  --color-brand-border: rgba(0, 0, 0, 0.08);
+  --color-brand-card: rgba(0, 0, 0, 0.02);
+  --color-brand-card-border: rgba(0, 0, 0, 0.06);
+  --color-brand-card-hover: rgba(0, 0, 0, 0.04);
+  --color-brand-card-border-hover: rgba(0, 0, 0, 0.10);
+  --color-brand-inverse: #FFFFFF;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+
+  --scrollbar-track: #F1F5F9;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 999;
+  padding: 1em;
+  background-color: #DC2626;
+  color: white;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DC2626;
+  border-radius: 3px;
+}
+
+/* GSAP animation utility classes */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid #DC2626;
+  outline-offset: 2px;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.glow-box {
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.15);
+}
+
+.glass-panel {
+  background: var(--color-brand-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--color-brand-card-border);
+}
+
+/* Blueprint 2.0 - High Fidelity Holographic Effects */
+.hologram-v2 {
+  filter: grayscale(1) invert(1) brightness(var(--hologram-bright)) contrast(1.1) hue-rotate(var(--hologram-hue)) saturate(var(--hologram-sat));
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+  will-change: transform, filter;
+}
+
+.theme-warm {
+  --hologram-hue: 180deg;
+  --hologram-sat: 2.5;
+}
+
+.theme-cool {
+  --hologram-hue: 160deg;
+  --hologram-sat: 1.5;
+}
+
+.theme-urgent {
+  --hologram-hue: 320deg;
+  --hologram-sat: 4;
+  --hologram-bright: 1.4;
+}
+
+/* Light mode hologram fallback — show normal image with subtle tint */
+[data-theme="light"] .hologram-v2 {
+  filter: grayscale(0.3) contrast(1.1);
+  mix-blend-mode: normal;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(250%);
+  }
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.15), transparent);
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes flicker {
+
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+
+  33% {
+    opacity: 0.88;
+  }
+
+  66% {
+    opacity: 1;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+/* Float animation */
+@keyframes float-y {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+.glow-text-blue {
+  text-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+}
+
+.glow-box-blue {
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.15);
+}
+
+@keyframes gradient-x {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 8s ease infinite;
 }

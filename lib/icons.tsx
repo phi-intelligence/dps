@@ -1,0 +1,46 @@
+import {
+  Phone,
+  Search,
+  Wrench,
+  CheckCircle,
+  Shield,
+  Flame,
+  AlertCircle,
+  Thermometer,
+  Gauge,
+  Settings,
+  FileText,
+  ClipboardList,
+  Droplets,
+  Home,
+  Zap,
+  Clock,
+  Star,
+  Wind,
+  Snowflake,
+} from "lucide-react";
+import { LucideIcon } from "lucide-react";
+
+export const ICON_MAP: Record<string, LucideIcon> = {
+  phone: Phone,
+  search: Search,
+  wrench: Wrench,
+  checkCircle: CheckCircle,
+  shield: Shield,
+  flame: Flame,
+  alertCircle: AlertCircle,
+  thermometer: Thermometer,
+  gauge: Gauge,
+  settings: Settings,
+  fileText: FileText,
+  clipboardList: ClipboardList,
+  droplets: Droplets,
+  home: Home,
+  zap: Zap,
+  clock: Clock,
+  star: Star,
+  wind: Wind,
+  snowflake: Snowflake,
+};
+
+export type IconName = keyof typeof ICON_MAP;
