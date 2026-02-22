@@ -18,6 +18,11 @@ import {
   Star,
   Wind,
   Snowflake,
+  MessageCircle,
+  Calculator,
+  Building2,
+  Send,
+  RotateCcw,
 } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
@@ -41,6 +46,11 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   star: Star,
   wind: Wind,
   snowflake: Snowflake,
+  messageCircle: MessageCircle,
+  calculator: Calculator,
+  building2: Building2,
+  send: Send,
+  rotateCcw: RotateCcw,
 };
 
 export type IconName = keyof typeof ICON_MAP;

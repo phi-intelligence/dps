@@ -5,16 +5,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, AlertCircle, Send, Cpu, Activity } from "lucide-react";
 
 const services = [
-  { value: "", label: "IDENTITY PORTAL TYPE..." },
-  { value: "boiler-repair", label: "BOILER DIAGNOSTICS & REPAIR" },
-  { value: "boiler-installation", label: "BOILER SYSTEM INSTALLATION" },
-  { value: "boiler-servicing", label: "ANNUAL BOILER CERTIFICATION" },
-  { value: "plumbing-repairs", label: "HYDRAULIC EMERGENCY RESOLUTION" },
-  { value: "general-plumbing", label: "GENERAL PLUMBING ARCHITECTURE" },
-  { value: "ac-installation", label: "CLIMATE CONTROL INSTALLATION" },
-  { value: "ac-servicing", label: "CLIMATE CONTROL MAINTENANCE" },
-  { value: "emergency", label: "CRITICAL TACTICAL DEPLOYMENT" },
-  { value: "other", label: "OTHER LEGACY SYSTEMS" },
+  { value: "", label: "Select service..." },
+  { value: "boiler-repair", label: "Boiler Repair" },
+  { value: "boiler-installation", label: "Boiler Installation" },
+  { value: "boiler-servicing", label: "Boiler Servicing" },
+  { value: "central-heating", label: "Central Heating" },
+  { value: "radiators", label: "Radiators" },
+  { value: "power-flushing", label: "Power Flushing" },
+  { value: "ac-installation", label: "AC Installation" },
+  { value: "ac-servicing", label: "AC Servicing" },
+  { value: "ac-repairs", label: "AC Repairs" },
+  { value: "commercial-ac", label: "Commercial AC" },
+  { value: "ac-maintenance", label: "Maintenance Contracts" },
+  { value: "other", label: "Other" },
 ];
 
 interface QuoteFormProps {

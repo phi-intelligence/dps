@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ChatWidget from "@/components/chat/ChatWidget";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { COMPANY } from "@/lib/constants";
 
@@ -53,6 +54,7 @@ export default function RootLayout({
           <Header />
           <main id="main-content" className="relative z-10">{children}</main>
           <Footer />
+          <ChatWidget />
         </ThemeProvider>
       </body>
     </html>

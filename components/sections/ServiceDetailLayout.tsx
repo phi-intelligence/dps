@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, ArrowRight, Activity, Zap, ShieldCheck, Cpu, Database } from "lucide-react";

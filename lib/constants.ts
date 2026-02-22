@@ -1,3 +1,9 @@
+export const OPENING_HOURS = {
+  weekday: "08:00 - 18:00",
+  saturday: "09:00 - 13:00",
+  sunday: "Closed",
+};
+
 export const COMPANY = {
   name: "DPS Heating Services Ltd",
   phone: "ADD_PHONE_NUMBER", // TODO: Replace with real phone number
