@@ -146,10 +146,20 @@ body {
   --hologram-bright: 1.4;
 }
 
-/* Light mode hologram fallback — show normal image with subtle tint */
+/* Light mode hologram — blueprint-on-paper effect:
+   grayscale → invert (dark bg → white, white lines → dark)
+   → sepia + hue-rotate(185deg) → blue-tinted technical lines on white
+   multiply blend: white areas disappear against light page, blue lines stay vivid */
 [data-theme="light"] .hologram-v2 {
-  filter: grayscale(0.3) contrast(1.1);
-  mix-blend-mode: normal;
+  filter: grayscale(1) invert(1) contrast(1.5) brightness(0.92) sepia(1) hue-rotate(185deg) saturate(3);
+  mix-blend-mode: multiply;
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 80%);
+}
+
+/* Tone down scan-line in light mode so it doesn't clash */
+[data-theme="light"] .scan-line {
+  background: linear-gradient(to bottom, transparent, rgba(37, 99, 235, 0.07), transparent);
 }
 
 @keyframes scan {

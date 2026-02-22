@@ -90,8 +90,8 @@ export default function BlueprintBillboard({
                 </div>
 
                 {idHash && (
-                    <div className="absolute top-4 left-4 p-2 border-l border-t border-white/5 bg-transparent">
-                        <p className="text-[8px] font-mono text-white/40 uppercase tracking-[0.1em]">
+                    <div className="absolute top-4 left-4 p-2 border-l border-t border-brand-card-border bg-transparent">
+                        <p className="text-[8px] font-mono text-brand-muted uppercase tracking-[0.1em]">
                             {idHash}
                         </p>
                     </div>
