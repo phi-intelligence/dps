@@ -20,6 +20,7 @@ const navLinks = [
     ],
   },
   { label: "About Us", href: "/about" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact", href: "/contact" },
   { label: "Admin", href: "/admin/login", admin: true },
