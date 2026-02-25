@@ -30,6 +30,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
@@ -46,6 +47,7 @@ export default function Header() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
+      setMobileServicesOpen(false);
     }
     return () => {
       document.body.style.overflow = "";
@@ -81,24 +83,28 @@ export default function Header() {
             {navLinks.map((link) =>
               link.admin ? null : // Exclude admin link from main nav
                 link.children ? (
-                  <div key={link.href} className="relative group">
-                    <button
-                      onMouseEnter={() => setServicesOpen(true)}
+                  <div
+                    key={link.href}
+                    className="relative group"
+                    onMouseEnter={() => setServicesOpen(true)}
+                    onMouseLeave={() => setServicesOpen(false)}
+                  >
+                    <Link
+                      href={link.href}
                       className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-sm font-technical uppercase tracking-widest font-bold"
                     >
                       {link.label}
-                        <ChevronDown
+                      <ChevronDown
                         size={14}
                         className={`transition-transform duration-300 group-hover:rotate-180 text-brand-red`}
                       />
-                    </button>
+                    </Link>
                     <AnimatePresence>
                       {servicesOpen && (
                         <motion.div
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          onMouseLeave={() => setServicesOpen(false)}
                           className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/95 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
                         >
                           {link.children.map((child) => (
@@ -202,26 +208,61 @@ export default function Header() {
                   >
                     {navLinks.filter((link) => !link.admin).map((link) => (
                       <div key={link.href} className="py-2">
-                        <Link
-                          href={link.href}
-                          className="block py-3 text-xl font-technical font-bold uppercase tracking-tight text-[#F8FAFC] hover:text-[#d4af37] transition-colors"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {link.label}
-                        </Link>
-                        {link.children && (
-                          <div className="pl-4 mt-1 border-l-2 border-[#d4af37]/30 flex flex-col gap-1">
-                            {link.children.map((child) => (
-                              <Link
-                                key={child.href}
-                                href={child.href}
-                                className="block py-2 text-sm font-technical uppercase tracking-widest text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
-                                onClick={() => setMobileOpen(false)}
-                              >
-                                {child.label}
-                              </Link>
-                            ))}
-                          </div>
+                        {link.children ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => setMobileServicesOpen((open) => !open)}
+                              className="flex items-center justify-between w-full py-3 text-xl font-technical font-bold uppercase tracking-tight text-[#F8FAFC] hover:text-[#d4af37] transition-colors"
+                              aria-expanded={mobileServicesOpen}
+                              aria-controls="mobile-services-dropdown"
+                              id="mobile-services-trigger"
+                            >
+                              {link.label}
+                              <ChevronDown
+                                size={20}
+                                className={`text-[#94A3B8] transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""}`}
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {mobileServicesOpen && (
+                                <motion.div
+                                  id="mobile-services-dropdown"
+                                  role="region"
+                                  aria-labelledby="mobile-services-trigger"
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.2 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="pl-4 mt-1 border-l-2 border-[#d4af37]/30 flex flex-col gap-1 pb-2">
+                                    {link.children.map((child) => (
+                                      <Link
+                                        key={child.href}
+                                        href={child.href}
+                                        className="block py-2.5 text-base font-technical font-bold uppercase tracking-widest text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                                        onClick={() => {
+                                          setMobileServicesOpen(false);
+                                          setMobileOpen(false);
+                                        }}
+                                      >
+                                        {child.label}
+                                      </Link>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="block py-3 text-xl font-technical font-bold uppercase tracking-tight text-[#F8FAFC] hover:text-[#d4af37] transition-colors"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            {link.label}
+                          </Link>
                         )}
                       </div>
                     ))}

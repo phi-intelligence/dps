@@ -202,7 +202,7 @@ export default function HomePage() {
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
-                    src="/images/commercial-boiler-plant.png"
+                    src="/images/our-services-commercial.png"
                     alt="Commercial boiler plant — PPM, plant room maintenance, and facilities management"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -251,7 +251,7 @@ export default function HomePage() {
               >
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
-                    src="/images/domestic-combi-boiler.png"
+                    src="/images/our-services-domestic.png"
                     alt="Domestic combi boiler — heating and hot water for your home"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -583,6 +583,61 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Proud sponsor — Next Level FC + accreditations */}
+      <section className="relative z-10 py-16 md:py-20 bg-brand-navy border-y border-brand-card-border" aria-label="Community sponsorship and accreditations">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16">
+            {/* Left: Gas Safe Register */}
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 order-2 md:order-1">
+              <Image
+                src="/images/gas-safe-register.png"
+                alt="Gas Safe Register"
+                fill
+                className="object-contain"
+                sizes="160px"
+              />
+            </div>
+
+            {/* Center: Proud sponsor of Next Level FC */}
+            <div className="text-center order-1 md:order-2">
+              <p className="text-brand-text text-sm font-technical font-bold uppercase tracking-[0.4em] mb-8">
+                Proud sponsor of
+              </p>
+              <div className="flex flex-col items-center gap-6">
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0">
+                  <Image
+                    src="/images/next-level-fc.png"
+                    alt="Next Level FC"
+                    fill
+                    className="object-contain"
+                    sizes="176px"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-technical font-extrabold text-brand-text uppercase tracking-wider">
+                    Next Level FC
+                  </h3>
+                  <p className="text-brand-muted text-sm font-technical uppercase tracking-wider mt-1">
+                    Engineering the future on and off the pitch
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: SafeContractor */}
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 order-3">
+              <Image
+                src="/images/safe-contractor.png"
+                alt="SafeContractor Approved"
+                fill
+                className="object-contain"
+                sizes="160px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose DPS */}
       <section className="py-48 bg-brand-steel relative overflow-hidden">
         <SectionWaves variant="warm" />
@@ -628,34 +683,6 @@ export default function HomePage() {
                 </span>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Proud sponsor — Next Level FC */}
-      <section className="relative z-10 py-16 md:py-20 bg-brand-navy border-y border-brand-card-border" aria-label="Community sponsorship">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-brand-text text-sm font-technical font-bold uppercase tracking-[0.4em] mb-8">
-            Proud sponsor of
-          </p>
-          <div className="flex flex-col items-center gap-6">
-            <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0">
-              <Image
-                src="/images/next-level-fc.png"
-                alt="Next Level FC"
-                fill
-                className="object-contain"
-                sizes="176px"
-              />
-            </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-technical font-extrabold text-brand-text uppercase tracking-wider">
-                Next Level FC
-              </h3>
-              <p className="text-brand-muted text-sm font-technical uppercase tracking-wider mt-1">
-                Engineering the future on and off the pitch
-              </p>
-            </div>
           </div>
         </div>
       </section>

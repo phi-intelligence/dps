@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, ArrowRight, Activity } from "lucide-react";
+import { MapPin, Phone, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
@@ -31,12 +31,15 @@ export default function ServiceAreasPage() {
         compact
       />
 
-      {/* Coverage Intro */}
-      <section className="py-48 relative overflow-hidden">
+      {/* Where We Work — left: copy + CTA card; right: map */}
+      <section
+        className="py-48 relative overflow-hidden"
+        aria-label="Where we work — coverage and map"
+      >
         <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-red/5 blur-[200px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -91,118 +94,16 @@ export default function ServiceAreasPage() {
               </div>
             </motion.div>
 
-            {/* Areas Grid */}
+            {/* Map — right side */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-brand-navy border border-brand-card-border rounded-[3rem] p-12 md:p-20 shadow-2xl relative overflow-hidden self-start"
-            >
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none" />
-              <div className="relative z-10">
-                <h3 className="text-2xl font-technical font-extrabold text-brand-text mb-10 tracking-widest uppercase border-b border-brand-card-border-hover pb-6 flex items-center gap-4">
-                  <Activity size={20} className="text-brand-red" />
-                  Areas We Cover
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {SERVICE_AREAS.map((area) => (
-                    <div
-                      key={area}
-                      className="flex items-center gap-4 bg-brand-card border border-brand-card-border text-brand-muted px-6 py-4 rounded-2xl text-[10px] font-technical font-bold uppercase tracking-widest group hover:border-brand-red/40 hover:text-brand-text transition-all"
-                    >
-                      <MapPin
-                        size={12}
-                        className="text-brand-red/40 group-hover:text-brand-red transition-colors"
-                      />
-                      {area}
-                    </div>
-                  ))}
-                </div>
-                <p className="text-brand-muted text-[10px] mt-10 font-mono tracking-[0.2em] text-center uppercase">
-                  If you can&apos;t see your location listed, please get in touch and we&apos;ll be happy to discuss your needs or provide a quote.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Map */}
-      <section
-        className="py-32 bg-brand-steel relative overflow-hidden"
-        aria-label="Interactive service areas map"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 border border-brand-red/20 bg-brand-red/5 backdrop-blur-md rounded-full px-5 py-2 mb-6">
-              <MapPin size={13} className="text-brand-red" />
-              <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                Live Coverage Map
-              </span>
-            </div>
-            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase leading-none mb-6">
-              Where We <span className="text-brand-red">Operate</span>
-            </h2>
-            <p className="text-brand-muted text-sm font-light uppercase tracking-wider max-w-xl mx-auto">
-              London, Kent, Essex and Surrey. Click any pin to find out more.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-2 relative rounded-3xl overflow-hidden border border-brand-card-border shadow-2xl"
-              style={{ height: "520px" }}
+              className="relative rounded-3xl overflow-hidden border border-brand-card-border shadow-2xl h-[480px] lg:h-[520px] min-h-[320px]"
             >
               <ServiceAreasMap />
               <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" />
-            </motion.div>
-
-            {/* Area list sidebar */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-brand-steel border border-brand-card-border rounded-3xl p-6 lg:p-8 self-start"
-            >
-              <h3 className="text-xs font-technical font-bold uppercase tracking-[0.3em] text-brand-red mb-6 flex items-center gap-2">
-                <MapPin size={12} />
-                Areas Covered
-              </h3>
-              <div className="grid grid-cols-2 gap-2">
-                {SERVICE_AREAS.map((area) => (
-                  <div
-                    key={area}
-                    className="flex items-center gap-2 text-[10px] font-technical font-bold uppercase tracking-widest text-brand-muted hover:text-brand-text transition-colors group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover:bg-brand-red transition-colors shrink-0" />
-                    {area}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 pt-6 border-t border-brand-card-border">
-                <p className="text-[10px] text-brand-muted font-technical uppercase tracking-widest mb-4">
-                  Not sure we cover your area?
-                </p>
-                <a
-                  href={`tel:${COMPANY.phone}`}
-                  className="inline-flex items-center gap-2 text-[10px] font-technical font-bold uppercase tracking-widest text-brand-red hover:text-brand-text transition-colors"
-                >
-                  <Phone size={12} />
-                  Call to confirm
-                </a>
-              </div>
             </motion.div>
           </div>
         </div>
@@ -269,8 +170,8 @@ export default function ServiceAreasPage() {
               transition={{ duration: 0.6 }}
             >
               <BlueprintBillboard
-                src="/images/blueprint-plant-room.png"
-                alt="Commercial heating plant room — London service coverage"
+                src="/images/blueprints/blueprint-8.png"
+                alt="Local coverage — DPS Heating Services across London and the South East"
                 theme="tech"
                 versionText="COVERAGE: LONDON & SURROUNDS"
                 idHash={`GAS SAFE: ${COMPANY.gasSafeNumber}`}

@@ -24,8 +24,8 @@ import { useTheme } from "@/lib/theme-provider";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { inquiryService } from "@/lib/inquiry-service";
 import { QUOTE_SERVICES } from "@/components/ui/QuoteForm";
+import { CORE_SERVICES_IMAGES } from "@/lib/constants";
 import Image from "next/image";
-import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
 
 const inputClass =
   "quote-modal-input w-full border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[12px] font-technical uppercase tracking-widest placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-2xl";
@@ -66,7 +66,27 @@ const SERVICE_METADATA: Record<string, { image: string; icon: any; category: str
   "central-heating": { image: "/images/central-heating.jpg", icon: Thermometer, category: "Heating" },
   "general-plumbing": { image: "/images/kitchen-plumbing.jpg", icon: Wrench, category: "Plumbing" },
   "other": { image: "/images/logo.png", icon: ShieldCheck, category: "General" },
+  // Sector + core service (Commercial/Domestic → Mechanical, Electrical, Gas)
+  "commercial-mechanical": { image: "/images/core-services/mechanical.png", icon: Wrench, category: "Commercial" },
+  "commercial-electrical": { image: "/images/core-services/electrical.png", icon: Zap, category: "Commercial" },
+  "commercial-gas": { image: "/images/core-services/gas.png", icon: Flame, category: "Commercial" },
+  "domestic-mechanical": { image: "/images/core-services/mechanical.png", icon: Wrench, category: "Domestic" },
+  "domestic-electrical": { image: "/images/core-services/electrical.png", icon: Zap, category: "Domestic" },
+  "domestic-gas": { image: "/images/core-services/gas.png", icon: Flame, category: "Domestic" },
 };
+
+const SECTOR_OPTIONS = [
+  { value: "commercial" as const, label: "Commercial Services", image: "/images/our-services-commercial.png", icon: Building2, description: "PPM contracts, plant room maintenance, 24-hour emergency support." },
+  { value: "domestic" as const, label: "Domestic Services", image: "/images/our-services-domestic.png", icon: Home, description: "Boiler installation, servicing, CP12, plumbing, and emergency callouts." },
+];
+
+const CORE_SERVICE_OPTIONS = [
+  { value: "mechanical" as const, label: "Mechanical Services", imageKey: "Mechanical Services", icon: Wrench },
+  { value: "electrical" as const, label: "Electrical Services", imageKey: "Electrical Services", icon: Zap },
+  { value: "gas" as const, label: "Gas Services", imageKey: "Gas Services", icon: Flame },
+];
+
+const TOTAL_STEPS = 4;
 
 export default function QuoteModal({
   open,
@@ -76,6 +96,7 @@ export default function QuoteModal({
   const [step, setStep] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
   const [form, setForm] = useState({
+    sector: "" as "" | "commercial" | "domestic",
     name: "",
     phone: "",
     email: "",
@@ -95,25 +116,30 @@ export default function QuoteModal({
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const selectSector = (value: "commercial" | "domestic") => {
+    setForm((prev) => ({ ...prev, sector: value, service: "" }));
+    setStep(2);
+  };
+
   const selectService = (value: string) => {
     setForm((prev) => ({ ...prev, service: value }));
-    setStep(2);
+    setStep(3);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (step < 3) {
+    if (step < TOTAL_STEPS) {
       setStep(step + 1);
       return;
     }
     setStatus("loading");
-    // Persist inquiry data
+    const sectorLabel = form.sector ? `[Sector: ${form.sector === "commercial" ? "Commercial" : "Domestic"}]\n\n` : "";
     inquiryService.addInquiry({
       name: form.name,
       phone: form.phone,
       email: form.email,
       service: form.service,
-      message: form.message,
+      message: sectorLabel + form.message,
     });
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setStatus("success");
@@ -122,9 +148,12 @@ export default function QuoteModal({
   const handleClose = useCallback(() => {
     setStep(1);
     setStatus("idle");
-    setForm({ name: "", phone: "", email: "", service: preselectedService, message: "" });
+    setForm({ sector: "", name: "", phone: "", email: "", service: preselectedService, message: "" });
     onClose();
   }, [onClose, preselectedService]);
+
+  const isCoreServiceValue = (v: string) =>
+    ["commercial-mechanical", "commercial-electrical", "commercial-gas", "domestic-mechanical", "domestic-electrical", "domestic-gas"].includes(v);
 
   useEffect(() => {
     if (!open) return;
@@ -189,20 +218,20 @@ export default function QuoteModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className={`quote-modal-opaque relative z-[101] w-full ${step === 1 ? 'max-w-6xl' : 'max-w-5xl'} max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-brand-steel border border-brand-card-border shadow-2xl premium-shadow`}
+            className={`quote-modal-opaque relative z-[101] w-full ${step === 1 ? "max-w-5xl" : step === 2 ? "max-w-6xl" : "max-w-5xl"} max-h-[90vh] overflow-y-auto rounded-3xl bg-brand-surface dark:bg-brand-steel border border-brand-card-border shadow-2xl premium-shadow`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="quote-modal-header sticky top-0 z-30 flex items-center justify-between px-8 py-6 bg-white/80 dark:bg-brand-steel/80 backdrop-blur-md border-b border-brand-card-border">
+            <div className="quote-modal-header sticky top-0 z-30 flex items-center justify-between px-8 py-6 bg-brand-surface/95 dark:bg-brand-steel/95 backdrop-blur-md border-b border-brand-card-border">
               <div>
                 <h2
                   id="quote-modal-title"
-                  className="text-2xl font-sans font-extrabold text-brand-text mb-1"
+                  className="text-xl md:text-2xl font-technical font-extrabold text-brand-text mb-1 uppercase tracking-wider"
                 >
                   Request a Quote
                 </h2>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">Step {step} of 3</span>
+                  <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">Step {step} of {TOTAL_STEPS}</span>
                 </div>
               </div>
               <button
@@ -264,89 +293,132 @@ export default function QuoteModal({
                     onSubmit={handleSubmit}
                     className="space-y-6"
                   >
-                    {/* Step 1: Service Selection Grid */}
+                    {/* Step 1: Commercial or Domestic */}
                     {step === 1 && (
-                      <div className="space-y-12">
-                        <div className="text-center max-w-2xl mx-auto mb-12">
-                          <h3 className="text-3xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">How can we help you today?</h3>
-                          <p className="text-brand-muted font-medium text-lg leading-relaxed">Select the service you require to begin your custom quote transmission.</p>
+                      <div className="space-y-10">
+                        <div className="text-center max-w-2xl mx-auto">
+                          <h3 className="text-2xl md:text-3xl font-technical font-extrabold text-brand-text mb-3 tracking-tight uppercase">Choose your sector</h3>
+                          <p className="text-brand-muted text-sm font-technical uppercase tracking-wider">Select Commercial or Domestic to request a quote for the right type of work.</p>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                          {QUOTE_SERVICES.filter(s => s.value !== "").map((s) => {
-                            const meta = SERVICE_METADATA[s.value as keyof typeof SERVICE_METADATA] || SERVICE_METADATA["other"];
-                            const MetaIcon = meta.icon;
-
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                          {SECTOR_OPTIONS.map((opt) => {
+                            const Icon = opt.icon;
                             return (
                               <motion.button
-                                key={s.value}
+                                key={opt.value}
                                 type="button"
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
-                                onClick={() => selectService(s.value)}
-                                className={`group relative h-52 rounded-[2rem] overflow-hidden border transition-all duration-300 bg-slate-900 ${form.service === s.value
-                                  ? "border-brand-red ring-2 ring-brand-red/30 shadow-lg shadow-brand-red/10"
-                                  : "border-white/10 hover:border-brand-red/50"
-                                  }`}
+                                onClick={() => selectSector(opt.value)}
+                                className="group relative aspect-[4/3] min-h-[220px] rounded-2xl overflow-hidden border-2 border-brand-card-border hover:border-brand-red/50 transition-all duration-300 bg-brand-navy shadow-xl"
                               >
-                                {/* Image — visible by default, full colour on hover */}
                                 <Image
-                                  src={meta.image}
-                                  alt={s.label}
+                                  src={opt.image}
+                                  alt={opt.label}
                                   fill
-                                  className="object-cover opacity-55 grayscale group-hover:opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-600"
+                                  className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
                                 />
-                                {/* Fixed dark scrim — works in both light & dark modal */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5 z-10" />
-
-                                <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end items-start">
-                                  <div className="w-11 h-11 rounded-xl bg-white/15 border border-white/20 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300">
-                                    <MetaIcon size={22} className="text-white transition-colors" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                                <div className="absolute inset-0 flex flex-col justify-end p-6 text-left">
+                                  <div className="w-12 h-12 rounded-xl bg-brand-red/20 border border-brand-red/40 flex items-center justify-center mb-4 backdrop-blur-sm group-hover:bg-brand-red/30 transition-colors">
+                                    <Icon size={24} className="text-brand-red" />
                                   </div>
-                                  <div className="text-left">
-                                    <p className="text-[9px] font-sans font-bold text-brand-red uppercase tracking-[0.25em] mb-0.5">{meta.category}</p>
-                                    <h4 className="text-base font-sans font-extrabold text-white leading-tight">{s.label}</h4>
-                                  </div>
+                                  <h4 className="text-lg font-technical font-extrabold text-white uppercase tracking-widest mb-1">{opt.label}</h4>
+                                  <p className="text-white/80 text-[11px] font-technical uppercase tracking-wider">{opt.description}</p>
                                 </div>
                               </motion.button>
                             );
                           })}
                         </div>
-                        <div className="flex justify-center pt-8">
-                          <p className="text-[10px] font-sans font-bold text-brand-muted uppercase tracking-[0.4em]">Proprietary Engineering Interface // DPS-QTS-2026</p>
+                      </div>
+                    )}
+
+                    {/* Step 2: Mechanical, Electrical, or Gas (core services) */}
+                    {step === 2 && form.sector && (
+                      <div className="space-y-10">
+                        <div className="flex items-center justify-between flex-wrap gap-4">
+                          <div>
+                            <h3 className="text-2xl md:text-3xl font-technical font-extrabold text-brand-text tracking-tight uppercase">Select service type</h3>
+                            <p className="text-brand-muted text-xs font-technical uppercase tracking-wider mt-1">
+                              {form.sector === "commercial" ? "Commercial" : "Domestic"} — choose Mechanical, Electrical, or Gas.
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setStep(1)}
+                            className="text-[10px] font-technical font-bold uppercase tracking-widest text-brand-muted hover:text-brand-red transition-colors"
+                          >
+                            ← Change sector
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                          {CORE_SERVICE_OPTIONS.map((opt) => {
+                            const value = `${form.sector}-${opt.value}`;
+                            const Icon = opt.icon;
+                            const imgSrc = CORE_SERVICES_IMAGES[opt.imageKey] ?? "/images/core-services/mechanical.png";
+                            return (
+                              <motion.button
+                                key={value}
+                                type="button"
+                                whileHover={{ y: -4 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => selectService(value)}
+                                className={`group relative aspect-[4/3] min-h-[200px] rounded-2xl overflow-hidden border-2 transition-all duration-300 bg-brand-navy shadow-xl ${form.service === value
+                                  ? "border-brand-red ring-2 ring-brand-red/30 shadow-brand-red/10"
+                                  : "border-brand-card-border hover:border-brand-red/50"
+                                }`}
+                              >
+                                <Image
+                                  src={imgSrc}
+                                  alt={opt.label}
+                                  fill
+                                  className="object-cover opacity-75 group-hover:scale-105 transition-transform duration-500"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                                <div className="absolute inset-0 flex flex-col justify-end p-6 text-left">
+                                  <div className="w-12 h-12 rounded-xl bg-brand-red/20 border border-brand-red/40 flex items-center justify-center mb-4 backdrop-blur-sm group-hover:bg-brand-red/30 transition-colors">
+                                    <Icon size={24} className="text-brand-red" />
+                                  </div>
+                                  <h4 className="text-base font-technical font-extrabold text-white uppercase tracking-widest">{opt.label}</h4>
+                                </div>
+                              </motion.button>
+                            );
+                          })}
                         </div>
                       </div>
                     )}
 
-                    {/* Step 2: Details */}
-                    {step === 2 && (
+                    {/* Step 3: Details */}
+                    {step === 3 && (
                       <div className="flex flex-col lg:flex-row gap-12">
                         <div className="lg:w-2/5">
-                          <div className="relative h-64 lg:h-full min-h-[420px] rounded-3xl overflow-hidden border border-white/10 shadow-xl bg-slate-900">
+                          <div className="relative h-64 lg:h-full min-h-[320px] rounded-2xl overflow-hidden border border-brand-card-border shadow-xl bg-brand-navy">
                             {(() => {
                               const meta = SERVICE_METADATA[form.service as keyof typeof SERVICE_METADATA] || SERVICE_METADATA["other"];
                               const MetaIcon = meta.icon;
-                              const serviceLabel = QUOTE_SERVICES.find(s => s.value === form.service)?.label || "Selected Service";
+                              const sectorLabel = form.sector === "commercial" ? "Commercial" : form.sector === "domestic" ? "Domestic" : "";
+                              const serviceLabel = isCoreServiceValue(form.service)
+                                ? `${sectorLabel} - ${form.service.endsWith("mechanical") ? "Mechanical Services" : form.service.endsWith("electrical") ? "Electrical Services" : "Gas Services"}`
+                                : QUOTE_SERVICES.find(s => s.value === form.service)?.label || "Selected Service";
 
                               return (
                                 <>
-                                  {/* Image — clearly visible, no grayscale */}
                                   <Image
                                     src={meta.image}
                                     alt={serviceLabel}
                                     fill
                                     className="object-cover opacity-75 transition-all duration-700"
                                   />
-                                  {/* Fixed dark scrim — same in both modes */}
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 z-10" />
-
-                                  <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end items-start">
-                                    <div className="w-14 h-14 rounded-2xl bg-brand-red border border-brand-red/80 flex items-center justify-center mb-5 shadow-lg shadow-brand-red/25">
-                                      <MetaIcon size={28} className="text-white" />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+                                  <div className="absolute inset-0 z-20 p-6 flex flex-col justify-end items-start">
+                                    <div className="w-12 h-12 rounded-xl bg-brand-red/90 border border-brand-red flex items-center justify-center mb-4">
+                                      <MetaIcon size={24} className="text-white" />
                                     </div>
-                                    <div className="text-left bg-black/30 backdrop-blur-md p-4 rounded-2xl border border-white/15">
-                                      <p className="text-[11px] font-sans font-bold text-brand-red uppercase tracking-[0.3em] mb-2">{meta.category}</p>
-                                      <h4 className="text-2xl font-sans font-extrabold text-white leading-tight">{serviceLabel}</h4>
+                                    <div className="text-left bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10 w-full">
+                                      <p className="text-[10px] font-technical font-bold text-brand-red uppercase tracking-widest mb-1">{sectorLabel}</p>
+                                      <h4 className="text-lg font-technical font-extrabold text-white leading-tight uppercase tracking-wider">{serviceLabel}</h4>
                                     </div>
                                   </div>
                                 </>
@@ -355,10 +427,10 @@ export default function QuoteModal({
                           </div>
                         </div>
 
-                        <div className="lg:w-3/5 space-y-10 py-4">
-                          <div className="mb-8">
-                            <h3 className="text-4xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">Your Details</h3>
-                            <p className="text-brand-muted font-medium text-lg leading-relaxed">Tell us about yourself so we can establish a primary communication channel.</p>
+                        <div className="lg:w-3/5 space-y-8 py-4">
+                          <div>
+                            <h3 className="text-2xl md:text-3xl font-technical font-extrabold text-brand-text mb-2 tracking-tight uppercase">Your details</h3>
+                            <p className="text-brand-muted text-xs font-technical uppercase tracking-wider">Tell us how we can contact you.</p>
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -421,14 +493,14 @@ export default function QuoteModal({
                           <div className="flex gap-4 pt-8">
                             <button
                               type="button"
-                              onClick={() => setStep(1)}
-                              className="px-10 py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-surface transition-all"
+                              onClick={() => setStep(2)}
+                              className="px-10 py-5 rounded-2xl font-technical font-extrabold text-[11px] uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-card transition-all"
                             >
                               Back
                             </button>
                             <button
                               type="submit"
-                              className="group relative flex-1 bg-brand-gradient text-white py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20"
+                              className="group relative flex-1 bg-brand-red text-white py-5 rounded-2xl font-technical font-extrabold text-[11px] uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20 hover:bg-brand-red/90"
                             >
                               <span className="relative z-10 flex items-center justify-center gap-2">
                                 Continue <ChevronRight size={20} />
@@ -439,16 +511,16 @@ export default function QuoteModal({
                       </div>
                     )}
 
-                    {step === 3 && (
-                      <div className="max-w-3xl mx-auto space-y-12 py-8">
+                    {step === 4 && (
+                      <div className="max-w-3xl mx-auto space-y-10 py-8">
                         <div className="text-center">
-                          <h3 className="text-3xl font-sans font-extrabold text-brand-text mb-4 tracking-tight">What's the situation?</h3>
-                          <p className="text-brand-muted font-medium text-lg leading-relaxed">Provide additional details or specific requirements for your quote.</p>
+                          <h3 className="text-2xl md:text-3xl font-technical font-extrabold text-brand-text mb-3 tracking-tight uppercase">Additional details</h3>
+                          <p className="text-brand-muted text-xs font-technical uppercase tracking-wider">Describe the work or situation so we can prepare your quote.</p>
                         </div>
 
                         <div>
                           <div className="flex items-center gap-2 mb-4 ml-1">
-                            <label htmlFor="modal-message" className="text-[11px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+                            <label htmlFor="modal-message" className="text-[11px] font-technical font-bold uppercase tracking-widest text-brand-muted">
                               Technical Requirements / Symptoms
                             </label>
                           </div>
@@ -466,15 +538,15 @@ export default function QuoteModal({
                         <div className="flex gap-4 pt-4">
                           <button
                             type="button"
-                            onClick={() => setStep(2)}
-                            className="px-10 py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-surface transition-all"
+                            onClick={() => setStep(3)}
+                            className="px-10 py-5 rounded-2xl font-technical font-extrabold text-[11px] uppercase tracking-widest border border-brand-card-border text-brand-muted hover:text-brand-text hover:bg-brand-card transition-all"
                           >
                             Back
                           </button>
                           <button
                             type="submit"
                             disabled={status === "loading"}
-                            className="group relative flex-1 bg-brand-gradient text-white py-5 rounded-2xl font-sans font-extrabold text-sm uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20 disabled:opacity-50"
+                            className="group relative flex-1 bg-brand-red text-white py-5 rounded-2xl font-technical font-extrabold text-[11px] uppercase tracking-widest overflow-hidden transition-all shadow-xl shadow-brand-red/20 hover:bg-brand-red/90 disabled:opacity-50"
                           >
                             <div className="relative z-10 flex items-center justify-center gap-4 transition-colors">
                               {status === "loading" ? (
@@ -498,10 +570,10 @@ export default function QuoteModal({
               </AnimatePresence>
             </div>
 
-            <div className="px-8 py-4 flex items-center justify-center gap-3 bg-brand-surface dark:bg-brand-navy/30 border-t border-brand-card-border rounded-b-3xl">
+            <div className="px-8 py-4 flex items-center justify-center gap-3 bg-brand-navy/50 dark:bg-brand-navy/50 border-t border-brand-card-border rounded-b-3xl">
               <Zap size={14} className="text-brand-red" />
-              <span className="text-[10px] font-sans font-black text-brand-red uppercase tracking-[0.4em]">
-                Proprietary Interface // Reliable Data Transmission // DPS Solutions
+              <span className="text-[10px] font-technical font-bold text-brand-red uppercase tracking-[0.4em]">
+                Get a quote — Commercial &amp; Domestic
               </span>
             </div>
           </motion.div>

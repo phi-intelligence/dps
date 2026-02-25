@@ -167,7 +167,7 @@ export default function ProcessSteps({
     return (
       <ScrollSequenceSection
         ref={containerRef}
-        frameDir={frameDir}
+        frameDir={frameDir!}
         frameCount={count}
         className={`py-12 sm:py-24 md:py-32 lg:py-40 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] sm:px-4 ${dark ? "bg-brand-surface" : "bg-brand-steel"}`}
         contentClassName="max-w-7xl mx-auto relative z-10"

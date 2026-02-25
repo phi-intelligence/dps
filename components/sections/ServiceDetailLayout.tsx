@@ -44,6 +44,7 @@ interface ServiceDetailLayoutProps {
 export default function ServiceDetailLayout({
   title,
   subtitle,
+  backgroundImage,
   sideImage,
   sideImageAlt,
   introduction,
@@ -68,6 +69,7 @@ export default function ServiceDetailLayout({
         title={title}
         subtitle={subtitle}
         breadcrumbs={breadcrumbs}
+        backgroundImage={backgroundImage}
         preselectedService={serviceValue}
         compact
       />

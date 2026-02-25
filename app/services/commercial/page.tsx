@@ -5,21 +5,9 @@ import Image from "next/image";
 import { Building2, ArrowRight, Phone } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
-import { COMPANY, COMMERCIAL_SERVICES } from "@/lib/constants";
+import { COMPANY, CORE_SERVICES_IMAGES, CORE_SERVICE_COMMERCIAL_HREFS } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
-
-const COMMERCIAL_CARD_IMAGES: Record<string, string> = {
-  "Commercial Boiler Servicing": "/images/boiler-modern.jpg",
-  "Plant Room Maintenance": "/images/central-heating.jpg",
-  "Gas Safety Inspections": "/images/boiler-repair.jpg",
-  "PPM Contracts": "/images/central-heating.jpg",
-  "Fault Finding & Diagnosis": "/images/boiler-repair.jpg",
-  "Commercial Heating Systems": "/images/central-heating.jpg",
-  "24 Hour Emergency Breakdowns": "/images/boiler-repair.jpg",
-  "Commercial Facilities Management (3 Tier PPM Packages)": "/images/central-heating.jpg",
-  "Commercial Facilities Management (Reactive & OOH Callouts)": "/images/plumbing-pipes.jpg",
-};
 
 export default function CommercialServicesPage() {
   const { openQuoteModal } = useQuoteModal();
@@ -34,7 +22,7 @@ export default function CommercialServicesPage() {
           { label: "Services", href: "/services" },
           { label: "Commercial Services" },
         ]}
-        backgroundImage="/images/blueprints/blueprint-8.png"
+        backgroundImage="/images/our-services-commercial.png"
         compact
       />
 
@@ -60,42 +48,48 @@ export default function CommercialServicesPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COMMERCIAL_SERVICES.map((service, i) => (
-              <motion.div
-                key={service.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="group"
-              >
-                <Link
-                  href={service.href}
-                  className="relative block aspect-[4/3] rounded-2xl overflow-hidden border border-brand-card-border shadow-lg hover:border-brand-red/30 transition-all duration-300"
+          {/* Core services — Mechanical, Electrical, Gas only */}
+          <div>
+            <p className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-6 text-center">
+              Our core services
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {(["Mechanical Services", "Electrical Services", "Gas Services"] as const).map((label, i) => (
+                <motion.div
+                  key={label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="group"
                 >
-                  <Image
-                    src={COMMERCIAL_CARD_IMAGES[service.label] ?? "/images/central-heating.jpg"}
-                    alt=""
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 flex items-center justify-between gap-4">
-                    <span className="text-white font-technical font-bold text-[10px] sm:text-xs uppercase tracking-widest leading-tight line-clamp-2">
-                      {service.label}
-                    </span>
-                    <span className="shrink-0 w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all">
-                      <ArrowRight size={18} className="text-white" />
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  <Link
+                    href={CORE_SERVICE_COMMERCIAL_HREFS[label]}
+                    className="relative block aspect-[4/3] min-h-[240px] sm:min-h-[280px] rounded-2xl overflow-hidden border border-brand-card-border shadow-lg hover:border-brand-red/30 transition-all duration-300"
+                  >
+                    <Image
+                      src={CORE_SERVICES_IMAGES[label]}
+                      alt={label}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 640px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between gap-4">
+                      <span className="text-white font-technical font-bold text-xs sm:text-sm uppercase tracking-widest leading-tight line-clamp-2">
+                        {label}
+                      </span>
+                      <span className="shrink-0 w-12 h-12 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all">
+                        <ArrowRight size={20} className="text-white" />
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-20 text-center">
+          <div className="mt-16 text-center">
             <button
               type="button"
               onClick={() => openQuoteModal()}

@@ -77,6 +77,89 @@ export const CORE_SERVICES_IMAGES: Record<string, string> = {
   "Gas Services": "/images/core-services/gas.png",
 };
 
+/** Core service detail page routes (for Core Services section links — hub pages). */
+export const CORE_SERVICE_HREFS: Record<string, string> = {
+  "Mechanical Services": "/services/mechanical",
+  "Electrical Services": "/services/electrical",
+  "Gas Services": "/services/gas",
+};
+
+/** Core service links from Commercial page — direct to commercial sub-pages. */
+export const CORE_SERVICE_COMMERCIAL_HREFS: Record<string, string> = {
+  "Mechanical Services": "/services/mechanical/commercial",
+  "Electrical Services": "/services/electrical/commercial",
+  "Gas Services": "/services/gas/commercial",
+};
+
+/** Core service links from Domestic page — direct to domestic sub-pages. */
+export const CORE_SERVICE_DOMESTIC_HREFS: Record<string, string> = {
+  "Mechanical Services": "/services/mechanical/domestic",
+  "Electrical Services": "/services/electrical/domestic",
+  "Gas Services": "/services/gas/domestic",
+};
+
+/** Core service type slug for sector sub-routes (mechanical | electrical | gas). */
+export type CoreServiceSlug = "mechanical" | "electrical" | "gas";
+
+/** Service lists for Commercial / Domestic sub-pages under each core service. */
+export const CORE_SERVICE_SECTOR_SERVICES: Record<
+  CoreServiceSlug,
+  { commercial: string[]; domestic: string[] }
+> = {
+  mechanical: {
+    commercial: [
+      "Plant room installations and maintenance",
+      "Commercial heating system installation and upgrades",
+      "PPM contracts and planned maintenance",
+      "Pipework systems and distribution",
+      "Preventative and reactive maintenance",
+      "Commercial facilities management (PPM packages)",
+      "24-hour emergency breakdowns",
+      "Fault finding and diagnosis",
+    ],
+    domestic: [
+      "Heating system installation and upgrades",
+      "Radiator and pipework installation and repairs",
+      "Preventative maintenance and servicing",
+      "Reactive repairs and fault finding",
+      "System upgrades and efficiency improvements",
+    ],
+  },
+  electrical: {
+    commercial: [
+      "Electrical installations and upgrades (commercial)",
+      "Fault finding and testing",
+      "Compliance inspections and certification",
+      "Maintenance contracts and PPM",
+      "Distribution and distribution boards",
+      "Emergency lighting and testing",
+    ],
+    domestic: [
+      "Electrical installations and upgrades (domestic)",
+      "Fault finding and testing",
+      "Landlord electrical safety inspections",
+      "Consumer unit upgrades",
+      "Maintenance and reactive repairs",
+    ],
+  },
+  gas: {
+    commercial: [
+      "Commercial gas installation and servicing",
+      "Gas safety inspections (commercial)",
+      "Commercial boiler servicing and repair",
+      "PPM and planned gas maintenance",
+      "24-hour emergency gas callouts",
+    ],
+    domestic: [
+      "Gas installation and servicing",
+      "Landlord gas safety certification (CP12)",
+      "Boiler installation, servicing and repairs",
+      "System diagnosis and repair",
+      "Emergency gas callouts",
+    ],
+  },
+};
+
 /** Key strengths for Capability section. */
 export const KEY_STRENGTHS = [
   "24/7 responsive service capability",

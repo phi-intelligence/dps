@@ -2,10 +2,11 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { Wrench, Zap, Flame, LucideIcon } from "lucide-react";
 import ScrollSequenceSection from "@/components/sections/ScrollSequenceSection";
-import { CAPABILITY_CORE_SERVICES, CORE_SERVICES_IMAGES } from "@/lib/constants";
+import { CAPABILITY_CORE_SERVICES, CORE_SERVICES_IMAGES, CORE_SERVICE_HREFS } from "@/lib/constants";
 
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   "Mechanical Services": Wrench,
@@ -54,17 +55,19 @@ export default function CoreServicesSection({
             const Icon = SERVICE_ICONS[service.title];
             const isEven = index % 2 === 0;
             const imageSrc = CORE_SERVICES_IMAGES[service.title];
+            const href = CORE_SERVICE_HREFS[service.title];
 
             return (
               <div key={service.title} className="relative lg:flex items-center justify-between lg:min-h-[320px]">
                 <div className={`lg:w-[45%] ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                  <motion.div
-                    initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="group rounded-2xl sm:rounded-3xl overflow-hidden border border-brand-card-border bg-brand-navy/70 backdrop-blur-md hover:border-brand-red/20 transition-all duration-500 sequence-step-card"
-                  >
+                  <Link href={href ?? "/services"} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface rounded-2xl sm:rounded-3xl">
+                    <motion.div
+                      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="group rounded-2xl sm:rounded-3xl overflow-hidden border border-brand-card-border bg-brand-navy/70 backdrop-blur-md hover:border-brand-red/20 transition-all duration-500 sequence-step-card"
+                    >
                     {imageSrc && (
                       <div className="relative aspect-[16/9] w-full">
                         <Image
@@ -98,6 +101,7 @@ export default function CoreServicesSection({
                       </ul>
                     </div>
                   </motion.div>
+                  </Link>
                 </div>
 
                 <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-surface border-4 border-brand-steel z-20 items-center justify-center sequence-step-dot">
