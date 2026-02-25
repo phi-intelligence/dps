@@ -2,49 +2,35 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Flame, Wind, ArrowRight, Phone, Shield, Zap, Award, Activity } from "lucide-react";
+import { Building2, Home, ArrowRight, Phone, Shield, Zap, Award, Activity } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMPANY } from "@/lib/constants";
+import { COMPANY, COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
 
 const categories = [
   {
-    icon: Flame,
-    title: "Heating Services",
+    icon: Building2,
+    title: "Commercial Services",
     description:
-      "Complete heating solutions for homes and businesses — from boiler repair and installation to central heating and power flushing. All work carried out by Gas Safe registered engineers.",
+      "Commercial boiler servicing, plant room maintenance, PPM contracts, fault finding, commercial heating systems, 24-hour emergency breakdowns, and facilities management across London, Kent, Essex and Surrey.",
     image: "/images/central-heating.jpg",
-    services: [
-      "Boiler Repair",
-      "Boiler Installation",
-      "Boiler Servicing",
-      "Central Heating",
-      "Radiator Services",
-      "Power Flushing",
-    ],
-    href: "/services/heating",
-    ctaLabel: "View Heating Services",
+    services: COMMERCIAL_SERVICES.map((s) => s.label),
+    href: "/services/commercial",
+    ctaLabel: "View Commercial Services",
     accent: "brand-red",
   },
   {
-    icon: Wind,
-    title: "Air Conditioning",
+    icon: Home,
+    title: "Domestic Services",
     description:
-      "Professional AC installation, servicing, and repair for homes and businesses. We work with all major brands and offer both domestic and commercial solutions.",
-    image: "/images/ac-unit-indoor.jpg",
-    services: [
-      "AC Installation",
-      "AC Servicing",
-      "AC Repair",
-      "Domestic AC",
-      "Commercial AC",
-      "Maintenance Contracts",
-    ],
-    href: "/services/air-conditioning",
-    ctaLabel: "View AC Services",
+      "Boiler installation, servicing and repairs, system diagnosis, landlord gas safety certification (CP12), plumbing repairs, and emergency callouts. Gas Safe registered engineers.",
+    image: "/images/plumbing-pipes.jpg",
+    services: DOMESTIC_SERVICES.map((s) => s.label),
+    href: "/services/domestic",
+    ctaLabel: "View Domestic Services",
     accent: "brand-blue",
   },
 ];
@@ -58,12 +44,12 @@ const whyDPS = [
   {
     icon: Zap,
     title: "Fast Response",
-    description: "Same-day appointments available for urgent heating and AC problems.",
+    description: "Same-day appointments available for urgent heating and plumbing problems.",
   },
   {
     icon: Award,
     title: "Over a Decade of Experience",
-    description: "Trusted by hundreds of customers across London for reliable, quality work.",
+    description: `Trusted by customers across ${COMPANY.areas} for reliable, quality work.`,
   },
 ];
 
@@ -73,7 +59,7 @@ export default function ServicesPage() {
     <div className="bg-brand-surface">
       <PageHero
         title="Our Services"
-        subtitle={`Professional heating and air conditioning services for homes and businesses across ${COMPANY.areas}.`}
+        subtitle={`Commercial & domestic gas works across ${COMPANY.areas}. Heating, plumbing, PPM, and emergency support.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
         backgroundImage="/images/blueprint-commercial-system.png"
       />
@@ -159,7 +145,7 @@ export default function ServicesPage() {
               <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white mb-4 tracking-widest uppercase">
                 Need Help Today?
               </h2>
-              <p className="text-white/80 text-xs font-technical uppercase tracking-widest">Call us now for same-day service. Available for urgent heating and AC issues.</p>
+              <p className="text-white/80 text-xs font-technical uppercase tracking-widest">Call us now for same-day service. Available for urgent heating and plumbing issues.</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 shrink-0">
@@ -202,9 +188,9 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <BlueprintBillboard
               src="/images/exploded-boiler.png"
-              alt="Full heating and AC system schematic"
+              alt="Full heating and plumbing system schematic"
               theme="warm"
-              versionText="HEATING & AC SERVICES"
+              versionText="HEATING & PLUMBING"
               idHash={`GAS SAFE: ${COMPANY.gasSafeNumber}`}
               statusText="ALL SYSTEMS OPERATIONAL"
               className="w-full"

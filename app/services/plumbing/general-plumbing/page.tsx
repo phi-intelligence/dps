@@ -15,7 +15,7 @@ export default function GeneralPlumbingPage() {
       backgroundImage="/images/kitchen-plumbing.jpg"
       sideImage="/images/kitchen-plumbing.jpg"
       sideImageAlt="Plumber installing new kitchen sink"
-      introduction={`Need a plumber for planned work? Whether it is fitting new fixtures, moving pipework, or upgrading your system, DPS Heating Services Ltd provides reliable general plumbing services across ${COMPANY.areas}. We offer free quotes for all planned work and stick to our prices — no surprises.`}
+      introduction={`Need a plumber for planned work? Whether it is fitting new fixtures, moving pipework, or upgrading your system, DPS Heating Services LTD provides reliable general plumbing services across ${COMPANY.areas}. We offer free quotes for all planned work and stick to our prices — no surprises.`}
       included={[
         "Tap and Mixer Installation",
         "Toilet and Cistern Fitting",
@@ -101,7 +101,7 @@ export default function GeneralPlumbingPage() {
         },
         {
           question: "Are you insured?",
-          answer: "Yes. DPS Heating Services Ltd holds full public liability insurance for all domestic and commercial plumbing work.",
+          answer: "Yes. DPS Heating Services LTD holds full public liability insurance for all domestic and commercial plumbing work.",
         },
         {
           question: "How quickly can you start the work?",

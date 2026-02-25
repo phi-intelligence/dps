@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Phone } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
@@ -9,11 +10,14 @@ interface CTABannerProps {
   title?: string;
   subtitle?: string;
   variant?: "orange" | "dark";
+  /** Optional full-bleed background image (e.g. blueprint). When set, shown behind content with overlay. */
+  backgroundImage?: string;
 }
 
 export default function CTABanner({
   title = "Get a Free Quote",
   subtitle = "Contact us today for a no-obligation quote. Gas Safe registered engineers ready to help.",
+  backgroundImage,
 }: CTABannerProps) {
   const { openQuoteModal } = useQuoteModal();
   return (
@@ -21,10 +25,25 @@ export default function CTABanner({
       className="relative py-32 px-4 overflow-hidden"
       aria-label="Call to action"
     >
-      <div className="absolute inset-0 opacity-50 pointer-events-none">
-        <EnergyFlowBackground />
-      </div>
-      <div className="max-w-7xl mx-auto">
+      {backgroundImage ? (
+        <>
+          <div className="absolute inset-0 z-0" aria-hidden>
+            <Image
+              src={backgroundImage}
+              alt=""
+              fill
+              className="object-cover object-center opacity-25 dark:opacity-20"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-brand-surface/70 dark:bg-brand-surface/85" />
+          </div>
+        </>
+      ) : (
+        <div className="absolute inset-0 opacity-50 pointer-events-none">
+          <EnergyFlowBackground />
+        </div>
+      )}
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="bg-brand-surface dark:bg-brand-steel rounded-[2rem] p-12 md:p-24 relative overflow-hidden premium-shadow">
           {/* Decorative Gradient Glows - Refined for geometric look */}
           <div className="absolute -top-32 -right-32 w-[30rem] h-[30rem] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none" />

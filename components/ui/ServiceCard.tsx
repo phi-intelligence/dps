@@ -41,7 +41,7 @@ export default function ServiceCard({
       <div className="space-y-4 mb-12">
         {subservices.map((sub, i) => (
           <div key={i} className="flex items-center gap-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-brand-red opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(220,38,38,0.5)] transition-all" />
+            <div className="w-1.5 h-1.5 rounded-full bg-brand-red opacity-20 group-hover:opacity-100 group-hover:shadow-[0_0_8px_rgba(212,175,55,0.5)] transition-all" />
             <span className="text-[11px] font-technical font-bold uppercase tracking-[0.2em] text-brand-muted group-hover:text-brand-text transition-colors">
               {sub}
             </span>

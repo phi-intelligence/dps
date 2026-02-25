@@ -126,7 +126,7 @@ function LogoFlame() {
         vertexColors
         metalness={0.85}
         roughness={0.15}
-        emissive="#DC2626"
+        emissive="#d4af37"
         emissiveIntensity={0.12}
       />
     </mesh>
@@ -184,7 +184,7 @@ export default function Logo3D() {
           intensity={1.5}
           castShadow
         />
-        <pointLight position={[-3, 2, 4]} intensity={0.5} color="#DC2626" />
+        <pointLight position={[-3, 2, 4]} intensity={0.5} color="#d4af37" />
         <pointLight position={[3, -2, 4]} intensity={0.3} color="#1C448E" />
 
         <PresentationControls

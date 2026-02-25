@@ -21,10 +21,10 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: {
     template: `%s | ${COMPANY.name}`,
-    default: `${COMPANY.name} | Heating & Air Conditioning`,
+    default: `${COMPANY.name} | Commercial & Domestic Gas Works`,
   },
   description:
-    `Professional heating and air conditioning services across ${COMPANY.areas}. Gas Safe registered engineers, fast response, free quotes.`,
+    `Professional commercial and domestic gas, heating and plumbing across ${COMPANY.areas}. Gas Safe registered, fast response, free quotes.`,
   openGraph: {
     type: "website",
     siteName: COMPANY.name,
@@ -41,7 +41,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t='light';document.documentElement.setAttribute('data-theme',t);if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark')}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('dps-theme');if(!t)t='dark';document.documentElement.setAttribute('data-theme',t);if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark')}catch(e){}})()`,
           }}
         />
       </head>

@@ -15,7 +15,7 @@ export default function ACInstallationPage() {
       backgroundImage="/images/ac-installation.jpg"
       sideImage="/images/ac-installation.jpg"
       sideImageAlt="Air conditioning unit being installed"
-      introduction={`DPS Heating Services Ltd installs a wide range of air conditioning systems for homes and businesses across ${COMPANY.areas}. Whether you need a single-room split system for your home or a multi-zone commercial installation, we manage the entire process from survey and design through to commissioning and handover. All our engineers are F-Gas certified.`}
+      introduction={`DPS Heating Services LTD installs a wide range of air conditioning systems for homes and businesses across ${COMPANY.areas}. Whether you need a single-room split system for your home or a multi-zone commercial installation, we manage the entire process from survey and design through to commissioning and handover. All our engineers are F-Gas certified.`}
       included={[
         "Free site survey and design",
         "System and brand recommendation",

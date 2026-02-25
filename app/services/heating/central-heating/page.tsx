@@ -15,7 +15,7 @@ export default function CentralHeatingPage() {
       backgroundImage="/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg"
       sideImage="/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg"
       sideImageAlt="Engineer installing copper heating pipework in a commercial building"
-      introduction={`Whether you are installing central heating for the first time, upgrading an existing system, or having your current system repaired, DPS Heating Services Ltd can help. We provide comprehensive central heating services across ${COMPANY.areas}, covering everything from new system design to component replacement, all carried out by our Gas Safe registered engineers.`}
+      introduction={`Whether you are installing central heating for the first time, upgrading an existing system, or having your current system repaired, DPS Heating Services LTD can help. We provide comprehensive central heating services across ${COMPANY.areas}, covering everything from new system design to component replacement, all carried out by our Gas Safe registered engineers.`}
       included={[
         "Full system design and quote",
         "New central heating installation",

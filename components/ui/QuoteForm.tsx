@@ -7,17 +7,28 @@ import { inquiryService } from "@/lib/inquiry-service";
 
 export const QUOTE_SERVICES = [
   { value: "", label: "Select service..." },
+  // Commercial
+  { value: "commercial-boiler-servicing", label: "Commercial Boiler Servicing" },
+  { value: "plant-room-maintenance", label: "Plant Room Maintenance" },
+  { value: "gas-safety-inspections", label: "Gas Safety Inspections" },
+  { value: "ppm-contracts", label: "PPM Contracts" },
+  { value: "fault-finding-diagnosis", label: "Fault Finding & Diagnosis" },
+  { value: "commercial-heating-systems", label: "Commercial Heating Systems" },
+  { value: "emergency-breakdowns", label: "24 Hour Emergency Breakdowns" },
+  { value: "fm-ppm-packages", label: "Facilities Management (3 Tier PPM)" },
+  { value: "fm-reactive-ooh", label: "Facilities Management (Reactive & OOH)" },
+  // Domestic
+  { value: "boiler-installation-servicing-repairs", label: "Boiler Installation, Servicing & Repairs" },
+  { value: "system-diagnosis", label: "System Diagnosis" },
+  { value: "landlord-gas-safety-cp12", label: "Landlord Gas Safety (CP12)" },
+  { value: "plumbing-repairs", label: "Plumbing Repairs" },
+  { value: "emergency-callouts", label: "Emergency Call outs" },
+  // Legacy (for preselection from detail pages — avoid duplicating values already in Commercial/Domestic)
   { value: "boiler-repair", label: "Boiler Repair" },
   { value: "boiler-installation", label: "Boiler Installation" },
   { value: "boiler-servicing", label: "Boiler Servicing" },
   { value: "central-heating", label: "Central Heating" },
-  { value: "radiators", label: "Radiators" },
-  { value: "power-flushing", label: "Power Flushing" },
-  { value: "ac-installation", label: "AC Installation" },
-  { value: "ac-servicing", label: "AC Servicing" },
-  { value: "ac-repairs", label: "AC Repairs" },
-  { value: "commercial-ac", label: "Commercial AC" },
-  { value: "ac-maintenance", label: "Maintenance Contracts" },
+  { value: "general-plumbing", label: "General Plumbing" },
   { value: "other", label: "Other" },
 ];
 

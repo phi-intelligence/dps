@@ -5,19 +5,29 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+const GOLD_COLOR = 0xd4af37; // metallic gold
+
 function HeroLogo({ url }: { url: string }) {
   const { scene } = useGLTF(url);
   const clone = scene.clone();
   clone.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
+    if (child instanceof THREE.Mesh && child.material) {
       child.castShadow = false;
       child.receiveShadow = false;
+      const materials = Array.isArray(child.material) ? child.material : [child.material];
+      materials.forEach((mat: THREE.Material) => {
+        const m = mat as THREE.MeshStandardMaterial;
+        if (m.color) m.color.setHex(GOLD_COLOR);
+        if (m.emissive) m.emissive.setHex(GOLD_COLOR).multiplyScalar(0.15);
+        if (m.metalness !== undefined) m.metalness = 0.85;
+        if (m.roughness !== undefined) m.roughness = 0.25;
+      });
     }
   });
   return (
     <primitive
       object={clone}
-      scale={[2.2, 2.2, 2.2]}
+      scale={[1.5, 1.5, 1.5]}
       rotation={[0, Math.PI, 0]}
     />
   );
@@ -49,11 +59,11 @@ interface Hero3DSceneProps {
 export default function Hero3DScene({ modelPath = null, className = "" }: Hero3DSceneProps) {
   return (
     <div
-      className={`w-full aspect-square max-h-[min(70vh,520px)] overflow-hidden ${className}`}
+      className={`w-full aspect-square max-h-[min(85vh,680px)] min-h-[320px] overflow-hidden ${className}`}
       style={{ background: "transparent" }}
     >
       <Canvas
-        camera={{ position: [0, 0, 5.5], fov: 40 }}
+        camera={{ position: [0, 0, 6.5], fov: 45 }}
         gl={{
           antialias: true,
           alpha: true,

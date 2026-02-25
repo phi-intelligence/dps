@@ -92,6 +92,7 @@ export default function PlumbingCategoryPage() {
           { label: "Services", href: "/services" },
           { label: "Hydraulic Engineering" },
         ]}
+        backgroundImage="/images/blueprints/blueprint-8.png"
         compact
       />
 
@@ -126,7 +127,7 @@ export default function PlumbingCategoryPage() {
             transition={{ delay: 0.2 }}
             className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.4em] leading-loose max-w-2xl mx-auto"
           >
-            From emergency breaches to structural architecture, DPS Heating Services Ltd provides advanced hydraulic solutions across {COMPANY.areas}. Our engineers are technically equipped for first-visit resolution of critical system failures.
+            From emergency breaches to structural architecture, DPS Heating Services LTD provides advanced hydraulic solutions across {COMPANY.areas}. Our engineers are technically equipped for first-visit resolution of critical system failures.
           </motion.p>
         </div>
       </section>

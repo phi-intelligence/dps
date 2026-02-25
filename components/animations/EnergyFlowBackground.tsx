@@ -74,7 +74,7 @@ export default function EnergyFlowBackground() {
         <defs>
           {/* Warm wave gradient: red → orange with soft edges */}
           <linearGradient id="wave-warm" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#EF4444" stopOpacity="0.12" />
+            <stop offset="0%" stopColor="#d4af37" stopOpacity="0.12" />
             <stop offset="40%" stopColor="#F97316" stopOpacity="0.10" />
             <stop offset="70%" stopColor="#FBBF24" stopOpacity="0.06" />
             <stop offset="100%" stopColor="#FBBF24" stopOpacity="0" />
@@ -90,8 +90,8 @@ export default function EnergyFlowBackground() {
 
           {/* Orange ribbon gradient */}
           <linearGradient id="ribbon-orange" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#EF4444" stopOpacity="0" />
-            <stop offset="20%" stopColor="#EF4444" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#d4af37" stopOpacity="0" />
+            <stop offset="20%" stopColor="#d4af37" stopOpacity="0.15" />
             <stop offset="50%" stopColor="#F97316" stopOpacity="0.20" />
             <stop offset="80%" stopColor="#FBBF24" stopOpacity="0.10" />
             <stop offset="100%" stopColor="#FBBF24" stopOpacity="0" />

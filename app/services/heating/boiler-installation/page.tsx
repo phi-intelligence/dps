@@ -15,7 +15,7 @@ export default function BoilerInstallationPage() {
       backgroundImage="/images/140d49a2-daf4-4c0f-b0c4-881f971b97c0.jpg"
       sideImage="/images/140d49a2-daf4-4c0f-b0c4-881f971b97c0.jpg"
       sideImageAlt="New boiler neatly installed in kitchen cupboard with copper pipework"
-      introduction={`A new boiler is a significant investment, and it pays to have it installed correctly. DPS Heating Services Ltd provides full boiler installation across ${COMPANY.areas}, including a free survey, system design, supply and installation of the new boiler, commissioning, and warranty registration. We are Gas Safe registered and work with all leading brands.`}
+      introduction={`A new boiler is a significant investment, and it pays to have it installed correctly. DPS Heating Services LTD provides full boiler installation across ${COMPANY.areas}, including a free survey, system design, supply and installation of the new boiler, commissioning, and warranty registration. We are Gas Safe registered and work with all leading brands.`}
       included={[
         "Free survey and quote",
         "Boiler and system design advice",

@@ -1,23 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, Shield, Cpu, Zap, Activity } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
-
-const heatingLinks = [
-  { label: "Boiler Repair", href: "/services/heating/boiler-repair" },
-  { label: "Boiler Installation", href: "/services/heating/boiler-installation" },
-  { label: "Boiler Servicing", href: "/services/heating/boiler-servicing" },
-  { label: "Central Heating", href: "/services/heating/central-heating" },
-  { label: "Power Flushing", href: "/services/heating/power-flushing" },
-];
-
-const acLinks = [
-  { label: "AC Installation", href: "/services/air-conditioning/ac-installation" },
-  { label: "AC Servicing", href: "/services/air-conditioning/ac-servicing" },
-  { label: "AC Repairs", href: "/services/air-conditioning/ac-repairs" },
-  { label: "Commercial AC", href: "/services/air-conditioning/commercial-ac" },
-  { label: "Maintenance Contracts", href: "/services/air-conditioning/ac-maintenance" },
-];
+import { Phone, Mail, Shield, Cpu, Zap, Activity, Wrench } from "lucide-react";
+import { COMPANY, COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
 
 const quickLinks = [
   { label: "About Us", href: "/about" },
@@ -36,21 +20,19 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-4 mb-8 group">
-              <div className="w-12 h-12 rounded-full border border-brand-card-border-hover bg-brand-navy flex items-center justify-center relative overflow-hidden group-hover:border-brand-red/30 transition-all">
-                <Image src="/images/logo.jpg" alt="DPS Heating" width={40} height={40} className="object-contain" style={{ width: "auto", height: "auto" }} />
-              </div>
+              <Image src="/images/logo.png" alt="DPS Heating" width={40} height={48} className="object-contain" style={{ width: "auto", height: "auto" }} />
               <div>
                 <span className="font-technical font-extrabold text-brand-text text-xl tracking-[0.2em] uppercase block leading-none">
                   DPS <span className="text-brand-red">HEATING</span>
                 </span>
                 <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                  Heating &amp; Air Conditioning
+                  Commercial &amp; Domestic Gas Works
                 </span>
               </div>
             </Link>
 
             <p className="text-sm font-light leading-relaxed mb-10 max-w-sm text-brand-muted uppercase tracking-wider">
-              Professional heating and air conditioning services for homes and businesses across {COMPANY.areas}. Gas Safe registered engineers.
+              Professional heating and plumbing services for homes and businesses across {COMPANY.areas}. Gas Safe registered engineers.
             </p>
 
             <div className="space-y-4">
@@ -69,14 +51,14 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Heating */}
+          {/* Column 2: Commercial */}
           <div className="lg:pl-8">
             <h3 className="font-technical font-bold text-[10px] text-brand-red mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
               <Activity size={12} />
-              Heating
+              Commercial
             </h3>
             <ul className="space-y-4">
-              {heatingLinks.map((link) => (
+              {COMMERCIAL_SERVICES.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-red hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
@@ -86,14 +68,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Air Conditioning */}
+          {/* Column 3: Domestic */}
           <div>
             <h3 className="font-technical font-bold text-[10px] text-brand-blue mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
-              <Zap size={12} />
-              Air Conditioning
+              <Wrench size={12} />
+              Domestic
             </h3>
             <ul className="space-y-4">
-              {acLinks.map((link) => (
+              {DOMESTIC_SERVICES.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-blue hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
@@ -133,7 +115,7 @@ export default function Footer() {
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <p className="text-[10px] font-technical uppercase tracking-widest text-brand-muted">
-              &copy; {new Date().getFullYear()} DPS Heating Services Ltd. Company No: {COMPANY.companyNumber}
+              &copy; {new Date().getFullYear()} {COMPANY.name}
             </p>
           </div>
 

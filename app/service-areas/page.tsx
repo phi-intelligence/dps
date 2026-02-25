@@ -25,7 +25,7 @@ export default function ServiceAreasPage() {
     <div className="bg-brand-surface text-brand-text">
       <PageHero
         title="Service Areas"
-        subtitle={`We provide heating and air conditioning services across ${COMPANY.areas}. Local engineers, fast response times.`}
+        subtitle={`We provide heating and plumbing services across ${COMPANY.areas}. Local engineers, fast response times.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Service Areas" }]}
         backgroundImage="/images/service-area-map.jpg"
         compact
@@ -57,14 +57,14 @@ export default function ServiceAreasPage() {
 
               <div className="space-y-8 text-brand-muted font-light leading-relaxed text-sm uppercase tracking-wider max-w-xl">
                 <p>
-                  DPS Heating Services Ltd operates throughout{" "}
+                  DPS Heating Services LTD operates throughout{" "}
                   {COMPANY.areas}, covering both domestic and commercial
                   customers. Our engineers are locally based, allowing us to
                   offer fast response times across our entire coverage area.
                 </p>
                 <p>
                   Whether you need a boiler repaired, a heating system
-                  installed, or an air conditioning unit serviced, we have
+                  installed, or plumbing work completed, we have
                   engineers ready to help. Same-day and next-day appointments
                   are available for most services.
                 </p>
@@ -120,7 +120,7 @@ export default function ServiceAreasPage() {
                   ))}
                 </div>
                 <p className="text-brand-muted text-[10px] mt-10 font-mono tracking-[0.2em] text-center uppercase">
-                  + Surrounding Areas — Call to Confirm
+                  If you can&apos;t see your location listed, please get in touch and we&apos;ll be happy to discuss your needs or provide a quote.
                 </p>
               </div>
             </motion.div>
@@ -150,8 +150,7 @@ export default function ServiceAreasPage() {
               Where We <span className="text-brand-red">Operate</span>
             </h2>
             <p className="text-brand-muted text-sm font-light uppercase tracking-wider max-w-xl mx-auto">
-              {SERVICE_AREAS.length}+ areas across South-West London. Click any
-              pin to find out more.
+              London, Kent, Essex and Surrey. Click any pin to find out more.
             </p>
           </motion.div>
 
@@ -302,8 +301,7 @@ export default function ServiceAreasPage() {
               Across <span className="text-brand-red">London</span>
             </h2>
             <p className="mt-6 text-brand-muted text-xs font-technical uppercase tracking-[0.3em]">
-              {SERVICE_AREAS.length}+ areas covered · Same-day service
-              available
+              {SERVICE_AREAS.length} regions covered · Same-day service available
             </p>
           </div>
         </div>

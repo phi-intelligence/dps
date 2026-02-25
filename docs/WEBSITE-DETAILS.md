@@ -13,6 +13,7 @@ This document describes the full website structure, all pages, and key details f
 | **Default meta description** | Professional heating and air conditioning services across London and Surrounding Areas. Gas Safe registered engineers, fast response, free quotes. |
 | **Primary audience** | Domestic and commercial customers in London and surrounding areas |
 | **Core offering** | Heating (boilers, central heating, radiators, power flushing), Air Conditioning (install, service, repair, commercial, maintenance), Plumbing (repairs, general plumbing) |
+| **Total pages** | 26 (24 public + 2 admin) |
 
 ---
 
@@ -65,6 +66,7 @@ London, Westminster, Chelsea, Kensington, Fulham, Hammersmith, Wandsworth, Batte
 ```
 /
 ├── /about
+├── /portfolio
 ├── /contact
 ├── /service-areas
 ├── /emergency          (Urgent Enquiries)
@@ -100,6 +102,7 @@ London, Westminster, Chelsea, Kensington, Fulham, Hammersmith, Wandsworth, Batte
   - Heating Services → `/services/heating`
   - Air Conditioning → `/services/air-conditioning`
 - **About Us** → `/about`
+- **Portfolio** → `/portfolio`
 - **Service Areas** → `/service-areas`
 - **Contact** → `/contact`
 
@@ -148,7 +151,27 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.3 Contact — `/contact`
+### 6.3 Portfolio — `/portfolio`
+
+| Attribute | Detail |
+|-----------|--------|
+| **Purpose** | Showcase completed projects, stats, and client testimonials |
+| **Title** | Portfolio \| DPS Heating Services Ltd |
+
+**Sections:**
+
+1. **Page hero** — “Portfolio”, subtitle (completed projects across service areas), breadcrumbs (Home → Portfolio), background image.
+2. **Stats strip** — Four metrics: Projects Completed (500+), Years Experience (10+), Areas Covered (20+), Customer Rating (5.0).
+3. **Completed projects grid** — “Deployment Log” / “Completed Projects”; grid of project cards from `PORTFOLIO_PROJECTS` (category badge, image, title, location, description, stat pills e.g. Boilers/Floors, Radiators/Duration). Categories: Heating, Air Conditioning.
+4. **Featured project highlight** — “Featured Deployment”: Commercial Plant Room Build; copy + stats (System Output 200 kW, Floors Heated 6, Duration 3 weeks, Warranty 10 years); BlueprintBillboard (plant room schematic).
+5. **Testimonials** — “Client Transmissions” / “What Our Clients Say”; grid of ReviewCard components using `REVIEWS`.
+6. **CTA banner.**
+
+**Data:** Projects from `lib/constants.ts` → `PORTFOLIO_PROJECTS`; reviews from `REVIEWS`.
+
+---
+
+### 6.4 Contact — `/contact`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -165,7 +188,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.4 Service Areas — `/service-areas`
+### 6.5 Service Areas — `/service-areas`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -183,7 +206,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.5 Urgent Enquiries — `/emergency`
+### 6.6 Urgent Enquiries — `/emergency`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -200,7 +223,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.6 Service Finder / Tools — `/tools`
+### 6.7 Service Finder / Tools — `/tools`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -216,7 +239,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.7 Services hub — `/services`
+### 6.8 Services hub — `/services`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -235,7 +258,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.8 Heating category — `/services/heating`
+### 6.9 Heating category — `/services/heating`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -259,7 +282,7 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.9 Heating service detail pages (shared layout)
+### 6.10 Heating service detail pages (shared layout)
 
 Each uses **ServiceDetailLayout** with: PageHero, Strategic Overview (intro + image), “What’s included”, “Common issues”, ProcessSteps, Trust points, FAQ accordion, Quote form + CTA.
 
@@ -274,7 +297,7 @@ Each uses **ServiceDetailLayout** with: PageHero, Strategic Overview (intro + im
 
 ---
 
-### 6.10 Air Conditioning category — `/services/air-conditioning`
+### 6.11 Air Conditioning category — `/services/air-conditioning`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -295,7 +318,7 @@ Each uses **ServiceDetailLayout** with: PageHero, Strategic Overview (intro + im
 
 ---
 
-### 6.11 Air Conditioning service detail pages (shared layout)
+### 6.12 Air Conditioning service detail pages (shared layout)
 
 Same structure as heating detail pages (ServiceDetailLayout).
 
@@ -309,7 +332,7 @@ Same structure as heating detail pages (ServiceDetailLayout).
 
 ---
 
-### 6.12 Plumbing category — `/services/plumbing`
+### 6.13 Plumbing category — `/services/plumbing`
 
 | Attribute | Detail |
 |-----------|--------|
@@ -326,7 +349,7 @@ Same structure as heating detail pages (ServiceDetailLayout).
 
 ---
 
-### 6.13 Plumbing service detail pages
+### 6.14 Plumbing service detail pages
 
 | URL | Service |
 |-----|---------|
@@ -337,7 +360,7 @@ Same layout pattern: hero, overview, included, issues, steps, trust, FAQ, quote/
 
 ---
 
-### 6.14 Admin — `/admin/login` and `/admin/dashboard`
+### 6.15 Admin — `/admin/login` and `/admin/dashboard`
 
 | Page | URL | Purpose |
 |------|-----|--------|
@@ -351,7 +374,7 @@ Admin is not linked in main navigation; access by going directly to `/admin/logi
 ## 7. Global UI elements
 
 - **Header** — Logo “DPS Solutions”, nav links, theme toggle, phone, “Get a Free Quote” (opens quote modal). Sticky; glass effect on scroll.
-- **Footer** — Logo, short blurb, phone, email; Heating links (5); AC links (5); Quick links (About, Service Areas, Contact). Brand and legal/copyright.
+- **Footer** — Logo, short blurb, phone, email; Heating links (5); AC links (5); Quick links (About, Portfolio, Service Areas, Contact). Brand and legal/copyright.
 - **Quote modal** — Site-wide; opened from header or “Get a Free Quote” buttons. Multi-step: choose service → contact details → submit. Submissions create inquiries (e.g. stored for admin).
 - **Chat widget** — Floating chat (e.g. bottom-right); AI assistant (e.g. Gemini/OpenAI) for DPS services, areas, booking. Lazy-loaded panel.
 
@@ -362,14 +385,15 @@ Admin is not linked in main navigation; access by going directly to `/admin/logi
 1. **Get a quote** — User clicks “Get a Free Quote” → modal opens → select service → enter details → submit → success message; inquiry appears in admin dashboard (when using localStorage backend).
 2. **Contact** — User visits `/contact` → sees phone/email/hours + form → submits form → same inquiry flow as above.
 3. **Find service** — User goes to `/tools` → Service Finder or Quote Calculator → navigates to service page or gets estimate.
-4. **Urgent** — User goes to `/emergency` → sees phone + gas emergency number 0800 111 999 → can call or submit form.
-5. **Admin** — User goes to `/admin/login` → enters admin/admin → Authenticate → redirect to `/admin/dashboard` → view/search/update/delete inquiries.
+4. **Portfolio** — User clicks “Portfolio” in nav or footer → views completed projects, stats, featured project, and testimonials.
+5. **Urgent** — User goes to `/emergency` → sees phone + gas emergency number 0800 111 999 → can call or submit form.
+6. **Admin** — User goes to `/admin/login` → enters admin/admin → Authenticate → redirect to `/admin/dashboard` → view/search/update/delete inquiries.
 
 ---
 
 ## 9. File reference (for presentations)
 
-- **Company/config:** `lib/constants.ts` (COMPANY, OPENING_HOURS, SERVICE_AREAS, REVIEWS, NAV_LINKS)
+- **Company/config:** `lib/constants.ts` (COMPANY, OPENING_HOURS, SERVICE_AREAS, REVIEWS, NAV_LINKS, PORTFOLIO_PROJECTS)
 - **Layout:** `app/layout.tsx` (metadata, theme script, LayoutShell, providers)
 - **Layout UI:** `components/layout/LayoutShell.tsx`, `Header.tsx`, `Footer.tsx`
 - **Quote:** `lib/quote-modal-context.tsx`, `components/ui/QuoteModal.tsx`, `QuoteForm.tsx`

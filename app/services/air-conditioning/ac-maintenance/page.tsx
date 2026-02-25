@@ -15,7 +15,7 @@ export default function ACMaintenancePage() {
       backgroundImage="/images/ac-unit-indoor.jpg"
       sideImage="/images/ac-installation.jpg"
       sideImageAlt="Air conditioning maintenance visit"
-      introduction={`A maintenance contract is the easiest way to keep your air conditioning system in top condition. DPS Heating Services Ltd offers flexible maintenance plans for both domestic and commercial customers across ${COMPANY.areas}. With a contract in place, you get scheduled servicing, priority response times, and peace of mind that your system is being looked after professionally.`}
+      introduction={`A maintenance contract is the easiest way to keep your air conditioning system in top condition. DPS Heating Services LTD offers flexible maintenance plans for both domestic and commercial customers across ${COMPANY.areas}. With a contract in place, you get scheduled servicing, priority response times, and peace of mind that your system is being looked after professionally.`}
       included={[
         "Scheduled annual or bi-annual service visits",
         "Full system inspection and cleaning",

@@ -30,7 +30,7 @@ export default function UrgentEnquiryPage() {
     <div className="bg-brand-surface text-brand-text min-h-screen">
       <PageHero
         title="Urgent Enquiries"
-        subtitle="For urgent heating and air conditioning problems, call us directly. We will do our best to help as quickly as possible."
+        subtitle={`Commercial & domestic gas, heating and plumbing — for urgent issues across ${COMPANY.areas}, call us directly.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Urgent Enquiries" }]}
         backgroundImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
         compact

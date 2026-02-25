@@ -12,12 +12,13 @@ import {
   ChevronRight,
   Zap,
   Flame,
-  Wind,
   Wrench,
   Settings,
   ShieldCheck,
   ClipboardList,
   Thermometer,
+  Building2,
+  Home,
 } from "lucide-react";
 import { useTheme } from "@/lib/theme-provider";
 import { useQuoteModal } from "@/lib/quote-modal-context";
@@ -42,18 +43,29 @@ function getFocusables(container: HTMLElement): HTMLElement[] {
 }
 
 const SERVICE_METADATA: Record<string, { image: string; icon: any; category: string }> = {
+  // Commercial
+  "commercial-boiler-servicing": { image: "/images/boiler-modern.jpg", icon: Building2, category: "Commercial" },
+  "plant-room-maintenance": { image: "/images/central-heating.jpg", icon: Building2, category: "Commercial" },
+  "gas-safety-inspections": { image: "/images/boiler-repair.jpg", icon: Building2, category: "Commercial" },
+  "ppm-contracts": { image: "/images/central-heating.jpg", icon: Building2, category: "Commercial" },
+  "fault-finding-diagnosis": { image: "/images/boiler-repair.jpg", icon: Building2, category: "Commercial" },
+  "commercial-heating-systems": { image: "/images/central-heating.jpg", icon: Building2, category: "Commercial" },
+  "emergency-breakdowns": { image: "/images/boiler-repair.jpg", icon: Building2, category: "Commercial" },
+  "fm-ppm-packages": { image: "/images/central-heating.jpg", icon: Building2, category: "Commercial" },
+  "fm-reactive-ooh": { image: "/images/central-heating.jpg", icon: Building2, category: "Commercial" },
+  // Domestic
+  "boiler-installation-servicing-repairs": { image: "/images/boiler-install.jpg", icon: Home, category: "Domestic" },
+  "system-diagnosis": { image: "/images/boiler-repair.jpg", icon: Home, category: "Domestic" },
+  "landlord-gas-safety-cp12": { image: "/images/boiler-modern.jpg", icon: Home, category: "Domestic" },
+  "plumbing-repairs": { image: "/images/plumbing-repairs.jpg", icon: Wrench, category: "Domestic" },
+  "emergency-callouts": { image: "/images/boiler-repair.jpg", icon: Home, category: "Domestic" },
+  // Legacy (for preselection from detail pages)
   "boiler-repair": { image: "/images/boiler-repair.jpg", icon: Flame, category: "Heating" },
   "boiler-installation": { image: "/images/boiler-install.jpg", icon: Settings, category: "Heating" },
   "boiler-servicing": { image: "/images/boiler-modern.jpg", icon: Activity, category: "Heating" },
   "central-heating": { image: "/images/central-heating.jpg", icon: Thermometer, category: "Heating" },
-  "radiators": { image: "/images/radiator-pipes.png", icon: Activity, category: "Heating" },
-  "power-flushing": { image: "/images/plumbing-pipes.jpg", icon: Wrench, category: "Heating" },
-  "ac-installation": { image: "/images/ac-installation.jpg", icon: Wind, category: "Climate" },
-  "ac-servicing": { image: "/images/ac-unit-indoor.jpg", icon: Activity, category: "Climate" },
-  "ac-repairs": { image: "/images/exploded-ac.png", icon: Wrench, category: "Climate" },
-  "commercial-ac": { image: "/images/blueprint-commercial-system.png", icon: Cpu, category: "Climate" },
-  "ac-maintenance": { image: "/images/team-professional.jpg", icon: ClipboardList, category: "Climate" },
-  "other": { image: "/images/logo.jpg", icon: ShieldCheck, category: "General" },
+  "general-plumbing": { image: "/images/kitchen-plumbing.jpg", icon: Wrench, category: "Plumbing" },
+  "other": { image: "/images/logo.png", icon: ShieldCheck, category: "General" },
 };
 
 export default function QuoteModal({
@@ -180,10 +192,6 @@ export default function QuoteModal({
             className={`quote-modal-opaque relative z-[101] w-full ${step === 1 ? 'max-w-6xl' : 'max-w-5xl'} max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-brand-steel border border-brand-card-border shadow-2xl premium-shadow`}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute inset-0 opacity-30 pointer-events-none overflow-hidden rounded-3xl">
-              <EnergyFlowBackground />
-            </div>
-
             <div className="quote-modal-header sticky top-0 z-30 flex items-center justify-between px-8 py-6 bg-white/80 dark:bg-brand-steel/80 backdrop-blur-md border-b border-brand-card-border">
               <div>
                 <h2

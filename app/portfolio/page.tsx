@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import {
   Flame,
-  Wind,
+  Wrench,
   MapPin,
   Award,
   CheckCircle,
@@ -20,12 +20,12 @@ import {
 
 const categoryIcon: Record<string, React.ReactNode> = {
   Heating: <Flame size={14} />,
-  "Air Conditioning": <Wind size={14} />,
+  Plumbing: <Wrench size={14} />,
 };
 
 const categoryColor: Record<string, string> = {
   Heating: "bg-brand-red/20 text-brand-red border-brand-red/30",
-  "Air Conditioning": "bg-brand-blue/20 text-brand-blue border-brand-blue/30",
+  Plumbing: "bg-brand-blue/20 text-brand-blue border-brand-blue/30",
 };
 
 const stats = [
@@ -41,7 +41,7 @@ export default function PortfolioPage() {
       {/* ── Hero ── */}
       <PageHero
         title="Portfolio"
-        subtitle={`Completed projects across ${COMPANY.areas}. Heating, air conditioning, and plumbing — delivered to the highest standard.`}
+        subtitle={`Completed projects across ${COMPANY.areas}. Heating and plumbing — delivered to the highest standard.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Portfolio" }]}
         backgroundImage="/images/team-professional.jpg"
         compact

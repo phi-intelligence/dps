@@ -5,13 +5,20 @@ export const OPENING_HOURS = {
 };
 
 export const COMPANY = {
-  name: "DPS Heating Services Ltd",
+  name: "DPS Heating Services LTD",
+  legalName: "DPS Services Heating Ltd",
   phone: "ADD_PHONE_NUMBER", // TODO: Replace with real phone number
   email: "ADD_EMAIL_ADDRESS", // TODO: Replace with real email
-  address: "ADD_ADDRESS", // TODO: Replace with real address
-  companyNumber: "ADD_COMPANY_NUMBER", // TODO: Replace with real company number
+  address: "Situated on the outskirts of Kent",
   gasSafeNumber: "ADD_GAS_SAFE_NUMBER", // TODO: Replace with real Gas Safe number
-  areas: "London and Surrounding Areas", // TODO: Replace with real service areas
+  areas: "London, Kent, Essex and Surrey",
+  liabilityInsurance: true,
+  indemnityInsurance: true,
+  founded: "2024",
+  founder: "Dominic",
+  industryExperience: "over 10 years",
+  mission: "To deliver reliable, compliant mechanical, electrical, and gas solutions with discipline, integrity, and reliability — putting our clients first, 24 hours a day, 7 days a week.",
+  vision: "To be the trusted choice for commercial and domestic engineering services across London and the Southeast, known for exceptional workmanship, clear communication, and long-term partnerships built on trust.",
 }
 
 export const NAV_LINKS = [
@@ -20,8 +27,8 @@ export const NAV_LINKS = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Heating Services", href: "/services/heating" },
-      { label: "Air Conditioning", href: "/services/air-conditioning" },
+      { label: "Commercial Services", href: "/services/commercial" },
+      { label: "Domestic Services", href: "/services/domestic" },
     ],
   },
   { label: "About Us", href: "/about" },
@@ -30,29 +37,135 @@ export const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ]
 
-export const SERVICE_AREAS = [
-  "London",
-  "Westminster",
-  "Chelsea",
-  "Kensington",
-  "Fulham",
-  "Hammersmith",
-  "Wandsworth",
-  "Battersea",
-  "Clapham",
-  "Brixton",
-  "Streatham",
-  "Balham",
-  "Tooting",
-  "Wimbledon",
-  "Kingston",
-  "Richmond",
-  "Twickenham",
-  "Putney",
-  "Southfields",
-  "Earlsfield",
-  // TODO: Replace with real service area names
-]
+export const SERVICE_AREAS = ["London", "Kent", "Essex", "Surrey"]
+
+/** Core service categories from Capability Statement — mechanical, electrical, gas. */
+export const CAPABILITY_CORE_SERVICES = [
+  {
+    title: "Mechanical Services",
+    items: [
+      "Heating system installation, maintenance, and upgrades",
+      "Plant room installations",
+      "Pipework systems",
+      "Preventative and reactive maintenance",
+    ],
+  },
+  {
+    title: "Electrical Services",
+    items: [
+      "Electrical installations and upgrades",
+      "Fault finding and testing",
+      "Compliance inspections",
+      "Maintenance contracts",
+    ],
+  },
+  {
+    title: "Gas Services",
+    items: [
+      "Gas installation and servicing",
+      "Landlord safety inspections",
+      "Commercial and domestic gas works",
+      "Emergency callouts",
+    ],
+  },
+] as const
+
+/** Core services hero images for homepage (Mechanical, Electrical, Gas). */
+export const CORE_SERVICES_IMAGES: Record<string, string> = {
+  "Mechanical Services": "/images/core-services/mechanical.png",
+  "Electrical Services": "/images/core-services/electrical.png",
+  "Gas Services": "/images/core-services/gas.png",
+};
+
+/** Key strengths for Capability section. */
+export const KEY_STRENGTHS = [
+  "24/7 responsive service capability",
+  "Strong Health & Safety culture with rigorous compliance standards",
+  "Client-focused delivery approach",
+  "Bespoke solutions tailored to project requirements",
+  "Reliable project management and clear communication",
+  "Commitment to quality workmanship and regulatory compliance",
+] as const
+
+/** Sectors served for Capability section. */
+export const SECTORS_SERVED = [
+  "Residential",
+  "Commercial premises",
+  "Landlords and property management companies",
+  "Corporate clients",
+] as const
+
+/** Industries we work with — homepage "Sectors We Deal With" section. */
+export const SECTORS_WE_DEAL_WITH = [
+  "Universities",
+  "Fire Stations",
+  "Hospital",
+  "Offices",
+  "Retail",
+  "Hospitality",
+  "Warehouses",
+  "Schools",
+  "Estate Agents (Rented Properties)",
+  "Facilities Management (Properties Managed)",
+] as const
+
+/** Sectors with hero images for the homepage grid (remaining sectors shown as pills). */
+export const SECTORS_WITH_IMAGES = [
+  { label: "Warehouses", image: "/images/sectors/warehouse.png" },
+  { label: "Offices", image: "/images/sectors/office.png" },
+  { label: "Hospital", image: "/images/sectors/hospital.png" },
+  { label: "Universities", image: "/images/sectors/university.png" },
+  { label: "Fire Stations", image: "/images/sectors/fire-station.png" },
+] as const
+
+/** Health & Safety paragraph for Capability section. */
+export const HEALTH_SAFETY_COPY =
+  "Health & Safety is central to our operations. We maintain stringent quality control procedures and ensure all works are carried out in accordance with current legislation, industry regulations, and best practice standards. Risk assessments and method statements (RAMS) are prepared where required to ensure safe and controlled project delivery."
+
+/** Commitment paragraph for Capability section. */
+export const COMMITMENT_COPY =
+  "DPS Heating Services Ltd is committed to delivering dependable, high-quality engineering services with professionalism and attention to detail. Our clients take precedence in every project we undertake, and we aim to build long-term partnerships based on trust, performance, and reliability."
+
+/** Accreditations and qualifications for About page and footer. */
+export const ACCREDITATIONS = [
+  { title: "Gas Safe Certification", items: ["Commercial & Domestic"] },
+  {
+    title: "Qualifications",
+    items: [
+      "COCN1",
+      "NDNG1 (Non-Domestic Natural Gas)",
+      "SENWAT",
+      "HWSS G3 (Hot Water System and Safety / Unvented)",
+      "Level 3 Energy Efficiency — Gas Fired & Oil-Fired Domestic Heating and Hot Water Systems",
+    ],
+  },
+  { title: "Safe Contractor", items: [] },
+  { title: "Health & Safety", items: ["Compliant — operatives trained and H&S aware"] },
+  { title: "Asbestos Awareness", items: [] },
+  { title: "Working at Heights", items: [] },
+] as const
+
+/** Commercial services (9 items) for services hub and nav. */
+export const COMMERCIAL_SERVICES = [
+  { label: "Commercial Boiler Servicing", href: "/services/heating/boiler-servicing" },
+  { label: "Plant Room Maintenance", href: "/services/commercial" },
+  { label: "Gas Safety Inspections", href: "/services/commercial" },
+  { label: "PPM Contracts", href: "/services/commercial" },
+  { label: "Fault Finding & Diagnosis", href: "/services/heating/boiler-repair" },
+  { label: "Commercial Heating Systems", href: "/services/heating/central-heating" },
+  { label: "24 Hour Emergency Breakdowns", href: "/emergency" },
+  { label: "Commercial Facilities Management (3 Tier PPM Packages)", href: "/services/commercial" },
+  { label: "Commercial Facilities Management (Reactive & OOH Callouts)", href: "/services/commercial" },
+] as const
+
+/** Domestic services (5 items) for services hub and nav. */
+export const DOMESTIC_SERVICES = [
+  { label: "Boiler Installation, Servicing & Repairs", href: "/services/heating/boiler-installation" },
+  { label: "System Diagnosis", href: "/services/heating/boiler-repair" },
+  { label: "Landlord Gas Safety Certification (CP12)", href: "/services/heating/boiler-servicing" },
+  { label: "Plumbing Repairs", href: "/services/plumbing/plumbing-repairs" },
+  { label: "Emergency Call outs", href: "/emergency" },
+] as const
 
 export const REVIEWS = [
   {
@@ -126,15 +239,15 @@ export const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Office AC Multi-Zone System",
-    category: "Air Conditioning",
+    title: "Commercial Plumbing & Plant Room",
+    category: "Plumbing",
     location: "Chelsea",
     description:
-      "Daikin VRF system across three open-plan office floors. Individual zone control for each department with centralised management and remote monitoring.",
-    image: "/images/ac-installation.jpg",
+      "Full commercial plumbing installation for an office building. New plant room, mains distribution, and bathroom fit-outs across three floors.",
+    image: "/images/plumbing-pipes.jpg",
     stats: [
-      { label: "Zones", value: "8" },
-      { label: "Brand", value: "Daikin" },
+      { label: "Floors", value: "3" },
+      { label: "Fittings", value: "24" },
     ],
   },
   {
@@ -150,15 +263,15 @@ export const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Residential Split AC",
-    category: "Air Conditioning",
+    title: "Bathroom & Kitchen Plumbing",
+    category: "Plumbing",
     location: "Richmond",
     description:
-      "Mitsubishi Electric wall-mounted split system for a loft conversion. Quiet operation, Wi-Fi control, and energy-efficient inverter technology.",
-    image: "/images/ac-unit-indoor.jpg",
+      "Complete bathroom and kitchen plumbing refurbishment. New pipework, sanitaryware connections, and appliance installations in a period property.",
+    image: "/images/kitchen-plumbing.jpg",
     stats: [
-      { label: "Brand", value: "Mitsubishi" },
-      { label: "Duration", value: "1 day" },
+      { label: "Rooms", value: "2" },
+      { label: "Duration", value: "3 days" },
     ],
   },
   {

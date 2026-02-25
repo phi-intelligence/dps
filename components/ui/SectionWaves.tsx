@@ -29,13 +29,13 @@ export default function SectionWaves({ variant = "warm", className = "" }: Secti
             />
             <defs>
               <linearGradient id="sw-warm-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#EF4444" stopOpacity="0.08" />
+                <stop offset="0%" stopColor="#d4af37" stopOpacity="0.08" />
                 <stop offset="50%" stopColor="#F97316" stopOpacity="0.06" />
                 <stop offset="100%" stopColor="#FBBF24" stopOpacity="0.02" />
               </linearGradient>
               <linearGradient id="sw-warm-2" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#F97316" stopOpacity="0.06" />
-                <stop offset="100%" stopColor="#EF4444" stopOpacity="0.10" />
+                <stop offset="100%" stopColor="#d4af37" stopOpacity="0.10" />
               </linearGradient>
             </defs>
           </>
@@ -90,7 +90,7 @@ export default function SectionWaves({ variant = "warm", className = "" }: Secti
             />
             <defs>
               <linearGradient id="sw-mix-warm" x1="0%" y1="0%" x2="80%" y2="100%">
-                <stop offset="0%" stopColor="#EF4444" stopOpacity="0.10" />
+                <stop offset="0%" stopColor="#d4af37" stopOpacity="0.10" />
                 <stop offset="60%" stopColor="#F97316" stopOpacity="0.07" />
                 <stop offset="100%" stopColor="#FBBF24" stopOpacity="0.02" />
               </linearGradient>
@@ -100,8 +100,8 @@ export default function SectionWaves({ variant = "warm", className = "" }: Secti
                 <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.05" />
               </linearGradient>
               <linearGradient id="sw-mix-ribbon" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#EF4444" stopOpacity="0" />
-                <stop offset="30%" stopColor="#EF4444" stopOpacity="0.12" />
+                <stop offset="0%" stopColor="#d4af37" stopOpacity="0" />
+                <stop offset="30%" stopColor="#d4af37" stopOpacity="0.12" />
                 <stop offset="70%" stopColor="#2563EB" stopOpacity="0.10" />
                 <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
               </linearGradient>

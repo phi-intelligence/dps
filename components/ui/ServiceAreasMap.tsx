@@ -14,28 +14,12 @@ const TILES = {
   dark:  "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
 };
 
-/* ── Service area coordinates ─────────────────────────── */
+/* ── Service area coordinates (London, Kent, Essex, Surrey) ─────────────────────────── */
 const AREA_COORDS: Record<string, [number, number]> = {
-  London:       [51.5074, -0.1278],
-  Westminster:  [51.4975, -0.1357],
-  Chelsea:      [51.4875, -0.1687],
-  Kensington:   [51.5000, -0.1919],
-  Fulham:       [51.4756, -0.1940],
-  Hammersmith:  [51.4927, -0.2239],
-  Wandsworth:   [51.4571, -0.1817],
-  Battersea:    [51.4762, -0.1521],
-  Clapham:      [51.4613, -0.1380],
-  Brixton:      [51.4613, -0.1156],
-  Streatham:    [51.4276, -0.1218],
-  Balham:       [51.4432, -0.1527],
-  Tooting:      [51.4274, -0.1680],
-  Wimbledon:    [51.4213, -0.2063],
-  Kingston:     [51.4085, -0.3064],
-  Richmond:     [51.4613, -0.3037],
-  Twickenham:   [51.4490, -0.3286],
-  Putney:       [51.4618, -0.2160],
-  Southfields:  [51.4440, -0.1982],
-  Earlsfield:   [51.4398, -0.1757],
+  London: [51.5074, -0.1278],
+  Kent:   [51.2704, 0.5227],   // Maidstone area
+  Essex:  [51.7356, 0.4690],   // Chelmsford area
+  Surrey: [51.2362, -0.5704], // Guildford area
 };
 
 /* ── Custom pulsing DivIcon ───────────────────────────── */
@@ -62,15 +46,15 @@ function createMarkerIcon(isMain = false, isDark = false) {
           position:absolute;
           width:${ring}px;height:${ring}px;
           border-radius:50%;
-          background:rgba(239,68,68,0.22);
+          background:rgba(212,175,55,0.22);
           animation:dps-ping ${isMain ? "1.6s" : "2.2s"} ease-out infinite;
         "></div>
         <div style="
           width:${dot}px;height:${dot}px;
           border-radius:50%;
-          background:#EF4444;
+          background:#d4af37;
           border:${border};
-          box-shadow:0 0 ${isMain ? "12px" : "8px"} rgba(239,68,68,0.7);
+          box-shadow:0 0 ${isMain ? "12px" : "8px"} rgba(212,175,55,0.7);
           position:relative;z-index:1;
           flex-shrink:0;
         "></div>
@@ -125,8 +109,8 @@ export default function ServiceAreasMap() {
 
   return (
     <MapContainer
-      center={[51.455, -0.215]}
-      zoom={11}
+      center={[51.45, 0]}
+      zoom={8}
       scrollWheelZoom={false}
       className="w-full h-full dps-map"
       zoomControl={false}

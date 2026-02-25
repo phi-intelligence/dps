@@ -15,7 +15,7 @@ export default function PowerFlushingPage() {
       backgroundImage="/images/c3f0259f-ffbb-408c-b420-a8c70e4a8190.jpg"
       sideImage="/images/c3f0259f-ffbb-408c-b420-a8c70e4a8190.jpg"
       sideImageAlt="Heating system pipes and valve manifold"
-      introduction={`Over time, central heating systems can accumulate sludge, rust, and debris that reduce efficiency and cause problems such as cold radiators, noisy pipes, and boiler breakdowns. A professional power flush from DPS Heating Services Ltd can restore your heating system to full working order. We carry out power flushing across ${COMPANY.areas} using professional equipment to thoroughly clean your entire system.`}
+      introduction={`Over time, central heating systems can accumulate sludge, rust, and debris that reduce efficiency and cause problems such as cold radiators, noisy pipes, and boiler breakdowns. A professional power flush from DPS Heating Services LTD can restore your heating system to full working order. We carry out power flushing across ${COMPANY.areas} using professional equipment to thoroughly clean your entire system.`}
       included={[
         "Full central heating system flush",
         "Chemical descaling treatment",

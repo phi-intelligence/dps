@@ -15,7 +15,7 @@ export default function CommercialACPage() {
       backgroundImage="/images/bb694770-ebf9-4854-877f-46073a4e9746.jpg"
       sideImage="/images/bb694770-ebf9-4854-877f-46073a4e9746.jpg"
       sideImageAlt="Commercial heating and ventilation plant room installation"
-      introduction={`DPS Heating Services Ltd provides commercial air conditioning solutions for businesses across ${COMPANY.areas}. Whether you need a single system for a small office or a multi-zone solution for a larger commercial building, we design, install, and maintain AC systems that keep your staff and customers comfortable all year round. We work around your schedule to minimise disruption to your business.`}
+      introduction={`DPS Heating Services LTD provides commercial air conditioning solutions for businesses across ${COMPANY.areas}. Whether you need a single system for a small office or a multi-zone solution for a larger commercial building, we design, install, and maintain AC systems that keep your staff and customers comfortable all year round. We work around your schedule to minimise disruption to your business.`}
       included={[
         "Commercial site survey and system design",
         "Supply and installation of commercial AC",

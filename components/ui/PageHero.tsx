@@ -44,21 +44,19 @@ export default function PageHero({
       className={`relative ${compact ? "pt-36 pb-20" : "pt-48 pb-32"} overflow-hidden bg-brand-surface`}
       aria-label={`${title} page hero`}
     >
-      {/* Background image + overlay — always dark so text stays white */}
+      {/* Background image + overlay — light in light mode, dark in dark mode (like homepage hero) */}
       {hasImage && (
         <>
           <Image
             src={backgroundImage}
             alt=""
             fill
-            className="object-cover object-center"
+            className="object-cover object-center opacity-35 dark:opacity-30"
             sizes="100vw"
             priority
             aria-hidden="true"
           />
-          {/* Fixed dark overlay — theme-independent so image always shows in both modes */}
-          <div className="absolute inset-0 bg-black/65" />
-          {/* Gradient fade to page background at bottom */}
+          <div className="absolute inset-0 bg-brand-surface/55 dark:bg-black/40" />
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-brand-surface to-transparent" />
         </>
       )}

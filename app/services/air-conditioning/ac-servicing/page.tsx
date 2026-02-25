@@ -15,7 +15,7 @@ export default function ACServicingPage() {
       backgroundImage="/images/ac-unit-indoor.jpg"
       sideImage="/images/ac-unit-indoor.jpg"
       sideImageAlt="Engineer servicing an air conditioning unit"
-      introduction={`Regular servicing is essential to keep your air conditioning system working efficiently and to extend its lifespan. DPS Heating Services Ltd provides professional AC servicing for domestic and commercial systems across ${COMPANY.areas}. Our engineers are experienced with all major brands and will carry out a thorough check and clean of your system.`}
+      introduction={`Regular servicing is essential to keep your air conditioning system working efficiently and to extend its lifespan. DPS Heating Services LTD provides professional AC servicing for domestic and commercial systems across ${COMPANY.areas}. Our engineers are experienced with all major brands and will carry out a thorough check and clean of your system.`}
       included={[
         "Internal and external unit inspection",
         "Filter cleaning or replacement",

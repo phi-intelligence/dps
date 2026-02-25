@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Wind, ArrowRight } from "lucide-react";
+import { Building2, Home, ArrowRight } from "lucide-react";
 import { SERVICE_MAP } from "@/lib/chat-config";
 import type { ServiceCategory, ServiceItem } from "@/lib/chat-config";
 
 const categories = [
-  { key: "heating" as const, label: "Heating", icon: Flame },
-  { key: "air-conditioning" as const, label: "Air Conditioning", icon: Wind },
+  { key: "commercial" as const, label: "Commercial", icon: Building2 },
+  { key: "domestic" as const, label: "Domestic", icon: Home },
 ];
 
 export default function ServiceWizard() {

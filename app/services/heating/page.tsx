@@ -65,7 +65,7 @@ export default function HeatingCategoryPage() {
           { label: "Services", href: "/services" },
           { label: "Heating Services" },
         ]}
-        backgroundImage="/images/9687b2e0-9aaf-4272-adc5-52162cb88115.jpeg"
+        backgroundImage="/images/blueprints/blueprint-3.png"
         compact
       />
 
@@ -100,7 +100,7 @@ export default function HeatingCategoryPage() {
             transition={{ delay: 0.2 }}
             className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.4em] leading-loose max-w-2xl mx-auto"
           >
-            DPS Heating Services Ltd specialises in boiler repair, installation, and servicing, as well as full central heating systems across {COMPANY.areas}. All engineers are Gas Safe registered (Reg: {COMPANY.gasSafeNumber}).
+            DPS Heating Services LTD specialises in boiler repair, installation, and servicing, as well as full central heating systems across {COMPANY.areas}. All engineers are Gas Safe registered (Reg: {COMPANY.gasSafeNumber}).
           </motion.p>
         </div>
       </section>

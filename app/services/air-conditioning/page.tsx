@@ -58,7 +58,7 @@ export default function ACCategoryPage() {
           { label: "Services", href: "/services" },
           { label: "Air Conditioning" },
         ]}
-        backgroundImage="/images/blueprint-ac-exploded.png"
+        backgroundImage="/images/blueprints/blueprint-2.png"
         compact
       />
 

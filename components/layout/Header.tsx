@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X, ChevronDown, Sun, Moon, ShieldCheck } from "lucide-react";
+import { Menu, X, ChevronDown, Sun, Moon, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { COMPANY } from "@/lib/constants";
 import { useTheme } from "@/lib/theme-provider";
-import { useQuoteModal } from "@/lib/quote-modal-context";
+import { COMPANY } from "@/lib/constants";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,8 +15,8 @@ const navLinks = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Heating Services", href: "/services/heating" },
-      { label: "Air Conditioning", href: "/services/air-conditioning" },
+      { label: "Commercial Services", href: "/services/commercial" },
+      { label: "Domestic Services", href: "/services/domestic" },
     ],
   },
   { label: "About Us", href: "/about" },
@@ -30,8 +30,10 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const { openQuoteModal } = useQuoteModal();
+
+  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,35 +41,37 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
     <header
-      className={`absolute top-0 left-0 right-0 z-50 transition-all duration-500 py-6`}
+      className={`absolute top-0 left-0 right-0 z-[60] transition-all duration-500 py-4 sm:py-6 max-lg:bg-brand-surface max-lg:shadow-md ${scrolled || mobileOpen ? "bg-brand-surface/95 backdrop-blur-md shadow-lg" : "lg:py-6"}`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-12">
         <div
-          className={`flex items-center justify-between transition-all duration-500 rounded-2xl px-10 md:px-16 py-6 ${scrolled
+          className={`flex items-center justify-between transition-all duration-500 rounded-xl md:rounded-2xl px-4 md:px-16 py-4 md:py-6 ${scrolled
               ? "bg-brand-surface/40 backdrop-blur-md shadow-lg"
               : "bg-transparent"
-            }`}
+            } ${!scrolled && "lg:bg-transparent"} max-lg:!bg-brand-surface max-lg:rounded-none max-lg:shadow-none`}
         >
-          {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 flex items-center justify-center">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-brand-red to-brand-orange rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity"
-                animate={{ rotate: [0, 90, 180, 270, 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <div className="w-10 h-10 rounded-2xl border border-brand-card-border bg-brand-surface flex items-center justify-center relative z-10 overflow-hidden shadow-sm shadow-brand-red/5 transition-transform group-hover:scale-105 duration-500">
-                <Image src="/images/logo.jpg" alt="DPS Heating" width={32} height={32} loading="eager" className="object-contain" style={{ width: "auto", height: "auto" }} />
-              </div>
-            </div>
-            <div>
-              <span className="font-technical font-extrabold text-brand-text text-xl tracking-tight leading-none block uppercase">
-                DPS <span className="text-brand-text">Solutions</span>
+          {/* Logo Section — compact on mobile */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+            <Image src="/images/logo.png" alt={COMPANY.name} width={40} height={48} loading="eager" className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0" style={{ width: "auto", height: "auto", maxHeight: "40px" }} />
+            <div className="min-w-0">
+              <span className="font-technical font-extrabold text-brand-text text-base sm:text-xl md:text-2xl tracking-tight leading-none block uppercase truncate">
+                {COMPANY.name}
               </span>
-              <span className="text-[10px] font-sans font-medium text-brand-muted tracking-tight mt-0.5 block">
-                Energy & HVAC Engineering
+              <span className="hidden sm:block text-xs font-sans font-medium text-brand-muted tracking-tight mt-0.5">
+                Commercial &amp; Domestic Gas Works
               </span>
             </div>
           </Link>
@@ -80,11 +84,11 @@ export default function Header() {
                   <div key={link.href} className="relative group">
                     <button
                       onMouseEnter={() => setServicesOpen(true)}
-                      className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold"
+                      className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-sm font-technical uppercase tracking-widest font-bold"
                     >
                       {link.label}
-                      <ChevronDown
-                        size={12}
+                        <ChevronDown
+                        size={14}
                         className={`transition-transform duration-300 group-hover:rotate-180 text-brand-red`}
                       />
                     </button>
@@ -101,7 +105,7 @@ export default function Header() {
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="flex items-center gap-3 px-4 py-3 text-[10px] text-brand-muted font-technical uppercase tracking-widest hover:text-brand-text hover:bg-brand-steel rounded-xl transition-all group/item"
+                              className="flex items-center gap-3 px-4 py-3 text-xs text-brand-muted font-technical uppercase tracking-widest hover:text-brand-text hover:bg-brand-steel rounded-xl transition-all group/item"
                               onClick={() => setServicesOpen(false)}
                             >
                               <div className="w-1.5 h-1.5 rounded-full bg-brand-red/30 group-hover/item:bg-brand-red transition-colors" />
@@ -116,7 +120,7 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-brand-muted hover:text-brand-text transition-all text-xs font-technical uppercase tracking-widest font-bold relative group"
+                    className="text-brand-muted hover:text-brand-text transition-all text-sm font-technical uppercase tracking-widest font-bold relative group"
                   >
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-red transition-all group-hover:w-full" />
@@ -125,7 +129,7 @@ export default function Header() {
             )}
           </nav>
 
-          {/* Right: Theme Toggle + Phone + CTA */}
+          {/* Right: Theme Toggle + Admin */}
           <div className="hidden lg:flex items-center gap-6">
             <button
               onClick={toggleTheme}
@@ -134,13 +138,6 @@ export default function Header() {
             >
               {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-            <a
-              href={`tel:${COMPANY.phone}`}
-              className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-xs font-technical font-bold uppercase tracking-widest"
-            >
-              <Phone size={14} className="text-brand-red animate-pulse" />
-              <span>{COMPANY.phone}</span>
-            </a>
             <Link
               href="/admin/login"
               className="w-9 h-9 rounded-xl border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red transition-all"
@@ -148,14 +145,6 @@ export default function Header() {
             >
               <ShieldCheck size={16} />
             </Link>
-            <button
-              type="button"
-              onClick={() => openQuoteModal()}
-              className="relative group bg-brand-gradient text-white px-8 py-4 rounded-xl text-[10px] font-technical font-extrabold uppercase tracking-[0.2em] transition-all overflow-hidden shadow-xl shadow-brand-red/10 active:scale-95 duration-200"
-            >
-              <span className="relative z-10">Get a Free Estimate</span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -168,81 +157,81 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            className="lg:hidden fixed inset-0 z-[60] bg-brand-surface p-8 flex flex-col"
-          >
-            <div className="flex justify-between items-center mb-12">
-              <span className="font-technical font-bold text-lg tracking-widest uppercase text-brand-text">Menu</span>
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={toggleTheme}
-                  className="w-10 h-10 rounded-xl border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-text transition-all"
-                  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-                >
-                  {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
-                <button onClick={() => setMobileOpen(false)} className="text-brand-text">
-                  <X size={32} />
-                </button>
-              </div>
-            </div>
+      {/* Mobile Menu — portaled to body so it always sits on top, full viewport, opaque */}
+      {mounted &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {mobileOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="lg:hidden fixed inset-0 bg-[#121417] text-[#F8FAFC]"
+                style={{ zIndex: 9999 }}
+                aria-modal
+                aria-label="Main menu"
+              >
+                <div className="flex flex-col h-full overflow-hidden">
+                  <div className="flex justify-between items-center shrink-0 px-4 py-4 border-b border-white/10">
+                    <span className="font-technical font-bold text-lg tracking-widest uppercase text-[#F8FAFC]">
+                      Menu
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={toggleTheme}
+                        className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-[#94A3B8] hover:text-[#F8FAFC] transition-all"
+                        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                      >
+                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                      </button>
+                      <button
+                        onClick={() => setMobileOpen(false)}
+                        className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-[#F8FAFC] hover:text-[#d4af37] transition-all"
+                        aria-label="Close menu"
+                      >
+                        <X size={22} />
+                      </button>
+                    </div>
+                  </div>
 
-            <nav className="flex flex-col gap-6">
-              {navLinks.filter((link) => !link.admin).map((link) => (
-                <div key={link.href} className="space-y-4">
-                  <Link
-                    href={link.href}
-                    className="text-4xl font-technical font-bold uppercase tracking-tighter text-brand-text hover:text-brand-red transition-colors"
-                    onClick={() => setMobileOpen(false)}
+                  <nav
+                    className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-1 min-h-0"
+                    aria-label="Main navigation"
                   >
-                    {link.label}
-                  </Link>
-                  {link.children && (
-                    <div className="pl-6 border-l border-brand-red/20 flex flex-col gap-3">
-                      {link.children.map((child) => (
+                    {navLinks.filter((link) => !link.admin).map((link) => (
+                      <div key={link.href} className="py-2">
                         <Link
-                          key={child.href}
-                          href={child.href}
-                          className="text-brand-muted hover:text-brand-text text-sm font-technical uppercase tracking-widest"
+                          href={link.href}
+                          className="block py-3 text-xl font-technical font-bold uppercase tracking-tight text-[#F8FAFC] hover:text-[#d4af37] transition-colors"
                           onClick={() => setMobileOpen(false)}
                         >
-                          {child.label}
+                          {link.label}
                         </Link>
-                      ))}
-                    </div>
-                  )}
+                        {link.children && (
+                          <div className="pl-4 mt-1 border-l-2 border-[#d4af37]/30 flex flex-col gap-1">
+                            {link.children.map((child) => (
+                              <Link
+                                key={child.href}
+                                href={child.href}
+                                className="block py-2 text-sm font-technical uppercase tracking-widest text-[#94A3B8] hover:text-[#F8FAFC] transition-colors"
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                {child.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </nav>
                 </div>
-              ))}
-            </nav>
-
-            <div className="mt-auto pt-12">
-              <a
-                href={`tel:${COMPANY.phone}`}
-                className="flex items-center gap-4 text-2xl font-technical font-bold mb-8 text-brand-text"
-              >
-                <Phone size={24} className="text-brand-red" />
-                {COMPANY.phone}
-              </a>
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileOpen(false);
-                  openQuoteModal();
-                }}
-                className="block w-full text-center bg-brand-gradient text-white py-5 rounded-2xl font-technical font-extrabold uppercase tracking-[0.2em] text-[11px] shadow-xl shadow-brand-red/20 active:scale-95 transition-all"
-              >
-                Get a Free Estimate
-              </button>
-            </div>
-          </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
     </header>
   );
 }
