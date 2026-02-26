@@ -31,8 +31,6 @@ import ReviewCard from "@/components/ui/ReviewCard";
 import CTABanner from "@/components/ui/CTABanner";
 import StatsCounter from "@/components/sections/StatsCounter";
 import CoreServicesSection from "@/components/sections/CoreServicesSection";
-import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
-import Hero3DScene from "@/components/animations/Hero3DScene";
 import SectionWaves from "@/components/ui/SectionWaves";
 import { COMPANY, REVIEWS, SERVICE_AREAS, COMMERCIAL_SERVICES, DOMESTIC_SERVICES, SECTORS_WE_DEAL_WITH, SECTORS_WITH_IMAGES } from "@/lib/constants";
 import { registerGSAP, gsap } from "@/components/animations/gsap-init";
@@ -62,17 +60,17 @@ const trustPoints = [
 
 export default function HomePage() {
   const { openQuoteModal } = useQuoteModal();
+
   useEffect(() => {
     registerGSAP();
   }, []);
 
   return (
     <div className="bg-brand-surface text-brand-text overflow-hidden relative">
-      {/* Hero Section — energy flow only behind hero */}
+      {/* Hero Section */}
       <div className="relative">
-        <EnergyFlowBackground />
         <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden" aria-label="Hero">
-        {/* Background image */}
+        {/* Background image — blueprint */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/blueprint-boiler-cutaway.png"
@@ -99,7 +97,7 @@ export default function HomePage() {
               >
                 <div className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
                 <span className="text-brand-red text-sm font-technical tracking-widest uppercase">
-                  Commercial &amp; Domestic Gas Works // {COMPANY.areas}
+                  DESIGN • ENGINEER • MAINTAIN // {COMPANY.areas}
                 </span>
               </motion.div>
 
@@ -133,9 +131,20 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Right column: 3D logo */}
+            {/* Right column: logo (same as navbar) */}
             <div className="relative w-full flex justify-center lg:justify-end">
-              <Hero3DScene className="w-full" modelPath="/highres.glb" />
+              <div className="w-full aspect-square max-h-[min(85vh,680px)] min-h-[320px] flex items-center justify-center">
+                <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[22rem] lg:h-[22rem]">
+                  <Image
+                    src="/images/logo.png"
+                    alt={COMPANY.name}
+                    fill
+                    className="object-contain drop-shadow-[0_0_24px_rgba(212,175,55,0.3)]"
+                    sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, (max-width: 1024px) 384px, 352px"
+                    priority
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -337,10 +346,10 @@ export default function HomePage() {
                 className="group group/card relative aspect-[4/3] rounded-2xl overflow-hidden border border-brand-card-border bg-brand-steel shadow-xl hover:shadow-2xl hover:border-brand-red/30 transition-all duration-300"
               >
                 <Image
-                  src={sector.image}
+                  src={sector.image ?? "/images/our-services-commercial.png"}
                   alt={sector.label}
                   fill
-                  className="object-cover group-hover/card:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />

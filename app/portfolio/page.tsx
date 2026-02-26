@@ -113,7 +113,7 @@ export default function PortfolioPage() {
                 {/* Project Image */}
                 <div className="relative h-56 overflow-hidden">
                   <Image
-                    src={project.image}
+                    src={project.image || "/images/central-heating.jpg"}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"

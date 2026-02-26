@@ -57,15 +57,14 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    // Persist inquiry data
-    inquiryService.addInquiry({
+    await inquiryService.addInquiry({
       name: form.name,
       phone: form.phone,
       email: form.email,
       service: form.service,
       message: form.message,
     });
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     setStatus("success");
   };
 

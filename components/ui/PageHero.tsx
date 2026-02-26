@@ -41,21 +41,23 @@ export default function PageHero({
 
   return (
     <section
-      className={`relative ${compact ? "pt-36 pb-20" : "pt-48 pb-32"} overflow-hidden bg-brand-surface`}
+      className={`relative overflow-hidden bg-brand-surface ${hasImage ? "min-h-[70vh]" : ""} ${compact ? "pt-36 pb-20" : "pt-48 pb-32"}`}
       aria-label={`${title} page hero`}
     >
       {/* Background image + overlay — light in light mode, dark in dark mode (like homepage hero) */}
-      {hasImage && (
+      {hasImage && backgroundImage && (
         <>
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            className="object-cover object-center opacity-35 dark:opacity-30"
-            sizes="100vw"
-            priority
-            aria-hidden="true"
-          />
+          <div className="absolute inset-0">
+            <Image
+              src={backgroundImage}
+              alt=""
+              fill
+              className="object-cover object-center opacity-35 dark:opacity-30"
+              sizes="100vw"
+              priority
+              aria-hidden="true"
+            />
+          </div>
           <div className="absolute inset-0 bg-brand-surface/55 dark:bg-black/40" />
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-brand-surface to-transparent" />
         </>

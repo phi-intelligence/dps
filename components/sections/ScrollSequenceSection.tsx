@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, forwardRef } from "react";
-import { registerGSAP, gsap } from "@/components/animations/gsap-init";
+import { registerGSAP, gsap, ScrollTrigger } from "@/components/animations/gsap-init";
 
 function buildFrameUrls(basePath: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) => {
@@ -121,8 +121,8 @@ const ScrollSequenceSection = forwardRef<HTMLElement, ScrollSequenceSectionProps
         canvas.style.width = `${w}px`;
         canvas.style.height = `${h}px`;
         updateImage();
-        if (typeof gsap.ScrollTrigger !== "undefined") {
-          gsap.ScrollTrigger.refresh();
+        if (typeof ScrollTrigger !== "undefined") {
+          ScrollTrigger.refresh();
         }
       };
 
@@ -163,7 +163,7 @@ const ScrollSequenceSection = forwardRef<HTMLElement, ScrollSequenceSectionProps
         style={{ clipPath: "inset(0)" }}
         aria-label={ariaLabel}
       >
-        <div className="fixed inset-0 z-0 w-full min-h-[100vh] min-h-[100dvh]" aria-hidden>
+        <div className="fixed inset-0 z-0 w-full min-h-[100vh] min-h-[100dvh] pointer-events-none" aria-hidden>
           <div className={`absolute inset-0 ${canvasOpacity}`}>
             <canvas
               ref={canvasRef}

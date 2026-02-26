@@ -1,16 +1,20 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, Shield, Cpu, Zap, Activity, Wrench } from "lucide-react";
-import { COMPANY, COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
+import { COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
+import { useContent } from "@/lib/content-provider";
 
 const quickLinks = [
-  { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "About Us", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Footer() {
+  const { company } = useContent();
   return (
     <footer className="bg-brand-steel text-brand-muted relative overflow-hidden">
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-red/5 rounded-full blur-[100px] pointer-events-none" />
@@ -26,27 +30,27 @@ export default function Footer() {
                   DPS <span className="text-brand-red">HEATING</span>
                 </span>
                 <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                  Commercial &amp; Domestic Gas Works
+                  DESIGN • ENGINEER • MAINTAIN
                 </span>
               </div>
             </Link>
 
             <p className="text-sm font-light leading-relaxed mb-10 max-w-sm text-brand-muted uppercase tracking-wider">
-              Professional heating and plumbing services for homes and businesses across {COMPANY.areas}. Gas Safe registered engineers.
+              Professional heating and plumbing services for homes and businesses across {company.areas}. Gas Safe registered engineers.
             </p>
 
             <div className="space-y-4">
-              <a href={`tel:${COMPANY.phone}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-red transition-colors">
+              <a href={`tel:${company.phone}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-red transition-colors">
                 <div className="w-11 h-11 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all shadow-sm">
                   <Phone size={18} className="text-brand-red group-hover:text-white transition-colors" />
                 </div>
-                {COMPANY.phone}
+                {company.phone}
               </a>
-              <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-blue transition-colors">
+              <a href={`mailto:${company.email}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-blue transition-colors">
                 <div className="w-11 h-11 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-blue group-hover:border-brand-blue transition-all shadow-sm">
                   <Mail size={18} className="text-brand-blue group-hover:text-white transition-colors" />
                 </div>
-                {COMPANY.email}
+                {company.email}
               </a>
             </div>
           </div>
@@ -105,7 +109,7 @@ export default function Footer() {
               </div>
               <div>
                 <p className="text-brand-text text-xs font-extrabold uppercase tracking-tight mb-1">Gas Safe Registered</p>
-                <p className="text-brand-muted text-xs font-medium">REG: {COMPANY.gasSafeNumber}</p>
+                <p className="text-brand-muted text-xs font-medium">REG: {company.gasSafeNumber}</p>
               </div>
             </div>
           </div>
@@ -115,7 +119,7 @@ export default function Footer() {
         <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <p className="text-[10px] font-technical uppercase tracking-widest text-brand-muted">
-              &copy; {new Date().getFullYear()} {COMPANY.name}
+              &copy; {new Date().getFullYear()} {company.name}
             </p>
           </div>
 

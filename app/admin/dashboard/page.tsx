@@ -19,8 +19,9 @@ import {
   X,
   Phone,
   Mail,
+  Settings,
 } from "lucide-react";
-import { Inquiry, inquiryService } from "@/lib/inquiry-service";
+import type { Inquiry } from "@/lib/inquiry-service";
 import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
 
 /* ── Status badge config ──────────────────────────────── */
@@ -73,10 +74,26 @@ function SidebarContent({
 
       {/* Nav */}
       <nav className="flex-1 p-4 space-y-1">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/15 text-white font-semibold text-sm border border-white/15">
+        <button
+          onClick={() => {
+            router.push("/admin/dashboard");
+            onNavigate();
+          }}
+          className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-white/60 hover:bg-white/10 hover:text-white font-medium text-sm transition-all"
+        >
           <LayoutDashboard size={16} />
           Inquiries
-        </div>
+        </button>
+        <button
+          onClick={() => {
+            router.push("/admin/content/site");
+            onNavigate();
+          }}
+          className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-white/60 hover:bg-white/10 hover:text-white font-medium text-sm transition-all"
+        >
+          <Settings size={16} />
+          Site Config
+        </button>
         <button
           onClick={() => {
             router.push("/");
@@ -117,25 +134,53 @@ export default function AdminDashboardPage() {
       router.push("/admin/login");
       return;
     }
-    setInquiries(inquiryService.getInquiries());
-    setLoading(false);
+    fetch("/api/admin/inquiries", { credentials: "include" })
+      .then((res) => {
+        if (res.status === 401) {
+          localStorage.removeItem("dps_admin_auth");
+          router.push("/admin/login");
+          return [];
+        }
+        return res.json();
+      })
+      .then((data: Inquiry[]) => {
+        if (Array.isArray(data)) setInquiries(data);
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem("dps_admin_auth");
+    fetch("/api/admin/logout", { method: "POST", credentials: "include" }).catch(() => {});
     router.push("/admin/login");
   };
 
   const updateStatus = (id: string, status: Inquiry["status"]) => {
-    inquiryService.updateInquiryStatus(id, status);
-    setInquiries(inquiryService.getInquiries());
+    fetch(`/api/admin/inquiries/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+      credentials: "include",
+    })
+      .then((res) => res.ok && res.json())
+      .then(() => {
+        setInquiries((prev) =>
+          prev.map((i) => (i.id === id ? { ...i, status } : i))
+        );
+      });
   };
 
   const deleteInquiry = (id: string) => {
-    if (confirm("Permanently delete this inquiry?")) {
-      inquiryService.deleteInquiry(id);
-      setInquiries(inquiryService.getInquiries());
-    }
+    if (!confirm("Permanently delete this inquiry?")) return;
+    fetch(`/api/admin/inquiries/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    })
+      .then((res) => res.ok)
+      .then((ok) => {
+        if (ok) setInquiries((prev) => prev.filter((i) => i.id !== id));
+      });
   };
 
   const filteredInquiries = inquiries.filter(

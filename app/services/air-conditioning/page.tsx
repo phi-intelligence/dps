@@ -163,7 +163,13 @@ export default function ACCategoryPage() {
 
       {/* Domestic & Commercial */}
       <section className="py-40 bg-brand-surface relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-5" />
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-24">
             <h2 className="text-3xl md:text-6xl font-technical font-extrabold text-brand-text mb-4 tracking-widest uppercase">

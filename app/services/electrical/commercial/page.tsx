@@ -1,43 +1,83 @@
 import type { Metadata } from "next";
-import ServiceDetailLayout from "@/components/sections/ServiceDetailLayout";
+import ServiceDetailLayout, { type ServiceCard } from "@/components/sections/ServiceDetailLayout";
 import { COMPANY, CORE_SERVICE_SECTOR_SERVICES } from "@/lib/constants";
+
+const COMMERCIAL_ELECTRICAL_SERVICE_CARDS: ServiceCard[] = [
+  {
+    title: "Electrical fault finding (heating related)",
+    description: "Systematic fault finding on heating-related electrical circuits. We trace faults in controls, wiring and ancillaries to restore heating operation quickly.",
+    image: "/images/core-services/electrical.png",
+    imageAlt: "Electrical controls and heating systems",
+  },
+  {
+    title: "Controls wiring & diagnostics",
+    description: "Wiring, commissioning and diagnostics for heating controls and BMS interfaces. We ensure correct connections and document any changes for your records.",
+    image: "/images/services/commercial-mechanical/plant-room-3.png",
+    imageAlt: "Control units and pipework in plant room",
+  },
+  {
+    title: "Programmer / thermostat replacement",
+    description: "Supply and installation of programmers and thermostats for commercial heating. We wire and commission to manufacturer specifications.",
+    image: "/images/services/commercial-mechanical/plant-room-5.png",
+    imageAlt: "Commercial boiler and control panels",
+  },
+  {
+    title: "Pumps / valves electrical testing",
+    description: "Electrical testing of pumps and motorised valves to confirm safe operation and correct switching. We document results and advise on any faults found.",
+    image: "/images/services/commercial-mechanical/plant-room-2.png",
+    imageAlt: "Pumps and valves in commercial system",
+  },
+  {
+    title: "Isolation & safety checks",
+    description: "Isolation and safety checks on heating-related electrical circuits. We verify isolation arrangements and document findings for compliance.",
+    image: "/images/core-services/electrical.png",
+    imageAlt: "Electrical safety and isolation",
+  },
+  {
+    title: "Emergency electrical diagnostics (M&E related)",
+    description: "Rapid electrical diagnostics when heating or M&E systems fail. We prioritise safety and restore operation with minimal downtime.",
+    image: "/images/services/commercial-mechanical/plant-room-6.png",
+    imageAlt: "Technician with diagnostic equipment in plant room",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Commercial Electrical Services",
-  description: `Commercial electrical installations, compliance inspections, and maintenance contracts across ${COMPANY.areas}.`,
+  description: `Commercial electrical fault finding, controls wiring, programmer and thermostat replacement, and M&E diagnostics across ${COMPANY.areas}.`,
 };
 
 export default function CommercialElectricalServicesPage() {
   return (
     <ServiceDetailLayout
       title="Commercial Electrical Services"
-      subtitle={`Electrical installations, fault finding, compliance inspections, and maintenance contracts for commercial premises across ${COMPANY.areas}.`}
+      subtitle={`Heating-related electrical fault finding, controls wiring, programmer and thermostat replacement, and emergency M&E diagnostics across ${COMPANY.areas}.`}
       backgroundImage="/images/our-services-commercial.png"
-      sideImage="/images/our-services-commercial.png"
-      sideImageAlt="Commercial electrical testing and installation"
-      introduction={`DPS Heating Services provides electrical installation, testing, and maintenance for commercial clients across ${COMPANY.areas}. From new installations and upgrades to fault finding, compliance inspections, maintenance contracts, and emergency lighting, our engineers help keep your commercial electrical systems safe and compliant.`}
+      sideImage="/images/core-services/electrical.png"
+      sideImageAlt="Commercial electrical controls and heating diagnostics"
+      introduction={`DPS Heating Services provides heating-related electrical services for commercial clients across ${COMPANY.areas}. From electrical fault finding and controls wiring to programmer and thermostat replacement, pumps and valves electrical testing, isolation and safety checks, and emergency electrical diagnostics for M&E systems — our engineers help keep your commercial heating controls and electrical systems safe and operational.`}
       included={CORE_SERVICE_SECTOR_SERVICES.electrical.commercial}
+      serviceCards={COMMERCIAL_ELECTRICAL_SERVICE_CARDS}
       issues={[
-        { icon: "zap", title: "Faults or Tripping", description: "Recurring trips or unexplained faults need professional testing and diagnosis to ensure safety." },
-        { icon: "alertCircle", title: "Compliance Requirements", description: "Commercial premises often require periodic electrical inspections and certificates." },
-        { icon: "settings", title: "Upgrades or New Installations", description: "Refurbishment or system upgrades need qualified electrical design and installation." },
-        { icon: "fileText", title: "Maintenance Contracts", description: "Planned electrical maintenance reduces the risk of failure and supports compliance." },
+        { icon: "zap", title: "Heating controls faults", description: "Faulty programmers, thermostats, or wiring can cause heating failures and need professional diagnosis." },
+        { icon: "alertCircle", title: "Pump and valve electrical issues", description: "Electrical testing and isolation checks ensure pumps and valves operate safely and correctly." },
+        { icon: "settings", title: "Controls upgrades", description: "Replacement programmers or thermostats need qualified electrical installation and commissioning." },
+        { icon: "fileText", title: "Emergency diagnostics", description: "When heating or M&E systems fail, fast electrical diagnostics minimise downtime." },
       ]}
       steps={[
-        { icon: "phone", number: "01", title: "Get in Touch", description: "Contact us with your commercial electrical requirements or to report a fault." },
-        { icon: "search", number: "02", title: "Assessment & Quote", description: "We assess the work required and provide a clear, no-obligation quote." },
-        { icon: "wrench", number: "03", title: "Work Carried Out", description: "Our qualified engineers complete installation, testing, or repairs to the required standards." },
-        { icon: "fileText", number: "04", title: "Certification & Handover", description: "Where applicable we provide certificates and documentation for your records." },
+        { icon: "phone", number: "01", title: "Get in touch", description: "Contact us with your commercial electrical or heating controls issue." },
+        { icon: "search", number: "02", title: "Assessment & quote", description: "We assess the work required and provide a clear, no-obligation quote." },
+        { icon: "wrench", number: "03", title: "Work carried out", description: "Our qualified engineers complete fault finding, replacement, or repairs to the required standards." },
+        { icon: "fileText", number: "04", title: "Handover & documentation", description: "Where applicable we provide documentation and confirm system operation." },
       ]}
       trustPoints={[
-        { icon: "shield", title: "Qualified & Compliant", description: "Electrical work is carried out by qualified engineers in line with current regulations." },
-        { icon: "fileText", title: "Certificates & Reports", description: "We provide test certificates and inspection reports where required." },
-        { icon: "clock", title: "Fault Finding & Response", description: "Fast fault finding and repair to minimise disruption and maintain safety." },
+        { icon: "shield", title: "Qualified & compliant", description: "Electrical work is carried out by qualified engineers in line with current regulations." },
+        { icon: "fileText", title: "Safety checks", description: "We carry out isolation and safety checks and document findings where required." },
+        { icon: "clock", title: "Fault finding & response", description: "Fast fault finding and repair to minimise disruption and restore heating operation." },
       ]}
       faqs={[
-        { question: "What commercial electrical work do you carry out?", answer: "We provide electrical installations and upgrades, fault finding and testing, compliance inspections, maintenance contracts, and emergency lighting for commercial premises." },
-        { question: "Do you provide electrical certificates for commercial properties?", answer: "Yes. We provide appropriate certificates and reports for the work carried out, including inspection and test documentation where required." },
-        { question: "Are you available for emergency electrical faults?", answer: "We offer responsive callouts for electrical faults. Contact us to discuss availability and we will prioritise where there is a safety concern." },
+        { question: "What commercial electrical work do you carry out?", answer: "We provide heating-related electrical fault finding, controls wiring and diagnostics, programmer and thermostat replacement, pumps and valves electrical testing, isolation and safety checks, and emergency electrical diagnostics for M&E systems." },
+        { question: "Do you replace programmers and thermostats?", answer: "Yes. We supply and fit programmers and thermostats for commercial heating systems and ensure correct wiring and commissioning." },
+        { question: "Are you available for emergency electrical diagnostics?", answer: "We offer responsive callouts for heating-related electrical faults. Contact us to discuss availability and we will prioritise where there is a safety or operational concern." },
       ]}
       breadcrumbs={[
         { label: "Home", href: "/" },
@@ -46,7 +86,7 @@ export default function CommercialElectricalServicesPage() {
         { label: "Commercial" },
       ]}
       serviceValue="electrical-commercial"
-      accentColor="red"
+      accentColor="blue"
     />
   );
 }

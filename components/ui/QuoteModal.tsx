@@ -134,14 +134,14 @@ export default function QuoteModal({
     }
     setStatus("loading");
     const sectorLabel = form.sector ? `[Sector: ${form.sector === "commercial" ? "Commercial" : "Domestic"}]\n\n` : "";
-    inquiryService.addInquiry({
+    await inquiryService.addInquiry({
       name: form.name,
       phone: form.phone,
       email: form.email,
       service: form.service,
       message: sectorLabel + form.message,
     });
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     setStatus("success");
   };
 
@@ -314,7 +314,7 @@ export default function QuoteModal({
                                 className="group relative aspect-[4/3] min-h-[220px] rounded-2xl overflow-hidden border-2 border-brand-card-border hover:border-brand-red/50 transition-all duration-300 bg-brand-navy shadow-xl"
                               >
                                 <Image
-                                  src={opt.image}
+                                  src={opt.image ?? "/images/logo.png"}
                                   alt={opt.label}
                                   fill
                                   className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
@@ -406,7 +406,7 @@ export default function QuoteModal({
                               return (
                                 <>
                                   <Image
-                                    src={meta.image}
+                                    src={meta?.image ?? "/images/logo.png"}
                                     alt={serviceLabel}
                                     fill
                                     className="object-cover opacity-75 transition-all duration-700"

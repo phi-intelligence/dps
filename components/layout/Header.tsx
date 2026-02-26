@@ -7,26 +7,10 @@ import Image from "next/image";
 import { Menu, X, ChevronDown, Sun, Moon, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/lib/theme-provider";
-import { COMPANY } from "@/lib/constants";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  {
-    label: "Services",
-    href: "/services",
-    children: [
-      { label: "Commercial Services", href: "/services/commercial" },
-      { label: "Domestic Services", href: "/services/domestic" },
-    ],
-  },
-  { label: "About Us", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Service Areas", href: "/service-areas" },
-  { label: "Contact", href: "/contact" },
-  { label: "Admin", href: "/admin/login", admin: true },
-];
+import { useContent } from "@/lib/content-provider";
 
 export default function Header() {
+  const { company, nav: navLinks } = useContent();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -56,7 +40,7 @@ export default function Header() {
 
   return (
     <header
-      className={`absolute top-0 left-0 right-0 z-[60] transition-all duration-500 py-4 sm:py-6 max-lg:bg-brand-surface max-lg:shadow-md ${scrolled || mobileOpen ? "bg-brand-surface/95 backdrop-blur-md shadow-lg" : "lg:py-6"}`}
+      className={`absolute top-0 left-0 right-0 z-[70] transition-all duration-500 py-4 sm:py-6 max-lg:bg-brand-surface max-lg:shadow-md ${scrolled || mobileOpen ? "bg-brand-surface/95 backdrop-blur-md shadow-lg" : "lg:py-6"}`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-12">
         <div
@@ -67,13 +51,13 @@ export default function Header() {
         >
           {/* Logo Section — compact on mobile */}
           <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
-            <Image src="/images/logo.png" alt={COMPANY.name} width={40} height={48} loading="eager" className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0" style={{ width: "auto", height: "auto", maxHeight: "40px" }} />
+            <Image src="/images/logo.png" alt={company.name} width={40} height={48} loading="eager" className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0" style={{ width: "auto", height: "auto", maxHeight: "40px" }} />
             <div className="min-w-0">
               <span className="font-technical font-extrabold text-brand-text text-base sm:text-xl md:text-2xl tracking-tight leading-none block uppercase truncate">
-                {COMPANY.name}
+                {company.name}
               </span>
               <span className="hidden sm:block text-xs font-sans font-medium text-brand-muted tracking-tight mt-0.5">
-                Commercial &amp; Domestic Gas Works
+                DESIGN • ENGINEER • MAINTAIN
               </span>
             </div>
           </Link>
@@ -81,8 +65,7 @@ export default function Header() {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map((link) =>
-              link.admin ? null : // Exclude admin link from main nav
-                link.children ? (
+              link.children ? (
                   <div
                     key={link.href}
                     className="relative group"
@@ -206,7 +189,7 @@ export default function Header() {
                     className="flex-1 overflow-y-auto px-4 py-6 flex flex-col gap-1 min-h-0"
                     aria-label="Main navigation"
                   >
-                    {navLinks.filter((link) => !link.admin).map((link) => (
+                    {navLinks.map((link) => (
                       <div key={link.href} className="py-2">
                         {link.children ? (
                           <>

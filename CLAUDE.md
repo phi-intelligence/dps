@@ -49,7 +49,6 @@ App Router with file-based routing. Key route groups:
 /contact                    # Contact form with inquiry service
 /service-areas              # Leaflet map with coverage areas
 /emergency                  # Emergency services page
-/about                      # About page
 /admin/login                # Admin login (localStorage auth, demo: admin/admin)
 /admin/dashboard            # Inquiry management
 /api/chat                   # POST — SSE streaming chat (Gemini → OpenAI fallback)

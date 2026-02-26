@@ -1,3 +1,10 @@
+/**
+ * Site constants — used as fallback when CMS (DB) is unavailable and for content not yet in CMS.
+ * CMS is the source of truth for: site config (company, opening hours), nav, reviews, portfolio,
+ * accreditations, service areas, inquiries, and service detail pages that have been seeded.
+ * Constants below are still used for: COMMERCIAL_SERVICES, DOMESTIC_SERVICES, CAPABILITY_*,
+ * SECTORS_*, KEY_STRENGTHS, HEALTH_SAFETY_COPY, COMMITMENT_COPY, and inline page content (About, Home sections).
+ */
 export const OPENING_HOURS = {
   weekday: "08:00 - 18:00",
   saturday: "09:00 - 13:00",
@@ -31,8 +38,8 @@ export const NAV_LINKS = [
       { label: "Domestic Services", href: "/services/domestic" },
     ],
   },
-  { label: "About Us", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "About Us", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact", href: "/contact" },
 ]
@@ -108,54 +115,70 @@ export const CORE_SERVICE_SECTOR_SERVICES: Record<
 > = {
   mechanical: {
     commercial: [
-      "Plant room installations and maintenance",
-      "Commercial heating system installation and upgrades",
-      "PPM contracts and planned maintenance",
-      "Pipework systems and distribution",
-      "Preventative and reactive maintenance",
-      "Commercial facilities management (PPM packages)",
-      "24-hour emergency breakdowns",
-      "Fault finding and diagnosis",
+      "Heating system installation",
+      "Heating system repairs",
+      "Pumps, valves & controls replacement",
+      "Pipework installation & modifications",
+      "HIU installation / servicing / repairs",
+      "Pressurisation units",
+      "Expansion vessels",
+      "Leak detection & repairs",
+      "System balancing",
+      "Powerflushing / system cleaning",
+      "General mechanical maintenance",
     ],
     domestic: [
-      "Heating system installation and upgrades",
-      "Radiator and pipework installation and repairs",
-      "Preventative maintenance and servicing",
-      "Reactive repairs and fault finding",
-      "System upgrades and efficiency improvements",
+      "Heating system installation / upgrades",
+      "Radiators / valves / TRVs",
+      "Pumps & motorised valves",
+      "Pipework repairs / alterations",
+      "Leaks & water issues",
+      "Cylinders / hot water systems",
+      "Unvented cylinder works (G3)",
+      "Powerflushing",
+      "General plumbing & heating repair",
     ],
   },
   electrical: {
     commercial: [
-      "Electrical installations and upgrades (commercial)",
-      "Fault finding and testing",
-      "Compliance inspections and certification",
-      "Maintenance contracts and PPM",
-      "Distribution and distribution boards",
-      "Emergency lighting and testing",
+      "Electrical fault finding (heating related)",
+      "Controls wiring & diagnostics",
+      "Programmer / thermostat replacement",
+      "Pumps / valves electrical testing",
+      "Isolation & safety checks",
+      "Emergency electrical diagnostics (M&E related)",
     ],
     domestic: [
-      "Electrical installations and upgrades (domestic)",
-      "Fault finding and testing",
-      "Landlord electrical safety inspections",
-      "Consumer unit upgrades",
-      "Maintenance and reactive repairs",
+      "Heating controls fault finding",
+      "Thermostat / programmer replacement",
+      "Wiring centre diagnostics",
+      "Electrical checks related to heating systems",
     ],
   },
   gas: {
     commercial: [
-      "Commercial gas installation and servicing",
-      "Gas safety inspections (commercial)",
-      "Commercial boiler servicing and repair",
-      "PPM and planned gas maintenance",
-      "24-hour emergency gas callouts",
+      "Commercial boiler installation & replacement",
+      "Commercial boiler servicing",
+      "Commercial boiler repairs & fault finding",
+      "Gas safety inspections",
+      "Tightness testing & purging",
+      "Gas pipework installation / modification",
+      "Plant room maintenance",
+      "Emergency breakdowns",
+      "Preventative planned maintenance (PPM)",
+      "Gas rate / combustion analysis",
+      "System upgrades & efficiency improvements",
     ],
     domestic: [
-      "Gas installation and servicing",
-      "Landlord gas safety certification (CP12)",
-      "Boiler installation, servicing and repairs",
-      "System diagnosis and repair",
-      "Emergency gas callouts",
+      "Boiler installation & replacement",
+      "Boiler servicing",
+      "Boiler repairs & breakdowns",
+      "Landlord Gas Safety Certificates (CP12)",
+      "Gas safety checks",
+      "Gas leaks / emergency response",
+      "Gas hob / cooker installation",
+      "Flue & ventilation checks",
+      "System upgrades",
     ],
   },
 };
@@ -252,48 +275,145 @@ export const DOMESTIC_SERVICES = [
 
 export const REVIEWS = [
   {
-    name: "James T.",
-    service: "Boiler Repair",
+    name: "Alloush",
+    service: "Leaking pipe behind water tank · Walworth, London",
     rating: 5,
     quote:
-      "Brilliant service from start to finish. Engineer arrived on time, diagnosed the fault quickly, and had it fixed within the hour. Highly recommended.",
+      "Excellent service. Turned up on time, assessed the issue quickly, and sorted the problem on the spot until a full fix starts.",
   },
   {
-    name: "Sarah M.",
-    service: "Boiler Installation",
+    name: "Benjamin Jarman",
+    service: "Replacement of two immersion heater elements · Deptford, London",
     rating: 5,
     quote:
-      "Had a new combi boiler installed last month. The team were professional, tidy, and explained everything clearly. Great value for money.",
+      "Dominic arranged at short notice to replace two immersion heater elements in a hot water tank. Courteous and communicated clearly throughout. Identified a separate issue previously undiagnosed by another tradesman, explained it clearly, and recommended who could do that work. I would definitely use him again.",
   },
   {
-    name: "David P.",
-    service: "Boiler Servicing",
+    name: "Sally D.",
+    service: "Loud whistling from kitchen tap · Upper Edmonton, London",
     rating: 5,
     quote:
-      "Annual boiler service carried out efficiently and professionally. Engineer was friendly, thorough, and explained exactly what was checked. Will definitely use again.",
+      "Quick, punctual, helpful, very tidy workmanship, and reasonably priced. Would not hesitate to recommend or use again.",
   },
   {
-    name: "Emily R.",
-    service: "AC Installation",
+    name: "Bhavesh",
+    service: "Loud foghorn sound when flushing toilet · Finchley Church End, London",
     rating: 5,
     quote:
-      "Had a split system installed in our home office. The team were incredibly neat and finished ahead of schedule. The room is now perfectly cool all summer. Couldn't be happier.",
+      "Great job. Good communication from the time of shortlisting, with clear information and costs. Job completed swiftly and to a high standard. Dom was personable, courteous, and professional. I will use his services again.",
   },
   {
-    name: "Mark H.",
-    service: "Central Heating",
+    name: "Max",
+    service: "Bathroom leaks and ensuite renovation · Southfields, London",
     rating: 5,
     quote:
-      "Complete central heating system installed in our Victorian terrace. Pipework was routed cleanly, radiators balanced perfectly. House is warm throughout for the first time in years.",
+      "Absolutely superb. Dom is now my go-to plumber. Completed the bathroom leak job; responsive, friendly, and professional. I plan a bigger ensuite renovation project with him and praise his professionalism and expertise.",
   },
   {
-    name: "Lisa W.",
-    service: "Commercial AC",
+    name: "Rhiannon",
+    service: "Non-flushing toilet cistern · Southwark, London",
     rating: 5,
     quote:
-      "DPS installed a multi-zone system across our office floors. Minimal disruption to our staff, and the ongoing maintenance contract gives us total peace of mind.",
+      "Fixed quickly. Toilet now flushes fine. Very good communication about arrival time and arrived on time.",
   },
-  // TODO: Replace with real customer reviews
+  {
+    name: "J. M. S.",
+    service: "Leak investigation — bathroom / immersion heater · Dalston, London",
+    rating: 5,
+    quote:
+      "Great service. Responded very quickly before and after coming out, came out straight away, and was clear and transparent about what the job required. Lovely to deal with; I would definitely recommend and hire again.",
+  },
+  {
+    name: "Amina",
+    service: "Radiator repair · Manor Park, London",
+    rating: 5,
+    quote:
+      "Excellent service — fast, friendly, and professional. Came back another day to fit smoke alarms as well. Thanks Dom.",
+  },
+  {
+    name: "Elizabeth",
+    service: "Leaking boiler · Bromley By Bow, London",
+    rating: 5,
+    quote:
+      "Dom came quickly and diagnosed the source of the leak rapidly and cheerfully. It turned out to be something different and the responsibility of building management, so he didn't fix it this time — but this was not due to lack of expertise and I would definitely invite him back for future plumbing work.",
+  },
+  {
+    name: "Johann",
+    service: "Banging pipes, water turned off · Rotherhithe, London",
+    rating: 5,
+    quote:
+      "Dom turned up within minutes, diagnosed the problem, got a part, and sorted it within a couple of hours. Beautiful!",
+  },
+  {
+    name: "Ashley",
+    service: "Three radiators fitted · Upper Norwood, London",
+    rating: 5,
+    quote:
+      "Great job, found solutions to problems during the work. Would not hesitate to use again and highly recommend.",
+  },
+  {
+    name: "M. J. Bri",
+    service: "Radiator half off wall · Streatham Hill, London",
+    rating: 5,
+    quote:
+      "Prompt, very professional, and helpful not just on this job but other issues around the house. Certified gas engineer who gave valuable boiler advice. I would definitely recommend.",
+  },
+  {
+    name: "Christine",
+    service: "Boiler repair · Shadwell, London",
+    rating: 5,
+    quote:
+      "Dominic was fantastic. Replied quickly, came at agreed time, and fixed the issue. I am very happy and would use him again. A great service!",
+  },
+  {
+    name: "Sophia",
+    service: "Whistling noise in the bathroom · Rotherhithe, London",
+    rating: 5,
+    quote:
+      "Very professional, knew exactly where the issue came from, fixed it quickly. Went the extra mile and was accommodating. I would definitely use again and highly recommend him.",
+  },
+  {
+    name: "Arash",
+    service: "Washing machine replacement installation · Epsom",
+    rating: 5,
+    quote:
+      "Dom responded very quickly and completed the job the same day. Fair quote and high-quality service. He also fixed a sink leak free of charge. Strong recommendation.",
+  },
+  {
+    name: "U. B.",
+    service: "Suspected leaking pipe in bathroom · Southwark, London",
+    rating: 5,
+    quote:
+      "Dominic attended late afternoon on one of the hottest days, identified the fault within seconds, went to buy the part, fitted, tested, and cleaned up professionally. Knowledgeable and highly trustworthy. Highly recommended.",
+  },
+  {
+    name: "Miles",
+    service: "Leaking shower valve replacement · Highbury, London",
+    rating: 5,
+    quote:
+      "Dominic was very helpful when an easy fix became a nightmare. Went above and beyond, including driving to a supplier for a replacement part, and completed the job quickly.",
+  },
+  {
+    name: "Akbar",
+    service: "Leaking pipe beneath boiler · Bromley By Bow, London",
+    rating: 5,
+    quote:
+      "Quick and efficient, arrived within the hour and fixed leak within minutes. Didn't charge for a washer part that was replaced. I would definitely use again.",
+  },
+  {
+    name: "Olu",
+    service: "Leaking radiator · Peckham, London",
+    rating: 5,
+    quote:
+      "Very polite, professional, and able to go over and fix the issue at very short notice on a Sunday. Also gave advice regarding the council. I would definitely recommend.",
+  },
+  {
+    name: "Coeur de Lion",
+    service: "Emergency repair rising main · Peckham, London",
+    rating: 5,
+    quote:
+      "Emergency leak in basement with over a foot of water. Dom arrived in under an hour, fixed leak and pumped water, while keeping me updated by phone. Patient and professional conduct in a sensitive situation. Strong praise.",
+  },
 ]
 
 export const PORTFOLIO_PROJECTS = [
@@ -302,11 +422,47 @@ export const PORTFOLIO_PROJECTS = [
     category: "Heating",
     location: "Westminster",
     description:
-      "Full plant room installation for a commercial office building. Two high-efficiency cascade boilers, header system, and building management integration.",
+      "Full plant room installation for a commercial office building. Two high-efficiency cascade boilers, header system, and building management integration — completed on schedule with zero disruption to tenants.",
     image: "/images/bb694770-ebf9-4854-877f-46073a4e9746.jpg",
     stats: [
       { label: "Boilers", value: "2" },
       { label: "Floors Served", value: "6" },
+    ],
+  },
+  {
+    title: "Immersion Heater & Leak Repair",
+    category: "Plumbing",
+    location: "Walworth, London",
+    description:
+      "Leaking pipe behind water tank for immersion heater. Assessed on arrival, temporary fix applied on the spot, then full repair completed. Customer praised punctuality and clear communication.",
+    image: "/images/plumbing-pipes.jpg",
+    stats: [
+      { label: "Response", value: "On time" },
+      { label: "Fix", value: "Same visit" },
+    ],
+  },
+  {
+    title: "Dual Immersion Heater Element Replacement",
+    category: "Heating",
+    location: "Deptford, London",
+    description:
+      "Short-notice replacement of two immersion heater elements in a hot water tank. Identified an additional fault missed by a previous tradesman and advised on next steps. Flexible scheduling and clear communication throughout.",
+    image: "/images/central-heating.jpg",
+    stats: [
+      { label: "Elements", value: "2" },
+      { label: "Booking", value: "Short notice" },
+    ],
+  },
+  {
+    title: "Kitchen Tap Whistle & Vibration Fix",
+    category: "Plumbing",
+    location: "Upper Edmonton, London",
+    description:
+      "Diagnosed and resolved loud whistling and vibration from kitchen tap. Tidy workmanship, competitive pricing, and minimal disruption. Customer would not hesitate to recommend or use again.",
+    image: "/images/kitchen-plumbing.jpg",
+    stats: [
+      { label: "Issue", value: "Tap noise" },
+      { label: "Result", value: "Fully resolved" },
     ],
   },
   {
@@ -322,15 +478,63 @@ export const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Commercial Plumbing & Plant Room",
+    title: "Toilet Cistern Foghorn Noise",
     category: "Plumbing",
-    location: "Chelsea",
+    location: "Finchley Church End, London",
     description:
-      "Full commercial plumbing installation for an office building. New plant room, mains distribution, and bathroom fit-outs across three floors.",
+      "Loud foghorn sound when flushing toilet — diagnosed and fixed with clear communication from quote to completion. Swift, high-standard finish. Customer described service as personable, courteous, and professional.",
+    image: "/images/plumbing-repairs.jpg",
+    stats: [
+      { label: "Diagnosis", value: "Same day" },
+      { label: "Standard", value: "High" },
+    ],
+  },
+  {
+    title: "Bathroom Leaks & Ensuite Renovation Prep",
+    category: "Plumbing",
+    location: "Southfields, London",
+    description:
+      "Bathroom leak investigation and repair; client now uses us as their go-to plumber. Responsive, friendly, and professional. Larger ensuite renovation project planned with same team.",
+    image: "/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg",
+    stats: [
+      { label: "Scope", value: "Leaks + prep" },
+      { label: "Follow-up", value: "Ensuite planned" },
+    ],
+  },
+  {
+    title: "Non-Flushing Cistern Repair",
+    category: "Plumbing",
+    location: "Southwark, London",
+    description:
+      "Non-flushing toilet cistern repaired quickly. Clear communication on arrival time, punctual attendance, and toilet flushing correctly after repair.",
+    image: "/images/plumbing-repairs.jpg",
+    stats: [
+      { label: "Speed", value: "Fast" },
+      { label: "Communication", value: "Clear" },
+    ],
+  },
+  {
+    title: "Leak Investigation — Bathroom & Immersion",
+    category: "Plumbing",
+    location: "Dalston, London",
+    description:
+      "Rapid response to leak investigation. Attended straight away, transparent about work required, and left customer happy to recommend and hire again.",
     image: "/images/plumbing-pipes.jpg",
     stats: [
-      { label: "Floors", value: "3" },
-      { label: "Fittings", value: "24" },
+      { label: "Response", value: "Same day" },
+      { label: "Outcome", value: "Resolved" },
+    ],
+  },
+  {
+    title: "Radiator Repair & Smoke Alarms",
+    category: "Heating",
+    location: "Manor Park, London",
+    description:
+      "Radiator repair carried out to a high standard. Return visit to fit smoke alarms as requested. Fast, friendly, and professional throughout.",
+    image: "/images/central-heating.jpg",
+    stats: [
+      { label: "Radiators", value: "Repaired" },
+      { label: "Extras", value: "Smoke alarms" },
     ],
   },
   {
@@ -338,7 +542,7 @@ export const PORTFOLIO_PROJECTS = [
     category: "Heating",
     location: "Wandsworth",
     description:
-      "Same-day callout for a failed boiler in a family home. Old unit removed and new Worcester Bosch combi fitted, tested, and commissioned within 8 hours.",
+      "Same-day callout for a failed boiler in a family home. Old unit removed and new combi fitted, tested, and commissioned within 8 hours.",
     image: "/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg",
     stats: [
       { label: "Response", value: "2 hrs" },
@@ -346,28 +550,171 @@ export const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Bathroom & Kitchen Plumbing",
+    title: "Banging Pipes & Emergency Shut-Off",
     category: "Plumbing",
-    location: "Richmond",
+    location: "Rotherhithe, London",
     description:
-      "Complete bathroom and kitchen plumbing refurbishment. New pipework, sanitaryware connections, and appliance installations in a period property.",
-    image: "/images/kitchen-plumbing.jpg",
+      "Customer had to turn water off due to banging pipes. Attended within minutes, diagnosed the fault, sourced the part, and had the system sorted within a couple of hours.",
+    image: "/images/plumbing-pipes.jpg",
     stats: [
-      { label: "Rooms", value: "2" },
-      { label: "Duration", value: "3 days" },
+      { label: "Arrival", value: "Minutes" },
+      { label: "Completion", value: "2 hours" },
     ],
   },
   {
-    title: "Power Flush & System Upgrade",
+    title: "Three Radiators Fitted",
     category: "Heating",
-    location: "Battersea",
+    location: "Upper Norwood, London",
     description:
-      "Full system power flush followed by new thermostatic radiator valves throughout. Restored heat output and reduced energy bills by an estimated 15%.",
+      "Three new radiators installed. Solutions found for problems that arose during the work. Customer would not hesitate to use again and highly recommends.",
     image: "/images/central-heating.jpg",
     stats: [
-      { label: "Radiators", value: "10" },
-      { label: "Savings", value: "~15%" },
+      { label: "Radiators", value: "3" },
+      { label: "Approach", value: "Problem-solving" },
     ],
   },
-  // TODO: Replace with real project data
+  {
+    title: "Radiator Reattachment & Boiler Advice",
+    category: "Heating",
+    location: "Streatham Hill, London",
+    description:
+      "Radiator half off wall — prompt, professional fix. Also gave advice on other household issues and valuable boiler guidance as a certified gas engineer. Customer would definitely recommend.",
+    image: "/images/radiator-pipes.png",
+    stats: [
+      { label: "Radiator", value: "Reattached" },
+      { label: "Advice", value: "Boiler + general" },
+    ],
+  },
+  {
+    title: "Leaking Boiler Diagnosis",
+    category: "Heating",
+    location: "Bromley By Bow, London",
+    description:
+      "Rapid attendance and diagnosis of leaking boiler. Source of leak identified quickly; issue was building-management responsibility on this occasion. Customer would definitely invite us back for future plumbing work.",
+    image: "/images/boiler-repair.jpg",
+    stats: [
+      { label: "Response", value: "Quick" },
+      { label: "Diagnosis", value: "Accurate" },
+    ],
+  },
+  {
+    title: "Boiler Repair",
+    category: "Heating",
+    location: "Shadwell, London",
+    description:
+      "Quick reply and attendance at agreed time. Boiler issue fixed to customer’s satisfaction. Customer very happy and would use again — described as a great service.",
+    image: "/images/boiler-repair.jpg",
+    stats: [
+      { label: "Communication", value: "Quick" },
+      { label: "Outcome", value: "Fixed" },
+    ],
+  },
+  {
+    title: "Leaking Tap Repair",
+    category: "Plumbing",
+    location: "Peckham, London",
+    description:
+      "Leaking tap repaired to a high standard. Customer would recommend.",
+    image: "/images/kitchen-plumbing.jpg",
+    stats: [
+      { label: "Job", value: "Tap repair" },
+      { label: "Recommend", value: "Yes" },
+    ],
+  },
+  {
+    title: "Bathroom Whistling Noise",
+    category: "Plumbing",
+    location: "Rotherhithe, London",
+    description:
+      "Whistling noise in bathroom — issue located and fixed quickly. Went the extra mile and was accommodating. Customer would definitely use again and highly recommends.",
+    image: "/images/plumbing-repairs.jpg",
+    stats: [
+      { label: "Diagnosis", value: "Precise" },
+      { label: "Service", value: "Extra mile" },
+    ],
+  },
+  {
+    title: "Washing Machine Installation & Sink Leak",
+    category: "Plumbing",
+    location: "Epsom",
+    description:
+      "Rapid response and same-day completion of washing machine replacement installation. Fair quote and high-quality work. Sink leak fixed free of charge. Strong recommendation from customer.",
+    image: "/images/kitchen-plumbing.jpg",
+    stats: [
+      { label: "Completion", value: "Same day" },
+      { label: "Extra", value: "Sink leak (FOC)" },
+    ],
+  },
+  {
+    title: "Suspected Leaking Pipe in Bathroom",
+    category: "Plumbing",
+    location: "Southwark, London",
+    description:
+      "Late-afternoon call on a very hot day. Fault identified within seconds; part purchased, fitted, tested, and area cleaned up professionally. Customer described as knowledgeable and highly trustworthy.",
+    image: "/images/plumbing-pipes.jpg",
+    stats: [
+      { label: "Diagnosis", value: "Seconds" },
+      { label: "Clean-up", value: "Included" },
+    ],
+  },
+  {
+    title: "Concealed Shower Valve Replacement",
+    category: "Plumbing",
+    location: "Highbury, London",
+    description:
+      "Leaking Zyam 3/4\" concealed shower valve. What started as a simple fix became more complex; we went above and beyond, including a trip to a supplier for a replacement part, and completed the job quickly.",
+    image: "/images/plumbing-repairs.jpg",
+    stats: [
+      { label: "Complexity", value: "Above & beyond" },
+      { label: "Result", value: "Completed" },
+    ],
+  },
+  {
+    title: "Leaking Pipe Beneath Boiler",
+    category: "Heating",
+    location: "Bromley By Bow, London",
+    description:
+      "Arrived within the hour and fixed the leak in minutes. Small washer replacement not charged. Customer would definitely use again.",
+    image: "/images/boiler-repair.jpg",
+    stats: [
+      { label: "Response", value: "< 1 hour" },
+      { label: "Fix", value: "Minutes" },
+    ],
+  },
+  {
+    title: "Leaking Radiator — Sunday Callout",
+    category: "Heating",
+    location: "Peckham, London",
+    description:
+      "Very short notice on a Sunday. Polite, professional, and issue fixed. Also provided advice regarding the council. Customer would definitely recommend.",
+    image: "/images/central-heating.jpg",
+    stats: [
+      { label: "Notice", value: "Short (Sunday)" },
+      { label: "Manner", value: "Polite & pro" },
+    ],
+  },
+  {
+    title: "Faulty Heating System",
+    category: "Heating",
+    location: "Rotherhithe, London",
+    description:
+      "Friendly, helpful, and flexible when customer had to rearrange due to work. Boiler issues explained clearly; prompt and efficient. Good service received.",
+    image: "/images/boiler-modern.jpg",
+    stats: [
+      { label: "Flexibility", value: "Rearranged" },
+      { label: "Explanation", value: "Clear" },
+    ],
+  },
+  {
+    title: "Emergency Rising Main — Basement Flood",
+    category: "Plumbing",
+    location: "Peckham, London",
+    description:
+      "Emergency leak in basement with over a foot of water. Arrived in under an hour, fixed the leak and pumped water, with updates by phone throughout. Patient and professional in a sensitive situation.",
+    image: "/images/emergency-callout.jpg",
+    stats: [
+      { label: "Response", value: "< 1 hour" },
+      { label: "Situation", value: "Emergency flood" },
+    ],
+  },
 ]

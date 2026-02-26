@@ -210,7 +210,13 @@ export default function ServiceAreasPage() {
 
       {/* Not in Our Area? */}
       <section className="py-32 bg-brand-red relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white mb-6 tracking-widest uppercase">
             Don&apos;t See Your Area?

@@ -65,7 +65,6 @@ London, Westminster, Chelsea, Kensington, Fulham, Hammersmith, Wandsworth, Batte
 
 ```
 /
-├── /about
 ├── /portfolio
 ├── /contact
 ├── /service-areas
@@ -101,7 +100,6 @@ London, Westminster, Chelsea, Kensington, Fulham, Hammersmith, Wandsworth, Batte
 - **Services** (dropdown)
   - Heating Services → `/services/heating`
   - Air Conditioning → `/services/air-conditioning`
-- **About Us** → `/about`
 - **Portfolio** → `/portfolio`
 - **Service Areas** → `/service-areas`
 - **Contact** → `/contact`
@@ -134,20 +132,9 @@ Header also includes: theme toggle (light/dark), phone number, “Get a Free Quo
 
 ---
 
-### 6.2 About Us — `/about`
+### 6.2 About Us — removed
 
-| Attribute | Detail |
-|-----------|--------|
-| **Purpose** | Company story, credentials, approach |
-| **Title** | About Us \| DPS Heating Services Ltd |
-
-**Sections:**
-
-1. **Page hero** — “About Us”, subtitle, breadcrumbs (Home → About Us), background image.
-2. **Who We Are** — Gas Safe badge, headline, intro paragraphs, Gas Safe registration callout (number placeholder).
-3. **Our approach** — Three cards: Reliability, Fully Qualified Engineers, Honest Transparent Pricing.
-4. **Blueprint billboard** — Visual/content block.
-5. **CTA banner** — Book/quote prompt.
+The About Us page has been removed. The homepage “About DPS Heating” section links to Contact.
 
 ---
 

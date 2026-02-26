@@ -68,7 +68,7 @@ export default function DomesticServicesPage() {
                     className="relative block aspect-[4/3] min-h-[240px] sm:min-h-[280px] rounded-2xl overflow-hidden border border-brand-card-border shadow-lg hover:border-brand-red/30 transition-all duration-300"
                   >
                     <Image
-                      src={CORE_SERVICES_IMAGES[label]}
+                      src={CORE_SERVICES_IMAGES[label] ?? "/images/core-services/mechanical.png"}
                       alt={label}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -103,7 +103,13 @@ export default function DomesticServicesPage() {
       </section>
 
       <section className="py-24 bg-brand-red relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-12">
           <div>
             <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white mb-4 tracking-widest uppercase">

@@ -38,7 +38,13 @@ export default function UrgentEnquiryPage() {
 
       {/* Phone CTA */}
       <section className="py-24 bg-brand-red relative overflow-hidden" aria-label="Call us for urgent help">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <p className="text-white/80 text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-6">
             For urgent issues, call us directly

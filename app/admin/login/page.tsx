@@ -22,8 +22,14 @@ export default function AdminLoginPage() {
     setError("");
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      if (username.trim() === "admin" && password === "admin") {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username.trim(), password }),
+        credentials: "include",
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
         if (typeof window !== "undefined") {
           window.localStorage.setItem("dps_admin_auth", "true");
           window.location.href = "/admin/dashboard";
@@ -31,8 +37,10 @@ export default function AdminLoginPage() {
         }
         router.push("/admin/dashboard");
       } else {
-        setError("Invalid username or password.");
+        setError(data.error ?? "Invalid username or password.");
       }
+    } catch {
+      setError("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -131,7 +139,7 @@ export default function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-[11px] text-white/30">
-            Test credentials: <span className="font-mono text-white/50">admin / admin</span>
+            Default: <span className="font-mono text-white/50">admin / admin</span> (set ADMIN_USERNAME / ADMIN_PASSWORD to override)
           </p>
         </div>
       </motion.div>

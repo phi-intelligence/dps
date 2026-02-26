@@ -130,7 +130,13 @@ export default function ContactPage() {
 
       {/* Urgent Enquiry Strip */}
       <section className="py-24 bg-brand-red border-y border-white/10 relative overflow-hidden" aria-label="Urgent enquiry">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="flex items-center gap-8">
             <div className="w-20 h-20 bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center shrink-0">

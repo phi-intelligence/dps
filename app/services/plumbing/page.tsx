@@ -134,7 +134,13 @@ export default function PlumbingCategoryPage() {
 
       {/* Urgency technical strip */}
       <section className="py-24 bg-brand-red border-y border-black/10 relative overflow-hidden" aria-label="Urgent hydraulic breach">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
           <div className="flex items-center gap-8">
             <div className="w-16 h-16 bg-black/20 backdrop-blur-xl rounded-xl flex items-center justify-center border border-white/10 shadow-2xl">
