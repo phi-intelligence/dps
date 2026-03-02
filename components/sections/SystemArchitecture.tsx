@@ -12,7 +12,7 @@ const callouts = [
 
 export default function SystemArchitecture() {
   return (
-    <section aria-label="System Architecture" className="bg-brand-surface border-y border-brand-card-border">
+    <section aria-label="System Architecture" className="bg-brand-surface">
 
       {/* Section heading — normal scroll flow, seen before the animation starts */}
       <div className="py-24 text-center">

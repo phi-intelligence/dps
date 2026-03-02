@@ -15,7 +15,7 @@ export default function RadiatorsPage() {
       backgroundImage="/images/b5ec6a7e-9a7d-4a9d-8596-8a89110fa626.jpg"
       sideImage="/images/b5ec6a7e-9a7d-4a9d-8596-8a89110fa626.jpg"
       sideImageAlt="Heating pipe system with valves and fittings"
-      introduction={`From a single radiator replacement to a full re-radiation of your property, DPS Heating Services Ltd provides all aspects of radiator work across ${COMPANY.areas}. Our Gas Safe registered engineers can install new radiators, replace old ones, repair leaks, and balance your system to ensure every room heats evenly.`}
+      introduction={`From a single radiator replacement to a full re-radiation of your property, DPS Heating Services LTD provides all aspects of radiator work across ${COMPANY.areas}. Our Gas Safe registered engineers can install new radiators, replace old ones, repair leaks, and balance your system to ensure every room heats evenly.`}
       included={[
         "New radiator installation",
         "Radiator replacement",

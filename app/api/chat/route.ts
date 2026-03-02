@@ -1,22 +1,46 @@
 import { NextRequest, NextResponse } from "next/server";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
+import { getSiteConfig, getServiceAreas } from "@/lib/content";
 import { COMPANY, SERVICE_AREAS, OPENING_HOURS } from "@/lib/constants";
 import { SERVICE_MAP } from "@/lib/chat-config";
 import type { ChatRequest } from "@/lib/types/chat";
 
-function buildSystemPrompt(): string {
+/** Prefer key from .env.local on disk so restarts aren't needed when key is updated. */
+function getGeminiApiKey(): string | undefined {
+  try {
+    const path = join(process.cwd(), ".env.local");
+    const content = readFileSync(path, "utf8");
+    const match = content.match(/^\s*GEMINI_API_KEY\s*=\s*(.+?)\s*$/m);
+    if (match) {
+      const value = match[1].trim().replace(/^["']|["']$/g, "");
+      if (value.length > 0) return value;
+    }
+  } catch {
+    // ignore
+  }
+  return process.env.GEMINI_API_KEY;
+}
+
+async function buildSystemPrompt(): Promise<string> {
+  const [site, areas] = await Promise.all([getSiteConfig(), getServiceAreas()]);
+  const company = site?.company ?? COMPANY;
+  const hours = site?.openingHours ?? OPENING_HOURS;
+  const areaList = areas.length > 0 ? areas : SERVICE_AREAS;
+
   const servicesList = Object.values(SERVICE_MAP).flatMap((cat) =>
     cat.services.map((s) => `- ${s.label}: ${s.href}`)
   );
 
   return `You are the DPS Heating Services virtual assistant.
 
-COMPANY: ${COMPANY.name}, ${COMPANY.phone}, ${COMPANY.email}, Gas Safe: ${COMPANY.gasSafeNumber}
-AREAS: ${SERVICE_AREAS.join(", ")}
+COMPANY: ${company.name}, ${company.phone}, ${company.email}, Gas Safe: ${company.gasSafeNumber}
+AREAS: ${areaList.join(", ")}
 SERVICES:
 ${servicesList.join("\n")}
-HOURS: Mon-Fri ${OPENING_HOURS.weekday}, Sat ${OPENING_HOURS.saturday}, Sun ${OPENING_HOURS.sunday}
+HOURS: Mon-Fri ${hours.weekday}, Sat ${hours.saturday}, Sun ${hours.sunday}
 
 RULES:
 1. Use British English. Be professional and concise (2-4 sentences).
@@ -43,12 +67,12 @@ async function streamGemini(
   systemPrompt: string,
   messages: Array<{ role: "user" | "assistant"; content: string }>
 ): Promise<ReadableStream<Uint8Array>> {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = getGeminiApiKey();
   if (!apiKey) throw new Error("GEMINI_API_KEY not set");
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
     systemInstruction: systemPrompt,
   });
 
@@ -150,7 +174,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const systemPrompt = buildSystemPrompt();
+    const systemPrompt = await buildSystemPrompt();
+    const geminiKey = getGeminiApiKey();
+    const prefix = geminiKey ? geminiKey.slice(0, 8) + "..." : "none";
+    console.log("[chat] GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING", "prefix:", prefix);
 
     try {
       const stream = await streamGemini(systemPrompt, messages);
@@ -161,7 +188,8 @@ export async function POST(request: NextRequest) {
           Connection: "keep-alive",
         },
       });
-    } catch {
+    } catch (geminiErr) {
+      console.error("[chat] Gemini failed:", (geminiErr as Error).message);
       try {
         const stream = await streamOpenAI(systemPrompt, messages);
         return new NextResponse(stream, {
@@ -171,7 +199,8 @@ export async function POST(request: NextRequest) {
             Connection: "keep-alive",
           },
         });
-      } catch (fallbackError) {
+      } catch (openaiErr) {
+        console.error("[chat] OpenAI failed:", (openaiErr as Error).message);
         return NextResponse.json(
           {
             error: "Chat is temporarily unavailable. Please try again or call us.",

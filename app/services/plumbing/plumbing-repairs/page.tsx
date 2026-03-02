@@ -15,7 +15,7 @@ export default function PlumbingRepairsPage() {
       backgroundImage="/images/plumbing-repairs.jpg"
       sideImage="/images/plumbing-repairs.jpg"
       sideImageAlt="Tactical hydraulic repair"
-      introduction={`Systemic hydraulic failures require immediate containment protocols. From localized breach resolution to total circuit restoration, DPS Heating Services Ltd deploys high-integrity plumbing solutions across ${COMPANY.areas}. Our qualified operatives carry an optimized hardware inventory to ensure rapid first-contact resolution for both domestic and commercial infrastructures.`}
+      introduction={`Systemic hydraulic failures require immediate containment protocols. From localized breach resolution to total circuit restoration, DPS Heating Services LTD deploys high-integrity plumbing solutions across ${COMPANY.areas}. Our qualified operatives carry an optimized hardware inventory to ensure rapid first-contact resolution for both domestic and commercial infrastructures.`}
       included={[
         "Sonic Breach Identification",
         "Primary Circuit Containment",

@@ -20,29 +20,32 @@ export interface ServiceCategory {
 }
 
 export const SERVICE_MAP: Record<string, ServiceCategory> = {
-  heating: {
-    slug: "heating",
-    label: "Heating",
-    href: "/services/heating",
+  commercial: {
+    slug: "commercial",
+    label: "Commercial",
+    href: "/services/commercial",
     services: [
-      { slug: "boiler-repair", label: "Boiler Repair", href: "/services/heating/boiler-repair", priceRange: { domestic: [80, 350], commercial: [120, 500] } },
-      { slug: "boiler-installation", label: "Boiler Installation", href: "/services/heating/boiler-installation", priceRange: { domestic: [1500, 3500], commercial: [2500, 6000] } },
-      { slug: "boiler-servicing", label: "Boiler Servicing", href: "/services/heating/boiler-servicing", priceRange: { domestic: [70, 120], commercial: [100, 180] } },
-      { slug: "central-heating", label: "Central Heating", href: "/services/heating/central-heating", priceRange: { domestic: [2000, 5000], commercial: [4000, 12000] } },
-      { slug: "radiators", label: "Radiators", href: "/services/heating/radiators", priceRange: { domestic: [150, 800], commercial: [300, 2000] } },
-      { slug: "power-flushing", label: "Power Flushing", href: "/services/heating/power-flushing", priceRange: { domestic: [300, 600], commercial: [500, 1000] } },
+      { slug: "commercial-boiler-servicing", label: "Commercial Boiler Servicing", href: "/services/heating/boiler-servicing", priceRange: { domestic: [70, 120], commercial: [100, 180] } },
+      { slug: "plant-room-maintenance", label: "Plant Room Maintenance", href: "/services/commercial", priceRange: { domestic: [0, 0], commercial: [150, 500] } },
+      { slug: "gas-safety-inspections", label: "Gas Safety Inspections", href: "/services/commercial", priceRange: { domestic: [0, 0], commercial: [80, 200] } },
+      { slug: "ppm-contracts", label: "PPM Contracts", href: "/services/commercial", priceRange: { domestic: [0, 0], commercial: [500, 3000] } },
+      { slug: "fault-finding-diagnosis", label: "Fault Finding & Diagnosis", href: "/services/heating/boiler-repair", priceRange: { domestic: [80, 350], commercial: [120, 500] } },
+      { slug: "commercial-heating-systems", label: "Commercial Heating Systems", href: "/services/heating/central-heating", priceRange: { domestic: [2000, 5000], commercial: [4000, 12000] } },
+      { slug: "emergency-breakdowns", label: "24 Hour Emergency Breakdowns", href: "/emergency", priceRange: { domestic: [80, 350], commercial: [120, 600] } },
+      { slug: "fm-ppm-packages", label: "Facilities Management (3 Tier PPM)", href: "/services/commercial", priceRange: { domestic: [0, 0], commercial: [800, 4000] } },
+      { slug: "fm-reactive-ooh", label: "Facilities Management (Reactive & OOH)", href: "/services/commercial", priceRange: { domestic: [0, 0], commercial: [120, 600] } },
     ],
   },
-  "air-conditioning": {
-    slug: "air-conditioning",
-    label: "Air Conditioning",
-    href: "/services/air-conditioning",
+  domestic: {
+    slug: "domestic",
+    label: "Domestic",
+    href: "/services/domestic",
     services: [
-      { slug: "ac-installation", label: "AC Installation", href: "/services/air-conditioning/ac-installation", priceRange: { domestic: [1500, 4000], commercial: [3000, 15000] } },
-      { slug: "ac-servicing", label: "AC Servicing", href: "/services/air-conditioning/ac-servicing", priceRange: { domestic: [80, 150], commercial: [120, 250] } },
-      { slug: "ac-repairs", label: "AC Repairs", href: "/services/air-conditioning/ac-repairs", priceRange: { domestic: [80, 400], commercial: [120, 600] } },
-      { slug: "commercial-ac", label: "Commercial AC", href: "/services/air-conditioning/commercial-ac", priceRange: { domestic: [0, 0], commercial: [5000, 25000] } },
-      { slug: "ac-maintenance", label: "Maintenance Contracts", href: "/services/air-conditioning/ac-maintenance", priceRange: { domestic: [200, 500], commercial: [400, 1200] } },
+      { slug: "boiler-installation-servicing-repairs", label: "Boiler Installation, Servicing & Repairs", href: "/services/heating/boiler-installation", priceRange: { domestic: [70, 3500], commercial: [100, 6000] } },
+      { slug: "system-diagnosis", label: "System Diagnosis", href: "/services/heating/boiler-repair", priceRange: { domestic: [80, 350], commercial: [120, 500] } },
+      { slug: "landlord-gas-safety-cp12", label: "Landlord Gas Safety (CP12)", href: "/services/heating/boiler-servicing", priceRange: { domestic: [60, 120], commercial: [80, 150] } },
+      { slug: "plumbing-repairs", label: "Plumbing Repairs", href: "/services/plumbing/plumbing-repairs", priceRange: { domestic: [80, 400], commercial: [120, 600] } },
+      { slug: "emergency-callouts", label: "Emergency Call outs", href: "/emergency", priceRange: { domestic: [80, 350], commercial: [120, 500] } },
     ],
   },
 };

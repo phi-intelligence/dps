@@ -92,11 +92,12 @@ export default function PlumbingCategoryPage() {
           { label: "Services", href: "/services" },
           { label: "Hydraulic Engineering" },
         ]}
+        backgroundImage="/images/blueprints/blueprint-8.png"
         compact
       />
 
       {/* Intro */}
-      <section className="py-24 border-b border-brand-card-border relative overflow-hidden bg-brand-surface">
+      <section className="py-24 relative overflow-hidden bg-brand-surface">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -126,14 +127,20 @@ export default function PlumbingCategoryPage() {
             transition={{ delay: 0.2 }}
             className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.4em] leading-loose max-w-2xl mx-auto"
           >
-            From emergency breaches to structural architecture, DPS Heating Services Ltd provides advanced hydraulic solutions across {COMPANY.areas}. Our engineers are technically equipped for first-visit resolution of critical system failures.
+            From emergency breaches to structural architecture, DPS Heating Services LTD provides advanced hydraulic solutions across {COMPANY.areas}. Our engineers are technically equipped for first-visit resolution of critical system failures.
           </motion.p>
         </div>
       </section>
 
       {/* Urgency technical strip */}
       <section className="py-24 bg-brand-red border-y border-black/10 relative overflow-hidden" aria-label="Urgent hydraulic breach">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
           <div className="flex items-center gap-8">
             <div className="w-16 h-16 bg-black/20 backdrop-blur-xl rounded-xl flex items-center justify-center border border-white/10 shadow-2xl">
@@ -161,7 +168,7 @@ export default function PlumbingCategoryPage() {
       </section>
 
       {/* Technical Component Map */}
-      <section className="py-40 bg-brand-surface border-b border-brand-card-border relative overflow-hidden">
+      <section className="py-40 bg-brand-surface relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -207,7 +214,7 @@ export default function PlumbingCategoryPage() {
       </section>
 
       {/* Services grid */}
-      <section className="py-40 border-b border-brand-card-border bg-brand-steel" aria-label="Plumbing service options">
+      <section className="py-40 bg-brand-steel" aria-label="Plumbing service options">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border-hover bg-brand-card mb-6">

@@ -13,7 +13,7 @@ export default function ContactPage() {
         title="Contact Us"
         subtitle="Get in touch for a free, no-obligation quote or to book a service. We aim to respond to all enquiries within one working day."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
-        backgroundImage="/images/hero-bg.jpg"
+        backgroundImage="/images/blueprints/blueprint-1.png"
         compact
       />
 
@@ -92,6 +92,17 @@ export default function ContactPage() {
                   </div>
                 </div>
               </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.25 }}
+                className="bg-brand-navy border border-brand-card-border rounded-[2.5rem] p-10 shadow-2xl"
+              >
+                <h2 className="font-technical font-extrabold text-brand-text text-xl mb-4 tracking-widest uppercase">Location</h2>
+                <p className="text-brand-muted text-sm font-technical uppercase tracking-wider">{COMPANY.address}</p>
+              </motion.div>
             </div>
 
             {/* Right: Quote Form */}
@@ -119,7 +130,13 @@ export default function ContactPage() {
 
       {/* Urgent Enquiry Strip */}
       <section className="py-24 bg-brand-red border-y border-white/10 relative overflow-hidden" aria-label="Urgent enquiry">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="flex items-center gap-8">
             <div className="w-20 h-20 bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center shrink-0">
@@ -130,7 +147,7 @@ export default function ContactPage() {
                 Urgent Issue?
               </h2>
               <p className="text-white/80 text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                Call us directly for urgent heating and air conditioning issues.
+                Call us directly for urgent heating and plumbing issues.
               </p>
             </div>
           </div>

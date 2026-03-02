@@ -15,7 +15,7 @@ export default function ACRepairsPage() {
       backgroundImage="/images/ac-unit-indoor.jpg"
       sideImage="/images/ac-unit-indoor.jpg"
       sideImageAlt="Air conditioning unit being repaired"
-      introduction={`When your air conditioning stops working, you want it fixed quickly. DPS Heating Services Ltd provides prompt AC repair services across ${COMPANY.areas} for all major brands of domestic and commercial systems. Our engineers carry out thorough diagnostics to identify the fault and carry out the repair efficiently, aiming to restore your system on the first visit wherever possible.`}
+      introduction={`When your air conditioning stops working, you want it fixed quickly. DPS Heating Services LTD provides prompt AC repair services across ${COMPANY.areas} for all major brands of domestic and commercial systems. Our engineers carry out thorough diagnostics to identify the fault and carry out the repair efficiently, aiming to restore your system on the first visit wherever possible.`}
       included={[
         "Full system diagnosis",
         "Refrigerant leak detection and repair",

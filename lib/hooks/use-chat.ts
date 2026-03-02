@@ -118,10 +118,19 @@ export function useChat() {
       }
     } catch (err) {
       if ((err as Error).name === "AbortError") return;
+      const isNetworkOrType =
+        (err as Error).name === "TypeError" ||
+        (err as Error).name === "NetworkError" ||
+        (err as Error).message?.includes("fetch");
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessage.id
-            ? { ...msg, content: "Connection failed. Please try again." }
+            ? {
+                ...msg,
+                content: isNetworkOrType
+                  ? "Connection failed. Please check your network and try again."
+                  : "Something went wrong. Please try again.",
+              }
             : msg
         )
       );

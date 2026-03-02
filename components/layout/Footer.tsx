@@ -1,34 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, Shield, Cpu, Zap, Activity } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
-
-const heatingLinks = [
-  { label: "Boiler Repair", href: "/services/heating/boiler-repair" },
-  { label: "Boiler Installation", href: "/services/heating/boiler-installation" },
-  { label: "Boiler Servicing", href: "/services/heating/boiler-servicing" },
-  { label: "Central Heating", href: "/services/heating/central-heating" },
-  { label: "Power Flushing", href: "/services/heating/power-flushing" },
-];
-
-const acLinks = [
-  { label: "AC Installation", href: "/services/air-conditioning/ac-installation" },
-  { label: "AC Servicing", href: "/services/air-conditioning/ac-servicing" },
-  { label: "AC Repairs", href: "/services/air-conditioning/ac-repairs" },
-  { label: "Commercial AC", href: "/services/air-conditioning/commercial-ac" },
-  { label: "Maintenance Contracts", href: "/services/air-conditioning/ac-maintenance" },
-];
+import { Phone, Mail, Shield, Cpu, Zap, Activity, Wrench } from "lucide-react";
+import { COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
+import { useContent } from "@/lib/content-provider";
 
 const quickLinks = [
+  { label: "Portfolio", href: "/portfolio" },
   { label: "About Us", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 export default function Footer() {
+  const { company } = useContent();
   return (
-    <footer className="bg-brand-steel border-t border-brand-card-border text-brand-muted relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-red to-transparent opacity-20" />
+    <footer className="bg-brand-steel text-brand-muted relative overflow-hidden">
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-brand-red/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
@@ -36,47 +24,45 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-4 mb-8 group">
-              <div className="w-12 h-12 rounded-full border border-brand-card-border-hover bg-brand-navy flex items-center justify-center relative overflow-hidden group-hover:border-brand-red/30 transition-all">
-                <Image src="/images/logo.jpg" alt="DPS Heating" width={40} height={40} className="object-contain" />
-              </div>
+              <Image src="/images/logo.png" alt="DPS Heating" width={40} height={48} className="object-contain" style={{ width: "auto", height: "auto" }} />
               <div>
                 <span className="font-technical font-extrabold text-brand-text text-xl tracking-[0.2em] uppercase block leading-none">
                   DPS <span className="text-brand-red">HEATING</span>
                 </span>
                 <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                  Heating &amp; Air Conditioning
+                  DESIGN • ENGINEER • MAINTAIN
                 </span>
               </div>
             </Link>
 
             <p className="text-sm font-light leading-relaxed mb-10 max-w-sm text-brand-muted uppercase tracking-wider">
-              Professional heating and air conditioning services for homes and businesses across {COMPANY.areas}. Gas Safe registered engineers.
+              Professional heating and plumbing services for homes and businesses across {company.areas}. Gas Safe registered engineers.
             </p>
 
             <div className="space-y-4">
-              <a href={`tel:${COMPANY.phone}`} className="flex items-center gap-4 group text-[10px] font-technical tracking-widest uppercase hover:text-brand-text transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-red/5 group-hover:border-brand-red/20 transition-all">
-                  <Phone size={14} className="text-brand-red" />
+              <a href={`tel:${company.phone}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-red transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-red group-hover:border-brand-red transition-all shadow-sm">
+                  <Phone size={18} className="text-brand-red group-hover:text-white transition-colors" />
                 </div>
-                {COMPANY.phone}
+                {company.phone}
               </a>
-              <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-4 group text-[10px] font-technical tracking-widest uppercase hover:text-brand-text transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-blue/5 group-hover:border-brand-blue/20 transition-all">
-                  <Mail size={14} className="text-brand-blue" />
+              <a href={`mailto:${company.email}`} className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-brand-blue transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-brand-blue group-hover:border-brand-blue transition-all shadow-sm">
+                  <Mail size={18} className="text-brand-blue group-hover:text-white transition-colors" />
                 </div>
-                {COMPANY.email}
+                {company.email}
               </a>
             </div>
           </div>
 
-          {/* Column 2: Heating */}
+          {/* Column 2: Commercial */}
           <div className="lg:pl-8">
             <h3 className="font-technical font-bold text-[10px] text-brand-red mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
               <Activity size={12} />
-              Heating
+              Commercial
             </h3>
             <ul className="space-y-4">
-              {heatingLinks.map((link) => (
+              {COMMERCIAL_SERVICES.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-red hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
@@ -86,14 +72,14 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Air Conditioning */}
+          {/* Column 3: Domestic */}
           <div>
             <h3 className="font-technical font-bold text-[10px] text-brand-blue mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
-              <Zap size={12} />
-              Air Conditioning
+              <Wrench size={12} />
+              Domestic
             </h3>
             <ul className="space-y-4">
-              {acLinks.map((link) => (
+              {DOMESTIC_SERVICES.map((link) => (
                 <li key={link.label}>
                   <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-blue hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
@@ -103,39 +89,37 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Quick Links */}
           <div>
-            <h3 className="font-technical font-bold text-[10px] text-brand-text mb-8 uppercase tracking-[0.3em] flex items-center gap-2">
-              <Cpu size={12} />
+            <h3 className="font-sans font-extrabold text-sm text-brand-text mb-8 uppercase tracking-widest">
               Quick Links
             </h3>
             <ul className="space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-[10px] font-technical uppercase tracking-widest hover:text-brand-text hover:pl-2 transition-all block text-brand-muted">
+                  <Link href={link.href} className="text-sm font-medium hover:text-brand-red hover:pl-2 transition-all block text-brand-muted">
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-10 p-5 bg-brand-navy border border-brand-card-border rounded-2xl flex items-center gap-4">
-              <div className="w-10 h-10 bg-brand-surface rounded-full border border-brand-red/20 flex items-center justify-center animate-pulse">
-                <Shield size={20} className="text-brand-red" />
+            <div className="mt-10 p-6 bg-brand-steel border border-brand-card-border rounded-3xl flex items-center gap-4 premium-shadow">
+              <div className="w-12 h-12 bg-brand-navy rounded-full border border-brand-red/10 flex items-center justify-center">
+                <Shield size={24} className="text-brand-red" />
               </div>
               <div>
-                <p className="text-brand-text text-[10px] font-technical font-bold tracking-[0.2em] uppercase leading-none mb-1">Gas Safe Registered</p>
-                <p className="text-brand-muted text-[10px] font-mono leading-none">REG: {COMPANY.gasSafeNumber}</p>
+                <p className="text-brand-text text-xs font-extrabold uppercase tracking-tight mb-1">Gas Safe Registered</p>
+                <p className="text-brand-muted text-xs font-medium">REG: {company.gasSafeNumber}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-24 pt-8 border-t border-brand-card-border flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="mt-24 pt-8 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-6">
             <p className="text-[10px] font-technical uppercase tracking-widest text-brand-muted">
-              &copy; {new Date().getFullYear()} DPS Heating Services Ltd. Company No: {COMPANY.companyNumber}
+              &copy; {new Date().getFullYear()} {company.name}
             </p>
           </div>
 

@@ -34,14 +34,14 @@ export default function BackgroundBeams() {
           {/* Glowing Beams */}
           <motion.path
             d="M 200 500 L 500 1000 L 800 1500"
-            stroke="#DC2626"
+            stroke="#d4af37"
             strokeWidth="3"
             strokeLinecap="round"
             fill="none"
             strokeDasharray="1 1000"
             style={{
               pathLength: pathLength,
-              filter: "drop-shadow(0 0 12px #DC2626)"
+              filter: "drop-shadow(0 0 12px #d4af37)"
             }}
           />
           <motion.path

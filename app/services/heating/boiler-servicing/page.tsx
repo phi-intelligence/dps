@@ -15,7 +15,7 @@ export default function BoilerServicingPage() {
       backgroundImage="/images/a2361d3b-a0e7-4df7-9753-8d55f55004f5.jpg"
       sideImage="/images/a2361d3b-a0e7-4df7-9753-8d55f55004f5.jpg"
       sideImageAlt="Boiler installed on wall with copper pipework"
-      introduction={`An annual boiler service is the best way to keep your heating system safe and running efficiently. DPS Heating Services Ltd provides thorough boiler servicing across ${COMPANY.areas} carried out by Gas Safe registered engineers. A service can also be a condition of your boiler warranty, so it is important not to skip it.`}
+      introduction={`An annual boiler service is the best way to keep your heating system safe and running efficiently. DPS Heating Services LTD provides thorough boiler servicing across ${COMPANY.areas} carried out by Gas Safe registered engineers. A service can also be a condition of your boiler warranty, so it is important not to skip it.`}
       included={[
         "Visual inspection of boiler and flue",
         "Gas pressure and flow checks",

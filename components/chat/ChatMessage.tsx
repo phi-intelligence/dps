@@ -68,7 +68,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         className={`max-w-[85%] rounded-2xl px-4 py-3 ${
           isUser
             ? "bg-brand-red text-white rounded-br-md"
-            : "bg-brand-card border border-brand-card-border text-brand-text rounded-bl-md"
+            : "chat-panel-msg-assistant border border-brand-card-border text-brand-text rounded-bl-md"
         }`}
       >
         {isEmpty && message.role === "assistant" ? (

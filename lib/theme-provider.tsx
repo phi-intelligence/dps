@@ -25,6 +25,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const current = document.documentElement.getAttribute("data-theme") as Theme | null;
     if (current === "light" || current === "dark") {
       setTheme(current);
+      if (current === "dark") document.documentElement.classList.add("dark");
+      else document.documentElement.classList.remove("dark");
     }
   }, []);
 
@@ -32,6 +34,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const next: Theme = theme === "dark" ? "light" : "dark";
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
+    if (next === "dark") document.documentElement.classList.add("dark");
+    else document.documentElement.classList.remove("dark");
     localStorage.setItem("dps-theme", next);
   }, [theme]);
 

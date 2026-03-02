@@ -15,7 +15,7 @@ export default function BoilerRepairPage() {
       backgroundImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
       sideImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
       sideImageAlt="Open boiler showing internal components during diagnosis"
-      introduction={`A broken boiler is never convenient. DPS Heating Services Ltd provides fast, professional boiler repair across ${COMPANY.areas}. Our Gas Safe registered engineers carry a wide range of parts, allowing us to diagnose and fix most faults on the first visit. We work on all major boiler brands and both domestic and commercial properties.`}
+      introduction={`A broken boiler is never convenient. DPS Heating Services LTD provides fast, professional boiler repair across ${COMPANY.areas}. Our Gas Safe registered engineers carry a wide range of parts, allowing us to diagnose and fix most faults on the first visit. We work on all major boiler brands and both domestic and commercial properties.`}
       included={[
         "Full boiler diagnosis",
         "Error code analysis",

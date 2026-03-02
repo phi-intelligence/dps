@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Phone, Flame } from "lucide-react";
 import { motion } from "framer-motion";
 import { COMPANY } from "@/lib/constants";
+import { useQuoteModal } from "@/lib/quote-modal-context";
 
 interface Breadcrumb {
   label: string;
@@ -19,6 +20,7 @@ interface PageHeroProps {
   showCTA?: boolean;
   ctaText?: string;
   ctaHref?: string;
+  preselectedService?: string;
   compact?: boolean;
 }
 
@@ -30,30 +32,33 @@ export default function PageHero({
   showCTA = true,
   ctaText = "Get a Quote",
   ctaHref = "/contact",
+  preselectedService,
   compact = false,
 }: PageHeroProps) {
+  const { openQuoteModal } = useQuoteModal();
   const hasImage = !!backgroundImage;
+  const isQuoteCTA = ctaHref === "/contact";
 
   return (
     <section
-      className={`relative ${compact ? "pt-36 pb-20" : "pt-48 pb-32"} overflow-hidden bg-brand-surface border-b border-brand-card-border`}
+      className={`relative overflow-hidden bg-brand-surface ${hasImage ? "min-h-[70vh]" : ""} ${compact ? "pt-36 pb-20" : "pt-48 pb-32"}`}
       aria-label={`${title} page hero`}
     >
-      {/* Background image + overlay — always dark so text stays white */}
-      {hasImage && (
+      {/* Background image + overlay — light in light mode, dark in dark mode (like homepage hero) */}
+      {hasImage && backgroundImage && (
         <>
-          <Image
-            src={backgroundImage}
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-            priority
-            aria-hidden="true"
-          />
-          {/* Fixed dark overlay — theme-independent so image always shows in both modes */}
-          <div className="absolute inset-0 bg-black/65" />
-          {/* Gradient fade to page background at bottom */}
+          <div className="absolute inset-0">
+            <Image
+              src={backgroundImage}
+              alt=""
+              fill
+              className="object-cover object-center opacity-35 dark:opacity-30"
+              sizes="100vw"
+              priority
+              aria-hidden="true"
+            />
+          </div>
+          <div className="absolute inset-0 bg-brand-surface/55 dark:bg-black/40" />
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-brand-surface to-transparent" />
         </>
       )}
@@ -130,13 +135,24 @@ export default function PageHero({
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-col sm:flex-row gap-8 items-start sm:items-center"
             >
-              <Link
-                href={ctaHref}
-                className="group relative bg-brand-red text-white px-12 py-5 rounded-full font-technical font-extrabold text-[12px] uppercase tracking-[0.3em] transition-all overflow-hidden shadow-xl shadow-brand-red/20"
-              >
-                <span className="relative z-10 group-hover:text-white transition-colors">{ctaText}</span>
-                <div className="absolute inset-0 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-              </Link>
+              {isQuoteCTA ? (
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal({ preselectedService })}
+                  className="group relative bg-brand-red text-white px-12 py-5 rounded-full font-technical font-extrabold text-[12px] uppercase tracking-[0.3em] transition-all overflow-hidden shadow-xl shadow-brand-red/20"
+                >
+                  <span className="relative z-10 group-hover:text-white transition-colors">{ctaText}</span>
+                  <div className="absolute inset-0 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                </button>
+              ) : (
+                <Link
+                  href={ctaHref}
+                  className="group relative bg-brand-red text-white px-12 py-5 rounded-full font-technical font-extrabold text-[12px] uppercase tracking-[0.3em] transition-all overflow-hidden shadow-xl shadow-brand-red/20"
+                >
+                  <span className="relative z-10 group-hover:text-white transition-colors">{ctaText}</span>
+                  <div className="absolute inset-0 bg-brand-red scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
+                </Link>
+              )}
               <a
                 href={`tel:${COMPANY.phone}`}
                 className={`flex items-center gap-4 transition-all font-technical font-bold text-[12px] uppercase tracking-[0.2em] ${hasImage ? "text-white/70 hover:text-white" : "text-brand-muted hover:text-brand-text"}`}
@@ -149,8 +165,6 @@ export default function PageHero({
         </div>
       </div>
 
-      {/* Bottom rule */}
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-brand-red/10 via-brand-purple/10 to-brand-blue/10" />
     </section>
   );
 }

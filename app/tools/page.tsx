@@ -7,7 +7,7 @@ import QuoteCalculator from "@/components/ui/QuoteCalculator";
 export const metadata: Metadata = {
   title: "Service Finder",
   description:
-    "Find the right heating or air conditioning service and get an instant quote estimate. DPS Heating Services — London.",
+    "Find the right heating or plumbing service and get an instant quote estimate. DPS Heating Services — London.",
 };
 
 export default function ToolsPage() {
@@ -15,7 +15,7 @@ export default function ToolsPage() {
     <div className="bg-brand-surface text-brand-text min-h-screen">
       <PageHero
         title="Service Finder"
-        subtitle="Choose your service and get an instant quote estimate, or browse our heating and air conditioning options."
+        subtitle="Choose your service and get an instant quote estimate, or browse our heating and plumbing options."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Service Finder" },
@@ -35,7 +35,7 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-surface border-y border-brand-card-border" aria-label="Quote calculator">
+      <section className="py-24 bg-brand-surface" aria-label="Quote calculator">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-4xl font-technical font-extrabold text-brand-text mb-4 tracking-widest uppercase">
             Instant Quote Calculator

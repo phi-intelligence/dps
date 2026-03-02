@@ -1,0 +1,137 @@
+// DPS CMS — Phase 1 + Inquiry. Use SQLite for dev; switch to postgres for prod if needed.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// Singleton: one row (id "default") for company, opening hours, default SEO
+model SiteConfig {
+  id        String   @id @default("default")
+  updatedAt DateTime @updatedAt
+
+  name                String
+  legalName           String
+  phone               String
+  email               String
+  address             String
+  gasSafeNumber       String
+  areas               String
+  liabilityInsurance  Boolean  @default(true)
+  indemnityInsurance  Boolean  @default(true)
+  founded             String
+  founder             String
+  industryExperience  String
+  mission             String
+  vision              String
+
+  openingHoursWeekday  String
+  openingHoursSaturday String
+  openingHoursSunday   String
+
+  defaultMetaTitle       String?
+  defaultMetaDescription String?
+}
+
+// Top-level nav items; children via self-relation
+model NavLink {
+  id        String    @id @default(cuid())
+  sortOrder Int       @default(0)
+  label     String
+  href      String
+  parentId  String?
+  parent    NavLink?  @relation("NavChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children  NavLink[] @relation("NavChildren")
+}
+
+model ServiceArea {
+  id        String @id @default(cuid())
+  name      String
+  sortOrder Int    @default(0)
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  sortOrder Int      @default(0)
+  name      String
+  service   String
+  rating    Int
+  quote     String
+  image     String?
+  published Boolean  @default(true)
+}
+
+model PortfolioProject {
+  id          String   @id @default(cuid())
+  sortOrder   Int      @default(0)
+  title       String
+  category    String
+  location    String
+  description String
+  image       String
+  stats       String   // JSON array of { label, value }
+  published   Boolean  @default(true)
+}
+
+model Accreditation {
+  id        String   @id @default(cuid())
+  sortOrder Int      @default(0)
+  title     String
+  items     String   // JSON array of strings
+}
+
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String
+  service   String
+  message   String
+  status    String   @default("pending") // pending | contacted | completed | archived
+  timestamp DateTime @default(now())
+}
+
+// Service (category or detail page). Slug can be "heating", "heating/boiler-installation", etc.
+model Service {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  title            String
+  shortDescription String?
+  sector           String?   // commercial | domestic | both
+  discipline       String?   // mechanical | electrical | gas | heating | plumbing | air-conditioning
+  parentSlug       String?
+  sortOrder        Int       @default(0)
+  detail           ServiceDetail?
+}
+
+// Keyed content blocks for About, Home, and other page sections (JSON value)
+model ContentBlock {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String // JSON
+}
+
+// Full content for a service detail page (ServiceDetailLayout props)
+model ServiceDetail {
+  id               String   @id @default(cuid())
+  serviceId        String   @unique
+  service          Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  subtitle         String?
+  introduction     String?
+  included         String   // JSON string[]
+  issues           String   // JSON { icon, title, description }[]
+  steps            String   // JSON { icon, number, title, description }[]
+  trustPoints      String   // JSON { icon, title, description }[]
+  faqs             String   // JSON { question, answer }[]
+  breadcrumbs      String   // JSON { label, href? }[]
+  backgroundImage  String?
+  sideImage        String?
+  sideImageAlt     String?
+  showGasSafeNote  Boolean  @default(false)
+  accentColor      String   @default("red") // red | blue
+  serviceValue     String?  // for quote form preselected value
+  metaTitle        String?
+  metaDescription  String?
+}

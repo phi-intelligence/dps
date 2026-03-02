@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, Wind, Home, Building2, ArrowRight, Phone, RotateCcw } from "lucide-react";
+import { Home, Building2, ArrowRight, Phone, RotateCcw } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { SERVICE_MAP, URGENCY_MULTIPLIER } from "@/lib/chat-config";
 import type { ServiceCategory, ServiceItem } from "@/lib/chat-config";
 
 const categories = [
-  { key: "heating" as const, label: "Heating", icon: Flame },
-  { key: "air-conditioning" as const, label: "Air Conditioning", icon: Wind },
+  { key: "commercial" as const, label: "Commercial", icon: Building2 },
+  { key: "domestic" as const, label: "Domestic", icon: Home },
 ];
 
 const propertyTypes = [

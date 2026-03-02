@@ -2,29 +2,38 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Shield, Award, Eye, Phone, Cpu } from "lucide-react";
+import {
+  Shield,
+  Clock,
+  Target,
+  MessageSquare,
+  CheckCircle,
+  Settings2,
+  ArrowRight,
+} from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
-import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMPANY } from "@/lib/constants";
-import { motion } from "framer-motion";
+import {
+  COMPANY,
+  KEY_STRENGTHS,
+  COMMITMENT_COPY,
+  SECTORS_SERVED,
+} from "@/lib/constants";
 
-const approach = [
-  {
-    icon: Shield,
-    title: "Reliability You Can Count On",
-    description: "We arrive on time, communicate clearly, and complete every job to a high standard — no exceptions.",
-  },
-  {
-    icon: Award,
-    title: "Fully Qualified Engineers",
-    description: "Gas Safe registered engineers with years of hands-on experience across all makes and models.",
-  },
-  {
-    icon: Eye,
-    title: "Honest, Transparent Pricing",
-    description: "You receive a clear, fixed quote before any work begins. No hidden charges, no surprises.",
-  },
+const STATS = [
+  { value: "10+", label: "Years experience" },
+  { value: "500+", label: "Jobs completed" },
+  { value: "4", label: "Areas covered" },
+  { value: "5.0", label: "Client rating" },
+];
+
+const WHY_CHOOSE_ITEMS = [
+  { icon: Clock, title: "24/7 capability", strength: KEY_STRENGTHS[0] },
+  { icon: Shield, title: "Health & Safety", strength: KEY_STRENGTHS[1] },
+  { icon: Target, title: "Client-focused", strength: KEY_STRENGTHS[2] },
+  { icon: Settings2, title: "Bespoke solutions", strength: KEY_STRENGTHS[3] },
+  { icon: MessageSquare, title: "Clear communication", strength: KEY_STRENGTHS[4] },
+  { icon: CheckCircle, title: "Quality & compliance", strength: KEY_STRENGTHS[5] },
 ];
 
 export default function AboutPage() {
@@ -32,178 +41,272 @@ export default function AboutPage() {
     <div className="bg-brand-surface text-brand-text">
       <PageHero
         title="About Us"
-        subtitle="DPS Heating Services Ltd — professional heating and air conditioning engineers serving London and the surrounding areas."
+        subtitle={`${COMPANY.name} — mechanical, electrical and gas services across ${COMPANY.areas}. Professional engineering you can rely on.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
         backgroundImage="/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg"
+        showCTA
+        ctaText="Talk to Us"
+        ctaHref="/contact"
         compact
       />
 
-      {/* Company Intro */}
-      <section className="py-48 relative overflow-hidden">
-        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-brand-red/5 blur-[200px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      {/* Intro + image collage */}
+      <section className="py-16 md:py-24 bg-brand-surface" aria-label="About DPS">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+              Our story
+            </span>
+            <h2 className="text-2xl md:text-3xl font-technical font-extrabold text-brand-text tracking-wider uppercase mb-6">
+              Engineering you can trust
+            </h2>
+            <p className="text-brand-muted text-sm md:text-base font-light leading-relaxed mb-6">
+              {COMPANY.vision}
+            </p>
+            <p className="text-brand-muted text-sm font-light leading-relaxed">
+              Founded in {COMPANY.founded} by {COMPANY.founder}, {COMPANY.name} delivers expert
+              mechanical, electrical, and gas services across domestic and commercial sectors.
+              With {COMPANY.industryExperience} of industry experience, we are committed to
+              exceptional workmanship, strict Health & Safety standards, and a responsive 24/7
+              service built on discipline, integrity, and reliability.
+            </p>
+          </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
-            <div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 border border-brand-red/20 bg-brand-red/5 backdrop-blur-md rounded-md px-5 py-2 mb-10"
-              >
-                <Cpu size={14} className="text-brand-red" />
-                <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                  Gas Safe Registered
-                </span>
-              </motion.div>
-
-              <h2 className="text-5xl md:text-7xl font-technical font-extrabold text-brand-text mb-10 tracking-widest leading-none uppercase">
-                Who We <br />
-                <span className="text-brand-muted/40">Are.</span>
-              </h2>
-
-              <div className="space-y-8 text-brand-muted font-light leading-relaxed text-sm uppercase tracking-wider">
-                <p>
-                  DPS Heating Services Ltd is a professional heating and air conditioning company
-                  serving {COMPANY.areas}. With over a decade of experience, we provide reliable,
-                  high-quality services to both domestic and commercial customers.
-                </p>
-                <p>
-                  Our team specialises in boiler installation, repair and servicing, central heating
-                  systems, and air conditioning — ensuring your home or business stays comfortable
-                  all year round.
-                </p>
-                <div className="border-l-2 border-brand-red pl-8 text-brand-text font-technical font-bold py-4 my-12 bg-brand-card">
-                  <p className="tracking-widest uppercase">Gas Safe Registered ({COMPANY.gasSafeNumber})</p>
-                  <p className="text-[10px] text-brand-muted mt-2 font-mono">FULLY INSURED // QUALIFIED ENGINEERS</p>
-                </div>
-              </div>
-
-              <div className="mt-16 grid grid-cols-2 gap-8">
-                <div className="bg-brand-navy border border-brand-card-border rounded-[2rem] p-10 text-left relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-red/5 blur-2xl group-hover:bg-brand-red/10 transition-colors" />
-                  <p className="text-6xl font-technical font-extrabold text-brand-red mb-4 tracking-tighter">10+</p>
-                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Years Experience</p>
-                </div>
-                <div className="bg-brand-navy border border-brand-card-border rounded-[2rem] p-10 text-left relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-brand-blue/5 blur-2xl group-hover:bg-brand-blue/10 transition-colors" />
-                  <p className="text-6xl font-technical font-extrabold text-brand-blue mb-4 tracking-tighter">500+</p>
-                  <p className="text-[9px] tracking-[0.4em] uppercase text-brand-muted font-bold font-technical">Jobs Completed</p>
-                </div>
-              </div>
+          {/* Engineering in action — plant room, boiler diagnostic, gas meter */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mt-12 md:mt-16">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-brand-card-border">
+              <Image
+                src="/images/about/plant-room-inspection.png"
+                alt="Engineer performing inspection on industrial boiler and plant room equipment"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                loading="lazy"
+              />
             </div>
-
-            {/* Engineering Schematic */}
-            <BlueprintBillboard
-              src="/images/blueprint-boiler-exploded.png"
-              alt="DPS Heating Services — boiler system exploded diagram"
-              theme="tech"
-              versionText="GAS SAFE REGISTERED"
-              idHash={`REG: ${COMPANY.gasSafeNumber}`}
-              statusText="OPERATIONAL"
-              className="w-full"
-            />
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-brand-card-border">
+              <Image
+                src="/images/about/boiler-diagnostic.png"
+                alt="Technician taking diagnostic readings on boiler with combustion analyzer"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                loading="lazy"
+              />
+            </div>
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-brand-card-border">
+              <Image
+                src="/images/about/gas-meter-inspection.png"
+                alt="Gas Safe engineer inspecting outdoor gas meter"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Our Approach */}
-      <section className="py-48 bg-brand-navy border-y border-brand-card-border relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-brand-blue/5 blur-[180px] rounded-full pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-32">
-            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
-              The <span className="text-brand-red">DPS Promise</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {approach.map((item, i) => (
-              <div key={item.title} className="bg-brand-surface rounded-[2.5rem] p-12 text-center border border-brand-card-border shadow-2xl hover:border-brand-red/30 transition-all duration-500 group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-red/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                <div className="w-24 h-24 bg-brand-navy border border-brand-card-border rounded-3xl flex items-center justify-center mx-auto mb-10 group-hover:bg-brand-red/10 group-hover:border-brand-red/30 transition-all duration-500 relative">
-                  <item.icon size={40} className="text-brand-text/20 group-hover:text-brand-red transition-all duration-500 relative z-10" />
-                </div>
-                <h3 className="text-xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase">
-                  {item.title}
-                </h3>
-                <p className="text-brand-muted text-xs leading-relaxed font-light uppercase tracking-wider">
-                  {item.description}
+      {/* Stats strip */}
+      <section className="py-12 md:py-16 bg-brand-steel border-y border-brand-card-border" aria-label="Key stats">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="text-3xl md:text-4xl font-technical font-extrabold text-brand-red tracking-tight">
+                  {stat.value}
                 </p>
-
-                <span className="absolute -bottom-4 -right-4 text-8xl font-technical font-black text-white/[0.02] pointer-events-none group-hover:text-brand-red/[0.05] transition-colors">
-                  0{i + 1}
-                </span>
+                <p className="text-[10px] font-technical font-bold uppercase tracking-widest text-brand-muted mt-1">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Engineers at Work Photo Section */}
-      <section className="py-48 bg-brand-surface border-t border-brand-card-border overflow-hidden">
+      {/* Our philosophy */}
+      <section className="py-16 md:py-24 bg-brand-surface" aria-label="Our philosophy">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+            What we stand for
+          </span>
+          <h2 className="text-2xl md:text-4xl font-technical font-extrabold text-brand-text tracking-wider uppercase mb-8">
+            Transparency, integrity, professionalism
+          </h2>
+          <p className="text-brand-muted text-sm md:text-base font-light leading-relaxed">
+            {COMMITMENT_COPY}
+          </p>
+          <p className="text-brand-muted text-sm font-light leading-relaxed mt-6">
+            {COMPANY.mission}
+          </p>
+        </div>
+      </section>
+
+      {/* Meet the founder */}
+      <section className="py-16 md:py-24 bg-brand-steel" aria-label="Meet the founder">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-24"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="relative aspect-square min-h-[280px] md:min-h-[360px] rounded-2xl overflow-hidden border border-brand-card-border">
+              <Image
+                src="/images/about/founder-800.jpg"
+                alt={`${COMPANY.founder}, Founder of ${COMPANY.name}`}
+                fill
+                className="object-cover object-right object-top"
+                sizes="(max-width: 768px) 100vw, min(50vw, 480px)"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+                Meet the founder
+              </span>
+              <h2 className="text-3xl md:text-4xl font-technical font-extrabold text-brand-text tracking-tight mb-6">
+                {COMPANY.founder}
+              </h2>
+              <p className="text-brand-muted text-sm md:text-base font-light leading-relaxed mb-4">
+                <span className="text-brand-text font-medium">Founder of {COMPANY.name}</span>
+                {" — "}
+                After a successful career in the corporate sector, {COMPANY.founder} established {COMPANY.name} with a clear
+                ambition: to deliver a truly bespoke mechanical, electrical, and gas service built on{" "}
+                <strong className="text-brand-text">discipline</strong>,{" "}
+                <strong className="text-brand-text">integrity</strong>, and{" "}
+                <strong className="text-brand-text">reliability</strong>.
+              </p>
+              <p className="text-brand-muted text-sm font-light leading-relaxed">
+                Today the company serves domestic and commercial clients across {COMPANY.areas},
+                with {COMPANY.industryExperience} of industry experience and a commitment to
+                exceptional workmanship and 24/7 availability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why choose us */}
+      <section className="py-16 md:py-24 bg-brand-surface" aria-label="Why choose us">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16">
             <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
-              Our Engineers
+              Why choose us?
             </span>
-            <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
-              Experienced. <span className="text-brand-muted/40">Qualified.</span>
+            <h2 className="text-3xl md:text-4xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+              What we deliver
             </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl border border-brand-card-border group"
-            >
-              <Image
-                src="/images/engineers-at-work.png"
-                alt="DPS engineers working on commercial heating installation"
-                width={600}
-                height={450}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/70 to-transparent">
-                <p className="text-white text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                  Commercial Heating Installation
-                </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {WHY_CHOOSE_ITEMS.map((item, i) => (
+              <div
+                key={item.title}
+                className="p-6 md:p-8 rounded-2xl border border-brand-card-border bg-brand-steel/50 hover:border-brand-red/20 transition-colors"
+              >
+                <div className="flex items-start gap-4">
+                  <span className="text-brand-red font-technical font-black text-2xl tabular-nums">
+                    {String(i + 1).padStart(2, "0")}.
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <item.icon size={18} className="text-brand-red shrink-0" />
+                      <h3 className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-widest">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-brand-muted text-sm font-light leading-relaxed">
+                      {item.strength}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative overflow-hidden rounded-3xl border border-brand-card-border group"
-            >
+      {/* Accreditations — same visual as homepage (Gas Safe, Next Level FC, SafeContractor) */}
+      <section className="py-16 md:py-20 bg-brand-navy border-y border-brand-card-border" aria-label="Accreditations and sponsorship">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="text-brand-red text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
+              Certified · Compliant
+            </span>
+            <h2 className="text-3xl md:text-4xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+              Accreditations & qualifications
+            </h2>
+          </div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16">
+            {/* Left: Gas Safe Register */}
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 order-2 md:order-1">
               <Image
-                src="/images/9687b2e0-9aaf-4272-adc5-52162cb88115.jpeg"
-                alt="DPS engineer team installing copper heating pipework"
-                width={600}
-                height={450}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                src="/images/gas-safe-register.png"
+                alt="Gas Safe Register"
+                fill
+                className="object-contain"
+                sizes="160px"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/70 to-transparent">
-                <p className="text-white text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
-                  Central Heating Pipework
-                </p>
+            </div>
+
+            {/* Center: Proud sponsor of Next Level FC */}
+            <div className="text-center order-1 md:order-2">
+              <p className="text-brand-text text-sm font-technical font-bold uppercase tracking-[0.4em] mb-8">
+                Proud sponsor of
+              </p>
+              <div className="flex flex-col items-center gap-6">
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 flex-shrink-0">
+                  <Image
+                    src="/images/next-level-fc.png"
+                    alt="Next Level FC"
+                    fill
+                    className="object-contain"
+                    sizes="176px"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-technical font-extrabold text-brand-text uppercase tracking-wider">
+                    Next Level FC
+                  </h3>
+                  <p className="text-brand-muted text-sm font-technical uppercase tracking-wider mt-1">
+                    Engineering the future on and off the pitch
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Right: SafeContractor */}
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 order-3">
+              <Image
+                src="/images/safe-contractor.png"
+                alt="SafeContractor Approved"
+                fill
+                className="object-contain"
+                sizes="160px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sectors served (compact) */}
+      <section className="py-12 bg-brand-surface" aria-label="Sectors served">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-brand-muted text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4">
+            Who we work with
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {SECTORS_SERVED.map((sector) => (
+              <span
+                key={sector}
+                className="px-4 py-2 bg-brand-red/10 text-brand-text text-xs font-technical font-bold uppercase tracking-wider rounded-full"
+              >
+                {sector}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
       <CTABanner
-        title="Get in Touch"
+        title="Get in touch"
         subtitle="Ready to book a service or get a free quote? Call us today or use our online form."
       />
     </div>

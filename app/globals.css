@@ -1,59 +1,86 @@
 @import "tailwindcss";
 
+/* Class-based dark mode so app theme toggle (data-theme + .dark) drives dark: utilities */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* Static accent colors — same in both themes */
   --color-brand-blue: #2563EB;
+  --color-brand-deep-blue: #0F172A;
   --color-brand-purple: #6B21A8;
-  --color-brand-red: #DC2626;
-  --color-brand-orange: #DC2626;
+  --color-brand-red: #d4af37;
+  --color-brand-orange: #F97316;
+  --color-brand-gradient-start: #d4af37;
+  --color-brand-gradient-end: #f4d03f;
 
   /* Font Families */
   --font-sans: var(--font-jakarta), system-ui, sans-serif;
   --font-technical: var(--font-space-grotesk), monospace;
   --font-heading: var(--font-space-grotesk), system-ui, sans-serif;
+
+  /* Roundedness - Modern Geometric */
+  --radius-mega: 2rem;
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
 }
 
-/* Theme-switching colors — dark defaults, overridden by [data-theme="light"] */
+/* Theme-switching colors — Ash Dark defaults */
 :root {
-  --color-brand-surface: #070707;
-  --color-brand-steel: #0A1128;
-  --color-brand-navy: #0A1128;
-  --color-brand-text: #FFFFFF;
+  --color-brand-surface: #121417;
+  /* Ash Charcoal */
+  --color-brand-steel: #1A1D21;
+  --color-brand-navy: #0F172A;
+  --color-brand-text: #F8FAFC;
   --color-brand-muted: #94A3B8;
-  --color-brand-border: rgba(255, 255, 255, 0.08);
-  --color-brand-card: rgba(255, 255, 255, 0.03);
-  --color-brand-card-border: rgba(255, 255, 255, 0.08);
-  --color-brand-card-hover: rgba(255, 255, 255, 0.05);
-  --color-brand-card-border-hover: rgba(255, 255, 255, 0.10);
+  --color-brand-border: rgba(255, 255, 255, 0.05);
+  --color-brand-card: rgba(255, 255, 255, 0.02);
+  --color-brand-card-border: rgba(255, 255, 255, 0.06);
+  --color-brand-card-hover: rgba(255, 255, 255, 0.04);
+  --color-brand-card-border-hover: rgba(255, 255, 255, 0.12);
   --color-brand-inverse: #000000;
 
-  --background: #070707;
-  --foreground: #FFFFFF;
+  --background: #121417;
+  --foreground: #F8FAFC;
 
   --hologram-hue: 160deg;
   --hologram-sat: 1.1;
   --hologram-bright: 1.2;
 
-  --scrollbar-track: #0A1128;
+  --scrollbar-track: #1A1D21;
 }
 
 [data-theme="light"] {
-  --color-brand-surface: #FFFFFF;
-  --color-brand-steel: #F1F5F9;
-  --color-brand-navy: #F8FAFC;
+  --color-brand-surface: #F0F7FF;
+  /* Light blue */
+  --color-brand-steel: #E6F0FA;
+  /* Slightly deeper light blue for sections */
+  --color-brand-navy: #0F172A;
   --color-brand-text: #0F172A;
+  /* Deep Blue Text */
   --color-brand-muted: #64748B;
-  --color-brand-border: rgba(0, 0, 0, 0.08);
-  --color-brand-card: rgba(0, 0, 0, 0.02);
-  --color-brand-card-border: rgba(0, 0, 0, 0.06);
-  --color-brand-card-hover: rgba(0, 0, 0, 0.04);
-  --color-brand-card-border-hover: rgba(0, 0, 0, 0.10);
-  --color-brand-inverse: #FFFFFF;
+  --color-brand-border: rgba(15, 23, 42, 0.08);
+  --color-brand-card: #F0F7FF;
+  --color-brand-card-border: rgba(15, 23, 42, 0.06);
+  --color-brand-card-hover: #E8F4FC;
+  --color-brand-card-border-hover: rgba(15, 23, 42, 0.12);
+  --color-brand-inverse: #F0F7FF;
 
-  --background: #FFFFFF;
+  --background: #F0F7FF;
   --foreground: #0F172A;
 
-  --scrollbar-track: #F1F5F9;
+  --scrollbar-track: #E6F0FA;
+}
+
+/* Force light blue in light mode so sections and body always use it (avoids cache/specificity issues) */
+[data-theme="light"] body {
+  background: #F0F7FF;
+}
+[data-theme="light"] .bg-brand-surface {
+  background-color: #F0F7FF;
+}
+[data-theme="light"] .bg-brand-steel {
+  background-color: #E6F0FA;
 }
 
 body {
@@ -70,7 +97,7 @@ body {
   left: -9999px;
   z-index: 999;
   padding: 1em;
-  background-color: #DC2626;
+  background-color: #d4af37;
   color: white;
   text-decoration: none;
 }
@@ -91,7 +118,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DC2626;
+  background: #d4af37;
   border-radius: 3px;
 }
 
@@ -103,16 +130,110 @@ body {
 
 /* Focus ring */
 *:focus-visible {
-  outline: 2px solid #DC2626;
+  outline: 2px solid #d4af37;
   outline-offset: 2px;
 }
 
+/* Chat panel — force fully opaque background (no transparency) */
+.chat-panel-opaque {
+  background: #121417 !important;
+}
+
+[data-theme="light"] .chat-panel-opaque {
+  background: #ffffff !important;
+}
+
+.chat-panel-opaque .chat-panel-inner,
+.chat-panel-opaque .chat-panel-messages {
+  background: #121417 !important;
+}
+
+[data-theme="light"] .chat-panel-opaque .chat-panel-inner,
+[data-theme="light"] .chat-panel-opaque .chat-panel-messages {
+  background: #ffffff !important;
+}
+
+.chat-panel-opaque .chat-panel-header,
+.chat-panel-opaque .chat-panel-form {
+  background: #1A1D21 !important;
+}
+
+[data-theme="light"] .chat-panel-opaque .chat-panel-header,
+[data-theme="light"] .chat-panel-opaque .chat-panel-form {
+  background: #F8FAFC !important;
+}
+
+.chat-panel-opaque .chat-panel-btn,
+.chat-panel-opaque .chat-panel-msg-assistant {
+  background: #0F172A !important;
+}
+
+[data-theme="light"] .chat-panel-opaque .chat-panel-btn,
+[data-theme="light"] .chat-panel-opaque .chat-panel-msg-assistant {
+  background: #E2E8F0 !important;
+}
+
+/* Quote modal — force fully opaque background (same pattern as chat panel) */
+.quote-modal-overlay {
+  background: #121417 !important;
+}
+
+[data-theme="light"] .quote-modal-overlay {
+  background: #ffffff !important;
+}
+
+.quote-modal-opaque {
+  background: #121417 !important;
+  border-radius: var(--radius-mega) !important;
+}
+
+[data-theme="light"] .quote-modal-opaque {
+  background: #ffffff !important;
+  border-radius: var(--radius-mega) !important;
+}
+
+.quote-modal-opaque .quote-modal-header {
+  background: #1A1D21 !important;
+}
+
+[data-theme="light"] .quote-modal-opaque .quote-modal-header {
+  background: #F8FAFC !important;
+}
+
+.quote-modal-opaque .quote-modal-content {
+  background: #121417 !important;
+}
+
+[data-theme="light"] .quote-modal-opaque .quote-modal-content {
+  background: #ffffff !important;
+}
+
+.quote-modal-opaque .quote-modal-input {
+  background: #0F172A !important;
+}
+
+[data-theme="light"] .quote-modal-opaque .quote-modal-input {
+  background: #E2E8F0 !important;
+}
+
 .glow-text {
-  text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+  text-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
 
 .glow-box {
-  box-shadow: 0 0 30px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);
+}
+
+.premium-shadow {
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+}
+
+.premium-shadow-hover {
+  box-shadow: 0 30px 60px -12px rgba(15, 23, 42, 0.12);
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand-gradient-start), var(--color-brand-gradient-end));
 }
 
 .glass-panel {
@@ -246,15 +367,180 @@ body {
   animation: gradient-x 8s ease infinite;
 }
 
-/* Scroll image sequence — theme-aware canvas rendering */
+/* Scroll image sequence — theme-aware canvas rendering.
+   Dark mode: no filter (match hero — raw image + opacity + overlay only).
+   Light mode: subtle contrast/brightness so frames read on light background. */
 .sequence-canvas {
-  /* grayscale → invert (white bg becomes black) → blue-teal hue tint → screen blend
-     White-background frames: bg disappears, parts glow as holographic components */
-  filter: grayscale(1) invert(1) brightness(1.3) contrast(1.1) hue-rotate(200deg) saturate(2);
-  mix-blend-mode: screen;
+  filter: none;
+  mix-blend-mode: normal;
 }
 
 [data-theme="light"] .sequence-canvas {
   filter: contrast(1.05) brightness(0.98);
   mix-blend-mode: normal;
+}
+
+/* Step cards and dots in How We Work — light mode use light backgrounds */
+[data-theme="light"] .sequence-step-card {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+[data-theme="light"] .sequence-step-icon,
+[data-theme="light"] .sequence-step-dot {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* ── Leaflet map overrides ─────────────────────────────── */
+@keyframes dps-ping {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  70%  { transform: scale(2.4); opacity: 0;   }
+  100% { transform: scale(2.4); opacity: 0;   }
+}
+
+/* Base container */
+.leaflet-container {
+  border-radius: inherit;
+  outline: none;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* ── Attribution ──────────────────────────────────────── */
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  opacity: 0.35 !important;
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+/* ── Zoom controls — dark mode ────────────────────────── */
+.leaflet-control-zoom {
+  border: none !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4) !important;
+}
+.leaflet-control-zoom a {
+  background: #1a1d21 !important;
+  color: rgba(255,255,255,0.7) !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  font-size: 16px !important;
+  font-weight: 300 !important;
+  width: 34px !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  transition: background 0.15s, color 0.15s !important;
+}
+.leaflet-control-zoom a:hover {
+  background: #d4af37 !important;
+  color: #ffffff !important;
+}
+.leaflet-control-zoom-out {
+  border-bottom: none !important;
+}
+
+/* ── Zoom controls — light mode ───────────────────────── */
+[data-theme="light"] .leaflet-control-zoom {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+}
+[data-theme="light"] .leaflet-control-zoom a {
+  background: #ffffff !important;
+  color: rgba(0,0,0,0.6) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+}
+[data-theme="light"] .leaflet-control-zoom a:hover {
+  background: #d4af37 !important;
+  color: #ffffff !important;
+}
+
+/* ── Popup — dark mode ────────────────────────────────── */
+.leaflet-popup-content-wrapper {
+  background: #1e2124 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important;
+  padding: 0 !important;
+}
+.leaflet-popup-tip-container {
+  margin-top: -1px;
+}
+.leaflet-popup-tip {
+  background: #1e2124 !important;
+  box-shadow: none !important;
+}
+.leaflet-popup-close-button {
+  color: rgba(255,255,255,0.35) !important;
+  top: 10px !important;
+  right: 12px !important;
+  font-size: 18px !important;
+  transition: color 0.15s !important;
+}
+.leaflet-popup-close-button:hover {
+  color: #d4af37 !important;
+}
+
+/* ── Popup — light mode ───────────────────────────────── */
+[data-theme="light"] .leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.14) !important;
+}
+[data-theme="light"] .leaflet-popup-tip {
+  background: #ffffff !important;
+}
+[data-theme="light"] .leaflet-popup-close-button {
+  color: rgba(0,0,0,0.3) !important;
+}
+[data-theme="light"] .leaflet-popup-close-button:hover {
+  color: #d4af37 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* ── Popup inner content ──────────────────────────────── */
+.dps-popup-inner {
+  padding: 16px 20px 14px;
+  min-width: 160px;
+}
+.dps-popup-title {
+  font-family: var(--font-space-grotesk, monospace);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #d4af37;
+  margin: 0 0 3px 0;
+}
+.dps-popup-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+[data-theme="light"] .dps-popup-sub {
+  color: rgba(0,0,0,0.38);
+}
+.dps-popup-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  background: #d4af37;
+  padding: 5px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.dps-popup-link:hover {
+  background: #dc2626;
+  color: #ffffff;
 }

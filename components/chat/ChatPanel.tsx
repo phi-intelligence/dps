@@ -34,10 +34,10 @@ export default function ChatPanel() {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 20 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className="flex flex-col w-full h-full bg-brand-surface border border-brand-card-border rounded-3xl shadow-2xl overflow-hidden"
+      className="chat-panel-inner flex flex-col w-full h-full rounded-2xl overflow-hidden"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-brand-card-border bg-brand-steel shrink-0">
+      <div className="chat-panel-header flex items-center justify-between px-5 py-4 border-b border-brand-card-border shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-3 h-3 rounded-full bg-brand-red animate-pulse" />
           <span className="font-technical font-bold text-brand-text text-sm tracking-widest uppercase">
@@ -52,7 +52,7 @@ export default function ChatPanel() {
       {/* Messages */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0"
+        className="chat-panel-messages flex-1 overflow-y-auto p-4 space-y-4 min-h-0"
       >
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center px-4">
@@ -65,7 +65,7 @@ export default function ChatPanel() {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="px-4 py-3 rounded-xl border border-brand-card-border-hover bg-brand-card hover:bg-brand-card-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
+                    className="chat-panel-btn px-4 py-3 rounded-xl border border-brand-card-border-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
                   >
                     {action.label}
                   </a>
@@ -73,7 +73,7 @@ export default function ChatPanel() {
                   <Link
                     key={action.label}
                     href={action.href}
-                    className="px-4 py-3 rounded-xl border border-brand-card-border-hover bg-brand-card hover:bg-brand-card-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
+                    className="chat-panel-btn px-4 py-3 rounded-xl border border-brand-card-border-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
                   >
                     {action.label}
                   </Link>
@@ -87,14 +87,14 @@ export default function ChatPanel() {
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-brand-card-border bg-brand-steel shrink-0">
+      <form onSubmit={handleSubmit} className="chat-panel-form p-4 border-t border-brand-card-border shrink-0">
         <div className="flex gap-3 items-center">
           <input
             ref={inputRef}
             type="text"
             placeholder="Type your message..."
             disabled={isStreaming}
-            className="flex-1 bg-brand-navy border border-brand-card-border-hover rounded-full px-5 py-3 text-brand-text text-sm placeholder-brand-muted/50 focus:outline-none focus:border-brand-red/50 transition-all disabled:opacity-60"
+            className="chat-panel-btn flex-1 border border-brand-card-border-hover rounded-full px-5 py-3 text-brand-text text-sm placeholder-brand-muted/50 focus:outline-none focus:border-brand-red/50 transition-all disabled:opacity-60"
             aria-label="Message"
           />
           <button

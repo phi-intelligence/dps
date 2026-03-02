@@ -30,7 +30,7 @@ export default function UrgentEnquiryPage() {
     <div className="bg-brand-surface text-brand-text min-h-screen">
       <PageHero
         title="Urgent Enquiries"
-        subtitle="For urgent heating and air conditioning problems, call us directly. We will do our best to help as quickly as possible."
+        subtitle={`Commercial & domestic gas, heating and plumbing — for urgent issues across ${COMPANY.areas}, call us directly.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Urgent Enquiries" }]}
         backgroundImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
         compact
@@ -38,7 +38,13 @@ export default function UrgentEnquiryPage() {
 
       {/* Phone CTA */}
       <section className="py-24 bg-brand-red relative overflow-hidden" aria-label="Call us for urgent help">
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-10 mix-blend-overlay" />
+        <div
+          className="absolute inset-0 opacity-10 mix-blend-overlay"
+          style={{
+            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <p className="text-white/80 text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-6">
             For urgent issues, call us directly
@@ -97,7 +103,7 @@ export default function UrgentEnquiryPage() {
       </section>
 
       {/* Form for non-critical issues */}
-      <section className="py-48 bg-brand-surface border-t border-brand-card-border">
+      <section className="py-48 bg-brand-surface">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-24">
             <h3 className="text-3xl md:text-5xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase">
