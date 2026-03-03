@@ -35,9 +35,11 @@ export const QUOTE_SERVICES = [
 interface QuoteFormProps {
   preselectedService?: string;
   compact?: boolean;
+  /** When "luxury", inputs and success state use gold/dark theme for use on dark cards */
+  theme?: "default" | "luxury";
 }
 
-export default function QuoteForm({ preselectedService = "", compact = false }: QuoteFormProps) {
+export default function QuoteForm({ preselectedService = "", compact = false, theme = "default" }: QuoteFormProps) {
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -68,8 +70,20 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
     setStatus("success");
   };
 
-  const inputClass =
-    "w-full bg-white dark:bg-brand-navy border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[14px] font-sans font-medium placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-sm";
+  const isLuxury = theme === "luxury";
+  const inputClass = isLuxury
+    ? "w-full bg-white/5 border border-white/10 rounded-xl px-6 py-5 text-white text-[14px] font-sans font-medium placeholder-white/40 focus:outline-none focus:border-[#e2c977]/50 transition-all"
+    : "w-full bg-white dark:bg-brand-navy border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[14px] font-sans font-medium placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-sm";
+  const labelClass = isLuxury ? "text-[10px] font-sans font-bold uppercase tracking-widest text-[#9aa3b0]" : "text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted";
+  const successClass = isLuxury
+    ? "absolute inset-0 z-50 border border-[#e2c977]/30 text-white px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center justify-center text-center gap-6 backdrop-blur-xl bg-[#0a0f14]/95"
+    : "absolute inset-0 z-50 bg-brand-navy border border-brand-red/30 text-brand-text px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center justify-center text-center gap-6 backdrop-blur-xl";
+  const successIconClass = isLuxury ? "w-16 h-16 rounded-full bg-[#e2c977]/20 flex items-center justify-center" : "w-16 h-16 rounded-full bg-brand-red/10 flex items-center justify-center";
+  const successCheckClass = isLuxury ? "text-[#e2c977] animate-pulse" : "text-brand-red animate-pulse";
+  const resetBtnClass = isLuxury ? "mt-4 text-[10px] font-technical font-bold text-[#e2c977] hover:text-white transition-colors uppercase tracking-widest" : "mt-4 text-[10px] font-technical font-bold text-brand-red hover:text-brand-text transition-colors uppercase tracking-widest";
+  const submitBtnClass = isLuxury
+    ? "group relative w-full bg-[#e2c977] text-[#0a0f14] py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-lg hover:bg-[#f5e9c6] disabled:opacity-50"
+    : "group relative w-full bg-brand-gradient text-white py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-xl shadow-brand-red/10 disabled:opacity-50";
 
   return (
     <div className="relative">
@@ -79,11 +93,11 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 z-50 bg-brand-navy border border-brand-red/30 text-brand-text px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center justify-center text-center gap-6 backdrop-blur-xl"
+            className={successClass}
             role="alert"
           >
-            <div className="w-16 h-16 rounded-full bg-brand-red/10 flex items-center justify-center">
-              <CheckCircle size={32} className="text-brand-red animate-pulse" />
+            <div className={successIconClass}>
+              <CheckCircle size={32} className={successCheckClass} />
             </div>
             <div>
               <p className="font-technical font-extrabold text-xl tracking-[0.2em] uppercase">Uplink Successful</p>
@@ -94,7 +108,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
             </div>
             <button
               onClick={() => setStatus("idle")}
-              className="mt-4 text-[10px] font-technical font-bold text-brand-red hover:text-brand-text transition-colors uppercase tracking-widest"
+              className={resetBtnClass}
             >
               Reset Terminal
             </button>
@@ -106,7 +120,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
         <div className={`grid gap-8 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
           <div>
             <div className="flex items-center gap-2 mb-3 ml-1">
-              <label htmlFor="name" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+              <label htmlFor="name" className={labelClass}>
                 Full Name
               </label>
             </div>
@@ -124,7 +138,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
           </div>
           <div>
             <div className="flex items-center gap-2 mb-3 ml-1">
-              <label htmlFor="phone" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+              <label htmlFor="phone" className={labelClass}>
                 Phone Number
               </label>
             </div>
@@ -144,7 +158,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <label htmlFor="email" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+            <label htmlFor="email" className={labelClass}>
               Email Address
             </label>
           </div>
@@ -163,7 +177,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <label htmlFor="service" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+            <label htmlFor="service" className={labelClass}>
               Required Service
             </label>
           </div>
@@ -177,20 +191,20 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
               className={`${inputClass} appearance-none cursor-pointer`}
             >
               {QUOTE_SERVICES.map((s) => (
-                <option key={s.value} value={s.value} className="bg-brand-navy text-brand-text uppercase text-[10px]">
+                <option key={s.value} value={s.value} className={isLuxury ? "bg-[#0d1319] text-white uppercase text-[10px]" : "bg-brand-navy text-brand-text uppercase text-[10px]"}>
                   {s.label}
                 </option>
               ))}
             </select>
             <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-30">
-              <Cpu size={14} className="text-brand-text" />
+              <Cpu size={14} className={isLuxury ? "text-[#e2c977]" : "text-brand-text"} />
             </div>
           </div>
         </div>
 
         <div>
           <div className="flex items-center gap-2 mb-3 ml-1">
-            <label htmlFor="message" className="text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted">
+            <label htmlFor="message" className={labelClass}>
               Additional Details
             </label>
           </div>
@@ -208,7 +222,7 @@ export default function QuoteForm({ preselectedService = "", compact = false }: 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="group relative w-full bg-brand-gradient text-white py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-xl shadow-brand-red/10 disabled:opacity-50"
+          className={submitBtnClass}
         >
           <div className="relative z-10 flex items-center justify-center gap-4 transition-colors">
             {status === "loading" ? (

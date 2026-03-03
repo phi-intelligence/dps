@@ -32,10 +32,10 @@ export default function CTABanner({
               src={backgroundImage}
               alt=""
               fill
-              className="object-cover object-center opacity-25 dark:opacity-20"
+              className="object-cover object-center opacity-30 dark:opacity-25"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-brand-surface/70 dark:bg-brand-surface/85" />
+            <div className="absolute inset-0 bg-[#05070b]/55 dark:bg-[#05070b]/75" />
           </div>
         </>
       ) : (
@@ -44,16 +44,16 @@ export default function CTABanner({
         </div>
       )}
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="bg-brand-surface dark:bg-brand-steel rounded-[2rem] p-12 md:p-24 relative overflow-hidden premium-shadow">
+        <div className="bg-white/80 dark:bg-brand-steel/90 rounded-[2rem] p-12 md:p-24 relative overflow-hidden premium-shadow backdrop-blur-xl border border-white/50">
           {/* Decorative Gradient Glows - Refined for geometric look */}
           <div className="absolute -top-32 -right-32 w-[30rem] h-[30rem] bg-brand-red/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute -bottom-32 -left-32 w-[30rem] h-[30rem] bg-brand-orange/5 rounded-full blur-[120px] pointer-events-none" />
           <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-7xl font-sans font-extrabold text-brand-text mb-8 tracking-tight">
+            <h2 className="text-4xl md:text-7xl font-sans font-extrabold text-[#10141a] mb-8 tracking-tight">
               {title}
             </h2>
 
-            <p className="text-brand-muted mb-12 max-w-2xl mx-auto font-medium leading-relaxed text-lg md:text-xl">
+            <p className="text-[#4a525a] mb-12 max-w-2xl mx-auto font-medium leading-relaxed text-lg md:text-xl">
               {subtitle}
             </p>
 
@@ -69,7 +69,7 @@ export default function CTABanner({
 
               <a
                 href={`tel:${COMPANY.phone}`}
-                className="flex items-center gap-3 text-brand-text hover:text-brand-red transition-all font-bold text-lg"
+                className="flex items-center gap-3 text-[#111518] hover:text-[#b8963a] transition-all font-bold text-lg"
               >
                 <Phone size={24} className="text-brand-red" />
                 <span>{COMPANY.phone}</span>

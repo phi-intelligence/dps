@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,19 +12,44 @@ import { useContent } from "@/lib/content-provider";
 export default function Header() {
   const { company, nav: navLinks } = useContent();
   const [scrolled, setScrolled] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const current = window.scrollY || 0;
+      const last = lastScrollYRef.current;
+      const heroThreshold = window.innerHeight * 0.6;
+
+      setScrolled(current > 20);
+
+      const scrollingDown = current > last + 4;
+      const scrollingUp = current < last - 4;
+
+      if (current < heroThreshold) {
+        // Always show header while within hero region
+        setShowHeader(true);
+      } else if (scrollingUp) {
+        // Reveal on slight upward scroll after hero
+        setShowHeader(true);
+      } else if (scrollingDown && !mobileOpen) {
+        // Hide when scrolling down past hero (unless menu is open)
+        setShowHeader(false);
+      }
+
+      lastScrollYRef.current = current;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -40,23 +65,35 @@ export default function Header() {
 
   return (
     <header
-      className={`absolute top-0 left-0 right-0 z-[70] transition-all duration-500 py-4 sm:py-6 max-lg:bg-brand-surface max-lg:shadow-md ${scrolled || mobileOpen ? "bg-brand-surface/95 backdrop-blur-md shadow-lg" : "lg:py-6"}`}
+      className={`fixed top-0 left-0 right-0 z-[70] transform transition-transform duration-400 py-3 sm:py-4 backdrop-blur-xl border-b border-white/10 ${
+        scrolled || mobileOpen
+          ? "bg-[#05080c]/95 shadow-lg"
+          : "bg-[#05080c]/85 shadow-md"
+      } ${showHeader || mobileOpen ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-12">
         <div
-          className={`flex items-center justify-between transition-all duration-500 rounded-xl md:rounded-2xl px-4 md:px-16 py-4 md:py-6 ${scrolled
-              ? "bg-brand-surface/40 backdrop-blur-md shadow-lg"
-              : "bg-transparent"
-            } ${!scrolled && "lg:bg-transparent"} max-lg:!bg-brand-surface max-lg:rounded-none max-lg:shadow-none`}
+          className="flex items-center justify-between transition-all duration-500 rounded-xl md:rounded-2xl px-4 md:px-16 py-3 md:py-4 bg-transparent"
         >
-          {/* Logo Section — compact on mobile */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
-            <Image src="/images/logo.png" alt={company.name} width={40} height={48} loading="eager" className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0" style={{ width: "auto", height: "auto", maxHeight: "40px" }} />
-            <div className="min-w-0">
-              <span className="font-technical font-extrabold text-brand-text text-base sm:text-xl md:text-2xl tracking-tight leading-none block uppercase truncate">
-                {company.name}
+          {/* Logo Section — flame + two-line name + tagline; sizes balanced to fit a compact rectangle */}
+          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
+            <Image
+              src="/images/logo.png"
+              alt={company.name}
+              width={32}
+              height={40}
+              loading="eager"
+              className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0 h-8 sm:h-9 md:h-10 w-auto"
+            />
+            <div className="min-w-0 flex flex-col justify-center py-0.5">
+              <span className="font-technical font-bold text-[11px] sm:text-xs md:text-sm tracking-tight leading-tight uppercase text-white block">
+                DPS HEATING
               </span>
-              <span className="hidden sm:block text-xs font-sans font-medium text-brand-muted tracking-tight mt-0.5">
+              <span className="font-technical font-bold text-[11px] sm:text-xs md:text-sm tracking-tight leading-tight uppercase text-white block">
+                SERVICES LTD
+              </span>
+              <span className="hidden sm:block h-px bg-white/30 my-0.5 w-full max-w-[100px] md:max-w-[110px]" aria-hidden />
+              <span className="hidden sm:block text-[9px] sm:text-[10px] font-technical font-medium uppercase tracking-[0.18em] text-white/80 leading-tight">
                 DESIGN • ENGINEER • MAINTAIN
               </span>
             </div>
@@ -74,7 +111,7 @@ export default function Header() {
                   >
                     <Link
                       href={link.href}
-                      className="flex items-center gap-2 text-brand-muted hover:text-brand-text transition-all text-sm font-technical uppercase tracking-widest font-bold"
+                      className="flex items-center gap-2 text-[#e5edf7] hover:text-white transition-all text-sm font-technical uppercase tracking-widest font-bold"
                     >
                       {link.label}
                       <ChevronDown
@@ -109,7 +146,7 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-brand-muted hover:text-brand-text transition-all text-sm font-technical uppercase tracking-widest font-bold relative group"
+                    className="text-[#e5edf7] hover:text-white transition-all text-sm font-technical uppercase tracking-widest font-bold relative group"
                   >
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-red transition-all group-hover:w-full" />
@@ -120,16 +157,19 @@ export default function Header() {
 
           {/* Right: Theme Toggle + Admin */}
           <div className="hidden lg:flex items-center gap-6">
-            <button
-              onClick={toggleTheme}
-              className="w-9 h-9 rounded-full border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-text hover:border-brand-card-border-hover transition-all"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
+            {/* Theme toggle temporarily hidden */}
+            {false && (
+              <button
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-full border border-white/15 bg-white/5 flex items-center justify-center text-[#e5edf7] hover:text-[#facc6b] hover:border-[#facc6b]/70 transition-all"
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              >
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+              </button>
+            )}
             <Link
               href="/admin/login"
-              className="w-9 h-9 rounded-xl border border-brand-card-border bg-brand-card flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red transition-all"
+              className="w-9 h-9 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-[#e5edf7] hover:text-[#facc6b] hover:border-[#facc6b]/70 transition-all"
               title="Admin Terminal"
             >
               <ShieldCheck size={16} />
@@ -138,7 +178,7 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="lg:hidden text-brand-text p-2"
+            className="lg:hidden text-white p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -168,13 +208,7 @@ export default function Header() {
                       Menu
                     </span>
                     <div className="flex items-center gap-3">
-                      <button
-                        onClick={toggleTheme}
-                        className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-[#94A3B8] hover:text-[#F8FAFC] transition-all"
-                        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-                      >
-                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                      </button>
+                      {/* Mobile theme toggle temporarily hidden */}
                       <button
                         onClick={() => setMobileOpen(false)}
                         className="w-10 h-10 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-[#F8FAFC] hover:text-[#d4af37] transition-all"

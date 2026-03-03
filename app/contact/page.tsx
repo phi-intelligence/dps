@@ -1,6 +1,6 @@
 "use client";
 
-import { Phone, Mail, Clock, AlertTriangle, Zap } from "lucide-react";
+import { Phone, Mail, Clock, MapPin, AlertTriangle, Zap } from "lucide-react";
 import QuoteForm from "@/components/ui/QuoteForm";
 import PageHero from "@/components/ui/PageHero";
 import { COMPANY } from "@/lib/constants";
@@ -8,40 +8,70 @@ import { motion } from "framer-motion";
 
 export default function ContactPage() {
   return (
-    <div className="bg-brand-surface text-brand-text min-h-screen">
+    <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
       <PageHero
         title="Contact Us"
         subtitle="Get in touch for a free, no-obligation quote or to book a service. We aim to respond to all enquiries within one working day."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
         backgroundImage="/images/blueprints/blueprint-1.png"
+        variant="luxury"
+        darkHero
         compact
       />
 
-      {/* Main Quote Form & Details */}
-      <section className="py-24" aria-label="Contact and quote request">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-24 items-start">
+      {/* Main Quote Form & Details — light band, luxury dark cards */}
+      <section className="relative py-20 md:py-24 bg-[#f7f3ea] overflow-hidden" aria-label="Contact and quote request">
+        {/* Geometric background */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-40 top-12 h-56 w-72 rotate-6 rounded-[3rem] border border-[#e2c977]/25 bg-[#e2c977]/5" />
+          <div className="absolute -left-40 bottom-12 h-48 w-64 -rotate-6 rounded-[3rem] border border-[#e2c977]/20 bg-[#e2c977]/5" />
+          <div className="absolute right-1/4 top-1/4 h-32 w-40 rotate-12 rounded-[2rem] border border-[#d4af37]/20" />
+          <div className="absolute left-1/4 bottom-1/3 h-28 w-36 -rotate-6 rounded-[2rem] border border-[#e2c977]/15" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-[#e2c977]/20 to-transparent" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
 
-            {/* Left: Contact Info */}
-            <div className="lg:col-span-2 space-y-10">
+            {/* Left: Contact Info — two combined cards in a column */}
+            <div className="lg:col-span-2 flex flex-col gap-8">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="bg-brand-navy border border-brand-card-border rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden group"
+                className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0a0f14] to-[#0d1319] p-10 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-red/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-16 h-16 bg-brand-card border border-brand-card-border-hover rounded-2xl flex items-center justify-center mb-8 group-hover:border-brand-red/30 transition-all">
-                  <Phone size={28} className="text-brand-red" />
+                <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-28 rotate-6 border border-white/10 rounded-[2rem] opacity-40" />
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-16 h-16 rounded-2xl border border-[#e2c977]/40 bg-white/5 flex items-center justify-center shrink-0">
+                    <Phone size={28} className="text-[#e2c977]" />
+                  </div>
+                  <div className="w-16 h-16 rounded-2xl border border-[#e2c977]/40 bg-white/5 flex items-center justify-center shrink-0">
+                    <Mail size={28} className="text-[#e2c977]" />
+                  </div>
                 </div>
-                <h2 className="font-technical font-extrabold text-brand-text text-xl mb-4 tracking-widest uppercase">Call Us</h2>
-                <a
-                  href={`tel:${COMPANY.phone}`}
-                  className="text-brand-text font-technical font-extrabold text-3xl hover:text-brand-red transition-colors inline-block mb-6 tracking-tighter"
-                >
-                  {COMPANY.phone}
-                </a>
-                <p className="text-brand-muted text-[10px] font-technical uppercase tracking-[0.2em]">Speak directly with our team for urgent enquiries.</p>
+                <h2 className="font-technical font-extrabold text-white text-xl mb-6 tracking-[0.2em] uppercase">Call & Email</h2>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Call</p>
+                    <a
+                      href={`tel:${COMPANY.phone}`}
+                      className="text-white font-technical font-extrabold text-2xl md:text-3xl hover:text-[#e2c977] transition-colors inline-block tracking-tight"
+                    >
+                      {COMPANY.phone}
+                    </a>
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mt-1">Speak directly for urgent enquiries.</p>
+                  </div>
+                  <div className="border-t border-white/10 pt-6">
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Email</p>
+                    <a
+                      href={`mailto:${COMPANY.email}`}
+                      className="text-white font-technical font-extrabold text-lg hover:text-[#e2c977] transition-colors inline-block break-all tracking-wide"
+                    >
+                      {COMPANY.email}
+                    </a>
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mt-1">We aim to reply within one working day.</p>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
@@ -49,78 +79,55 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="bg-brand-navy border border-brand-card-border rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden group"
+                className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#0a0f14] to-[#0d1319] p-10 relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-16 h-16 bg-brand-card border border-brand-card-border-hover rounded-2xl flex items-center justify-center mb-8 group-hover:border-brand-blue/30 transition-all">
-                  <Mail size={28} className="text-brand-blue" />
-                </div>
-                <h2 className="font-technical font-extrabold text-brand-text text-xl mb-4 tracking-widest uppercase">Email Us</h2>
-                <a
-                  href={`mailto:${COMPANY.email}`}
-                  className="text-brand-text font-technical font-extrabold text-lg hover:text-brand-blue transition-colors inline-block mb-6 break-all tracking-widest"
-                >
-                  {COMPANY.email}
-                </a>
-                <p className="text-brand-muted text-[10px] font-technical uppercase tracking-[0.2em]">We aim to reply within one working day.</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="bg-brand-navy border border-brand-card-border rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden group"
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-purple/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-16 h-16 bg-brand-card border border-brand-card-border-hover rounded-2xl flex items-center justify-center mb-8 group-hover:border-brand-purple/30 transition-all">
-                  <Clock size={28} className="text-brand-purple" />
-                </div>
-                <h2 className="font-technical font-extrabold text-brand-text text-xl mb-6 tracking-widest uppercase">Opening Hours</h2>
-                <div className="space-y-4 text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-brand-muted">
-                  <div className="flex justify-between border-b border-brand-card-border pb-3">
-                    <span>Mon–Fri</span>
-                    <span className="text-brand-text">08:00 – 18:00</span>
+                <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-28 rotate-6 border border-white/10 rounded-[2rem] opacity-40" />
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-16 h-16 rounded-2xl border border-[#e2c977]/40 bg-white/5 flex items-center justify-center shrink-0">
+                    <Clock size={28} className="text-[#e2c977]" />
                   </div>
-                  <div className="flex justify-between border-b border-brand-card-border pb-3">
-                    <span>Saturday</span>
-                    <span className="text-brand-text">09:00 – 13:00</span>
-                  </div>
-                  <div className="flex justify-between text-brand-muted">
-                    <span>Sunday</span>
-                    <span>Closed</span>
+                  <div className="w-16 h-16 rounded-2xl border border-[#e2c977]/40 bg-white/5 flex items-center justify-center shrink-0">
+                    <MapPin size={28} className="text-[#e2c977]" />
                   </div>
                 </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.25 }}
-                className="bg-brand-navy border border-brand-card-border rounded-[2.5rem] p-10 shadow-2xl"
-              >
-                <h2 className="font-technical font-extrabold text-brand-text text-xl mb-4 tracking-widest uppercase">Location</h2>
-                <p className="text-brand-muted text-sm font-technical uppercase tracking-wider">{COMPANY.address}</p>
+                <h2 className="font-technical font-extrabold text-white text-xl mb-6 tracking-[0.2em] uppercase">Hours & Location</h2>
+                <div className="space-y-6">
+                  <div>
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Opening hours</p>
+                    <p className="text-white font-technical font-extrabold text-2xl md:text-3xl tracking-tight">24/7</p>
+                    <p className="text-[#9aa3b0] text-sm font-technical uppercase tracking-wider leading-relaxed mt-1">
+                      Every day of the week — emergency callouts and enquiries welcome.
+                    </p>
+                  </div>
+                  <div className="border-t border-white/10 pt-6">
+                    <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Location</p>
+                    <p className="text-white font-technical font-extrabold text-lg md:text-xl tracking-tight">
+                      Across London, Kent, Essex and Surrey
+                    </p>
+                    <p className="text-[#9aa3b0] text-sm font-technical uppercase tracking-wider leading-relaxed mt-1">
+                      Local engineers with fast response across our coverage area.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
 
             {/* Right: Quote Form */}
-            <div className="lg:col-span-3 bg-brand-navy rounded-[3rem] p-12 md:p-20 shadow-2xl border border-brand-card-border relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 blur-[150px] rounded-full pointer-events-none" />
+            <div className="lg:col-span-3 rounded-[2.25rem] border border-white/10 bg-gradient-to-br from-[#0a0f14] to-[#0d1319] p-12 md:p-20 relative overflow-hidden">
+              <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-48 rotate-6 border border-white/10 rounded-[2rem] opacity-30" />
 
               <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-red/20 bg-brand-red/5 mb-8">
-                  <Zap size={12} className="text-brand-red" />
-                  <span className="text-[9px] font-technical font-bold text-brand-red uppercase tracking-[0.3em]">Free Quote — No Obligation</span>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#e2c977]/30 bg-[#e2c977]/10 mb-8">
+                  <Zap size={12} className="text-[#e2c977]" />
+                  <span className="text-[10px] font-technical font-bold text-[#e2c977] uppercase tracking-[0.25em]">Free Quote — No Obligation</span>
                 </div>
 
-                <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase leading-none">Request a Quote</h2>
-                <p className="text-brand-muted text-xs font-light leading-relaxed mb-16 uppercase tracking-wider max-w-xl">
+                <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white mb-6 tracking-[0.2em] uppercase leading-none">Request a Quote</h2>
+                <p className="text-[#b3c0d0] text-sm leading-relaxed mb-16 uppercase tracking-wider max-w-xl">
                   Fill in the form below and we will get back to you with a clear, no-obligation quote as soon as possible.
                 </p>
 
-                <QuoteForm />
+                <QuoteForm theme="luxury" />
               </div>
             </div>
 
@@ -128,37 +135,34 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Urgent Enquiry Strip */}
-      <section className="py-24 bg-brand-red border-y border-white/10 relative overflow-hidden" aria-label="Urgent enquiry">
-        <div
-          className="absolute inset-0 opacity-10 mix-blend-overlay"
-          style={{
-            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
+      {/* Urgent Enquiry Strip — dark band, gold CTA */}
+      <section className="relative py-24 md:py-28 overflow-hidden" aria-label="Urgent enquiry">
+        <div className="absolute inset-0 bg-[#0b1015]" />
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#e2c977] to-transparent opacity-80" />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute right-0 top-1/4 h-40 w-56 -rotate-6 rounded-[2rem] border border-[#e2c977]/10" />
+          <div className="absolute left-0 bottom-1/4 h-36 w-48 rotate-6 rounded-[2rem] border border-white/5" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="flex items-center gap-8">
-            <div className="w-20 h-20 bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center shrink-0">
-              <AlertTriangle size={36} className="text-white animate-pulse" />
+            <div className="w-20 h-20 rounded-2xl border border-[#e2c977]/30 bg-white/5 flex items-center justify-center shrink-0">
+              <AlertTriangle size={36} className="text-[#e2c977] animate-pulse" />
             </div>
             <div>
-              <h2 className="text-3xl md:text-5xl font-technical font-extrabold text-white tracking-widest uppercase mb-2">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-technical font-extrabold text-white tracking-[0.2em] uppercase mb-2">
                 Urgent Issue?
               </h2>
-              <p className="text-white/80 text-[10px] font-technical font-bold uppercase tracking-[0.4em]">
+              <p className="text-[#b3c0d0] text-sm font-technical font-bold uppercase tracking-[0.3em]">
                 Call us directly for urgent heating and plumbing issues.
               </p>
             </div>
           </div>
           <a
             href={`tel:${COMPANY.phone}`}
-            className="group relative bg-white text-black px-12 py-6 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.3em] overflow-hidden shadow-2xl transition-all hover:scale-105"
+            className="inline-flex items-center gap-3 bg-[#e2c977] text-[#0a0f14] px-12 py-6 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.3em] hover:bg-[#f5e9c6] transition-colors shadow-lg"
           >
-            <span className="relative z-10 transition-colors group-hover:text-brand-red flex items-center gap-4">
-              <Phone size={20} className="animate-pulse" />
-              {COMPANY.phone}
-            </span>
+            <Phone size={20} />
+            {COMPANY.phone}
           </a>
         </div>
       </section>

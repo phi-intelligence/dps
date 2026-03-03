@@ -19,7 +19,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
         Skip to main content
       </a>
       <Header />
-      <main id="main-content" className="relative z-10">
+      <main id="main-content" className="relative z-10 pt-20 md:pt-24">
         {children}
       </main>
       <Footer />
