@@ -74,6 +74,7 @@ export default function DomesticElectricalServicesPage() {
         { label: "Domestic" },
       ]}
       serviceValue="electrical-domestic"
+      theme="luxury"
       accentColor="blue"
     />
   );

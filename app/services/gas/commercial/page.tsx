@@ -117,6 +117,7 @@ export default function CommercialGasServicesPage() {
       ]}
       serviceValue="gas-commercial"
       showGasSafeNote
+      theme="luxury"
       accentColor="red"
     />
   );

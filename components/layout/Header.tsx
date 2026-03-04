@@ -75,27 +75,18 @@ export default function Header() {
         <div
           className="flex items-center justify-between transition-all duration-500 rounded-xl md:rounded-2xl px-4 md:px-16 py-3 md:py-4 bg-transparent"
         >
-          {/* Logo Section — flame + two-line name + tagline; sizes balanced to fit a compact rectangle */}
-          <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group min-w-0">
-            <Image
-              src="/images/logo.png"
-              alt={company.name}
-              width={32}
-              height={40}
-              loading="eager"
-              className="object-contain transition-transform group-hover:scale-105 duration-300 shrink-0 h-8 sm:h-9 md:h-10 w-auto"
-            />
-            <div className="min-w-0 flex flex-col justify-center py-0.5">
-              <span className="font-technical font-bold text-[11px] sm:text-xs md:text-sm tracking-tight leading-tight uppercase text-white block">
-                DPS HEATING
-              </span>
-              <span className="font-technical font-bold text-[11px] sm:text-xs md:text-sm tracking-tight leading-tight uppercase text-white block">
-                SERVICES LTD
-              </span>
-              <span className="hidden sm:block h-px bg-white/30 my-0.5 w-full max-w-[100px] md:max-w-[110px]" aria-hidden />
-              <span className="hidden sm:block text-[9px] sm:text-[10px] font-technical font-medium uppercase tracking-[0.18em] text-white/80 leading-tight">
-                DESIGN • ENGINEER • MAINTAIN
-              </span>
+          {/* Logo Section — using full lockup image */}
+          <Link href="/" className="flex items-center group min-w-0">
+            <div className="relative h-9 sm:h-10 md:h-14 w-auto">
+              <Image
+                src="/imagesV2/logo_full_light_nobg.png"
+                alt={company.name}
+                width={210}
+                height={48}
+                loading="eager"
+                className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                priority
+              />
             </div>
           </Link>
 

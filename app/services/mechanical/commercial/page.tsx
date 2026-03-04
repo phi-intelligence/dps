@@ -116,6 +116,7 @@ export default function CommercialMechanicalServicesPage() {
         { label: "Commercial" },
       ]}
       serviceValue="mechanical-commercial"
+      theme="luxury"
       accentColor="red"
     />
   );

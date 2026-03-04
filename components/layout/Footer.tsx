@@ -23,15 +23,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-4 mb-8 group">
-              <Image src="/images/logo.png" alt="DPS Heating" width={40} height={48} className="object-contain" style={{ width: "auto", height: "auto" }} />
-              <div>
-                <span className="font-technical font-extrabold text-brand-text text-xl tracking-[0.2em] uppercase block leading-none">
-                  DPS <span className="text-brand-red">HEATING</span>
-                </span>
-                <span className="text-[8px] font-mono text-brand-muted tracking-[0.4em] uppercase mt-1 block">
-                  DESIGN • ENGINEER • MAINTAIN
-                </span>
+            <Link href="/" className="flex items-center mb-8 group">
+              <div className="relative h-14 sm:h-10 md:h-20 w-auto">
+                <Image
+                  src="/imagesV2/logo_full_light_nobg.png"
+                  alt={company.name}
+                  width={210}
+                  height={48}
+                  className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                />
               </div>
             </Link>
 

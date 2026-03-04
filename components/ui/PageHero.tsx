@@ -196,7 +196,20 @@ export default function PageHero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className={`text-5xl md:text-8xl font-technical font-extrabold mb-10 tracking-widest uppercase leading-none ${
-              isDarkHero || (luxuryWithImage && (title === "Portfolio" || title === "About Us" || title === "Service Areas" || title === "Contact Us"))
+              isDarkHero ||
+              (luxuryWithImage &&
+                (title === "Portfolio" ||
+                  title === "About Us" ||
+                  title === "Service Areas" ||
+                  title === "Contact Us" ||
+                  title === "Commercial Services" ||
+                  title === "Domestic Services" ||
+                  title === "Domestic Plumbing & Heating" ||
+                  title === "Commercial Mechanical Services" ||
+                  title === "Commercial Electrical Services" ||
+                  title === "Commercial Gas Services" ||
+                  title === "Domestic Gas Services" ||
+                  title === "Domestic Electrical Services"))
                 ? isDarkHero
                   ? "text-[#e2c977]"
                   : "text-[#b8963a]"
@@ -215,7 +228,15 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className={`text-sm md:text-base mb-16 max-w-2xl leading-relaxed uppercase tracking-[0.35em] ${isDarkHero ? "text-[#b3c0d0] font-medium" : luxuryWithImage ? "text-[#2b3136] font-semibold" : hasImage ? "text-white/70 font-light" : "text-brand-muted font-light"}`}
+              className={`text-sm md:text-base mb-16 max-w-2xl leading-relaxed uppercase tracking-[0.35em] ${
+                isDarkHero
+                  ? "text-[#b3c0d0] font-medium"
+                  : luxuryWithImage
+                  ? "text-[#1f252b] font-bold"
+                  : hasImage
+                  ? "text-white/70 font-light"
+                  : "text-brand-muted font-light"
+              }`}
             >
               {subtitle}
             </motion.p>

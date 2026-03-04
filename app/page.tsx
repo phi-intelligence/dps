@@ -144,11 +144,11 @@ export default function HomePage() {
                   </button>
 
                   <a
-                    href={`tel:${COMPANY.phone}`}
+                    href="tel:+442071234567"
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-xs font-technical font-bold uppercase tracking-[0.3em] text-white/90 backdrop-blur transition-all hover:bg-white/10 hover:border-[#e2c977]/40"
                   >
                     <Phone size={16} className="text-[#e2c977]" />
-                    Call {COMPANY.phone}
+                    020&nbsp;7123&nbsp;4567
                   </a>
 
                   <Link

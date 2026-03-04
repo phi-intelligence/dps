@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { createPortal } from "react-dom";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
@@ -12,7 +11,7 @@ export interface FAQItem {
 
 export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {faqs.map((faq) => (
         <FAQItemComponent key={faq.question} {...faq} />
       ))}
@@ -22,71 +21,39 @@ export default function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
 
 function FAQItemComponent({ question, answer }: FAQItem) {
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const [buttonRect, setButtonRect] = useState<DOMRect | null>(null);
-
-  useEffect(() => {
-    if (open && buttonRef.current) {
-      const updateRect = () => {
-        if (buttonRef.current) setButtonRect(buttonRef.current.getBoundingClientRect());
-      };
-      updateRect();
-      window.addEventListener("scroll", updateRect, { passive: true });
-      window.addEventListener("resize", updateRect);
-      return () => {
-        window.removeEventListener("scroll", updateRect);
-        window.removeEventListener("resize", updateRect);
-      };
-    }
-    if (!open && buttonRect !== null) {
-      const t = setTimeout(() => setButtonRect(null), 300);
-      return () => clearTimeout(t);
-    }
-  }, [open, buttonRect]);
-
-  const portaledContent =
-    typeof document !== "undefined" &&
-    buttonRect &&
-    createPortal(
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden fixed left-0 right-0 z-[60] bg-brand-navy border-x border-b border-brand-card-border-hover rounded-b-xl shadow-sm"
-            style={{
-              top: buttonRect.bottom,
-              left: buttonRect.left,
-              width: buttonRect.width,
-            }}
-          >
-            <p className="px-6 py-4 text-brand-muted text-sm leading-relaxed">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>,
-      document.body
-    );
-
   return (
-    <div className="border border-brand-border rounded-xl overflow-hidden">
+    <div className="rounded-2xl border border-[#e0d3b8]/80 bg-white/70 shadow-sm overflow-hidden">
       <button
-        ref={buttonRef}
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-4 text-left bg-brand-navy hover:bg-brand-surface transition-colors"
+        className="w-full flex items-center justify-between px-6 py-4 text-left bg-transparent hover:bg-white transition-colors"
         aria-expanded={open}
       >
-        <span className="font-semibold text-brand-text">{question}</span>
+        <span className="font-technical font-semibold text-sm md:text-base tracking-[0.12em] uppercase text-[#171b1f]">
+          {question}
+        </span>
         <ChevronDown
           size={20}
-          className={`text-brand-muted shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`text-[#b3c0d0] shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
         />
       </button>
-      {portaledContent}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="overflow-hidden border-t border-[#e0d3b8]/70 bg-white/90"
+          >
+            <div className="px-6 py-4">
+              <p className="text-sm md:text-[15px] leading-relaxed text-[#3c444b]">
+                {answer}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

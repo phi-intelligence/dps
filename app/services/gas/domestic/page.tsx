@@ -105,6 +105,7 @@ export default function DomesticGasServicesPage() {
       ]}
       serviceValue="gas-domestic"
       showGasSafeNote
+      theme="luxury"
       accentColor="red"
     />
   );

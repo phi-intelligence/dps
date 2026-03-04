@@ -77,10 +77,22 @@ export default function ProcessSteps({
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-brand-red/20 bg-brand-red/5 mb-3 sm:mb-6 md:mb-8"
+          className={`inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-3 sm:mb-6 md:mb-8 ${
+            dark
+              ? "border border-[#e2c977]/40 bg-white/10"
+              : "border border-brand-red/20 bg-brand-red/5"
+          }`}
         >
-          <div className="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse" />
-          <span className="text-[9px] sm:text-[10px] font-technical font-bold uppercase tracking-[0.35em] sm:tracking-[0.4em] text-brand-red">
+          <div
+            className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+              dark ? "bg-[#e2c977]" : "bg-brand-red"
+            }`}
+          />
+          <span
+            className={`text-[9px] sm:text-[10px] font-technical font-bold uppercase tracking-[0.35em] sm:tracking-[0.4em] ${
+              dark ? "text-[#b8963a]" : "text-brand-red"
+            }`}
+          >
             Our Process
           </span>
         </motion.div>
@@ -89,7 +101,9 @@ export default function ProcessSteps({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-technical font-extrabold mb-3 sm:mb-6 md:mb-8 text-brand-text tracking-wider uppercase px-1 sm:px-2"
+          className={`text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-technical font-extrabold mb-3 sm:mb-6 md:mb-8 tracking-wider uppercase px-1 sm:px-2 ${
+            dark ? "text-[#171b1f]" : "text-brand-text"
+          }`}
         >
           {title}
         </motion.h2>
@@ -98,16 +112,24 @@ export default function ProcessSteps({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-[11px] sm:text-sm font-light max-w-2xl mx-auto uppercase tracking-[0.15em] sm:tracking-[0.2em] text-brand-muted px-1 sm:px-2 leading-snug"
+          className={`text-[11px] sm:text-sm max-w-2xl mx-auto uppercase tracking-[0.15em] sm:tracking-[0.2em] px-1 sm:px-2 leading-snug ${
+            dark ? "text-[#6b737b] font-medium" : "text-brand-muted font-light"
+          }`}
         >
           {subtitle}
         </motion.p>
       </div>
 
       <div className="relative">
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-brand-card-border hidden lg:block">
+        <div
+          className={`absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] hidden lg:block ${
+            dark ? "bg-[#e2c977]/35" : "bg-brand-card-border"
+          }`}
+        >
           <motion.div
-            className="absolute top-0 left-0 right-0 bg-brand-red origin-top"
+            className={`absolute top-0 left-0 right-0 origin-top ${
+              dark ? "bg-[#e2c977]" : "bg-brand-red"
+            }`}
             style={{ height: lineHeight }}
           />
         </div>
@@ -125,32 +147,67 @@ export default function ProcessSteps({
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="group p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-brand-navy/70 backdrop-blur-md border border-brand-card-border hover:border-brand-red/20 transition-all duration-500 sequence-step-card"
+                    className={`group p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl backdrop-blur-md border transition-all duration-500 sequence-step-card ${
+                      dark
+                        ? "bg-white/80 border-[#e0d3b8] hover:border-[#e2c977]/70"
+                        : "bg-brand-navy/70 border-brand-card-border hover:border-brand-red/20"
+                    }`}
                   >
                     <div className={`flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6 ${isEven ? "lg:flex-row-reverse" : ""}`}>
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 bg-brand-surface/80 border border-brand-card-border rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:border-brand-red/30 transition-all sequence-step-icon">
-                        {Icon && <Icon size={20} className="sm:w-6 sm:h-6 text-brand-red" />}
+                      <div
+                        className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 shrink-0 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all sequence-step-icon ${
+                          dark
+                            ? "bg-white border border-[#e0d3b8]/80 group-hover:border-[#e2c977]"
+                            : "bg-brand-surface/80 border border-brand-card-border group-hover:border-brand-red/30"
+                        }`}
+                      >
+                        {Icon && (
+                          <Icon
+                            size={20}
+                            className={`sm:w-6 sm:h-6 ${dark ? "text-[#b8963a]" : "text-brand-red"}`}
+                          />
+                        )}
                       </div>
                       <div className={isEven ? "lg:text-right" : ""}>
-                        <p className="text-[9px] sm:text-[10px] font-technical font-bold text-brand-red uppercase tracking-widest mb-0.5 sm:mb-1">Step {step.number}</p>
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-technical font-extrabold text-brand-text tracking-widest uppercase">
+                        <p
+                          className={`text-[9px] sm:text-[10px] font-technical font-bold uppercase tracking-widest mb-0.5 sm:mb-1 ${
+                            dark ? "text-[#b8963a]" : "text-brand-red"
+                          }`}
+                        >
+                          Step {step.number}
+                        </p>
+                        <h3
+                          className={`text-lg sm:text-xl md:text-2xl font-technical font-extrabold tracking-widest uppercase ${
+                            dark ? "text-[#171b1f]" : "text-brand-text"
+                          }`}
+                        >
                           {step.title}
                         </h3>
                       </div>
                     </div>
-                    <p className="text-xs sm:text-sm leading-relaxed text-brand-muted font-light uppercase tracking-widest">
+                    <p
+                      className={`text-xs sm:text-sm leading-relaxed uppercase tracking-widest ${
+                        dark ? "text-[#6b737b] font-medium" : "text-brand-muted font-light"
+                      }`}
+                    >
                       {step.description}
                     </p>
                   </motion.div>
                 </div>
 
-                <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-surface border-4 border-brand-steel z-20 items-center justify-center sequence-step-dot">
+                <div
+                  className={`hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full z-20 items-center justify-center sequence-step-dot ${
+                    dark ? "bg-white border-4 border-[#e0d3b8]" : "bg-brand-surface border-4 border-brand-steel"
+                  }`}
+                >
                   <motion.div
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-brand-red"
+                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${
+                      dark ? "bg-[#e2c977]" : "bg-brand-red"
+                    }`}
                   />
                 </div>
 
@@ -169,7 +226,9 @@ export default function ProcessSteps({
         ref={containerRef}
         frameDir={frameDir!}
         frameCount={count}
-        className={`py-12 sm:py-24 md:py-32 lg:py-40 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] sm:px-4 ${dark ? "bg-brand-surface" : "bg-brand-steel"}`}
+        className={`py-12 sm:py-24 md:py-32 lg:py-40 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] sm:px-4 ${
+          dark ? "bg-[#f7f3ea]" : "bg-brand-steel"
+        }`}
         contentClassName="max-w-7xl mx-auto relative z-10"
         aria-label={title}
       >
@@ -181,9 +240,18 @@ export default function ProcessSteps({
   return (
     <section
       ref={containerRef}
-      className={`relative py-12 sm:py-24 md:py-32 lg:py-40 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] sm:px-4 ${dark ? "bg-brand-surface" : "bg-brand-steel"}`}
+      className={`relative py-12 sm:py-24 md:py-32 lg:py-40 pl-[max(0.75rem,env(safe-area-inset-left))] pr-[max(0.75rem,env(safe-area-inset-right))] sm:px-4 ${
+        dark ? "bg-[#f7f3ea]" : "bg-brand-steel"
+      }`}
       aria-label={title}
     >
+      {dark && (
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-40 top-0 h-64 w-80 rotate-6 rounded-[3rem] border border-[#e2c977]/22 bg-[#e2c977]/8" />
+          <div className="absolute -left-40 bottom-0 h-60 w-80 -rotate-6 rounded-[3rem] border border-[#d4af37]/20 bg-[#d4af37]/8" />
+          <div className="absolute inset-x-10 top-1/2 h-px bg-gradient-to-r from-transparent via-[#b8963a]/24 to-transparent" />
+        </div>
+      )}
       <div className="max-w-7xl mx-auto relative z-10">{content}</div>
     </section>
   );

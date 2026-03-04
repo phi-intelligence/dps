@@ -104,6 +104,7 @@ export default function DomesticMechanicalServicesPage() {
         { label: "Domestic" },
       ]}
       serviceValue="mechanical-domestic"
+      theme="luxury"
       accentColor="red"
     />
   );
