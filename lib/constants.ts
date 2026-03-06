@@ -80,8 +80,8 @@ export const CAPABILITY_CORE_SERVICES = [
 /** Core services hero images for homepage (Mechanical, Electrical, Gas). */
 export const CORE_SERVICES_IMAGES: Record<string, string> = {
   "Mechanical Services": "/images/core-services/mechanical.png",
-  "Electrical Services": "/images/core-services/electrical.png",
-  "Gas Services": "/images/core-services/gas.png",
+  "Electrical Services": "/imagesv2/home_electrical.jpg",
+  "Gas Services": "/imagesv2/home_gas.jpg",
 };
 
 /** Core service detail page routes (for Core Services section links — hub pages). */
@@ -152,7 +152,7 @@ export const CORE_SERVICE_SECTOR_SERVICES: Record<
       "Heating controls fault finding",
       "Thermostat / programmer replacement",
       "Wiring centre diagnostics",
-      "Electrical checks related to heating systems",
+      "Electrical checks related to heating systems (EICR certification)",
     ],
   },
   gas: {
@@ -161,6 +161,7 @@ export const CORE_SERVICE_SECTOR_SERVICES: Record<
       "Commercial boiler servicing",
       "Commercial boiler repairs & fault finding",
       "Gas safety inspections",
+      "Flue & ventilation checks",
       "Tightness testing & purging",
       "Gas pipework installation / modification",
       "Plant room maintenance",

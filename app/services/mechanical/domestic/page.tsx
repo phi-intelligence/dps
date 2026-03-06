@@ -6,7 +6,7 @@ const DOMESTIC_PLUMBING_HEATING_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Heating system installation / upgrades",
     description: "New central heating systems and upgrades to existing installations. We design, supply and install boilers, radiators and controls to suit your home and budget.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_heating.jpg",
     imageAlt: "Central heating system",
   },
   {
@@ -18,7 +18,7 @@ const DOMESTIC_PLUMBING_HEATING_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Pumps & motorised valves",
     description: "Replacement and repair of central heating pumps and motorised valves. Correct operation is essential for heating performance and we commission after fitting.",
-    image: "/images/plumbing-pipes.jpg",
+    image: "/imagesv2/domestic_pump.jpg",
     imageAlt: "Heating pumps and pipework",
   },
   {
@@ -30,13 +30,13 @@ const DOMESTIC_PLUMBING_HEATING_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Leaks & water issues",
     description: "Leak detection and repair for heating and plumbing systems. We locate the source, make a lasting repair and advise on preventing recurrence.",
-    image: "/images/kitchen-plumbing.jpg",
+    image: "/imagesv2/domestic_leak.jpg",
     imageAlt: "Plumbing and water systems",
   },
   {
     title: "Cylinders / hot water systems",
     description: "Installation, repair and replacement of hot water cylinders and associated pipework. We ensure correct sizing and safe discharge arrangements.",
-    image: "/images/our-services-domestic.png",
+    image: "/imagesv2/domestic_hot_water.jpg",
     imageAlt: "Domestic hot water",
   },
   {
@@ -54,7 +54,7 @@ const DOMESTIC_PLUMBING_HEATING_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "General plumbing & heating repair",
     description: "Routine repairs and small jobs across domestic plumbing and heating. We respond promptly and complete work to a high standard.",
-    image: "/images/kitchen-plumbing.jpg",
+    image: "/imagesv2/domestic_plumbing.jpg",
     imageAlt: "Domestic plumbing and heating",
   },
 ];

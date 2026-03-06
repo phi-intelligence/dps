@@ -22,9 +22,10 @@ const DOMESTIC_ELECTRICAL_SERVICE_CARDS: ServiceCard[] = [
     imageAlt: "Wiring centre and heating electrical",
   },
   {
-    title: "Electrical checks related to heating systems",
-    description: "Electrical safety and operation checks on heating-related circuits. We verify isolation, switching and load and advise on any issues found.",
-    image: "/images/our-services-domestic.png",
+    title: "Electrical checks related to heating systems (EICR certification)",
+    description:
+      "Electrical safety and operation checks on heating-related circuits, including EICR-style inspection points where appropriate. We verify isolation, switching, and load, flag any non-compliances, and provide clear documentation for landlords and homeowners.",
+    image: "/imagesv2/eicr.jpeg",
     imageAlt: "Domestic heating electrical",
   },
 ];
@@ -49,7 +50,12 @@ export default function DomesticElectricalServicesPage() {
         { icon: "zap", title: "Heating controls faults", description: "Faulty thermostats, programmers, or wiring can cause heating failures and need professional diagnosis." },
         { icon: "settings", title: "Controls replacement", description: "Replacement thermostats or programmers need correct wiring and commissioning." },
         { icon: "fileText", title: "Wiring centre issues", description: "Wiring centre diagnostics identify and resolve faults in heating control circuits." },
-        { icon: "checkCircle", title: "Electrical checks", description: "Electrical checks related to heating systems ensure safe and compliant operation." },
+        {
+          icon: "checkCircle",
+          title: "Electrical checks & EICR",
+          description:
+            "We can carry out electrical checks related to heating systems and provide EICR certification context where required (e.g. landlord compliance), with clear findings and next steps.",
+        },
       ]}
       steps={[
         { icon: "phone", number: "01", title: "Get in touch", description: "Contact us with your heating controls or electrical issue." },

@@ -82,11 +82,11 @@ export default function HomePage() {
             src="/images/blueprint-boiler-cutaway.png"
             alt=""
             fill
-            className="opacity-60 object-cover object-center"
+            className="opacity-80 object-cover object-center"
             priority
             aria-hidden
           />
-          <div className="absolute inset-0 bg-[#05080c]/85" />
+          <div className="absolute inset-0 bg-[#05080c]/70" />
           <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#05080c] to-transparent" />
           <div className="pointer-events-none absolute inset-0">
             <div className="absolute -top-40 -right-40 h-[32rem] w-[32rem] rotate-3 border border-white/10 rounded-[3rem]" />
@@ -96,141 +96,87 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1.6fr] gap-10 lg:gap-16 items-start lg:items-center">
-            {/* Left column – copy and CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col justify-between"
-            >
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur"
-                >
-                  <div className="h-1.5 w-1.5 rounded-sm bg-[#e2c977] animate-pulse" />
-                  <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-white/90">
-                    Design • Engineer • Maintain  {COMPANY.areas}
-                  </span>
-                </motion.div>
+          {/* Hero content – logo, headline, and CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col justify-between"
+          >
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="inline-flex items-center"
+              >
+                <Image
+                  src="/imagesV2/logo_full_light_nobg.png"
+                  alt={COMPANY.name}
+                  width={320}
+                  height={80}
+                  className="h-14 sm:h-24 md:h-40 w-auto object-contain"
+                />
+              </motion.div>
 
-                <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
-                  <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-[3.7rem] font-technical font-extrabold tracking-[0.22em] md:tracking-[0.24em] leading-[1.15] uppercase text-white">
-                    Precision{" "}
-                    <span className="inline-block text-[#e2c977]">
-                      Heating
-                    </span>{" "}
-                    &amp; Plumbing
-                  </h1>
-                  <p className="max-w-md text-sm md:text-base text-[#b3c0d0] font-medium leading-relaxed">
+              <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.1rem] font-technical font-extrabold tracking-[0.22em] md:tracking-[0.24em] leading-[1.15] uppercase text-white">
+                  Precision{" "}
+                  <span className="inline-block text-[#e2c977]">
+                    Heating
+                  </span>{" "}
+                  &amp; Plumbing
+                </h1>
+                <p className="max-w-md text-sm md:text-base text-[#b3c0d0] font-medium leading-relaxed">
                   Engineered heating and plumbing for commercial and domestic.
-                  </p>
-                  {/* <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[10px] md:text-xs font-technical font-bold uppercase tracking-[0.3em] text-[#9aa3b0]">
-                    {SERVICE_AREAS.map((area) => (
-                      <li key={area} className="flex items-center gap-2">
-                        <span className="h-[2px] w-4 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
-                        <span>{area}</span>
-                      </li>
-                    ))}
-                  </ul> */}
-                </div>
-
-                <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
-                  <button
-                    type="button"
-                    onClick={() => openQuoteModal()}
-                    className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-[#e2c977] px-8 py-4 text-sm font-technical font-bold uppercase tracking-[0.25em] text-[#0a0f14] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5 hover:bg-[#e8d07a]"
-                  >
-                    <span className="relative z-10">Book A Consultation</span>
-                    <ArrowRight
-                      size={18}
-                      className="relative z-10 transition-transform group-hover:translate-x-1"
-                    />
-                  </button>
-
-                  <a
-                    href="tel:+442071234567"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-xs font-technical font-bold uppercase tracking-[0.3em] text-white/90 backdrop-blur transition-all hover:bg-white/10 hover:border-[#e2c977]/40"
-                  >
-                    <Phone size={16} className="text-[#e2c977]" />
-                    020&nbsp;7123&nbsp;4567
-                  </a>
-
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-white/80 hover:bg-white/10 hover:text-white"
-                  >
-                    <ChevronDown size={14} />
-                    View services
-                  </Link>
-                </div>
+                </p>
+                <ul className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2 text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.3em] text-[#d6dde7]">
+                  {SERVICE_AREAS.map((area) => (
+                    <li key={area} className="flex items-center gap-3">
+                      <Image
+                        src="/imagesV2/logo.png"
+                        alt=""
+                        width={22}
+                        height={30}
+                        className="h-8 w-auto object-contain"
+                      />
+                      <span>{area}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-            </motion.div>
+              <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
+                <button
+                  type="button"
+                  onClick={() => openQuoteModal()}
+                  className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-[#e2c977] px-8 py-4 text-sm font-technical font-bold uppercase tracking-[0.25em] text-[#0a0f14] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5 hover:bg-[#e8d07a]"
+                >
+                  <span className="relative z-10">Book A Consultation</span>
+                  <ArrowRight
+                    size={18}
+                    className="relative z-10 transition-transform group-hover:translate-x-1"
+                  />
+                </button>
 
-            {/* Right column – geometric logo composition */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9 }}
-              className="relative mt-8 lg:mt-0"
-            >
-              <div className="relative h-auto lg:h-full min-h-[220px] sm:min-h-[240px] md:min-h-[320px] lg:min-h-[420px]">
-                <div className="absolute inset-0 rounded-[1.8rem] sm:rounded-[2.2rem] lg:rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-[#10141a] via-[#151b21] to-[#04060a] shadow-[0_24px_60px_rgba(0,0,0,0.6)]" />
-                <div className="absolute inset-2 sm:inset-4 lg:inset-[1.4rem] rounded-[1.5rem] sm:rounded-[2rem] border border-[#2f3841] bg-gradient-to-br from-[#0f151b] via-[#151c24] to-[#04060a]" />
+                <a
+                  href="tel:+442071234567"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-xs font-technical font-bold uppercase tracking-[0.3em] text-white/90 backdrop-blur transition-all hover:bg-white/10 hover:border-[#e2c977]/40"
+                >
+                  <Phone size={16} className="text-[#e2c977]" />
+                  020&nbsp;7123&nbsp;4567
+                </a>
 
-                <div className="absolute inset-2 sm:inset-4 lg:inset-[1.4rem] overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
-                  <div className="absolute -left-20 top-10 h-[120%] w-[70%] -skew-x-6 bg-gradient-to-b from-[#b8963a]/15 via-[#e2c977]/4 to-transparent" />
-                  <div className="absolute right-3 top-0 h-full w-[45%] bg-gradient-to-b from-white/6 via-transparent to-[#b8963a]/10" />
-
-                  <div className="absolute inset-4 sm:inset-6 lg:inset-8 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                    <div className="flex flex-col justify-between">
-                      <div className="rounded-3xl border border-white/10 bg-white/5 px-4 py-3">
-                        <span className="text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-[#9aa3b0]">
-                          Commercial &amp; Domestic
-                        </span>
-                        <p className="mt-2 text-xs text-[#c7ced7]">
-                          Boiler plant, hot water, mechanical and plumbing, heating, gas and electrical systems.
-                        </p>
-                      </div>
-                      <div className="rounded-3xl border border-white/8 bg-[#05080b]/70 px-4 py-3 mt-4">
-                        <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
-                          Areas Covered
-                        </span>
-                        <ul className="mt-2 space-y-1 text-[10px] text-[#c7ced7] font-technical uppercase tracking-[0.25em]">
-                          {SERVICE_AREAS.map((area) => (
-                            <li key={area} className="flex items-center gap-2">
-                              <span className="h-[1px] w-4 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
-                              <span>{area}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="relative flex items-center justify-center">
-                      <div className="relative h-28 w-28 sm:h-36 sm:w-36 md:h-56 md:w-56">
-                        <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-[#e2c977]/40 via-transparent to-transparent blur-2xl" />
-                        <div className="absolute inset-0 rounded-[2rem] border border-[#e2c977]/60 bg-[#050608]/70 backdrop-blur">
-                          <Image
-                            src="/images/logo.png"
-                            alt={COMPANY.name}
-                            fill
-                            className="object-contain p-6 drop-shadow-[0_0_40px_rgba(226,201,119,0.55)]"
-                            sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, (max-width: 1024px) 352px, 384px"
-                            priority
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-white/80 hover:bg-white/10 hover:text-white"
+                >
+                  <ChevronDown size={14} />
+                  View services
+                </Link>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -994,7 +940,7 @@ export default function HomePage() {
                 <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#e2c977]/35 via-transparent to-transparent blur-2xl" />
                 <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/20">
                   <Image
-                    src="/images/plumbing-pipes.jpg"
+                    src="/imagesv2/home_engineer.jpeg"
                     alt="DPS engineer working on complex pipework"
                     fill
                     className="object-cover object-center"
@@ -1062,61 +1008,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Sponsors & accreditations strip */}
+      {/* Sponsors & accreditations strip – prominent certificates section */}
       <section
-        className="relative bg-[#05080c] py-16 border-y border-white/5"
+        className="relative bg-[#05080c] py-20 md:py-28 lg:py-32 border-y border-white/10"
         aria-label="Community sponsorship and accreditations"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-8">
-            <div className="flex items-center gap-3 text-[10px] font-technical uppercase tracking-[0.4em] text-[#9aa3b0]">
-              <div className="h-[1px] w-10 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
+          <div className="flex flex-col items-center gap-12 md:gap-16">
+            <div className="flex items-center gap-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.35em] text-[#d6e0ec]">
+              <div className="h-[2px] w-12 md:w-16 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
               Proudly accredited &amp; supporting community sport
-              <div className="h-[1px] w-10 bg-gradient-to-l from-[#e2c977] via-[#f5e9c6] to-transparent" />
+              <div className="h-[2px] w-12 md:w-16 bg-gradient-to-l from-[#e2c977] via-[#f5e9c6] to-transparent" />
             </div>
 
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10 w-full max-w-3xl">
-              <div className="flex flex-col items-center gap-3">
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/20 bg-white/5 shadow-[0_18px_40px_rgba(0,0,0,0.5)]">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-14 lg:gap-20 w-full max-w-5xl">
+              <div className="flex flex-col items-center gap-4 md:gap-5">
+                <div className="relative flex h-28 w-[15.5rem] md:h-32 md:w-[17.5rem] items-center justify-center rounded-3xl border-2 border-white/25 bg-white/10 shadow-[0_24px_56px_rgba(0,0,0,0.5)] ring-2 ring-[#e2c977]/20">
                   <Image
-                    src="/images/gas-safe-register.png"
+                    src="/imagesV2/gas_safe_logo.jpeg"
                     alt="Gas Safe Register"
                     fill
-                    className="object-contain p-3"
-                    sizes="96px"
+                    className="object-contain p-4 md:p-5"
+                    sizes="(max-width: 768px) 248px, 280px"
                   />
                 </div>
-                <p className="text-[10px] font-technical uppercase tracking-[0.3em] text-[#d6e0ec] text-center">
+                <p className="text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.25em] text-white text-center">
                   Gas Safe Register
                 </p>
               </div>
 
-              <div className="flex flex-col items-center gap-3">
-                <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/24 bg-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
+              <div className="flex flex-col items-center gap-4 md:gap-5">
+                <div className="relative flex h-28 w-[15.5rem] md:h-32 md:w-[17.5rem] items-center justify-center rounded-3xl border-2 border-white/25 bg-white/10 shadow-[0_24px_56px_rgba(0,0,0,0.5)] ring-2 ring-[#e2c977]/20">
                   <Image
                     src="/images/next-level-fc.png"
                     alt="Next Level FC"
                     fill
-                    className="object-contain p-4"
-                    sizes="112px"
+                    className="object-contain p-4 md:p-5"
+                    sizes="(max-width: 768px) 248px, 280px"
                   />
                 </div>
-                <p className="text-[10px] font-technical uppercase tracking-[0.3em] text-[#d6e0ec] text-center">
+                <p className="text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.25em] text-white text-center">
                   Next Level FC Sponsor
                 </p>
               </div>
 
-              <div className="flex flex-col items-center gap-3">
-                <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-white/20 bg-white/5 shadow-[0_18px_40px_rgba(0,0,0,0.5)]">
+              <div className="flex flex-col items-center gap-4 md:gap-5">
+                <div className="relative flex h-28 w-[15.5rem] md:h-32 md:w-[17.5rem] items-center justify-center rounded-3xl border-2 border-white/25 bg-white/10 shadow-[0_24px_56px_rgba(0,0,0,0.5)] ring-2 ring-[#e2c977]/20">
                   <Image
                     src="/images/safe-contractor.png"
                     alt="SafeContractor Approved"
                     fill
-                    className="object-contain p-3"
-                    sizes="96px"
+                    className="object-contain p-4 md:p-5"
+                    sizes="(max-width: 768px) 248px, 280px"
                   />
                 </div>
-                <p className="text-[10px] font-technical uppercase tracking-[0.3em] text-[#d6e0ec] text-center">
+                <p className="text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.25em] text-white text-center">
                   SafeContractor Approved
                 </p>
               </div>

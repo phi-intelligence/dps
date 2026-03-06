@@ -6,25 +6,25 @@ const COMMERCIAL_ELECTRICAL_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Electrical fault finding (heating related)",
     description: "Systematic fault finding on heating-related electrical circuits. We trace faults in controls, wiring and ancillaries to restore heating operation quickly.",
-    image: "/images/core-services/electrical.png",
+    image: "/imagesv2/commercial_electric.jpg",
     imageAlt: "Electrical controls and heating systems",
   },
   {
     title: "Controls wiring & diagnostics",
     description: "Wiring, commissioning and diagnostics for heating controls and BMS interfaces. We ensure correct connections and document any changes for your records.",
-    image: "/images/services/commercial-mechanical/plant-room-3.png",
+    image: "/imagesv2/commercial_wiring.jpg",
     imageAlt: "Control units and pipework in plant room",
   },
   {
     title: "Programmer / thermostat replacement",
     description: "Supply and installation of programmers and thermostats for commercial heating. We wire and commission to manufacturer specifications.",
-    image: "/images/services/commercial-mechanical/plant-room-5.png",
+    image: "/imagesv2/commercial_thermostat.jpg",
     imageAlt: "Commercial boiler and control panels",
   },
   {
     title: "Pumps / valves electrical testing",
     description: "Electrical testing of pumps and motorised valves to confirm safe operation and correct switching. We document results and advise on any faults found.",
-    image: "/images/services/commercial-mechanical/plant-room-2.png",
+    image: "/imagesv2/commercial_testing.jpg",
     imageAlt: "Pumps and valves in commercial system",
   },
   {
@@ -36,7 +36,7 @@ const COMMERCIAL_ELECTRICAL_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Emergency electrical diagnostics (M&E related)",
     description: "Rapid electrical diagnostics when heating or M&E systems fail. We prioritise safety and restore operation with minimal downtime.",
-    image: "/images/services/commercial-mechanical/plant-room-6.png",
+    image: "/imagesv2/commercial_diagnosis.jpg",
     imageAlt: "Technician with diagnostic equipment in plant room",
   },
 ];

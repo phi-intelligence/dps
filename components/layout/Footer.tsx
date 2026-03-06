@@ -103,24 +103,19 @@ export default function Footer() {
               ))}
             </ul>
 
-            <div className="mt-10 px-5 py-4 md:px-6 md:py-5 bg-[#05080c] border border-white/25 rounded-[2rem] flex items-center justify-between gap-4 premium-shadow">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 md:w-11 md:h-11 bg-brand-navy rounded-xl border border-[#e2c977]/40 flex items-center justify-center">
-                  <Shield size={20} className="text-[#e2c977]" />
-                </div>
-                <p className="text-xs md:text-sm font-technical font-extrabold uppercase tracking-[0.28em] text-white">
-                  Gas Safe Registered
-                </p>
-              </div>
-              <div className="relative w-12 h-10 sm:w-16 sm:h-12">
+            <div className="mt-14 md:mt-20 px-6 py-5 md:px-7 md:py-6 bg-[#05080c] border border-white/25 rounded-[2.4rem] flex flex-col items-center gap-3 premium-shadow">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-18 rounded-2xl bg-brand-navy border border-[#e2c977]/70 flex items-center justify-center overflow-hidden">
                 <Image
                   src="/imagesV2/gas_safe_logo.jpeg"
                   alt="Gas Safe Register"
                   fill
                   className="object-contain"
-                  sizes="80px"
+                  sizes="160px"
                 />
               </div>
+              <p className="text-[10px] md:text-xs font-technical font-extrabold uppercase tracking-[0.28em] text-white text-center">
+                Gas Safe Registered
+              </p>
             </div>
           </div>
         </div>

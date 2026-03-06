@@ -85,7 +85,7 @@ export default function DomesticServicesPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between gap-4">
                       <span className="text-white font-technical font-bold text-xs sm:text-sm uppercase tracking-widest leading-tight line-clamp-2">
-                        {label}
+                        {label === "Mechanical Services" ? "Plumbing and mechanical" : label}
                       </span>
                       <span className="shrink-0 w-12 h-12 rounded-xl bg-white/10 border border-white/25 flex items-center justify-center group-hover:bg-[#e2c977] group-hover:border-[#e2c977] transition-all">
                         <ArrowRight size={20} className="text-white" />
