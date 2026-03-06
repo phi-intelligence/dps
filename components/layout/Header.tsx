@@ -77,7 +77,7 @@ export default function Header() {
         >
           {/* Logo Section — using full lockup image */}
           <Link href="/" className="flex items-center group min-w-0">
-            <div className="relative h-9 sm:h-10 md:h-14 w-auto">
+            <div className="relative h-9 sm:h-10 md:h-16 w-auto">
               <Image
                 src="/imagesV2/logo_full_light_nobg.png"
                 alt={company.name}
@@ -116,7 +116,7 @@ export default function Header() {
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/95 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
+                          className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/70 bg-gray-700 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
                         >
                           {link.children.map((child) => (
                             <Link

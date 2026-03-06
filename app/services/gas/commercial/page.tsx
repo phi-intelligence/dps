@@ -17,7 +17,7 @@ const COMMERCIAL_GAS_SERVICE_CARDS: ServiceCard[] = [
   },
   {
     title: "Commercial boiler repairs & fault finding",
-    description: "Fast diagnosis and repair of commercial boiler faults. We minimise downtime and restore heating with minimal disruption to your operations.",
+    description: "Fast diagnosis and repair of commercial boiler faults. We minimise downtime and restore heating and hot water safetly with minimal disruption to your operations.",
     image: "/images/boiler-repair.jpg",
     imageAlt: "Boiler repair and fault finding",
   },

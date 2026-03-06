@@ -56,7 +56,7 @@ export default function ServiceAreasPage() {
               </h2>
               <div className="space-y-6 text-[#2b3136] text-sm md:text-base leading-relaxed max-w-xl">
                 <p>
-                  DPS Heating Services LTD operates throughout{" "}
+                  DPS Heating Services Ltd operates throughout{" "}
                   {COMPANY.areas}, covering both domestic and commercial
                   customers. Our engineers are locally based, allowing us to
                   offer fast response times across our entire coverage area.
@@ -127,7 +127,7 @@ export default function ServiceAreasPage() {
             {[
               { stat: `${SERVICE_AREAS.length}+`, label: "Areas Covered" },
               { stat: "Same Day", label: "Available" },
-              { stat: "10+", label: "Years Serving London" },
+              { stat: "13+", label: "Years Serving London" },
               { stat: "100%", label: "Gas Safe Registered" },
             ].map((item) => (
               <motion.div

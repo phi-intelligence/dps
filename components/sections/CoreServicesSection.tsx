@@ -38,6 +38,22 @@ export default function CoreServicesSection({
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  const serviceCount = CAPABILITY_CORE_SERVICES.length || 1;
+  const dotScales = CAPABILITY_CORE_SERVICES.map((_, index) =>
+    useTransform(
+      scrollYProgress,
+      [index / serviceCount, (index + 0.35) / serviceCount],
+      [0, 1]
+    )
+  );
+  const dotOpacities = CAPABILITY_CORE_SERVICES.map((_, index) =>
+    useTransform(
+      scrollYProgress,
+      [index / serviceCount, (index + 0.35) / serviceCount],
+      [0, 1]
+    )
+  );
+
   const hasSequence = Boolean(frameDir && frameCount > 0);
 
   const content = (
@@ -56,16 +72,24 @@ export default function CoreServicesSection({
             const isEven = index % 2 === 0;
             const imageSrc = CORE_SERVICES_IMAGES[service.title];
             const href = CORE_SERVICE_HREFS[service.title];
+            const dotScale = dotScales[index];
+            const dotOpacity = dotOpacities[index];
 
             return (
               <div key={service.title} className="relative lg:flex items-center justify-between lg:min-h-[320px]">
                 <div className={`lg:w-[45%] ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                  <Link href={href ?? "/services"} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface rounded-2xl sm:rounded-3xl">
+                  <Link
+                    href={href ?? "/services"}
+                    className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface rounded-2xl sm:rounded-3xl"
+                  >
                     <motion.div
-                      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+                      initial={{ opacity: 0, x: isEven ? -60 : 60 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      viewport={{ once: true, amount: 0.45 }}
+                      transition={{
+                        duration: 0.7,
+                        ease: [0.16, 0.84, 0.44, 1],
+                      }}
                       className="group rounded-2xl sm:rounded-3xl overflow-hidden border border-brand-card-border bg-brand-navy/70 backdrop-blur-md hover:border-brand-red/20 transition-all duration-500 sequence-step-card"
                     >
                     {imageSrc && (
@@ -100,16 +124,13 @@ export default function CoreServicesSection({
                         ))}
                       </ul>
                     </div>
-                  </motion.div>
+                    </motion.div>
                   </Link>
                 </div>
 
                 <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-brand-surface border-4 border-brand-steel z-20 items-center justify-center sequence-step-dot">
                   <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
+                    style={{ scale: dotScale, opacity: dotOpacity }}
                     className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-brand-red"
                   />
                 </div>

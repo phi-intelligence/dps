@@ -72,8 +72,8 @@ export default function QuoteForm({ preselectedService = "", compact = false, th
 
   const isLuxury = theme === "luxury";
   const inputClass = isLuxury
-    ? "w-full bg-white/5 border border-white/10 rounded-xl px-6 py-5 text-white text-[14px] font-sans font-medium placeholder-white/40 focus:outline-none focus:border-[#e2c977]/50 transition-all"
-    : "w-full bg-white dark:bg-brand-navy border border-brand-card-border-hover rounded-xl px-6 py-5 text-brand-text text-[14px] font-sans font-medium placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-sm";
+    ? "w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 sm:px-6 sm:py-5 text-white text-[14px] font-sans font-medium placeholder-white/40 focus:outline-none focus:border-[#e2c977]/50 transition-all"
+    : "w-full bg-white dark:bg-brand-navy border border-brand-card-border-hover rounded-xl px-5 py-4 sm:px-6 sm:py-5 text-brand-text text-[14px] font-sans font-medium placeholder-brand-muted/30 focus:outline-none focus:border-brand-red/50 transition-all shadow-sm";
   const labelClass = isLuxury ? "text-[10px] font-sans font-bold uppercase tracking-widest text-[#9aa3b0]" : "text-[10px] font-sans font-bold uppercase tracking-widest text-brand-muted";
   const successClass = isLuxury
     ? "absolute inset-0 z-50 border border-[#e2c977]/30 text-white px-8 py-10 rounded-2xl shadow-2xl flex flex-col items-center justify-center text-center gap-6 backdrop-blur-xl bg-[#0a0f14]/95"
@@ -82,8 +82,8 @@ export default function QuoteForm({ preselectedService = "", compact = false, th
   const successCheckClass = isLuxury ? "text-[#e2c977] animate-pulse" : "text-brand-red animate-pulse";
   const resetBtnClass = isLuxury ? "mt-4 text-[10px] font-technical font-bold text-[#e2c977] hover:text-white transition-colors uppercase tracking-widest" : "mt-4 text-[10px] font-technical font-bold text-brand-red hover:text-brand-text transition-colors uppercase tracking-widest";
   const submitBtnClass = isLuxury
-    ? "group relative w-full bg-[#e2c977] text-[#0a0f14] py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-lg hover:bg-[#f5e9c6] disabled:opacity-50"
-    : "group relative w-full bg-brand-gradient text-white py-6 rounded-xl font-sans font-extrabold text-sm uppercase tracking-[0.2em] overflow-hidden transition-all shadow-xl shadow-brand-red/10 disabled:opacity-50";
+    ? "group relative w-full bg-[#e2c977] text-[#0a0f14] py-5 sm:py-6 rounded-full font-sans font-extrabold text-[11px] sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.24em] overflow-hidden transition-all shadow-lg hover:bg-[#f5e9c6] disabled:opacity-50"
+    : "group relative w-full bg-brand-gradient text-white py-5 sm:py-6 rounded-full font-sans font-extrabold text-[11px] sm:text-sm uppercase tracking-[0.18em] sm:tracking-[0.24em] overflow-hidden transition-all shadow-xl shadow-brand-red/10 disabled:opacity-50";
 
   return (
     <div className="relative">
@@ -116,7 +116,13 @@ export default function QuoteForm({ preselectedService = "", compact = false, th
         )}
       </AnimatePresence>
 
-      <form onSubmit={handleSubmit} className={`space-y-8 ${status === "success" ? "opacity-10 pointer-events-none filter blur-md transition-all" : ""}`} noValidate>
+      <form
+        onSubmit={handleSubmit}
+        className={`space-y-6 sm:space-y-8 ${
+          status === "success" ? "opacity-10 pointer-events-none filter blur-md transition-all" : ""
+        }`}
+        noValidate
+      >
         <div className={`grid gap-8 ${compact ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2"}`}>
           <div>
             <div className="flex items-center gap-2 mb-3 ml-1">

@@ -135,9 +135,10 @@ const ScrollSequenceSection = forwardRef<HTMLElement, ScrollSequenceSectionProps
         onUpdate: updateImage,
         scrollTrigger: {
           trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+          start: "top center",
+          end: "bottom center",
+          scrub: 0.6,
+          invalidateOnRefresh: true,
         },
       });
 

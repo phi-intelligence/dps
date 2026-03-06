@@ -23,9 +23,9 @@ import {
 import { motion, useInView } from "framer-motion";
 
 const STATS = [
-  { value: "10+", label: "Years experience" },
-  { value: "500+", label: "Jobs completed" },
-  { value: "4", label: "Areas covered" },
+  { value: "13+", label: "Years experience" },
+  { value: "1000+", label: "Jobs completed" },
+  { value: "50+", label: "Areas covered" },
   { value: "5.0", label: "Client rating" },
 ];
 
@@ -118,7 +118,7 @@ export default function AboutPage() {
               <p className="text-sm md:text-base text-[#3c444b] leading-relaxed">
                 {COMPANY.vision}
               </p>
-              <p className="text-sm text-[#3c444b] leading-relaxed">
+              <p className="text-sm md:text-base text-[#3c444b] leading-relaxed">
                 Founded in {COMPANY.founded} by {COMPANY.founder},{" "}
                 {COMPANY.name} delivers expert mechanical, electrical, and gas
                 services across domestic and commercial sectors. With{" "}
@@ -181,17 +181,17 @@ export default function AboutPage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div className="space-y-3 max-w-xl">
+            <div className="space-y-3 max-w-2xl md:max-w-3xl lg:max-w-4xl">
               <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
                 What We Stand For
               </span>
               <h2 className="text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
                 Transparency, Integrity, Professionalism
               </h2>
-              <p className="text-xs md:text-sm text-[#a5b1c1] leading-relaxed">
+              <p className="text-sm md:text-base text-[#a5b1c1] leading-relaxed">
                 {COMMITMENT_COPY}
               </p>
-              <p className="text-xs md:text-sm text-[#a5b1c1] leading-relaxed">
+              <p className="text-sm md:text-base text-[#a5b1c1] leading-relaxed">
                 {COMPANY.mission}
               </p>
             </div>
@@ -207,14 +207,14 @@ export default function AboutPage() {
                 <p className="text-3xl md:text-4xl font-technical font-extrabold text-white tracking-tight">
                   <AnimatedStatValue value={stat.value} />
                 </p>
-                <p className="mt-2 text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-[#9aa3b0]">
+                <p className="mt-2 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.3em] text-[#9aa3b0]">
                   {stat.label}
                 </p>
               </div>
             ))}
           </div>
 
-          <p className="mt-6 max-w-lg text-[11px] md:text-xs text-[#9aa3b0]">
+          <p className="mt-6 max-w-lg text-xs md:text-sm text-[#9aa3b0]">
             Every statistic is tied to real projects delivered across{" "}
             {COMPANY.areas}. It&apos;s how we measure the reliability clients
             feel on site.
@@ -297,7 +297,7 @@ export default function AboutPage() {
                         className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/5 px-4 py-3"
                       >
                         <span className="h-[2px] w-5 flex-shrink-0 bg-[#e2c977]" />
-                        <span className="text-[11px] md:text-xs font-technical uppercase tracking-[0.25em] text-[#d6e0ec]">
+                        <span className="text-xs md:text-sm font-technical uppercase tracking-[0.25em] text-[#d6e0ec]">
                           {item}
                         </span>
                       </div>
@@ -345,10 +345,10 @@ export default function AboutPage() {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="text-[11px] md:text-xs font-technical font-extrabold uppercase tracking-[0.3em] text-white">
+                  <h3 className="text-xs md:text-sm font-technical font-extrabold uppercase tracking-[0.3em] text-white">
                     {item.title}
                   </h3>
-                  <p className="text-[11px] md:text-sm text-[#b3c0d0] leading-relaxed">
+                  <p className="text-xs md:text-base text-[#b3c0d0] leading-relaxed">
                     {item.strength}
                   </p>
                 </div>
@@ -391,19 +391,19 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-14 md:grid-cols-3 md:gap-16 w-full max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-3 md:gap-20 w-full max-w-5xl mx-auto">
             {/* Gas Safe Register */}
             <div className="group flex flex-col items-center">
-              <div className="relative flex h-36 w-36 md:h-40 md:w-40 items-center justify-center rounded-full border-2 border-[#e2c977]/40 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(226,201,119,0.15)] transition-all duration-300 group-hover:border-[#e2c977]/70 group-hover:shadow-[0_28px_64px_rgba(0,0,0,0.6),0_0_32px_rgba(226,201,119,0.12)]">
+              <div className="relative flex h-44 w-44 md:h-56 md:w-56 items-center justify-center rounded-full border-2 border-[#e2c977]/40 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(226,201,119,0.15)] transition-all duration-300 group-hover:border-[#e2c977]/70 group-hover:shadow-[0_28px_64px_rgba(0,0,0,0.6),0_0_32px_rgba(226,201,119,0.12)]">
                 <Image
-                  src="/images/gas-safe-register.png"
+                  src="/imagesV2/gas_safe_logo.jpeg"
                   alt="Gas Safe Register"
                   fill
-                  className="object-contain p-5"
-                  sizes="160px"
+                  className="object-contain p-7"
+                  sizes="224px"
                 />
               </div>
-              <p className="mt-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.28em] text-white text-center">
+              <p className="mt-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.28em] text-[#e2c977] text-center">
                 Gas Safe Register
               </p>
               <p className="mt-1 text-[11px] text-[#9aa3b0] text-center max-w-[200px]">
@@ -413,13 +413,13 @@ export default function AboutPage() {
 
             {/* Next Level FC Sponsor */}
             <div className="group flex flex-col items-center md:-mt-4">
-              <div className="relative flex h-40 w-40 md:h-44 md:w-44 items-center justify-center rounded-full border-2 border-[#e2c977]/50 bg-gradient-to-b from-white/12 to-white/5 shadow-[0_28px_64px_rgba(0,0,0,0.55),0_0_0_1px_rgba(226,201,119,0.2)] transition-all duration-300 group-hover:border-[#e2c977]/80 group-hover:shadow-[0_32px_72px_rgba(0,0,0,0.6),0_0_40px_rgba(226,201,119,0.15)]">
+              <div className="relative flex h-48 w-48 md:h-60 md:w-60 items-center justify-center rounded-full border-2 border-[#e2c977]/50 bg-gradient-to-b from-white/12 to-white/5 shadow-[0_28px_64px_rgba(0,0,0,0.55),0_0_0_1px_rgba(226,201,119,0.2)] transition-all duration-300 group-hover:border-[#e2c977]/80 group-hover:shadow-[0_32px_72px_rgba(0,0,0,0.6),0_0_40px_rgba(226,201,119,0.15)]">
                 <Image
                   src="/images/next-level-fc.png"
                   alt="Next Level FC"
                   fill
-                  className="object-contain p-6"
-                  sizes="176px"
+                  className="object-contain p-8"
+                  sizes="240px"
                 />
               </div>
               <p className="mt-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.28em] text-[#e2c977] text-center">
@@ -432,16 +432,16 @@ export default function AboutPage() {
 
             {/* SafeContractor Approved */}
             <div className="group flex flex-col items-center">
-              <div className="relative flex h-36 w-36 md:h-40 md:w-40 items-center justify-center rounded-full border-2 border-[#e2c977]/40 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(226,201,119,0.15)] transition-all duration-300 group-hover:border-[#e2c977]/70 group-hover:shadow-[0_28px_64px_rgba(0,0,0,0.6),0_0_32px_rgba(226,201,119,0.12)]">
+              <div className="relative flex h-44 w-44 md:h-56 md:w-56 items-center justify-center rounded-full border-2 border-[#e2c977]/40 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(226,201,119,0.15)] transition-all duration-300 group-hover:border-[#e2c977]/70 group-hover:shadow-[0_28px_64px_rgba(0,0,0,0.6),0_0_32px_rgba(226,201,119,0.12)]">
                 <Image
                   src="/images/safe-contractor.png"
                   alt="SafeContractor Approved"
                   fill
-                  className="object-contain p-5"
-                  sizes="160px"
+                  className="object-contain p-7"
+                  sizes="224px"
                 />
               </div>
-              <p className="mt-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.28em] text-white text-center">
+              <p className="mt-4 text-xs md:text-sm font-technical font-bold uppercase tracking-[0.28em] text-[#e2c977] text-center">
                 SafeContractor Approved
               </p>
               <p className="mt-1 text-[11px] text-[#9aa3b0] text-center max-w-[200px]">

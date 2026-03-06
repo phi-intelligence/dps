@@ -113,7 +113,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Quote Form */}
-            <div className="lg:col-span-3 rounded-[2.25rem] border border-white/10 bg-gradient-to-br from-[#0a0f14] to-[#0d1319] p-12 md:p-20 relative overflow-hidden">
+            <div className="lg:col-span-3 rounded-[2.25rem] border border-white/10 bg-gradient-to-br from-[#0a0f14] to-[#0d1319] px-5 py-8 sm:px-8 sm:py-10 md:px-12 md:py-16 lg:px-20 lg:py-20 relative overflow-hidden">
               <div className="pointer-events-none absolute -right-20 -top-20 h-40 w-48 rotate-6 border border-white/10 rounded-[2rem] opacity-30" />
 
               <div className="relative z-10">

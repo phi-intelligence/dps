@@ -242,10 +242,10 @@ export default function ServiceDetailLayout({
                       <p
                         className={
                           isLuxury && i % 2 !== 0
-                            ? "text-[#d7dee6] text-sm font-technical uppercase tracking-wide leading-relaxed max-w-xl"
+                            ? "text-[#d7dee6] text-sm md:text-base font-technical uppercase tracking-wide leading-relaxed max-w-xl"
                             : isLuxury
-                            ? "text-[#3c444b] text-sm font-technical uppercase tracking-wide leading-relaxed max-w-xl"
-                            : "text-brand-muted text-sm font-technical uppercase tracking-wide leading-relaxed max-w-xl"
+                            ? "text-[#3c444b] text-sm md:text-base font-technical uppercase tracking-wide leading-relaxed max-w-xl"
+                            : "text-brand-muted text-sm md:text-base font-technical uppercase tracking-wide leading-relaxed max-w-xl"
                         }
                       >
                         {card.description}

@@ -266,19 +266,21 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             {whyDPS.map((item, i) => (
               <div key={item.title} className="text-center group relative p-8">
-                <div className="absolute inset-0 bg-[#05080c] shadow-sm border border-white/10 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 z-0 bg-[#05080c] shadow-sm border border-white/10 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                <div className="w-20 h-20 bg-[#05080c] border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-10 group-hover:border-[#e2c977]/30 transition-all duration-500">
-                  <item.icon size={32} className="text-[#e2c977]" />
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-[#05080c] border border-white/10 rounded-3xl flex items-center justify-center mx-auto mb-10 group-hover:border-[#e2c977]/30 transition-all duration-500">
+                    <item.icon size={32} className="text-[#e2c977]" />
+                  </div>
+                  <h3 className="text-lg font-technical font-extrabold text-white mb-4 tracking-widest uppercase">
+                    {item.title}
+                  </h3>
+                  <p className="text-[#e2edf7] text-[10px] font-technical uppercase tracking-widest leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-technical font-extrabold text-white mb-4 tracking-widest uppercase">
-                  {item.title}
-                </h3>
-                <p className="text-[#b3c0d0] text-[10px] font-technical uppercase tracking-widest leading-relaxed">
-                  {item.description}
-                </p>
 
-                <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-8xl font-technical font-black text-white/[0.02] pointer-events-none group-hover:text-[#e2c977]/[0.06] transition-colors">
+                <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-8xl font-technical font-black text-white/[0.02] pointer-events-none group-hover:text-[#e2c977]/[0.06] transition-colors z-0">
                   0{i + 1}
                 </span>
               </div>

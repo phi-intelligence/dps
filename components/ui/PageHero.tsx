@@ -46,6 +46,13 @@ export default function PageHero({
   const isLuxury = variant === "luxury";
   const luxuryWithImage = isLuxury && hasImage;
   const isDarkHero = isLuxury && darkHero;
+  const isPortfolioLuxuryHero = luxuryWithImage && title === "Portfolio";
+  const isAboutLuxuryHero = luxuryWithImage && title === "About Us";
+  const isServiceAreasLuxuryHero = luxuryWithImage && title === "Service Areas";
+  const isCommercialServicesLuxuryHero = luxuryWithImage && title === "Commercial Services";
+  const isCommercialMechanicalHero = luxuryWithImage && title === "Commercial Mechanical Services";
+  const isCommercialElectricalHero = luxuryWithImage && title === "Commercial Electrical Services";
+  const isCommercialGasHero = luxuryWithImage && title === "Commercial Gas Services";
 
   return (
     <section
@@ -64,7 +71,15 @@ export default function PageHero({
               src={backgroundImage}
               alt=""
               fill
-              className={`object-cover object-center ${
+              className={`object-cover object-center${
+                isServiceAreasLuxuryHero ||
+                isCommercialServicesLuxuryHero ||
+                isCommercialMechanicalHero ||
+                isCommercialElectricalHero ||
+                isCommercialGasHero
+                  ? " blur-sm md:blur-[3px]"
+                  : ""
+              } ${
                 isLuxury ? "opacity-100" : "opacity-55 dark:opacity-60"
               }`}
               sizes="100vw"
@@ -229,6 +244,16 @@ export default function PageHero({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`text-sm md:text-base mb-16 max-w-2xl leading-relaxed uppercase tracking-[0.35em] ${
+                isPortfolioLuxuryHero ||
+                isAboutLuxuryHero ||
+                isServiceAreasLuxuryHero ||
+                isCommercialServicesLuxuryHero ||
+                isCommercialMechanicalHero ||
+                isCommercialElectricalHero ||
+                isCommercialGasHero
+                  ? "inline-block px-4 py-3 rounded-xl bg-[#f2ede3]/20 backdrop-blur-md shadow-sm"
+                  : ""
+              } ${
                 isDarkHero
                   ? "text-[#b3c0d0] font-medium"
                   : luxuryWithImage

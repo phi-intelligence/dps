@@ -29,9 +29,9 @@ const categoryColor: Record<string, string> = {
 };
 
 const stats = [
-  { icon: CheckCircle, label: "Projects Completed", value: "500+" },
-  { icon: Clock, label: "Years Experience", value: "10+" },
-  { icon: Building2, label: "Areas Covered", value: "20+" },
+  { icon: CheckCircle, label: "Projects Completed", value: "1000+" },
+  { icon: Clock, label: "Years Experience", value: "13+" },
+  { icon: Building2, label: "Areas Covered", value: "50+" },
   { icon: Star, label: "Customer Rating", value: "5.0" },
 ];
 
@@ -153,10 +153,10 @@ export default function PortfolioPage() {
                 Portfolio Snapshot
               </span>
               <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
-                Built Projects In Numbers
+                Projects In Numbers
               </h2>
             </div>
-            <p className="max-w-md text-xs md:text-sm text-[#9aa3b0]">
+            <p className="max-w-md text-sm md:text-base text-[#9aa3b0]">
               A view over the live work delivered across {COMPANY.areas} — from
               single dwellings to multi-storey plant.
             </p>
@@ -178,7 +178,7 @@ export default function PortfolioPage() {
                 <p className="text-3xl sm:text-4xl font-extrabold text-white font-technical">
                   {stat.value}
                 </p>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-[#9aa3b0] font-technical mt-2">
+                <p className="text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#9aa3b0] font-technical mt-2">
                   {stat.label}
                 </p>
               </motion.div>
@@ -207,7 +207,7 @@ export default function PortfolioPage() {
               Deployment Log
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-technical uppercase tracking-[0.2em] text-[#171b1f]">
-              Completed <span className="text-[#b8963a]">Projects</span>
+              Completed <span className="text-[#b8963a]">Works</span>
             </h2>
             <p className="mt-6 text-[#3c444b] max-w-2xl mx-auto text-sm md:text-base">
               A selection of recent installations, repairs, and system upgrades
@@ -219,10 +219,10 @@ export default function PortfolioPage() {
             {PORTFOLIO_PROJECTS.map((project, i) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, ease: "easeOut" }}
                 className="group relative overflow-hidden rounded-[1.8rem] border border-[#2d3a46] bg-gradient-to-br from-[#05070b] via-[#0f151c] to-[#020508] text-[#d6e0ec] shadow-[0_22px_60px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(0,0,0,0.7)] transition-all duration-500"
               >
                 {/* Project Image */}
@@ -251,14 +251,14 @@ export default function PortfolioPage() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-lg font-bold font-technical uppercase tracking-wide text-white mb-1">
+                  <h3 className="text-base sm:text-lg font-bold font-technical uppercase tracking-wide text-white mb-1">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-[#9aa3b0] text-sm mb-4">
+                  <div className="flex items-center gap-1.5 text-[#9aa3b0] text-xs sm:text-sm mb-4">
                     <MapPin size={14} className="text-[#e2c977]" />
                     {project.location}
                   </div>
-                  <p className="text-[#b3c0d0] text-sm leading-relaxed mb-6">
+                  <p className="text-[#b3c0d0] text-xs sm:text-sm md:text-base leading-relaxed mb-6">
                     {project.description}
                   </p>
 
@@ -269,10 +269,10 @@ export default function PortfolioPage() {
                         key={stat.label}
                         className="flex-1 rounded-xl px-3 py-2 text-center border border-white/18 bg-white/5"
                       >
-                        <p className="text-base font-bold text-white font-technical">
+                        <p className="text-sm sm:text-base font-bold text-white font-technical">
                           {stat.value}
                         </p>
-                        <p className="text-[11px] uppercase tracking-[0.28em] text-[#b3c0d0]">
+                        <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#b3c0d0]">
                           {stat.label}
                         </p>
                       </div>

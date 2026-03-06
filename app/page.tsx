@@ -47,12 +47,12 @@ const trustPoints = [
   {
     icon: Shield,
     title: "Gas Safe Registered",
-    description: "All engineers are Gas Safe registered and fully qualified.",
+    description: "All engineers are Gas Safe registered and fully qualified. Reg no: 977798",
   },
   {
     icon: Star,
     title: "Clean & Tidy Work",
-    description: "We respect your home — always leaving the work area clean.",
+    description: "We respect your property — always leaving the work area clean.",
   },
   {
     icon: Clock,
@@ -113,7 +113,7 @@ export default function HomePage() {
                 >
                   <div className="h-1.5 w-1.5 rounded-sm bg-[#e2c977] animate-pulse" />
                   <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-white/90">
-                    Design • Engineer • Maintain // {COMPANY.areas}
+                    Design • Engineer • Maintain  {COMPANY.areas}
                   </span>
                 </motion.div>
 
@@ -126,8 +126,16 @@ export default function HomePage() {
                     &amp; Plumbing
                   </h1>
                   <p className="max-w-md text-sm md:text-base text-[#b3c0d0] font-medium leading-relaxed">
-                    Engineered heating and plumbing for commercial plant rooms and homes across {COMPANY.areas}.
+                  Engineered heating and plumbing for commercial and domestic.
                   </p>
+                  {/* <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[10px] md:text-xs font-technical font-bold uppercase tracking-[0.3em] text-[#9aa3b0]">
+                    {SERVICE_AREAS.map((area) => (
+                      <li key={area} className="flex items-center gap-2">
+                        <span className="h-[2px] w-4 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
+                        <span>{area}</span>
+                      </li>
+                    ))}
+                  </ul> */}
                 </div>
 
                 <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-5">
@@ -185,17 +193,21 @@ export default function HomePage() {
                           Commercial &amp; Domestic
                         </span>
                         <p className="mt-2 text-xs text-[#c7ced7]">
-                          Boiler plant, hot water, mechanical and plumbing
-                          delivered as engineered systems.
+                          Boiler plant, hot water, mechanical and plumbing, heating, gas and electrical systems.
                         </p>
                       </div>
                       <div className="rounded-3xl border border-white/8 bg-[#05080b]/70 px-4 py-3 mt-4">
                         <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
                           Areas Covered
                         </span>
-                        <p className="mt-2 text-[11px] text-[#c7ced7]">
-                          {COMPANY.areas}
-                        </p>
+                        <ul className="mt-2 space-y-1 text-[10px] text-[#c7ced7] font-technical uppercase tracking-[0.25em]">
+                          {SERVICE_AREAS.map((area) => (
+                            <li key={area} className="flex items-center gap-2">
+                              <span className="h-[1px] w-4 bg-gradient-to-r from-[#e2c977] via-[#f5e9c6] to-transparent" />
+                              <span>{area}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                     <div className="relative flex items-center justify-center">
@@ -342,7 +354,7 @@ export default function HomePage() {
                 Engineered Reliability. Luxury Finish.
               </h2>
               <p className="max-w-md text-xs text-[#9aa3b0]">
-                From commercial boiler plant rooms to domestic homes, we combine
+                From commercial to domestic, we combine
                 disciplined engineering with precise, clean installs and
                 transparent communication.
               </p>
@@ -425,8 +437,8 @@ export default function HomePage() {
                       Domestic Excellence
                     </span>
                     <p className="text-sm text-[#c7ced7]">
-                      Clean boilers, fault finding, CP12, and emergency response
-                      with respect for your home.
+                      Service boilers, fault finding, CP12, and emergency response
+                      with respect for your property.
                     </p>
                   </div>
                 </div>
@@ -505,8 +517,8 @@ export default function HomePage() {
                 Mechanical, Electrical &amp; Gas
               </h2>
               <p className="max-w-xl text-sm text-[#3c444b]">
-                Three clear paths into how we work with commercial estates and
-                domestic homeowners.
+                Three clear paths into how we work with commercial and
+                domestic.
               </p>
             </div>
           </div>
@@ -530,7 +542,7 @@ export default function HomePage() {
                         Commercial
                       </span>
                       <h3 className="mt-2 text-base font-technical font-extrabold uppercase tracking-[0.22em] text-white">
-                        Boiler Plant &amp; HVAC
+                        Boiler &amp; Plant Room
                       </h3>
                       <p className="mt-2 text-xs text-[#b3c0d0] line-clamp-3">
                         Designed plant rooms, packaged boiler systems, and
@@ -541,8 +553,8 @@ export default function HomePage() {
                       <Building2 size={18} className="text-[#b8963a]" />
                     </div>
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977] max-h-[48px] overflow-hidden">
-                    {COMMERCIAL_SERVICES.map((s) => (
+                  <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977]">
+                    {COMMERCIAL_SERVICES.slice(0, 4).map((s) => (
                       <span
                         key={s.label}
                         className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1"
@@ -550,10 +562,15 @@ export default function HomePage() {
                         {s.label}
                       </span>
                     ))}
+                    {COMMERCIAL_SERVICES.length > 4 && (
+                      <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1">
+                        + {COMMERCIAL_SERVICES.length - 4} more
+                      </span>
+                    )}
                   </div>
                   <Link
-                    href="/services/commercial"
-                    className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-[#e2c977]"
+                  href="/services/commercial"
+                  className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-white"
                   >
                     View commercial services
                     <ArrowRight size={12} />
@@ -577,7 +594,7 @@ export default function HomePage() {
                         Domestic
                       </span>
                       <h3 className="mt-2 text-base font-technical font-extrabold uppercase tracking-[0.22em] text-white">
-                        Home Heating &amp; Hot Water
+                        Heating &amp; Hot Water
                       </h3>
                       <p className="mt-2 text-xs text-[#b3c0d0] line-clamp-3">
                         Boiler upgrades, servicing, safety certificates and
@@ -588,8 +605,8 @@ export default function HomePage() {
                       <Home size={18} className="text-[#b8963a]" />
                     </div>
                   </div>
-                  <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977] max-h-[48px] overflow-hidden">
-                    {DOMESTIC_SERVICES.map((s) => (
+                  <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977]">
+                    {DOMESTIC_SERVICES.slice(0, 4).map((s) => (
                       <span
                         key={s.label}
                         className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1"
@@ -597,10 +614,15 @@ export default function HomePage() {
                         {s.label}
                       </span>
                     ))}
+                    {DOMESTIC_SERVICES.length > 4 && (
+                      <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1">
+                        + {DOMESTIC_SERVICES.length - 4} more
+                      </span>
+                    )}
                   </div>
                   <Link
-                    href="/services/domestic"
-                    className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-[#e2c977]"
+                  href="/services/domestic"
+                  className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-white"
                   >
                     View domestic services
                     <ArrowRight size={12} />
@@ -623,15 +645,15 @@ export default function HomePage() {
                       <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
                         Project Delivery
                       </span>
-                      <h3 className="mt-2 text-base font-technical font-extrabold uppercase tracking-[0.22em] text-white">
-                        Design • Install • Maintain
+                      <h3 className="mt-2 text-sm font-technical font-extrabold uppercase tracking-[0.22em] text-white">
+                        Design • Engineer • Maintain
                       </h3>
                       <p className="mt-2 text-xs text-[#b3c0d0] line-clamp-3">
                         Mechanical, electrical and gas projects delivered as
                         complete packages with a single, disciplined team.
                       </p>
                     </div>
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/5">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#e2c977]/70 bg-white/5">
                       <Target size={18} className="text-[#e2c977]" />
                     </div>
                   </div>
@@ -937,16 +959,16 @@ export default function HomePage() {
                 <h2 className="text-xl md:text-2xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
                   Disciplined Engineers. Clean Installs.
                 </h2>
-                <p className="text-xs text-[#a5b1c1]">
+                <p className="text-md text-[#a5b1c1]">
                   Founded in {COMPANY.founded} by {COMPANY.founder},{" "}
-                  {COMPANY.name} brings {COMPANY.industryExperience} of
-                  experience across domestic and commercial plant. We combine
-                  tight workmanship, robust H&amp;S and transparent
-                  communication.
+                  
                 </p>
-                <div className="space-y-3">
+                <p className="text-md text-[#a5b1c1]">{COMPANY.name} brings {COMPANY.industryExperience} of
+                  experience across domestic and commercial. We combine
+                  professional workmanship, robust H&amp;S system and transparent
+                  communication.</p>
+                {/* <div className="space-y-3">
                   {[
-                    "Gas Safe on every live connection",
                     "24/7 responsive capability for key clients",
                     "Transparent, line-item pricing",
                     "Health & Safety baked into every method statement",
@@ -959,7 +981,7 @@ export default function HomePage() {
                       {item}
                     </div>
                   ))}
-                </div>
+                </div> */}
                 <Link
                   href="/about"
                   className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-[10px] font-technical font-bold uppercase tracking-[0.3em] text-white hover:bg-white/10"

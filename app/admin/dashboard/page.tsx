@@ -20,6 +20,7 @@ import {
   Phone,
   Mail,
   Settings,
+  FileText,
 } from "lucide-react";
 import type { Inquiry } from "@/lib/inquiry-service";
 import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
@@ -83,6 +84,16 @@ function SidebarContent({
         >
           <LayoutDashboard size={16} />
           Inquiries
+        </button>
+        <button
+          onClick={() => {
+            router.push("/admin/content/pages");
+            onNavigate();
+          }}
+          className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-white/60 hover:bg-white/10 hover:text-white font-medium text-sm transition-all"
+        >
+          <FileText size={16} />
+          Content Management
         </button>
         <button
           onClick={() => {

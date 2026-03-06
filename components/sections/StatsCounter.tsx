@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 import { registerGSAP, gsap, ScrollTrigger } from "@/components/animations/gsap-init";
 
 const stats = [
-  { value: 500, suffix: "+", label: "Jobs Completed" },
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 1000, suffix: "+", label: "Jobs Completed" },
+  { value: 13, suffix: "+", label: "Years Experience" },
   { value: 5, suffix: "★", label: "Customer Rating" },
   { value: 100, suffix: "%", label: "Gas Safe Registered" },
 ];

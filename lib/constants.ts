@@ -12,7 +12,7 @@ export const OPENING_HOURS = {
 };
 
 export const COMPANY = {
-  name: "DPS Heating Services LTD",
+  name: "DPS Heating Services Ltd",
   legalName: "DPS Services Heating Ltd",
   phone: "ADD_PHONE_NUMBER", // TODO: Replace with real phone number
   email: "ADD_EMAIL_ADDRESS", // TODO: Replace with real email
@@ -23,9 +23,9 @@ export const COMPANY = {
   indemnityInsurance: true,
   founded: "2024",
   founder: "Dominic",
-  industryExperience: "over 10 years",
+  industryExperience: "over 13+ years",
   mission: "To deliver reliable, compliant mechanical, electrical, and gas solutions with discipline, integrity, and reliability — putting our clients first, 24 hours a day, 7 days a week.",
-  vision: "To be the trusted choice for commercial and domestic engineering services across London and the Southeast, known for exceptional workmanship, clear communication, and long-term partnerships built on trust.",
+  vision: "To be the trusted choice for commercial and domestic engineering services across London and the Southeast, known for exceptional workmanship, compliance & safety, clear communication, and long-term partnerships built on trust.",
 }
 
 export const NAV_LINKS = [
@@ -453,18 +453,18 @@ export const PORTFOLIO_PROJECTS = [
       { label: "Booking", value: "Short notice" },
     ],
   },
-  {
-    title: "Kitchen Tap Whistle & Vibration Fix",
-    category: "Plumbing",
-    location: "Upper Edmonton, London",
-    description:
-      "Diagnosed and resolved loud whistling and vibration from kitchen tap. Tidy workmanship, competitive pricing, and minimal disruption. Customer would not hesitate to recommend or use again.",
-    image: "/images/kitchen-plumbing.jpg",
-    stats: [
-      { label: "Issue", value: "Tap noise" },
-      { label: "Result", value: "Fully resolved" },
-    ],
-  },
+  // {
+  //   title: "Kitchen Tap Whistle & Vibration Fix",
+  //   category: "Plumbing",
+  //   location: "Upper Edmonton, London",
+  //   description:
+  //     "Diagnosed and resolved loud whistling and vibration from kitchen tap. Tidy workmanship, competitive pricing, and minimal disruption. Customer would not hesitate to recommend or use again.",
+  //   image: "/images/kitchen-plumbing.jpg",
+  //   stats: [
+  //     { label: "Issue", value: "Tap noise" },
+  //     { label: "Result", value: "Fully resolved" },
+  //   ],
+  // },
   {
     title: "Victorian Terrace Central Heating",
     category: "Heating",
@@ -474,21 +474,21 @@ export const PORTFOLIO_PROJECTS = [
     image: "/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg",
     stats: [
       { label: "Radiators", value: "12" },
-      { label: "Duration", value: "4 days" },
+      { label: "Duration", value: "2 days" },
     ],
   },
-  {
-    title: "Toilet Cistern Foghorn Noise",
-    category: "Plumbing",
-    location: "Finchley Church End, London",
-    description:
-      "Loud foghorn sound when flushing toilet — diagnosed and fixed with clear communication from quote to completion. Swift, high-standard finish. Customer described service as personable, courteous, and professional.",
-    image: "/images/plumbing-repairs.jpg",
-    stats: [
-      { label: "Diagnosis", value: "Same day" },
-      { label: "Standard", value: "High" },
-    ],
-  },
+  // {
+  //   title: "Toilet Cistern Foghorn Noise",
+  //   category: "Plumbing",
+  //   location: "Finchley Church End, London",
+  //   description:
+  //     "Loud foghorn sound when flushing toilet — diagnosed and fixed with clear communication from quote to completion. Swift, high-standard finish. Customer described service as personable, courteous, and professional.",
+  //   image: "/images/plumbing-repairs.jpg",
+  //   stats: [
+  //     { label: "Diagnosis", value: "Same day" },
+  //     { label: "Standard", value: "High" },
+  //   ],
+  // },
   {
     title: "Bathroom Leaks & Ensuite Renovation Prep",
     category: "Plumbing",
@@ -501,18 +501,18 @@ export const PORTFOLIO_PROJECTS = [
       { label: "Follow-up", value: "Ensuite planned" },
     ],
   },
-  {
-    title: "Non-Flushing Cistern Repair",
-    category: "Plumbing",
-    location: "Southwark, London",
-    description:
-      "Non-flushing toilet cistern repaired quickly. Clear communication on arrival time, punctual attendance, and toilet flushing correctly after repair.",
-    image: "/images/plumbing-repairs.jpg",
-    stats: [
-      { label: "Speed", value: "Fast" },
-      { label: "Communication", value: "Clear" },
-    ],
-  },
+  // {
+  //   title: "Non-Flushing Cistern Repair",
+  //   category: "Plumbing",
+  //   location: "Southwark, London",
+  //   description:
+  //     "Non-flushing toilet cistern repaired quickly. Clear communication on arrival time, punctual attendance, and toilet flushing correctly after repair.",
+  //   image: "/images/plumbing-repairs.jpg",
+  //   stats: [
+  //     { label: "Speed", value: "Fast" },
+  //     { label: "Communication", value: "Clear" },
+  //   ],
+  // },
   {
     title: "Leak Investigation — Bathroom & Immersion",
     category: "Plumbing",
@@ -609,42 +609,42 @@ export const PORTFOLIO_PROJECTS = [
       { label: "Outcome", value: "Fixed" },
     ],
   },
-  {
-    title: "Leaking Tap Repair",
-    category: "Plumbing",
-    location: "Peckham, London",
-    description:
-      "Leaking tap repaired to a high standard. Customer would recommend.",
-    image: "/images/kitchen-plumbing.jpg",
-    stats: [
-      { label: "Job", value: "Tap repair" },
-      { label: "Recommend", value: "Yes" },
-    ],
-  },
-  {
-    title: "Bathroom Whistling Noise",
-    category: "Plumbing",
-    location: "Rotherhithe, London",
-    description:
-      "Whistling noise in bathroom — issue located and fixed quickly. Went the extra mile and was accommodating. Customer would definitely use again and highly recommends.",
-    image: "/images/plumbing-repairs.jpg",
-    stats: [
-      { label: "Diagnosis", value: "Precise" },
-      { label: "Service", value: "Extra mile" },
-    ],
-  },
-  {
-    title: "Washing Machine Installation & Sink Leak",
-    category: "Plumbing",
-    location: "Epsom",
-    description:
-      "Rapid response and same-day completion of washing machine replacement installation. Fair quote and high-quality work. Sink leak fixed free of charge. Strong recommendation from customer.",
-    image: "/images/kitchen-plumbing.jpg",
-    stats: [
-      { label: "Completion", value: "Same day" },
-      { label: "Extra", value: "Sink leak (FOC)" },
-    ],
-  },
+  // {
+  //   title: "Leaking Tap Repair",
+  //   category: "Plumbing",
+  //   location: "Peckham, London",
+  //   description:
+  //     "Leaking tap repaired to a high standard. Customer would recommend.",
+  //   image: "/images/kitchen-plumbing.jpg",
+  //   stats: [
+  //     { label: "Job", value: "Tap repair" },
+  //     { label: "Recommend", value: "Yes" },
+  //   ],
+  // },
+  // {
+  //   title: "Bathroom Whistling Noise",
+  //   category: "Plumbing",
+  //   location: "Rotherhithe, London",
+  //   description:
+  //     "Whistling noise in bathroom — issue located and fixed quickly. Went the extra mile and was accommodating. Customer would definitely use again and highly recommends.",
+  //   image: "/images/plumbing-repairs.jpg",
+  //   stats: [
+  //     { label: "Diagnosis", value: "Precise" },
+  //     { label: "Service", value: "Extra mile" },
+  //   ],
+  // },
+  // {
+  //   title: "Washing Machine Installation & Sink Leak",
+  //   category: "Plumbing",
+  //   location: "Epsom",
+  //   description:
+  //     "Rapid response and same-day completion of washing machine replacement installation. Fair quote and high-quality work. Sink leak fixed free of charge. Strong recommendation from customer.",
+  //   image: "/images/kitchen-plumbing.jpg",
+  //   stats: [
+  //     { label: "Completion", value: "Same day" },
+  //     { label: "Extra", value: "Sink leak (FOC)" },
+  //   ],
+  // },
   {
     title: "Suspected Leaking Pipe in Bathroom",
     category: "Plumbing",
