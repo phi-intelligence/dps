@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
+import PageLoadGuard from "@/components/ui/PageLoadGuard";
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -14,7 +15,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
   }
 
   return (
-    <>
+    <PageLoadGuard>
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -24,6 +25,6 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       </main>
       <Footer />
       <ChatWidget />
-    </>
+    </PageLoadGuard>
   );
 }

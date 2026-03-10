@@ -476,7 +476,7 @@ export default function AdminManagePage() {
                         handleFieldChange(field.id, e.target.value)
                       }
                       placeholder={field.placeholder}
-                      rows={field.multiline ? 3 : 2}
+                      rows={field.multiline ? 6 : 4}
                       className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-slate-100"
                     />
                   ) : (

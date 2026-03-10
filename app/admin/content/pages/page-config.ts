@@ -159,48 +159,6 @@ export const PAGE_CONFIGS: PageConfig[] = [
       },
     ],
   },
-  {
-    id: "portfolio",
-    label: "Portfolio",
-    description: "High level heading and intro for project work.",
-    fields: [
-      {
-        id: "portfolioHeading",
-        label: "Main heading",
-        type: "text",
-        placeholder: "Selected Projects",
-      },
-      {
-        id: "portfolioIntro",
-        label: "Intro paragraph",
-        type: "textarea",
-        multiline: true,
-        description: "One or two sentences describing the type of projects featured.",
-        placeholder:
-          "A snapshot of recent commercial and domestic projects, from boiler plant upgrades to full mechanical refurbishments.",
-      },
-      {
-        id: "portfolioFeaturedTitle",
-        label: "Featured project title",
-        type: "text",
-        placeholder: "Featured project heading",
-      },
-      {
-        id: "portfolioFeaturedSummary",
-        label: "Featured project summary",
-        type: "textarea",
-        multiline: true,
-        placeholder:
-          "Short summary of a flagship installation or contract to highlight at the top of the portfolio.",
-      },
-      {
-        id: "portfolioGridHeading",
-        label: "Projects grid heading",
-        type: "text",
-        placeholder: "Recent work",
-      },
-    ],
-  },
 ];
 
 export function getPageConfig(id: string): PageConfig | undefined {

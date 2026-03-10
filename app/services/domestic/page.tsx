@@ -4,18 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { Home, ArrowRight, Phone } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
-import { COMPANY, CORE_SERVICES_IMAGES, CORE_SERVICE_DOMESTIC_HREFS } from "@/lib/constants";
+import { CORE_SERVICES_IMAGES, CORE_SERVICE_DOMESTIC_HREFS } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
+import { useContent } from "@/lib/content-provider";
 
 export default function DomesticServicesPage() {
   const { openQuoteModal } = useQuoteModal();
+  const { company } = useContent();
 
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
       <PageHero
         title="Domestic Services"
-        subtitle={`Boiler installation, servicing, repairs, plumbing, and landlord gas safety across ${COMPANY.areas}. Gas Safe registered engineers.`}
+        subtitle={`Boiler installation, servicing, repairs, plumbing, and landlord gas safety across ${company.areas}. Gas Safe registered engineers.`}
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
@@ -128,11 +130,11 @@ export default function DomesticServicesPage() {
             </p>
           </div>
           <a
-            href={`tel:${COMPANY.phone}`}
+            href={`tel:${company.phone}`}
             className="flex items-center gap-4 bg-[#e2c977] text-[#0a0f14] px-10 py-5 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.2em] hover:bg-[#e8d07a] transition-all shadow-xl shrink-0"
           >
             <Phone size={18} />
-            {COMPANY.phone}
+            {company.phone}
           </a>
         </div>
       </section>

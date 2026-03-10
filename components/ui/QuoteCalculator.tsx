@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Building2, ArrowRight, Phone, RotateCcw } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
 import { SERVICE_MAP, URGENCY_MULTIPLIER } from "@/lib/chat-config";
 import type { ServiceCategory, ServiceItem } from "@/lib/chat-config";
+import { useContent } from "@/lib/content-provider";
 
 const categories = [
   { key: "commercial" as const, label: "Commercial", icon: Building2 },
@@ -25,6 +25,7 @@ const urgencyOptions = [
 ] as const;
 
 export default function QuoteCalculator() {
+  const { company } = useContent();
   const [step, setStep] = useState(1);
   const [category, setCategory] = useState<ServiceCategory | null>(null);
   const [service, setService] = useState<ServiceItem | null>(null);
@@ -255,7 +256,7 @@ export default function QuoteCalculator() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href={`tel:${COMPANY.phone}`}
+                href={`tel:${company.phone}`}
                 className="flex items-center justify-center gap-2 border border-brand-card-border-hover bg-brand-navy text-brand-text py-4 px-8 rounded-full font-technical font-bold text-[12px] uppercase tracking-widest hover:border-brand-blue/30 transition-all"
               >
                 <Phone size={18} className="text-brand-blue" />

@@ -8,6 +8,7 @@ import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
 import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useContent } from "@/lib/content-provider";
 
 const plumbingServices = [
   {
@@ -82,6 +83,7 @@ const plumbingSteps = [
 ];
 
 export default function PlumbingCategoryPage() {
+  const { company } = useContent();
   return (
     <div className="bg-brand-surface text-brand-text min-h-screen">
       <PageHero
@@ -156,12 +158,12 @@ export default function PlumbingCategoryPage() {
             </div>
           </div>
           <a
-            href={`tel:${COMPANY.phone}`}
+            href={`tel:${company.phone}`}
             className="group relative bg-white text-black px-12 py-6 rounded-xl font-technical font-black text-[12px] uppercase tracking-[0.3em] overflow-hidden shadow-2xl transition-all hover:scale-105"
           >
             <span className="relative z-10 transition-colors group-hover:text-brand-red flex items-center gap-4">
               <Phone size={18} className="animate-pulse" />
-              {COMPANY.phone}
+              {company.phone}
             </span>
           </a>
         </div>

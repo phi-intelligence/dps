@@ -7,8 +7,6 @@ import { ArrowLeft, Save, Settings } from "lucide-react";
 import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
 
 interface SiteConfigForm {
-  name: string;
-  legalName: string;
   phone: string;
   email: string;
   address: string;
@@ -21,16 +19,11 @@ interface SiteConfigForm {
   industryExperience: string;
   mission: string;
   vision: string;
-  openingHoursWeekday: string;
-  openingHoursSaturday: string;
-  openingHoursSunday: string;
   defaultMetaTitle: string;
   defaultMetaDescription: string;
 }
 
 const emptyForm: SiteConfigForm = {
-  name: "",
-  legalName: "",
   phone: "",
   email: "",
   address: "",
@@ -43,9 +36,6 @@ const emptyForm: SiteConfigForm = {
   industryExperience: "",
   mission: "",
   vision: "",
-  openingHoursWeekday: "",
-  openingHoursSaturday: "",
-  openingHoursSunday: "",
   defaultMetaTitle: "",
   defaultMetaDescription: "",
 };
@@ -74,8 +64,6 @@ export default function AdminSiteConfigPage() {
       .then((data) => {
         if (data) {
           setForm({
-            name: data.name ?? "",
-            legalName: data.legalName ?? "",
             phone: data.phone ?? "",
             email: data.email ?? "",
             address: data.address ?? "",
@@ -88,9 +76,6 @@ export default function AdminSiteConfigPage() {
             industryExperience: data.industryExperience ?? "",
             mission: data.mission ?? "",
             vision: data.vision ?? "",
-            openingHoursWeekday: data.openingHoursWeekday ?? "",
-            openingHoursSaturday: data.openingHoursSaturday ?? "",
-            openingHoursSunday: data.openingHoursSunday ?? "",
             defaultMetaTitle: data.defaultMetaTitle ?? "",
             defaultMetaDescription: data.defaultMetaDescription ?? "",
           });
@@ -154,8 +139,8 @@ export default function AdminSiteConfigPage() {
             <Settings size={20} className="text-brand-red" />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-tight">Site Config</h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">Company info, opening hours, mission & vision</p>
+            <h1 className="text-xl font-bold tracking-tight">Basic Data</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Contact details, mission & vision</p>
           </div>
         </div>
 
@@ -174,28 +159,8 @@ export default function AdminSiteConfigPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <fieldset className="space-y-4 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
             <legend className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Company
+              Contact & company
             </legend>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Company name</span>
-                <input
-                  type="text"
-                  value={form.name}
-                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-                />
-              </label>
-              <label className="block">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Legal name</span>
-                <input
-                  type="text"
-                  value={form.legalName}
-                  onChange={(e) => setForm((f) => ({ ...f, legalName: e.target.value }))}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-                />
-              </label>
-            </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block">
                 <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Phone</span>
@@ -279,7 +244,7 @@ export default function AdminSiteConfigPage() {
               <textarea
                 value={form.mission}
                 onChange={(e) => setForm((f) => ({ ...f, mission: e.target.value }))}
-                rows={2}
+                rows={5}
                 className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
               />
             </label>
@@ -288,48 +253,10 @@ export default function AdminSiteConfigPage() {
               <textarea
                 value={form.vision}
                 onChange={(e) => setForm((f) => ({ ...f, vision: e.target.value }))}
-                rows={2}
+                rows={5}
                 className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
               />
             </label>
-          </fieldset>
-
-          <fieldset className="space-y-4 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700">
-            <legend className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Opening hours
-            </legend>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <label className="block">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Weekday</span>
-                <input
-                  type="text"
-                  value={form.openingHoursWeekday}
-                  onChange={(e) => setForm((f) => ({ ...f, openingHoursWeekday: e.target.value }))}
-                  placeholder="08:00 - 18:00"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-                />
-              </label>
-              <label className="block">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Saturday</span>
-                <input
-                  type="text"
-                  value={form.openingHoursSaturday}
-                  onChange={(e) => setForm((f) => ({ ...f, openingHoursSaturday: e.target.value }))}
-                  placeholder="09:00 - 13:00"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-                />
-              </label>
-              <label className="block">
-                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 block mb-1">Sunday</span>
-                <input
-                  type="text"
-                  value={form.openingHoursSunday}
-                  onChange={(e) => setForm((f) => ({ ...f, openingHoursSunday: e.target.value }))}
-                  placeholder="Closed"
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-                />
-              </label>
-            </div>
           </fieldset>
 
           <div className="flex justify-end gap-3">

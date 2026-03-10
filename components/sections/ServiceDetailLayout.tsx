@@ -6,10 +6,10 @@ import PageHero from "@/components/ui/PageHero";
 import ProcessSteps, { ProcessStep } from "@/components/sections/ProcessSteps";
 import FAQAccordion, { FAQItem } from "@/components/ui/FAQAccordion";
 import QuoteForm from "@/components/ui/QuoteForm";
-import { COMPANY } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { ICON_MAP, IconName } from "@/lib/icons";
 import { motion } from "framer-motion";
+import { useContent } from "@/lib/content-provider";
 
 interface IssueCard {
   icon: IconName;
@@ -79,6 +79,7 @@ export default function ServiceDetailLayout({
   accentColor = "red",
 }: ServiceDetailLayoutProps) {
   const { openQuoteModal } = useQuoteModal();
+  const { company } = useContent();
   const isLuxury = theme === "luxury";
   const accentClass = isLuxury
     ? "text-[#b8963a]"
@@ -137,11 +138,11 @@ export default function ServiceDetailLayout({
                 }
               >
                 All gas work by Gas Safe registered engineers. Gas Safe Reg:{" "}
-                <span className={`${accentClass} font-black`}>{COMPANY.gasSafeNumber}</span>
+                <span className={`${accentClass} font-black`}>{company.gasSafeNumber}</span>
               </p>
             </div>
             <a
-              href={`tel:${COMPANY.phone}`}
+              href={`tel:${company.phone}`}
               className={
                 isLuxury
                   ? "inline-flex items-center gap-2 text-white font-technical font-bold text-xs uppercase tracking-widest hover:text-[#e2c977] transition-colors"
@@ -710,7 +711,7 @@ export default function ServiceDetailLayout({
                           : "text-3xl md:text-4xl font-technical font-black text-brand-text tracking-tighter"
                       }
                     >
-                      {COMPANY.phone}
+                      {company.phone}
                     </p>
                   </div>
                 </div>

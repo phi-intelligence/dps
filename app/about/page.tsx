@@ -396,7 +396,7 @@ export default function AboutPage() {
             <div className="group flex flex-col items-center">
               <div className="relative flex h-44 w-44 md:h-56 md:w-56 items-center justify-center rounded-full border-2 border-[#e2c977]/40 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_24px_56px_rgba(0,0,0,0.5),0_0_0_1px_rgba(226,201,119,0.15)] transition-all duration-300 group-hover:border-[#e2c977]/70 group-hover:shadow-[0_28px_64px_rgba(0,0,0,0.6),0_0_32px_rgba(226,201,119,0.12)]">
                 <Image
-                  src="/imagesV2/gas_safe_logo.jpeg"
+                  src="/imagesv2/gas_safe_logo.jpeg"
                   alt="Gas Safe Register"
                   fill
                   className="object-contain p-7"

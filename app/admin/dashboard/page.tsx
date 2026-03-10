@@ -95,6 +95,7 @@ function SidebarContent({
           <FileText size={16} />
           Content Management
         </button>
+        {/* Site Config - commented out for now
         <button
           onClick={() => {
             router.push("/admin/content/site");
@@ -105,6 +106,7 @@ function SidebarContent({
           <Settings size={16} />
           Site Config
         </button>
+        */}
         <button
           onClick={() => {
             router.push("/");

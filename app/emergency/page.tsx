@@ -3,9 +3,9 @@
 import { Phone, AlertTriangle, Flame, ShieldAlert } from "lucide-react";
 import QuoteForm from "@/components/ui/QuoteForm";
 import PageHero from "@/components/ui/PageHero";
-import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useContent } from "@/lib/content-provider";
 
 const urgentIssues = [
   {
@@ -26,11 +26,12 @@ const urgentIssues = [
 ];
 
 export default function UrgentEnquiryPage() {
+  const { company } = useContent();
   return (
     <div className="bg-brand-surface text-brand-text min-h-screen">
-      <PageHero
+        <PageHero
         title="Urgent Enquiries"
-        subtitle={`Commercial & domestic gas, heating and plumbing — for urgent issues across ${COMPANY.areas}, call us directly.`}
+        subtitle={`Commercial & domestic gas, heating and plumbing — for urgent issues across ${company.areas}, call us directly.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Urgent Enquiries" }]}
         backgroundImage="/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg"
         compact
@@ -50,11 +51,11 @@ export default function UrgentEnquiryPage() {
             For urgent issues, call us directly
           </p>
           <a
-            href={`tel:${COMPANY.phone}`}
+            href={`tel:${company.phone}`}
             className="group relative inline-flex items-center gap-6 bg-white text-brand-red px-16 py-8 rounded-full font-technical font-extrabold text-2xl transition-all shadow-xl hover:scale-105"
           >
             <Phone size={36} className="animate-pulse" />
-            <span>{COMPANY.phone}</span>
+            <span>{company.phone}</span>
           </a>
           <p className="text-white/60 text-[9px] font-technical uppercase tracking-[0.3em] mt-8">
             Mon–Fri 08:00–18:00 // Sat 09:00–13:00

@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import { ICON_MAP } from "@/lib/icons";
 import { useChat } from "@/lib/hooks/use-chat";
 import { QUICK_ACTIONS } from "@/lib/chat-config";
+import { useContent } from "@/lib/content-provider";
 import ChatMessage from "./ChatMessage";
 
 export default function ChatPanel() {
   const { messages, isStreaming, sendMessage, clearChat } = useChat();
+  const { company } = useContent();
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -60,11 +62,14 @@ export default function ChatPanel() {
               How can we help?
             </p>
             <div className="grid grid-cols-2 gap-3 w-full max-w-[280px]">
-              {QUICK_ACTIONS.map((action) =>
-                action.href.startsWith("tel:") ? (
+              {QUICK_ACTIONS.map((action) => {
+                const href = action.href.startsWith("tel:")
+                  ? `tel:${company.phone}`
+                  : action.href;
+                return action.href.startsWith("tel:") ? (
                   <a
                     key={action.label}
-                    href={action.href}
+                    href={href}
                     className="chat-panel-btn px-4 py-3 rounded-xl border border-brand-card-border-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
                   >
                     {action.label}
@@ -72,13 +77,13 @@ export default function ChatPanel() {
                 ) : (
                   <Link
                     key={action.label}
-                    href={action.href}
+                    href={href}
                     className="chat-panel-btn px-4 py-3 rounded-xl border border-brand-card-border-hover hover:border-brand-red/20 text-brand-text text-[10px] font-technical font-bold uppercase tracking-widest transition-all text-center"
                   >
                     {action.label}
                   </Link>
-                )
-              )}
+                );
+              })}
             </div>
           </div>
         ) : (

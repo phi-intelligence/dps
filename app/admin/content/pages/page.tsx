@@ -12,15 +12,31 @@ interface ManagedPage {
   description: string;
   path: string;
   adminPath: string;
+  comingSoon?: boolean;
 }
 
 const PAGES: ManagedPage[] = [
+  {
+    id: "basic-data",
+    label: "Basic Data",
+    description: "Email, phone, address and core company contact details.",
+    path: "/contact",
+    adminPath: "/admin/content/site",
+  },
+  {
+    id: "portfolio",
+    label: "Portfolio",
+    description: "Selected projects and case studies.",
+    path: "/portfolio",
+    adminPath: "/admin/content/portfolio",
+  },
   {
     id: "home",
     label: "Home",
     description: "Hero, core services, sectors and contact funnels.",
     path: "/",
     adminPath: "/admin/content/pages/home",
+    comingSoon: true,
   },
   {
     id: "about",
@@ -28,13 +44,7 @@ const PAGES: ManagedPage[] = [
     description: "Company story, values and credentials.",
     path: "/about",
     adminPath: "/admin/content/pages/about",
-  },
-  {
-    id: "portfolio",
-    label: "Portfolio",
-    description: "Selected projects and case studies.",
-    path: "/portfolio",
-    adminPath: "/admin/content/pages/portfolio",
+    comingSoon: true,
   },
 ];
 
@@ -117,12 +127,18 @@ export default function AdminContentPages() {
                   <ExternalLink size={12} />
                   View page
                 </Link>
-                <Link
-                  href={page.adminPath}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-brand-red text-white px-3 py-1.5 text-[11px] hover:bg-brand-red/90 transition-colors"
-                >
-                  Manage page
-                </Link>
+                {page.comingSoon ? (
+                  <span className="inline-flex items-center rounded-xl border border-slate-300 dark:border-slate-600 px-3 py-1.5 text-[11px] text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800">
+                    Coming soon
+                  </span>
+                ) : (
+                  <Link
+                    href={page.adminPath}
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-brand-red text-white px-3 py-1.5 text-[11px] hover:bg-brand-red/90 transition-colors"
+                  >
+                    Manage page
+                  </Link>
+                )}
               </div>
             </div>
           ))}

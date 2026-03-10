@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { Phone } from "lucide-react";
-import { COMPANY } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import EnergyFlowBackground from "@/components/animations/EnergyFlowBackground";
+import { useContent } from "@/lib/content-provider";
 
 interface CTABannerProps {
   title?: string;
@@ -20,6 +20,7 @@ export default function CTABanner({
   backgroundImage,
 }: CTABannerProps) {
   const { openQuoteModal } = useQuoteModal();
+  const { company } = useContent();
   return (
     <section
       className="relative py-32 px-4 overflow-hidden"
@@ -68,11 +69,11 @@ export default function CTABanner({
               </button>
 
               <a
-                href={`tel:${COMPANY.phone}`}
+                href={`tel:${company.phone}`}
                 className="flex items-center gap-3 text-[#111518] hover:text-[#b8963a] transition-all font-bold text-lg"
               >
                 <Phone size={24} className="text-brand-red" />
-                <span>{COMPANY.phone}</span>
+                <span>{company.phone}</span>
               </a>
             </div>
           </div>

@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone, Flame } from "lucide-react";
 import { motion } from "framer-motion";
-import { COMPANY } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
+import { useContent } from "@/lib/content-provider";
 
 interface Breadcrumb {
   label: string;
@@ -41,6 +41,7 @@ export default function PageHero({
   compact = false,
 }: PageHeroProps) {
   const { openQuoteModal } = useQuoteModal();
+  const { company } = useContent();
   const hasImage = !!backgroundImage;
   const isQuoteCTA = ctaHref === "/contact";
   const isLuxury = variant === "luxury";
@@ -301,7 +302,7 @@ export default function PageHero({
                 </Link>
               )}
               <a
-                href={`tel:${COMPANY.phone}`}
+                href={`tel:${company.phone}`}
                 className={`flex items-center gap-4 transition-all font-technical font-bold text-[12px] uppercase tracking-[0.2em] ${
                   isDarkHero
                     ? "text-white/90 hover:text-[#e2c977]"
@@ -313,7 +314,7 @@ export default function PageHero({
                 }`}
               >
                 <Phone size={18} className={isDarkHero ? "text-[#e2c977] animate-pulse" : luxuryWithImage ? "text-[#5c4d2e] animate-pulse" : "text-brand-red animate-pulse"} />
-                <span>{COMPANY.phone}</span>
+                <span>{company.phone}</span>
               </a>
             </motion.div>
           )}

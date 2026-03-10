@@ -3,10 +3,11 @@
 import { Phone, Mail, Clock, MapPin, AlertTriangle, Zap } from "lucide-react";
 import QuoteForm from "@/components/ui/QuoteForm";
 import PageHero from "@/components/ui/PageHero";
-import { COMPANY } from "@/lib/constants";
 import { motion } from "framer-motion";
+import { useContent } from "@/lib/content-provider";
 
 export default function ContactPage() {
+  const { company } = useContent();
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
       <PageHero
@@ -54,20 +55,20 @@ export default function ContactPage() {
                   <div>
                     <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Call</p>
                     <a
-                      href={`tel:${COMPANY.phone}`}
+                      href={`tel:${company.phone}`}
                       className="text-white font-technical font-extrabold text-2xl md:text-3xl hover:text-[#e2c977] transition-colors inline-block tracking-tight"
                     >
-                      {COMPANY.phone}
+                      {company.phone}
                     </a>
                     <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mt-1">Speak directly for urgent enquiries.</p>
                   </div>
                   <div className="border-t border-white/10 pt-6">
                     <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mb-1">Email</p>
                     <a
-                      href={`mailto:${COMPANY.email}`}
+                      href={`mailto:${company.email}`}
                       className="text-white font-technical font-extrabold text-lg hover:text-[#e2c977] transition-colors inline-block break-all tracking-wide"
                     >
-                      {COMPANY.email}
+                      {company.email}
                     </a>
                     <p className="text-[#9aa3b0] text-[10px] font-technical uppercase tracking-[0.2em] mt-1">We aim to reply within one working day.</p>
                   </div>
@@ -158,11 +159,11 @@ export default function ContactPage() {
             </div>
           </div>
           <a
-            href={`tel:${COMPANY.phone}`}
+            href={`tel:${company.phone}`}
             className="inline-flex items-center gap-3 bg-[#e2c977] text-[#0a0f14] px-12 py-6 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.3em] hover:bg-[#f5e9c6] transition-colors shadow-lg"
           >
             <Phone size={20} />
-            {COMPANY.phone}
+            {company.phone}
           </a>
         </div>
       </section>

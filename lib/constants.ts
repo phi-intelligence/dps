@@ -2,6 +2,11 @@
  * Site constants — used as fallback when CMS (DB) is unavailable and for content not yet in CMS.
  * CMS is the source of truth for: site config (company, opening hours), nav, reviews, portfolio,
  * accreditations, service areas, inquiries, and service detail pages that have been seeded.
+ *
+ * Static fallback: REVIEWS and PORTFOLIO_PROJECTS are the canonical static data for the portfolio
+ * page. When /api/content/reviews or /api/content/portfolio fails or returns empty, the portfolio
+ * page falls back to these constants. Keep this file in sync with seed data.
+ *
  * Constants below are still used for: COMMERCIAL_SERVICES, DOMESTIC_SERVICES, CAPABILITY_*,
  * SECTORS_*, KEY_STRENGTHS, HEALTH_SAFETY_COPY, COMMITMENT_COPY, and inline page content (About, Home sections).
  */
@@ -14,8 +19,8 @@ export const OPENING_HOURS = {
 export const COMPANY = {
   name: "DPS Heating Services Ltd",
   legalName: "DPS Services Heating Ltd",
-  phone: "ADD_PHONE_NUMBER", // TODO: Replace with real phone number
-  email: "ADD_EMAIL_ADDRESS", // TODO: Replace with real email
+  phone: "07932403830",
+  email: "office@dps-heating.co.uk",
   address: "Situated on the outskirts of Kent",
   gasSafeNumber: "ADD_GAS_SAFE_NUMBER", // TODO: Replace with real Gas Safe number
   areas: "London, Kent, Essex and Surrey",
@@ -274,6 +279,10 @@ export const DOMESTIC_SERVICES = [
   { label: "Emergency Call outs", href: "/emergency" },
 ] as const
 
+/**
+ * Customer reviews — static fallback when DB fetch fails or returns empty.
+ * Used by: portfolio page, home page. Keep in sync with seed data.
+ */
 export const REVIEWS = [
   {
     name: "Alloush",
@@ -417,6 +426,10 @@ export const REVIEWS = [
   },
 ]
 
+/**
+ * Completed portfolio projects — static fallback when DB fetch fails or returns empty.
+ * Used by: portfolio page. Keep in sync with seed data.
+ */
 export const PORTFOLIO_PROJECTS = [
   {
     title: "Commercial Boiler Plant Room",

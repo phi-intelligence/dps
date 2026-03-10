@@ -35,6 +35,7 @@ import CTABanner from "@/components/ui/CTABanner";
 import StatsCounter from "@/components/sections/StatsCounter";
 import CoreServicesSection from "@/components/sections/CoreServicesSection";
 import SectionWaves from "@/components/ui/SectionWaves";
+import LazyViewport from "@/components/ui/LazyViewport";
 import { COMPANY, REVIEWS, SERVICE_AREAS, COMMERCIAL_SERVICES, DOMESTIC_SERVICES, SECTORS_WE_DEAL_WITH, SECTORS_WITH_IMAGES } from "@/lib/constants";
 import { registerGSAP, gsap } from "@/components/animations/gsap-init";
 
@@ -83,6 +84,7 @@ export default function HomePage() {
             alt=""
             fill
             className="opacity-80 object-cover object-center"
+            sizes="100vw"
             priority
             aria-hidden
           />
@@ -111,7 +113,7 @@ export default function HomePage() {
                 className="inline-flex items-center"
               >
                 <Image
-                  src="/imagesV2/logo_full_light_nobg.png"
+                  src="/imagesv2/logo_full_light_nobg.png"
                   alt={COMPANY.name}
                   width={320}
                   height={80}
@@ -134,7 +136,7 @@ export default function HomePage() {
                   {SERVICE_AREAS.map((area) => (
                     <li key={area} className="flex items-center gap-3">
                       <Image
-                        src="/imagesV2/logo.png"
+                        src="/imagesv2/logo.png"
                         alt=""
                         width={22}
                         height={30}
@@ -160,11 +162,11 @@ export default function HomePage() {
                 </button>
 
                 <a
-                  href="tel:+442071234567"
+                  href="tel:07932403830"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-xs font-technical font-bold uppercase tracking-[0.3em] text-white/90 backdrop-blur transition-all hover:bg-white/10 hover:border-[#e2c977]/40"
                 >
                   <Phone size={16} className="text-[#e2c977]" />
-                  020&nbsp;7123&nbsp;4567
+                  07932403830
                 </a>
 
                 <Link
@@ -650,17 +652,24 @@ export default function HomePage() {
               scroll-sequenced overview.
             </p>
           </div>
-
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#05080c] via-[#05080c] to-[#0c141f] shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
-            <CoreServicesSection
-              title="Our Core Services"
-              subtitle="Mechanical, electrical, and gas solutions — installation, maintenance, and compliance across commercial and domestic projects."
-              dark
-              frameDir="/images/how-we-work-frames/frame"
-              frameCount={145}
-            />
-          </div>
         </div>
+
+        <LazyViewport
+          minHeight={480}
+          fallback={
+            <div className="flex min-h-[480px] w-full items-center justify-center rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#05080c] via-[#05080c] to-[#0c141f]">
+              <div className="h-10 w-10 animate-pulse rounded-full border-2 border-[#e2c977]/40 border-t-transparent" />
+            </div>
+          }
+        >
+          <CoreServicesSection
+            title="Our Core Services"
+            subtitle="Mechanical, electrical, and gas solutions — installation, maintenance, and compliance across commercial and domestic projects."
+            dark
+            frameDir="/images/how-we-work-frames/frame"
+            frameCount={145}
+          />
+        </LazyViewport>
       </section>
 
       {/* Sectors we serve – geometric grid */}
@@ -756,16 +765,25 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.8fr_1.1fr] items-start">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative h-[420px] overflow-hidden rounded-[2rem] border border-[#d5c7aa] bg-white shadow-[0_24px_60px_rgba(0,0,0,0.15)]"
+            <LazyViewport
+              minHeight={420}
+              fallback={
+                <div className="flex h-[420px] w-full items-center justify-center rounded-[2rem] border border-[#d5c7aa] bg-white shadow-[0_24px_60px_rgba(0,0,0,0.15)]">
+                  <div className="h-10 w-10 animate-pulse rounded-full border-2 border-[#e2c977]/40 border-t-transparent" />
+                </div>
+              }
             >
-              <ServiceAreasMap />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.98 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="relative h-[420px] overflow-hidden rounded-[2rem] border border-[#d5c7aa] bg-white shadow-[0_24px_60px_rgba(0,0,0,0.15)]"
+              >
+                <ServiceAreasMap />
               <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-black/5" />
-            </motion.div>
+              </motion.div>
+            </LazyViewport>
 
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -974,7 +992,15 @@ export default function HomePage() {
 
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-[#05080c] via-[#05080c] to-[#10161f] px-4 py-10 md:px-8 md:py-12">
             <div className="mb-10">
-              <StatsCounter />
+              <LazyViewport
+                fallback={
+                  <div className="flex min-h-[140px] w-full items-center justify-center">
+                    <div className="h-8 w-8 animate-pulse rounded-full border-2 border-[#e2c977]/40 border-t-transparent" />
+                  </div>
+                }
+              >
+                <StatsCounter />
+              </LazyViewport>
             </div>
 
             <div className="grid gap-8 md:grid-cols-4">
@@ -1025,7 +1051,7 @@ export default function HomePage() {
               <div className="flex flex-col items-center gap-4 md:gap-5">
                 <div className="relative flex h-28 w-[15.5rem] md:h-32 md:w-[17.5rem] items-center justify-center rounded-3xl border-2 border-white/25 bg-white/10 shadow-[0_24px_56px_rgba(0,0,0,0.5)] ring-2 ring-[#e2c977]/20">
                   <Image
-                    src="/imagesV2/gas_safe_logo.jpeg"
+                    src="/imagesv2/gas_safe_logo.jpeg"
                     alt="Gas Safe Register"
                     fill
                     className="object-contain p-4 md:p-5"

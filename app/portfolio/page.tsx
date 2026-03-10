@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMPANY, REVIEWS, PORTFOLIO_PROJECTS } from "@/lib/constants";
+import { COMPANY, REVIEWS as FALLBACK_REVIEWS, PORTFOLIO_PROJECTS as FALLBACK_PROJECTS } from "@/lib/constants";
 import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import Image from "next/image";
 import {
@@ -35,7 +35,13 @@ const stats = [
   { icon: Star, label: "Customer Rating", value: "5.0" },
 ];
 
-type ReviewItem = (typeof REVIEWS)[number];
+interface ReviewItem {
+  name: string;
+  service: string;
+  rating: number;
+  quote: string;
+  image?: string;
+}
 
 function ReviewMarqueeCard({ review }: { review: ReviewItem }) {
   return (
@@ -74,7 +80,7 @@ function ReviewMarqueeCard({ review }: { review: ReviewItem }) {
   );
 }
 
-function ReviewMarqueeRow({ direction }: { direction: "left" | "right" }) {
+function ReviewMarqueeRow({ direction, reviews }: { direction: "left" | "right"; reviews: ReviewItem[] }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [cycleWidth, setCycleWidth] = useState(0);
   const x = useMotionValue(0);
@@ -84,7 +90,7 @@ function ReviewMarqueeRow({ direction }: { direction: "left" | "right" }) {
     if (containerRef.current) {
       setCycleWidth(containerRef.current.scrollWidth / 2 || 0);
     }
-  }, []);
+  }, [reviews]);
 
   useAnimationFrame((_, delta) => {
     if (paused || cycleWidth === 0) return;
@@ -108,6 +114,8 @@ function ReviewMarqueeRow({ direction }: { direction: "left" | "right" }) {
     x.set(next);
   });
 
+  if (reviews.length === 0) return null;
+
   return (
     <div className="w-full overflow-hidden">
       <motion.div
@@ -117,7 +125,7 @@ function ReviewMarqueeRow({ direction }: { direction: "left" | "right" }) {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {[...REVIEWS, ...REVIEWS].map((review, idx) => (
+        {[...reviews, ...reviews].map((review, idx) => (
           <ReviewMarqueeCard key={`${review.name}-${idx}`} review={review} />
         ))}
       </motion.div>
@@ -125,7 +133,29 @@ function ReviewMarqueeRow({ direction }: { direction: "left" | "right" }) {
   );
 }
 
+interface ProjectItem {
+  title: string;
+  category: string;
+  location: string;
+  description: string;
+  image: string;
+  stats: { label: string; value: string }[];
+}
+
 export default function PortfolioPage() {
+  const [projects, setProjects] = useState<ProjectItem[]>(FALLBACK_PROJECTS);
+  const [reviews, setReviews] = useState<ReviewItem[]>(FALLBACK_REVIEWS);
+
+  useEffect(() => {
+    Promise.all([
+      fetch("/api/content/portfolio").then((r) => r.json()),
+      fetch("/api/content/reviews").then((r) => r.json()),
+    ]).then(([projData, revData]) => {
+      if (Array.isArray(projData) && projData.length > 0) setProjects(projData);
+      if (Array.isArray(revData) && revData.length > 0) setReviews(revData);
+    }).catch(() => {});
+  }, []);
+
   return (
     <div className="bg-[#f2ede3] text-brand-text">
       {/* ── Hero ── */}
@@ -216,9 +246,9 @@ export default function PortfolioPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PORTFOLIO_PROJECTS.map((project, i) => (
+            {projects.map((project, i) => (
               <motion.div
-                key={project.title}
+                key={`${project.title}-${i}`}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -398,8 +428,8 @@ export default function PortfolioPage() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#05080c] via-[#05080c] to-transparent z-20 opacity-70" />
 
           <div className="space-y-6 relative z-10">
-            <ReviewMarqueeRow direction="left" />
-            <ReviewMarqueeRow direction="right" />
+            <ReviewMarqueeRow direction="left" reviews={reviews} />
+            <ReviewMarqueeRow direction="right" reviews={reviews} />
           </div>
         </div>
       </section>

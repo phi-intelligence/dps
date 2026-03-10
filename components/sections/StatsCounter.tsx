@@ -31,8 +31,8 @@ export default function StatsCounter() {
           onEnter: () => {
             gsap.to(obj, {
               val: target,
-              duration: 2.5,
-              ease: "expo.out",
+              duration: 2,
+              ease: "power2.out",
               onUpdate: () => {
                 counter.textContent = Math.floor(obj.val).toString();
               },

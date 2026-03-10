@@ -7,7 +7,9 @@ import { Phone, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
+import LazyViewport from "@/components/ui/LazyViewport";
 import { COMPANY, SERVICE_AREAS } from "@/lib/constants";
+import { useContent } from "@/lib/content-provider";
 
 const ServiceAreasMap = dynamic(
   () => import("@/components/ui/ServiceAreasMap"),
@@ -20,11 +22,12 @@ const ServiceAreasMap = dynamic(
 );
 
 export default function ServiceAreasPage() {
+  const { company } = useContent();
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden">
       <PageHero
         title="Service Areas"
-        subtitle={`We provide heating and plumbing services across ${COMPANY.areas}. Local engineers, fast response times.`}
+        subtitle={`We provide heating and plumbing services across ${company.areas}. Local engineers, fast response times.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Service Areas" }]}
         backgroundImage="/images/service-area-map.jpg"
         variant="luxury"
@@ -57,7 +60,7 @@ export default function ServiceAreasPage() {
               <div className="space-y-6 text-[#2b3136] text-sm md:text-base leading-relaxed max-w-xl">
                 <p>
                   DPS Heating Services Ltd operates throughout{" "}
-                  {COMPANY.areas}, covering both domestic and commercial
+                  {company.areas}, covering both domestic and commercial
                   customers. Our engineers are locally based, allowing us to
                   offer fast response times across our entire coverage area.
                 </p>
@@ -78,24 +81,33 @@ export default function ServiceAreasPage() {
                   coverage and get you booked in.
                 </p>
                 <a
-                  href={`tel:${COMPANY.phone}`}
+                  href={`tel:${company.phone}`}
                   className="inline-flex items-center gap-3 bg-[#e2c977] text-[#0a0f14] px-8 py-4 rounded-full font-technical font-extrabold text-[10px] uppercase tracking-[0.3em] hover:bg-[#f5e9c6] transition-colors"
                 >
                   <Phone size={16} />
-                  {COMPANY.phone}
+                  {company.phone}
                 </a>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative rounded-[2rem] overflow-hidden border-2 border-[#e2c977]/25 shadow-[0_24px_56px_rgba(0,0,0,0.12)] h-[400px] md:min-h-[480px] lg:h-[520px] min-h-[320px]"
+            <LazyViewport
+              minHeight={400}
+              fallback={
+                <div className="flex h-[400px] md:min-h-[480px] min-h-[320px] w-full items-center justify-center rounded-[2rem] border-2 border-[#e2c977]/25 bg-[#0a0f14]">
+                  <div className="h-10 w-10 animate-pulse rounded-full border-2 border-[#e2c977]/40 border-t-transparent" />
+                </div>
+              }
             >
-              <ServiceAreasMap />
-              <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-[#e2c977]/10" />
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="relative rounded-[2rem] overflow-hidden border-2 border-[#e2c977]/25 shadow-[0_24px_56px_rgba(0,0,0,0.12)] h-[400px] md:min-h-[480px] lg:h-[520px] min-h-[320px]"
+              >
+                <ServiceAreasMap />
+                <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-[#e2c977]/10" />
+              </motion.div>
+            </LazyViewport>
           </div>
         </div>
       </section>

@@ -6,9 +6,10 @@ import { Building2, Home, ArrowRight, Phone, Shield, Zap, Award, Activity, Wrenc
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMPANY, COMMERCIAL_SERVICES, DOMESTIC_SERVICES, KEY_STRENGTHS } from "@/lib/constants";
+import { COMMERCIAL_SERVICES, DOMESTIC_SERVICES, KEY_STRENGTHS } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
+import { useContent } from "@/lib/content-provider";
 
 const categories = [
   {
@@ -35,33 +36,33 @@ const categories = [
   },
 ];
 
-const whyDPS = [
-  {
-    icon: Shield,
-    title: "Gas Safe Registered",
-    description: "All heating work carried out by certified Gas Safe registered engineers.",
-  },
-  {
-    icon: Zap,
-    title: "Fast Response",
-    description: "Same-day appointments available for urgent heating and plumbing problems.",
-  },
-  {
-    icon: Award,
-    title: "Over a Decade of Experience",
-    description: `Trusted by customers across ${COMPANY.areas} for reliable, quality work.`,
-  },
-];
-
 export default function ServicesPage() {
   const { openQuoteModal } = useQuoteModal();
+  const { company } = useContent();
   const keyHighlights = KEY_STRENGTHS.slice(0, 6);
+  const whyDPS = [
+    {
+      icon: Shield,
+      title: "Gas Safe Registered",
+      description: "All heating work carried out by certified Gas Safe registered engineers.",
+    },
+    {
+      icon: Zap,
+      title: "Fast Response",
+      description: "Same-day appointments available for urgent heating and plumbing problems.",
+    },
+    {
+      icon: Award,
+      title: "Over a Decade of Experience",
+      description: `Trusted by customers across ${company.areas} for reliable, quality work.`,
+    },
+  ];
 
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
       <PageHero
         title="Services"
-        subtitle={`Mechanical, electrical and gas services for commercial estates and domestic homes across ${COMPANY.areas}. Heating, plumbing, compliance and emergency support.`}
+        subtitle={`Mechanical, electrical and gas services for commercial estates and domestic homes across ${company.areas}. Heating, plumbing, compliance and emergency support.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
         backgroundImage="/images/blueprint-commercial-system.png"
         variant="luxury"
@@ -178,11 +179,11 @@ export default function ServicesPage() {
 
             <div className="flex flex-col sm:flex-row gap-6 shrink-0">
               <a
-                href={`tel:${COMPANY.phone}`}
+                href={`tel:${company.phone}`}
                 className="flex items-center justify-center gap-4 bg-[#e2c977] text-[#0a0f14] px-10 py-5 rounded-full font-technical font-extrabold text-xs uppercase tracking-[0.2em] hover:bg-[#e8d07a] transition-all shadow-xl"
               >
                 <Phone size={18} />
-                {COMPANY.phone}
+                {company.phone}
               </a>
               <button
                 type="button"
