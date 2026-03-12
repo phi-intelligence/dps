@@ -19,7 +19,7 @@ export const OPENING_HOURS = {
 export const COMPANY = {
   name: "DPS Heating Services Ltd",
   legalName: "DPS Services Heating Ltd",
-  phone: "07932403830",
+  phone: "+44 07932 403830",
   email: "office@dps-heating.co.uk",
   address: "Situated on the outskirts of Kent",
   gasSafeNumber: "ADD_GAS_SAFE_NUMBER", // TODO: Replace with real Gas Safe number

@@ -162,11 +162,11 @@ export default function HomePage() {
                 </button>
 
                 <a
-                  href="tel:07932403830"
+                  href="tel:+447932403830"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 text-xs font-technical font-bold uppercase tracking-[0.3em] text-white/90 backdrop-blur transition-all hover:bg-white/10 hover:border-[#e2c977]/40"
                 >
                   <Phone size={16} className="text-[#e2c977]" />
-                  07932403830
+                  +44 07932 403830
                 </a>
 
                 <Link
