@@ -79,7 +79,7 @@ export default function Header() {
           <Link href="/" className="flex items-center group min-w-0">
             <div className="relative h-9 sm:h-10 md:h-16 w-auto">
               <Image
-                src="/imagesv2/logo_full_light_nobg.png"
+                src="/imagesv2/branding/logo_full_light_nobg.png"
                 alt={company.name}
                 width={210}
                 height={48}

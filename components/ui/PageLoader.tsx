@@ -26,7 +26,7 @@ export default function PageLoader() {
           className="relative h-16 w-48 sm:h-20 sm:w-56 md:h-24 md:w-64"
         >
           <Image
-            src="/imagesv2/logo_full_light_nobg.png"
+            src="/imagesv2/branding/logo_full_light_nobg.png"
             alt=""
             fill
             className="object-contain"

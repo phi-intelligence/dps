@@ -6,67 +6,67 @@ const COMMERCIAL_MECHANICAL_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Heating system installation",
     description: "Full design, supply and installation of commercial heating systems. Our engineers deliver robust, efficient solutions tailored to your building and compliance requirements.",
-    image: "/images/services/commercial-mechanical/plant-room-1.png",
+    image: "/imagesv2/commercial_mechanical/commercial_heating.webp",
     imageAlt: "Technicians working on commercial heating and pipework in a plant room",
   },
   {
     title: "Heating system repairs",
     description: "Fast fault finding and repair of commercial heating systems. We minimise downtime and restore heating performance with minimal disruption to your operations.",
-    image: "/images/services/commercial-mechanical/plant-room-2.png",
+    image: "/imagesv2/commercial_mechanical/commercial_heating_repair.jpg",
     imageAlt: "Commercial plant room with pipes, valves and boiler units",
   },
   {
     title: "Pumps, valves & controls replacement",
     description: "Replacement and upgrade of circulation pumps, motorised valves and control equipment. We ensure correct sizing and commissioning for reliable operation.",
-    image: "/images/services/commercial-mechanical/plant-room-3.png",
+    image: "/imagesv2/commercial_mechanical/commercial_pump.jpg",
     imageAlt: "Pumps, valves and control units in a commercial heating system",
   },
   {
     title: "Pipework installation & modifications",
     description: "New pipework runs, distribution systems and modifications to existing installations. All work carried out to current standards with clear documentation.",
-    image: "/images/services/commercial-mechanical/plant-room-4.png",
+    image: "/imagesv2/commercial_mechanical/commercial_pipework.png",
     imageAlt: "Technicians working on pipework in a commercial plant room",
   },
   {
     title: "HIU installation / servicing / repairs",
     description: "Heat interface unit installation, planned servicing and fault repair. We work with leading HIU manufacturers to maintain performance and compliance.",
-    image: "/images/services/commercial-mechanical/plant-room-5.png",
+    image: "/imagesv2/commercial_mechanical/commercial_hiu.webp",
     imageAlt: "Commercial boilers and pipework with technician and diagnostic equipment",
   },
   {
     title: "Pressurisation units",
     description: "Supply, installation and maintenance of pressurisation units for sealed heating systems. Correct pressure and expansion are essential for system longevity.",
-    image: "/images/services/commercial-mechanical/plant-room-6.png",
+    image: "/imagesv2/commercial_mechanical/commercial_pressure.jpg",
     imageAlt: "Technician inspecting commercial boiler control panel",
   },
   {
     title: "Expansion vessels",
     description: "Sizing, installation and replacement of expansion vessels. We ensure adequate capacity and correct pre-charge for safe, efficient system operation.",
-    image: "/images/services/commercial-mechanical/plant-room-1.png",
+    image: "/imagesv2/commercial_mechanical/expansion_vessels.webp",
     imageAlt: "Commercial plant room heating installation",
   },
   {
     title: "Leak detection & repairs",
     description: "Systematic leak detection across pipework, fittings and plant. We locate and repair leaks with minimal damage to finishes and structure.",
-    image: "/images/services/commercial-mechanical/plant-room-2.png",
+    image: "/imagesv2/commercial_mechanical/leak_detection.png",
     imageAlt: "Pipework and equipment in a commercial plant room",
   },
   {
     title: "System balancing",
     description: "Hydronic balancing of heating and cooling circuits to achieve design flow rates. Balanced systems improve comfort, efficiency and equipment life.",
-    image: "/images/services/commercial-mechanical/plant-room-3.png",
+    image: "/imagesv2/commercial_mechanical/system_balance.jpg",
     imageAlt: "Pumps, gauges and valves in a commercial heating system",
   },
   {
     title: "Powerflushing / system cleaning",
     description: "Powerflushing and chemical cleaning of heating systems to remove sludge and corrosion. Restores flow and heat output and protects new components.",
-    image: "/images/services/commercial-mechanical/plant-room-4.png",
+    image: "/imagesv2/commercial_mechanical/power_flushing.jpg",
     imageAlt: "Technicians and pipework in a plant room",
   },
   {
     title: "General mechanical maintenance",
     description: "Routine inspection, servicing and small repairs across commercial mechanical systems. We keep plant rooms and heating infrastructure running reliably.",
-    image: "/images/services/commercial-mechanical/plant-room-5.png",
+    image: "/imagesv2/commercial_mechanical/general.jpg",
     imageAlt: "Commercial boiler plant and pipework",
   },
 ];
@@ -82,7 +82,7 @@ export default function CommercialMechanicalServicesPage() {
       title="Commercial Mechanical Services"
       subtitle={`Heating systems, plant room, pipework, HIU, powerflushing, and mechanical maintenance for commercial premises across ${COMPANY.areas}.`}
       backgroundImage="/images/our-services-commercial.png"
-      sideImage="/images/core-services/mechanical.png"
+      sideImage="/imagesv2/commercial_mechanical/commercial_heating.webp"
       sideImageAlt="Commercial plant room and mechanical heating systems"
       introduction={`DPS Heating Services delivers full mechanical engineering solutions for commercial clients across ${COMPANY.areas}. From heating system installation and repairs to pumps, valves and controls, pipework and HIU installation and servicing, pressurisation units, expansion vessels, leak detection, system balancing, powerflushing, and general mechanical maintenance — our qualified engineers keep your commercial mechanical systems running safely and efficiently.`}
       included={CORE_SERVICE_SECTOR_SERVICES.mechanical.commercial}

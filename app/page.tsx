@@ -113,7 +113,7 @@ export default function HomePage() {
                 className="inline-flex items-center"
               >
                 <Image
-                  src="/imagesv2/logo_full_light_nobg.png"
+                  src="/imagesv2/branding/logo_full_light_nobg.png"
                   alt={COMPANY.name}
                   width={320}
                   height={80}
@@ -136,7 +136,7 @@ export default function HomePage() {
                   {SERVICE_AREAS.map((area) => (
                     <li key={area} className="flex items-center gap-3">
                       <Image
-                        src="/imagesv2/logo.png"
+                        src="/imagesv2/branding/logo.png"
                         alt=""
                         width={22}
                         height={30}
@@ -958,7 +958,7 @@ export default function HomePage() {
                 <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#e2c977]/35 via-transparent to-transparent blur-2xl" />
                 <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/20">
                   <Image
-                    src="/imagesv2/home_engineer.jpeg"
+                      src="/imagesv2/home/home_engineer.jpeg"
                     alt="DPS engineer working on complex pipework"
                     fill
                     className="object-cover object-center"
@@ -1051,7 +1051,7 @@ export default function HomePage() {
               <div className="flex flex-col items-center gap-4 md:gap-5">
                 <div className="relative flex h-28 w-[15.5rem] md:h-32 md:w-[17.5rem] items-center justify-center rounded-3xl border-2 border-white/25 bg-white/10 shadow-[0_24px_56px_rgba(0,0,0,0.5)] ring-2 ring-[#e2c977]/20">
                   <Image
-                    src="/imagesv2/gas_safe_logo.jpeg"
+                    src="/imagesv2/branding/gas_safe_logo.jpeg"
                     alt="Gas Safe Register"
                     fill
                     className="object-contain p-4 md:p-5"

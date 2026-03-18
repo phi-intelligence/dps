@@ -17,7 +17,7 @@ const categories = [
     title: "Commercial Services",
     description:
       "Commercial boiler servicing, plant room maintenance, PPM contracts, fault finding, commercial heating systems, 24-hour emergency breakdowns, and facilities management across London, Kent, Essex and Surrey.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/commercial_gas/commercial_install.jpg",
     services: COMMERCIAL_SERVICES.map((s) => s.label),
     href: "/services/commercial",
     ctaLabel: "View Commercial Services",
@@ -220,7 +220,7 @@ export default function ServicesPage() {
               alt="Full heating and plumbing system schematic"
               theme="warm"
               versionText="HEATING & PLUMBING"
-              idHash={`GAS SAFE: ${COMPANY.gasSafeNumber}`}
+              idHash={`GAS SAFE: ${company.gasSafeNumber || "—"}`}
               statusText="ALL SYSTEMS OPERATIONAL"
               className="w-full"
             />

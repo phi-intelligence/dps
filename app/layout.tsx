@@ -49,8 +49,8 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: company.name,
     },
     icons: {
-      icon: "/imagesV2/logo.png",
-      shortcut: "/imagesV2/logo.png",
+      icon: "/imagesv2/branding/logo.png",
+      shortcut: "/imagesv2/branding/logo.png",
     },
   };
 }

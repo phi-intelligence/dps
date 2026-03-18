@@ -84,9 +84,9 @@ export const CAPABILITY_CORE_SERVICES = [
 
 /** Core services hero images for homepage (Mechanical, Electrical, Gas). */
 export const CORE_SERVICES_IMAGES: Record<string, string> = {
-  "Mechanical Services": "/images/core-services/mechanical.png",
-  "Electrical Services": "/imagesv2/home_electrical.jpg",
-  "Gas Services": "/imagesv2/home_gas.jpg",
+  "Mechanical Services": "/imagesv2/home/mechanical_service.webp",
+  "Electrical Services": "/imagesv2/home/home_electrical.jpg",
+  "Gas Services": "/imagesv2/home/home_gas.jpg",
 };
 
 /** Core service detail page routes (for Core Services section links — hub pages). */
@@ -223,11 +223,11 @@ export const SECTORS_WE_DEAL_WITH = [
 
 /** Sectors with hero images for the homepage grid (remaining sectors shown as pills). */
 export const SECTORS_WITH_IMAGES = [
-  { label: "Warehouses", image: "/images/sectors/warehouse.png" },
-  { label: "Offices", image: "/images/sectors/office.png" },
-  { label: "Hospital", image: "/images/sectors/hospital.png" },
-  { label: "Universities", image: "/images/sectors/university.png" },
-  { label: "Fire Stations", image: "/images/sectors/fire-station.png" },
+  { label: "Warehouses", image: "/imagesv2/sectors/warehouse.jpg" },
+  { label: "Offices", image: "/imagesv2/sectors/office.jpg" },
+  { label: "Hospital", image: "/imagesv2/sectors/hospital.webp" },
+  { label: "Universities", image: "/imagesv2/sectors/university.jpg" },
+  { label: "Fire Stations", image: "/imagesv2/sectors/fire_station.jpeg" },
 ] as const
 
 /** Health & Safety paragraph for Capability section. */
@@ -437,7 +437,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Westminster",
     description:
       "Full plant room installation for a commercial office building. Two high-efficiency cascade boilers, header system, and building management integration — completed on schedule with zero disruption to tenants.",
-    image: "/images/bb694770-ebf9-4854-877f-46073a4e9746.jpg",
+    image: "/imagesv2/commercial_gas/plant_room.jpg",
     stats: [
       { label: "Boilers", value: "2" },
       { label: "Floors Served", value: "6" },
@@ -449,7 +449,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Walworth, London",
     description:
       "Leaking pipe behind water tank for immersion heater. Assessed on arrival, temporary fix applied on the spot, then full repair completed. Customer praised punctuality and clear communication.",
-    image: "/images/plumbing-pipes.jpg",
+    image: "/imagesv2/domestic_mechanical/domestic_hot_water.jpg",
     stats: [
       { label: "Response", value: "On time" },
       { label: "Fix", value: "Same visit" },
@@ -461,7 +461,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Deptford, London",
     description:
       "Short-notice replacement of two immersion heater elements in a hot water tank. Identified an additional fault missed by a previous tradesman and advised on next steps. Flexible scheduling and clear communication throughout.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_mechanical/domestic_hot_water.jpg",
     stats: [
       { label: "Elements", value: "2" },
       { label: "Booking", value: "Short notice" },
@@ -485,7 +485,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Clapham",
     description:
       "Complete central heating installation in a period property. New combi boiler, 12 radiators, and smart thermostat — fitted with minimal disruption to original features.",
-    image: "/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg",
+    image: "/imagesv2/domestic_mechanical/domestic_heating.jpg",
     stats: [
       { label: "Radiators", value: "12" },
       { label: "Duration", value: "2 days" },
@@ -509,7 +509,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Southfields, London",
     description:
       "Bathroom leak investigation and repair; client now uses us as their go-to plumber. Responsive, friendly, and professional. Larger ensuite renovation project planned with same team.",
-    image: "/images/76d6f0b9-2287-4edd-a9d8-cd30b63806ee.jpeg",
+    image: "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
     stats: [
       { label: "Scope", value: "Leaks + prep" },
       { label: "Follow-up", value: "Ensuite planned" },
@@ -533,7 +533,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Dalston, London",
     description:
       "Rapid response to leak investigation. Attended straight away, transparent about work required, and left customer happy to recommend and hire again.",
-    image: "/images/plumbing-pipes.jpg",
+    image: "/imagesv2/domestic_mechanical/domestic_leak.jpg",
     stats: [
       { label: "Response", value: "Same day" },
       { label: "Outcome", value: "Resolved" },
@@ -545,7 +545,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Manor Park, London",
     description:
       "Radiator repair carried out to a high standard. Return visit to fit smoke alarms as requested. Fast, friendly, and professional throughout.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_mechanical/radiator.jpg",
     stats: [
       { label: "Radiators", value: "Repaired" },
       { label: "Extras", value: "Smoke alarms" },
@@ -557,7 +557,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Wandsworth",
     description:
       "Same-day callout for a failed boiler in a family home. Old unit removed and new combi fitted, tested, and commissioned within 8 hours.",
-    image: "/images/de580d83-e113-4fa5-8635-779e1377cae6.jpg",
+    image: "/imagesv2/domestic_gas/boiler-install.jpg",
     stats: [
       { label: "Response", value: "2 hrs" },
       { label: "Completed", value: "Same day" },
@@ -569,7 +569,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Rotherhithe, London",
     description:
       "Customer had to turn water off due to banging pipes. Attended within minutes, diagnosed the fault, sourced the part, and had the system sorted within a couple of hours.",
-    image: "/images/plumbing-pipes.jpg",
+    image: "/imagesv2/domestic_mechanical/pipework.png",
     stats: [
       { label: "Arrival", value: "Minutes" },
       { label: "Completion", value: "2 hours" },
@@ -581,7 +581,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Upper Norwood, London",
     description:
       "Three new radiators installed. Solutions found for problems that arose during the work. Customer would not hesitate to use again and highly recommends.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_mechanical/radiator.jpg",
     stats: [
       { label: "Radiators", value: "3" },
       { label: "Approach", value: "Problem-solving" },
@@ -593,7 +593,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Streatham Hill, London",
     description:
       "Radiator half off wall — prompt, professional fix. Also gave advice on other household issues and valuable boiler guidance as a certified gas engineer. Customer would definitely recommend.",
-    image: "/images/radiator-pipes.png",
+    image: "/imagesv2/domestic_mechanical/radiator.jpg",
     stats: [
       { label: "Radiator", value: "Reattached" },
       { label: "Advice", value: "Boiler + general" },
@@ -605,7 +605,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Bromley By Bow, London",
     description:
       "Rapid attendance and diagnosis of leaking boiler. Source of leak identified quickly; issue was building-management responsibility on this occasion. Customer would definitely invite us back for future plumbing work.",
-    image: "/images/boiler-repair.jpg",
+    image: "/imagesv2/domestic_gas/boiler-repair.jpg",
     stats: [
       { label: "Response", value: "Quick" },
       { label: "Diagnosis", value: "Accurate" },
@@ -617,7 +617,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Shadwell, London",
     description:
       "Quick reply and attendance at agreed time. Boiler issue fixed to customer’s satisfaction. Customer very happy and would use again — described as a great service.",
-    image: "/images/boiler-repair.jpg",
+    image: "/imagesv2/domestic_gas/boiler-repair.jpg",
     stats: [
       { label: "Communication", value: "Quick" },
       { label: "Outcome", value: "Fixed" },
@@ -665,7 +665,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Southwark, London",
     description:
       "Late-afternoon call on a very hot day. Fault identified within seconds; part purchased, fitted, tested, and area cleaned up professionally. Customer described as knowledgeable and highly trustworthy.",
-    image: "/images/plumbing-pipes.jpg",
+    image: "/imagesv2/domestic_mechanical/domestic_leak.jpg",
     stats: [
       { label: "Diagnosis", value: "Seconds" },
       { label: "Clean-up", value: "Included" },
@@ -677,7 +677,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Highbury, London",
     description:
       "Leaking Zyam 3/4\" concealed shower valve. What started as a simple fix became more complex; we went above and beyond, including a trip to a supplier for a replacement part, and completed the job quickly.",
-    image: "/images/plumbing-repairs.jpg",
+    image: "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
     stats: [
       { label: "Complexity", value: "Above & beyond" },
       { label: "Result", value: "Completed" },
@@ -689,7 +689,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Bromley By Bow, London",
     description:
       "Arrived within the hour and fixed the leak in minutes. Small washer replacement not charged. Customer would definitely use again.",
-    image: "/images/boiler-repair.jpg",
+    image: "/imagesv2/domestic_gas/boiler-repair.jpg",
     stats: [
       { label: "Response", value: "< 1 hour" },
       { label: "Fix", value: "Minutes" },
@@ -701,7 +701,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Peckham, London",
     description:
       "Very short notice on a Sunday. Polite, professional, and issue fixed. Also provided advice regarding the council. Customer would definitely recommend.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_mechanical/radiator.jpg",
     stats: [
       { label: "Notice", value: "Short (Sunday)" },
       { label: "Manner", value: "Polite & pro" },
@@ -713,7 +713,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Rotherhithe, London",
     description:
       "Friendly, helpful, and flexible when customer had to rearrange due to work. Boiler issues explained clearly; prompt and efficient. Good service received.",
-    image: "/images/boiler-modern.jpg",
+    image: "/imagesv2/domestic_gas/boiler%20service.jpg",
     stats: [
       { label: "Flexibility", value: "Rearranged" },
       { label: "Explanation", value: "Clear" },
@@ -725,7 +725,7 @@ export const PORTFOLIO_PROJECTS = [
     location: "Peckham, London",
     description:
       "Emergency leak in basement with over a foot of water. Arrived in under an hour, fixed the leak and pumped water, with updates by phone throughout. Patient and professional in a sensitive situation.",
-    image: "/images/emergency-callout.jpg",
+    image: "/imagesv2/domestic_mechanical/pipework.png",
     stats: [
       { label: "Response", value: "< 1 hour" },
       { label: "Situation", value: "Emergency flood" },

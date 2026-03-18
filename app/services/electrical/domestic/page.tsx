@@ -6,26 +6,26 @@ const DOMESTIC_ELECTRICAL_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Heating controls fault finding",
     description: "Fault finding on heating controls, wiring and programmers. We trace faults efficiently and repair or replace so your heating works reliably again.",
-    image: "/images/core-services/electrical.png",
+    image: "/imagesv2/domestic_electrical/heating%20control.jpg",
     imageAlt: "Heating controls and electrical",
   },
   {
     title: "Thermostat / programmer replacement",
     description: "Supply and installation of room thermostats and programmers for central heating. We wire and commission so your system responds correctly to your settings.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_electrical/thermostat.jpg",
     imageAlt: "Heating controls",
   },
   {
     title: "Wiring centre diagnostics",
     description: "Diagnostics and repair at the heating wiring centre. We identify faulty connections or components and restore correct operation of pumps, valves and boiler.",
-    image: "/images/core-services/electrical.png",
+    image: "/imagesv2/domestic_electrical/wiring%20centre.jpg",
     imageAlt: "Wiring centre and heating electrical",
   },
   {
     title: "Electrical checks related to heating systems (EICR certification)",
     description:
       "Electrical safety and operation checks on heating-related circuits, including EICR-style inspection points where appropriate. We verify isolation, switching, and load, flag any non-compliances, and provide clear documentation for landlords and homeowners.",
-    image: "/imagesv2/eicr.jpeg",
+    image: "/imagesv2/domestic_electrical/eicr.jpeg",
     imageAlt: "Domestic heating electrical",
   },
 ];
@@ -41,7 +41,7 @@ export default function DomesticElectricalServicesPage() {
       title="Domestic Electrical Services"
       subtitle={`Heating controls fault finding, thermostat and programmer replacement, and wiring diagnostics for homes across ${COMPANY.areas}.`}
       backgroundImage="/images/our-services-domestic.png"
-      sideImage="/images/core-services/electrical.png"
+      sideImage="/imagesv2/domestic_electrical/inspection.jpg"
       sideImageAlt="Domestic heating controls and electrical diagnostics"
       introduction={`DPS Heating Services provides heating-related electrical services for domestic clients across ${COMPANY.areas}. From heating controls fault finding and thermostat or programmer replacement to wiring centre diagnostics and electrical checks related to heating systems — our engineers help keep your home heating controls safe and operational.`}
       included={CORE_SERVICE_SECTOR_SERVICES.electrical.domestic}

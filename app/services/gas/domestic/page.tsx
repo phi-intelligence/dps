@@ -6,31 +6,31 @@ const DOMESTIC_GAS_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Boiler installation & replacement",
     description: "Supply and installation of new gas boilers for your home. We advise on the right size and type, install to current standards and commission the system for you.",
-    image: "/images/boiler-install.jpg",
+    image: "/imagesv2/domestic_gas/boiler-install.jpg",
     imageAlt: "Domestic boiler installation",
   },
   {
     title: "Boiler servicing",
     description: "Annual boiler servicing to maintain efficiency, safety and warranty. Our Gas Safe engineers check burners, flues and safety devices and leave you with a service record.",
-    image: "/images/boiler-modern.jpg",
+    image: "/imagesv2/domestic_gas/boiler%20service.jpg",
     imageAlt: "Modern boiler servicing",
   },
   {
     title: "Boiler repairs & breakdowns",
     description: "Fast diagnosis and repair of boiler breakdowns. We get your heating and hot water back on with minimal fuss and explain what was wrong.",
-    image: "/images/boiler-repair.jpg",
+    image: "/imagesv2/domestic_gas/boiler-repair.jpg",
     imageAlt: "Boiler repair",
   },
   {
     title: "Landlord Gas Safety Certificates (CP12)",
     description: "Annual gas safety inspections for rental properties and issue of CP12 certificates. Landlords must use a Gas Safe registered engineer for this legal requirement.",
-    image: "/images/boiler-modern.jpg",
+    image: "/imagesv2/domestic_gas/safe%20check.jpg",
     imageAlt: "Gas safety inspection",
   },
   {
     title: "Gas safety checks",
     description: "Gas safety checks for homeowners and tenants. We inspect appliances, flues and pipework and advise on any issues or improvements.",
-    image: "/images/boiler-modern.jpg",
+    image: "/imagesv2/domestic_gas/gas%20safe.webp",
     imageAlt: "Gas safety check",
   },
   {
@@ -42,19 +42,19 @@ const DOMESTIC_GAS_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Gas hob / cooker installation",
     description: "Installation of gas hobs and cookers by Gas Safe registered engineers. We connect safely, test and advise on ventilation where needed.",
-    image: "/images/our-services-domestic.png",
+    image: "/imagesv2/domestic_gas/gas%20hob.webp",
     imageAlt: "Domestic gas appliances",
   },
   {
     title: "Flue & ventilation checks",
     description: "Checks on flues and ventilation for gas appliances. Correct flue and air supply are essential for safe operation and we advise on any remedial work.",
-    image: "/images/domestic-combi-boiler.png",
+    image: "/imagesv2/domestic_gas/flue.jpg",
     imageAlt: "Flue and boiler",
   },
   {
     title: "System upgrades",
     description: "Upgrades to your existing gas system: new boilers, better controls or improved efficiency. We quote clearly and complete the work to a high standard.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/domestic_gas/upgrade.webp",
     imageAlt: "Central heating system",
   },
 ];
@@ -70,7 +70,7 @@ export default function DomesticGasServicesPage() {
       title="Domestic Gas Services"
       subtitle={`Gas Safe registered boiler installation, servicing, repairs, landlord CP12, and gas safety for homes across ${COMPANY.areas}.`}
       backgroundImage="/images/our-services-domestic.png"
-      sideImage="/images/core-services/gas.png"
+      sideImage="/imagesv2/domestic_gas/gas%20safe.webp"
       sideImageAlt="Domestic gas safety inspection and boiler servicing"
       introduction={`All domestic gas work at DPS Heating Services is carried out by Gas Safe registered engineers across ${COMPANY.areas}. We provide boiler installation and replacement, servicing, repairs and breakdowns, Landlord Gas Safety Certificates (CP12), gas safety checks, gas leak and emergency response, gas hob and cooker installation, flue and ventilation checks, and system upgrades. Safety and compliance are at the heart of everything we do.`}
       included={CORE_SERVICE_SECTOR_SERVICES.gas.domestic}

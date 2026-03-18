@@ -6,50 +6,50 @@ const COMMERCIAL_GAS_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Commercial boiler installation & replacement",
     description: "Full design, supply and installation of commercial gas boilers. We specify and fit equipment suited to your load and compliance requirements, with full commissioning and handover.",
-    image: "/imagesv2/commerical_boiler.jpg",
+    image: "/imagesv2/commercial_gas/commercial_boiler.jpg",
     imageAlt: "Commercial boiler plant and pipework",
   },
   {
     title: "Commercial boiler servicing",
     description: "Scheduled servicing of commercial gas boilers to maintain efficiency, safety and warranty. Our Gas Safe engineers follow manufacturer guidelines and document all work.",
-    image: "/imagesv2/commercial_repair.jpg",
+    image: "/imagesv2/commercial_gas/commercial_repair.jpg",
     imageAlt: "Commercial plant room with boilers and pipework",
   },
   {
     title: "Commercial boiler repairs & fault finding",
     description: "Fast diagnosis and repair of commercial boiler faults. We minimise downtime and restore heating and hot water safetly with minimal disruption to your operations.",
-    image: "/imagesv2/commercial_install.jpg",
+    image: "/imagesv2/commercial_gas/commercial_install.jpg",
     imageAlt: "Boiler repair and fault finding",
   },
   {
     title: "Gas safety inspections",
     description: "Thorough gas safety inspections of commercial premises and appliances. We issue the relevant certificates and reports for your compliance records.",
-    image: "/imagesv2/commercial_inspect.jpg",
+    image: "/imagesv2/commercial_gas/commercial_inspect.jpg",
     imageAlt: "Gas appliance inspection",
   },
   {
     title: "Flue & ventilation checks",
     description:
       "Flue integrity and ventilation checks for commercial gas appliances and plant rooms. We verify safe operation, identify compliance issues, and advise on remedial work where required.",
-    image: "/imagesv2/commercial_flue.jpg",
+    image: "/imagesv2/commercial_gas/commercial_flue.jpg",
     imageAlt: "Commercial boiler flue and ventilation checks",
   },
   {
     title: "Tightness testing & purging",
     description: "Tightness testing and purging of gas installations to current standards. Essential for new installations, modifications and after repair.",
-    image: "/images/services/commercial-mechanical/plant-room-4.png",
+    image: "/imagesv2/commercial_gas/testing.jpeg",
     imageAlt: "Gas pipework and testing",
   },
   {
     title: "Gas pipework installation / modification",
     description: "New gas pipework runs and modifications to existing installations. All work carried out by Gas Safe registered engineers with appropriate testing and documentation.",
-    image: "/images/services/commercial-mechanical/plant-room-5.png",
+    image: "/imagesv2/commercial_gas/pipework.webp",
     imageAlt: "Gas pipework in plant room",
   },
   {
     title: "Plant room maintenance",
     description: "Routine inspection and maintenance of commercial gas plant rooms. We keep boilers, pipework and controls running safely and efficiently.",
-    image: "/images/services/commercial-mechanical/plant-room-6.png",
+    image: "/imagesv2/commercial_gas/plant_room.jpg",
     imageAlt: "Commercial plant room maintenance",
   },
   {
@@ -61,19 +61,19 @@ const COMMERCIAL_GAS_SERVICE_CARDS: ServiceCard[] = [
   {
     title: "Preventative planned maintenance (PPM)",
     description: "Structured PPM contracts for commercial gas equipment. Planned visits reduce the risk of failure and help meet insurance and compliance requirements.",
-    image: "/images/central-heating.jpg",
+    image: "/imagesv2/commercial_gas/ppm.jpeg",
     imageAlt: "Planned maintenance of heating systems",
   },
   {
     title: "Gas rate / combustion analysis",
     description: "Gas rate checks and combustion analysis to verify burner performance and efficiency. We identify issues before they affect safety or running costs.",
-    image: "/images/services/commercial-mechanical/plant-room-3.png",
+    image: "/imagesv2/commercial_gas/gas%20rate.webp",
     imageAlt: "Combustion and gas rate checks",
   },
   {
     title: "System upgrades & efficiency improvements",
     description: "Upgrades and efficiency improvements to existing commercial gas systems. We advise on options and deliver installations that cut costs and improve reliability.",
-    image: "/images/blueprint-plant-room.png",
+    image: "/imagesv2/commercial_gas/commercial_install.jpg",
     imageAlt: "Commercial heating system design",
   },
 ];
@@ -89,7 +89,7 @@ export default function CommercialGasServicesPage() {
       title="Commercial Gas Services"
       subtitle={`Gas Safe registered commercial gas installation, servicing, safety inspections, PPM, and emergency breakdowns across ${COMPANY.areas}.`}
       backgroundImage="/images/our-services-commercial.png"
-      sideImage="/images/core-services/gas.png"
+      sideImage="/imagesv2/commercial_gas/commercial_boiler.jpg"
       sideImageAlt="Commercial gas safety inspection and boiler plant"
       introduction={`All commercial gas work at DPS Heating Services is carried out by Gas Safe registered engineers across ${COMPANY.areas}. We provide commercial boiler installation and replacement, servicing and repairs, gas safety inspections, flue and ventilation checks, tightness testing and purging, gas pipework installation and modification, plant room maintenance, PPM contracts, gas rate and combustion analysis, and 24-hour emergency breakdowns. Safety and compliance are at the heart of everything we do.`}
       included={CORE_SERVICE_SECTOR_SERVICES.gas.commercial}
