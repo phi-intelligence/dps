@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Home, ArrowRight, Phone } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
-import { CORE_SERVICES_IMAGES, CORE_SERVICE_DOMESTIC_HREFS } from "@/lib/constants";
+import { CORE_SERVICES_IMAGES_DOMESTIC, CORE_SERVICE_DOMESTIC_HREFS } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
 import { useContent } from "@/lib/content-provider";
@@ -78,7 +78,7 @@ export default function DomesticServicesPage() {
                     className="relative block aspect-[4/3] min-h-[240px] sm:min-h-[280px] rounded-2xl overflow-hidden border border-[#e0d3b8] shadow-[0_22px_60px_rgba(0,0,0,0.22)] hover:border-[#e2c977]/60 transition-all duration-300"
                   >
                     <Image
-                      src={CORE_SERVICES_IMAGES[label] ?? "/images/core-services/mechanical.png"}
+                      src={CORE_SERVICES_IMAGES_DOMESTIC[label] ?? "/images/core-services/mechanical.png"}
                       alt={label}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
