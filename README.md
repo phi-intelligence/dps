@@ -44,3 +44,14 @@ Build settings are in `amplify.yml` (Next.js SSR with `baseDirectory: .next`). A
 ## Deploy on Vercel
 
 You can also deploy on the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). See [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Docker (VPS)
+
+Build and run with SQLite on a persistent volume:
+
+```bash
+docker build -t dps-web:latest .
+docker compose up -d --build
+```
+
+See **[docs/DOCKER.md](./docs/DOCKER.md)** for registry push/pull, bind-mounting an existing `dev.db`, and environment variables.

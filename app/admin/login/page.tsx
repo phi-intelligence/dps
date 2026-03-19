@@ -138,10 +138,6 @@ export default function AdminLoginPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-[11px] text-white/30">
-            Sign in with the admin account created via{" "}
-            <span className="font-mono text-white/45">POST /api/admin/register</span>
-          </p>
         </div>
       </motion.div>
     </div>

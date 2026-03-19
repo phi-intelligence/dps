@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Smaller production image + correct tracing for Docker (see Dockerfile)
+  output: "standalone",
   turbopack: {
     root: __dirname,
   },
