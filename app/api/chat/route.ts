@@ -175,9 +175,10 @@ export async function POST(request: NextRequest) {
     }
 
     const systemPrompt = await buildSystemPrompt();
-    const geminiKey = getGeminiApiKey();
-    const prefix = geminiKey ? geminiKey.slice(0, 8) + "..." : "none";
-    console.log("[chat] GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING", "prefix:", prefix);
+    // Do not log API key presence, length, or prefixes — ends up in server logs / APM.
+    // const geminiKey = getGeminiApiKey();
+    // const prefix = geminiKey ? geminiKey.slice(0, 8) + "..." : "none";
+    // console.log("[chat] GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING", "prefix:", prefix);
 
     try {
       const stream = await streamGemini(systemPrompt, messages);
@@ -188,8 +189,8 @@ export async function POST(request: NextRequest) {
           Connection: "keep-alive",
         },
       });
-    } catch (geminiErr) {
-      console.error("[chat] Gemini failed:", (geminiErr as Error).message);
+    } catch {
+      // console.error("[chat] Gemini failed:", …);
       try {
         const stream = await streamOpenAI(systemPrompt, messages);
         return new NextResponse(stream, {
@@ -199,8 +200,8 @@ export async function POST(request: NextRequest) {
             Connection: "keep-alive",
           },
         });
-      } catch (openaiErr) {
-        console.error("[chat] OpenAI failed:", (openaiErr as Error).message);
+      } catch {
+        // console.error("[chat] OpenAI failed:", …);
         return NextResponse.json(
           {
             error: "Chat is temporarily unavailable. Please try again or call us.",
@@ -209,7 +210,7 @@ export async function POST(request: NextRequest) {
         );
       }
     }
-  } catch (e) {
+  } catch {
     return NextResponse.json(
       { error: "Invalid request" },
       { status: 400 }

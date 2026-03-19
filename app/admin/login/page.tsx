@@ -139,7 +139,8 @@ export default function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-[11px] text-white/30">
-            Default: <span className="font-mono text-white/50">admin / admin</span> (set ADMIN_USERNAME / ADMIN_PASSWORD to override)
+            Sign in with the admin account created via{" "}
+            <span className="font-mono text-white/45">POST /api/admin/register</span>
           </p>
         </div>
       </motion.div>

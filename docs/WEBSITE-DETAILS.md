@@ -351,8 +351,10 @@ Same layout pattern: hero, overview, included, issues, steps, trust, FAQ, quote/
 
 | Page | URL | Purpose |
 |------|-----|--------|
-| **Admin login** | `/admin/login` | Test login: credentials shown (admin / admin); Authenticate submits and redirects to dashboard (full page navigation after setting auth in localStorage). |
-| **Admin dashboard** | `/admin/dashboard` | Protected by client-side auth check. Lists inquiries (from inquiry service, e.g. localStorage): search, status (pending/contacted/completed), update status, delete. Sidebar: Inquiries, View Site, Logout. |
+| **Admin login** | `/admin/login` | Sign in with the admin user stored in SQLite (`AdminUser` table; password hashed with bcrypt). Sets httpOnly session cookie + localStorage flag for UI redirects. |
+| **Admin dashboard** | `/admin/dashboard` | Client-side redirect if not logged in; APIs require session cookie. Lists inquiries from the database: search, status (pending/contacted/completed), update status, delete. Sidebar: Inquiries, Content, View Site, Logout. |
+
+**Bootstrap (no UI):** `POST /api/admin/register` with JSON `{ "username", "password", "full_name" }` — allowed only until one admin exists (then `409`). Optional production hardening: set `ADMIN_REGISTER_SECRET` and send `x-admin-register-secret` or `Authorization: Bearer …`.
 
 Admin is not linked in main navigation; access by going directly to `/admin/login`.
 
@@ -374,7 +376,7 @@ Admin is not linked in main navigation; access by going directly to `/admin/logi
 3. **Find service** — User goes to `/tools` → Service Finder or Quote Calculator → navigates to service page or gets estimate.
 4. **Portfolio** — User clicks “Portfolio” in nav or footer → views completed projects, stats, featured project, and testimonials.
 5. **Urgent** — User goes to `/emergency` → sees phone + gas emergency number 0800 111 999 → can call or submit form.
-6. **Admin** — User goes to `/admin/login` → enters admin/admin → Authenticate → redirect to `/admin/dashboard` → view/search/update/delete inquiries.
+6. **Admin** — One-time `POST /api/admin/register` creates the admin user → `/admin/login` with username/password → redirect to `/admin/dashboard` → view/search/update/delete inquiries.
 
 ---
 
@@ -384,7 +386,7 @@ Admin is not linked in main navigation; access by going directly to `/admin/logi
 - **Layout:** `app/layout.tsx` (metadata, theme script, LayoutShell, providers)
 - **Layout UI:** `components/layout/LayoutShell.tsx`, `Header.tsx`, `Footer.tsx`
 - **Quote:** `lib/quote-modal-context.tsx`, `components/ui/QuoteModal.tsx`, `QuoteForm.tsx`
-- **Inquiries:** `lib/inquiry-service.ts` (client-side storage); admin: `app/admin/login/page.tsx`, `app/admin/dashboard/page.tsx`
+- **Inquiries:** `lib/inquiry-service.ts` → `/api/content/inquiries` (SQLite); admin APIs: `app/api/admin/inquiries/**`; admin UI: `app/admin/login/page.tsx`, `app/admin/dashboard/page.tsx`; registration: `app/api/admin/register/route.ts`
 - **Service detail template:** `components/sections/ServiceDetailLayout.tsx`
 - **Pages:** `app/**/page.tsx` per route above
 

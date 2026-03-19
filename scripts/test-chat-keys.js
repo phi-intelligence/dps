@@ -28,8 +28,9 @@ fs.readFileSync(envPath, "utf8")
 const geminiKey = process.env.GEMINI_API_KEY;
 const openaiKey = process.env.OPENAI_API_KEY;
 
-console.log("GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING");
-console.log("OPENAI_API_KEY:", openaiKey ? `set (${openaiKey.length} chars)` : "MISSING");
+// Avoid logging key length / presence (copy-paste from terminals leaks metadata).
+// console.log("GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING");
+// console.log("OPENAI_API_KEY:", openaiKey ? `set (${openaiKey.length} chars)` : "MISSING");
 
 async function testGemini() {
   if (!geminiKey) return { ok: false, error: "GEMINI_API_KEY not set" };
@@ -67,11 +68,13 @@ async function testOpenAI() {
 (async () => {
   console.log("\nTesting Gemini...");
   const g = await testGemini();
-  console.log(g.ok ? "  Gemini: OK" : "  Gemini: FAIL -", g.error);
+  // console.log(g.ok ? "  Gemini: OK" : "  Gemini: FAIL -", g.error);
+  console.log(g.ok ? "  Gemini: OK" : "  Gemini: FAIL (enable logs above for provider message)");
 
   console.log("\nTesting OpenAI (fallback)...");
   const o = await testOpenAI();
-  console.log(o.ok ? "  OpenAI: OK" : "  OpenAI: FAIL -", o.error);
+  // console.log(o.ok ? "  OpenAI: OK" : "  OpenAI: FAIL -", o.error);
+  console.log(o.ok ? "  OpenAI: OK" : "  OpenAI: FAIL (enable logs above for provider message)");
 
   if (g.ok || o.ok) {
     console.log("\nAt least one provider works. Chat should work.");

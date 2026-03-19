@@ -93,6 +93,15 @@ model Inquiry {
   timestamp DateTime @default(now())
 }
 
+/// Single admin account: primary key is always `singleton` so only one row can exist.
+model AdminUser {
+  id           String   @id @default("singleton")
+  username     String   @unique
+  passwordHash String
+  fullName     String
+  createdAt    DateTime @default(now())
+}
+
 // Service (category or detail page). Slug can be "heating", "heating/boiler-installation", etc.
 model Service {
   id               String    @id @default(cuid())

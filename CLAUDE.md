@@ -23,6 +23,8 @@ No test framework is configured.
 Requires `.env.local` with:
 - `GEMINI_API_KEY` — Google Gemini API key (read from disk at runtime, not process.env, to allow hot-reload)
 - `OPENAI_API_KEY` — OpenAI key (fallback if Gemini fails)
+- `DATABASE_URL` — SQLite URL (e.g. `file:./prisma/dev.db`) for Prisma
+- `ADMIN_REGISTER_SECRET` (optional) — if set, `POST /api/admin/register` requires matching `x-admin-register-secret` or `Authorization: Bearer …`
 
 ## Tech Stack
 
@@ -49,8 +51,9 @@ App Router with file-based routing. Key route groups:
 /contact                    # Contact form with inquiry service
 /service-areas              # Leaflet map with coverage areas
 /emergency                  # Emergency services page
-/admin/login                # Admin login (localStorage auth, demo: admin/admin)
+/admin/login                # Admin login (session cookie + localStorage UI flag)
 /admin/dashboard            # Inquiry management
+/api/admin/register         # POST — one-time admin registration (SQLite, bcrypt password)
 /api/chat                   # POST — SSE streaming chat (Gemini → OpenAI fallback)
 ```
 
@@ -73,17 +76,17 @@ components/
 - `chat-config.ts` — SERVICE_MAP with pricing ranges (domestic/commercial), URGENCY_MULTIPLIER (1.0/1.3/1.6), QUICK_ACTIONS for chat UI.
 - `quote-modal-context.tsx` — React Context for global quote modal open/close state with preselected service support. Consumed via `useQuoteModal()`.
 - `theme-provider.tsx` — Dark/light theme toggle via `data-theme` attribute, persisted in localStorage (`dps-theme`).
-- `inquiry-service.ts` — Client-side localStorage CRUD for inquiries (no backend yet). Used by QuoteModal, QuoteForm, and admin dashboard.
+- `inquiry-service.ts` — Submits inquiries to `/api/content/inquiries` (Prisma/SQLite); localStorage fallback offline. Admin reads via `/api/admin/inquiries`.
+- `admin-auth.ts` — HttpOnly session cookie `dps_admin_session` for admin API routes.
+- `password.ts` — bcryptjs hashing for `AdminUser` passwords.
 - `hooks/use-chat.ts` — `useChat()` hook managing messages, SSE streaming, and AbortController cancellation.
 - `types/chat.ts` — ChatMessage, ChatRequest interfaces.
 
 ### Data Persistence
 
-All persistence is currently **client-side localStorage** (development pattern):
-- Inquiries: `inquiryService` reads/writes to localStorage (admin dashboard consumes this)
-- Theme: `dps-theme` key
-- Admin auth: `dps_admin_auth` key (hardcoded demo credentials)
-- No database or backend API for data storage yet
+- **SQLite (Prisma):** inquiries, site config, nav, portfolio, reviews, services, and a single `AdminUser` row (`id = singleton`). Run `npx prisma db push` after schema changes.
+- **Admin:** Register once via `POST /api/admin/register` with `{ username, password, full_name }`. Optional env `ADMIN_REGISTER_SECRET` + header `x-admin-register-secret` or `Authorization: Bearer …`. Login checks bcrypt hash in DB.
+- **Client:** Theme `dps-theme`; admin UI uses `dps_admin_auth` for redirects only (APIs enforce cookie).
 
 ### Chat System
 

@@ -30,8 +30,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files — do not commit (keep .env.local and .env.example local only)
+# env files — do not commit secrets; commit `.env.example` as a template only
 .env*
+!.env.example
 
 # vercel
 .vercel

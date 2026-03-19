@@ -9,6 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Matches lib/db.ts default so `npx prisma db push` works without .env
+    url: process.env["DATABASE_URL"] ?? "file:./prisma/dev.db",
   },
 });
