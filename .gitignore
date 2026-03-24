@@ -45,3 +45,7 @@ mobile/android/local.properties
 # Storage / uploads (local dev)
 **/document_storage/
 **/uploads/
+var/
+
+# Accidental local git metadata backups (do not commit)
+.git_broken_*/
