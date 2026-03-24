@@ -1,0 +1,537 @@
+/* Phase 4 — portal polish + field-friendly controls */
+
+.portal-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 18px 32px;
+}
+
+.portal-hero {
+  background: linear-gradient(135deg, rgba(45, 90, 200, 0.22), rgba(20, 40, 90, 0.35));
+  border: 1px solid rgba(120, 170, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 20px;
+}
+
+.portal-hero h2 {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.portal-hero p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(231, 238, 252, 0.85);
+  line-height: 1.5;
+}
+
+.portal-alert-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.portal-alert {
+  background: rgba(255, 180, 72, 0.12);
+  border: 1px solid rgba(255, 200, 120, 0.35);
+  color: #ffe8c8;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.portal-stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.portal-stat {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  min-width: 120px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.portal-stat .n {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.portal-stat .l {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(231, 238, 252, 0.65);
+  margin-top: 4px;
+}
+
+.portal-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(231, 238, 252, 0.55);
+  margin: 20px 0 10px;
+}
+
+.contract-acc {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.contract-acc summary {
+  cursor: pointer;
+  padding: 14px 16px;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.contract-acc summary::-webkit-details-marker {
+  display: none;
+}
+
+.contract-acc[open] summary {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contract-acc .acc-body {
+  padding: 14px 16px 18px;
+}
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-pill.released {
+  background: rgba(80, 200, 140, 0.2);
+  border: 1px solid rgba(80, 200, 140, 0.45);
+  color: #b8f5d0;
+}
+
+.status-pill.pending {
+  background: rgba(255, 200, 100, 0.15);
+  border: 1px solid rgba(255, 200, 100, 0.4);
+  color: #ffe0a8;
+}
+
+.status-pill.muted {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(231, 238, 252, 0.75);
+}
+
+.status-pill.danger {
+  background: rgba(255, 110, 110, 0.14);
+  border: 1px solid rgba(255, 140, 140, 0.42);
+  color: #ffd0d0;
+}
+
+/* §5.10 — customer portal in-page navigation */
+.portal-toc {
+  margin: 0 18px 20px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.portal-toc-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(231, 238, 252, 0.55);
+  margin: 0 0 8px;
+}
+
+.portal-toc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+
+.portal-toc-links a {
+  font-size: 12px;
+  color: #9eb8ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(158, 184, 255, 0.35);
+  padding-bottom: 1px;
+}
+
+.portal-toc-links a:hover {
+  color: #d4e2ff;
+  border-bottom-color: rgba(212, 226, 255, 0.55);
+}
+
+.portal-toc-sep {
+  color: rgba(231, 238, 252, 0.22);
+  font-size: 12px;
+  user-select: none;
+}
+
+.portal-anchor {
+  scroll-margin-top: 20px;
+}
+
+.portal-card-section {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.portal-card-section > .portal-card-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(231, 238, 252, 0.5);
+  margin: 0 0 8px;
+}
+
+.timeline-mini strong {
+  color: rgba(231, 238, 252, 0.92);
+}
+
+.proposal-card {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.18);
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.proposal-card h4 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.portal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.portal-actions button,
+.portal-actions .btn-link {
+  font-size: 13px;
+}
+
+.btn-link {
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  color: #b8d4ff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.timeline-mini {
+  font-size: 12px;
+  color: rgba(231, 238, 252, 0.78);
+  margin-top: 10px;
+  padding-left: 14px;
+  border-left: 2px solid rgba(120, 170, 255, 0.35);
+}
+
+.timeline-mini div {
+  margin-bottom: 6px;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.form-stack label {
+  font-size: 11px;
+}
+
+/* Commercial hub */
+.hub-intro {
+  grid-column: 1 / -1;
+  background: rgba(70, 120, 255, 0.1);
+  border: 1px solid rgba(70, 120, 255, 0.28);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 4px;
+}
+
+.hub-intro h2 {
+  margin: 0 0 6px;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 18px;
+}
+
+/* §5.9 — in-page navigation for long admin hubs */
+.hub-toc {
+  grid-column: 1 / -1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.hub-toc .hub-toc-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(231, 238, 252, 0.55);
+  margin: 0 0 8px;
+}
+
+.hub-toc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+
+.hub-toc-links a {
+  font-size: 12px;
+  color: #9eb8ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(158, 184, 255, 0.35);
+  padding-bottom: 1px;
+}
+
+.hub-toc-links a:hover {
+  color: #d4e2ff;
+  border-bottom-color: rgba(212, 226, 255, 0.6);
+}
+
+.hub-toc-sep {
+  color: rgba(231, 238, 252, 0.25);
+  font-size: 12px;
+  user-select: none;
+}
+
+.hub-anchor {
+  scroll-margin-top: 16px;
+}
+
+.hub-panel h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.hub-metric {
+  font-size: 22px;
+  font-weight: 800;
+  color: #cfe0ff;
+}
+
+.hub-sub {
+  font-size: 12px;
+  color: rgba(231, 238, 252, 0.72);
+  margin-top: 4px;
+}
+
+.hub-err {
+  font-size: 12px;
+  color: #ffb4b4;
+  margin-top: 8px;
+}
+
+.hub-list-compact {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: rgba(231, 238, 252, 0.88);
+}
+
+.hub-list-compact li {
+  margin-bottom: 4px;
+}
+
+/* Field / mobile-friendly time tab */
+.field-work-wrap {
+  padding: 18px;
+}
+
+.field-work-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .field-work-grid {
+    grid-template-columns: 1fr 1.1fr;
+  }
+}
+
+.field-punch-card {
+  border-radius: 16px;
+  border: 1px solid rgba(120, 200, 255, 0.2);
+  background: rgba(30, 55, 100, 0.35);
+  padding: 20px;
+}
+
+.field-punch-card h3 {
+  margin-top: 0;
+}
+
+.field-punch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.field-punch-row button {
+  min-height: 52px;
+  min-width: 140px;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 22px;
+  border-radius: 14px;
+}
+
+.field-hint {
+  font-size: 13px;
+  color: rgba(231, 238, 252, 0.75);
+  margin-top: 14px;
+  line-height: 1.45;
+}
+
+/* Field console (Jobs) + time tab — §5.11 */
+.field-toc {
+  margin: 0 18px 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 200, 255, 0.18);
+  background: rgba(20, 40, 80, 0.35);
+  font-size: 13px;
+  color: rgba(231, 238, 252, 0.88);
+}
+
+.field-toc-label {
+  font-weight: 700;
+  margin-right: 8px;
+  color: rgba(212, 226, 255, 0.95);
+}
+
+.field-toc-links a {
+  color: #9ec8ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(158, 200, 255, 0.35);
+}
+
+.field-toc-links a:hover {
+  color: #d4e2ff;
+  border-bottom-color: rgba(212, 226, 255, 0.55);
+}
+
+.field-toc-sep {
+  color: rgba(231, 238, 252, 0.25);
+  margin: 0 6px;
+  user-select: none;
+}
+
+.field-anchor {
+  scroll-margin-top: 16px;
+}
+
+.field-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(212, 226, 255, 0.95);
+  text-transform: uppercase;
+}
+
+.field-readiness-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.field-readiness-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field-readiness-pill.ready {
+  background: rgba(80, 200, 140, 0.2);
+  border: 1px solid rgba(80, 200, 140, 0.45);
+  color: #b8f5d0;
+}
+
+.field-readiness-pill.warn {
+  background: rgba(255, 200, 100, 0.15);
+  border: 1px solid rgba(255, 200, 100, 0.4);
+  color: #ffe0a8;
+}
+
+.field-readiness-pill.blocked {
+  background: rgba(255, 110, 110, 0.14);
+  border: 1px solid rgba(255, 140, 140, 0.42);
+  color: #ffd0d0;
+}
+
+.field-timesheet-card .field-touch-btn {
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.field-geo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+  margin-top: 8px;
+}
+
+.field-geo-row > div {
+  min-width: 0;
+}
+
+.field-geo-actions {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 160px;
+}
+
+.field-geo-actions-label {
+  font-size: 12px;
+  margin-bottom: 6px;
+  visibility: hidden;
+}
+
+.field-geo-actions button {
+  min-height: 44px;
+  width: 100%;
+}

@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+python-jose[cryptography]
+passlib>=1.7.4
+python-multipart
+email-validator
+httpx
+reportlab>=4.0.0
+boto3>=1.34.0

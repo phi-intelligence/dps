@@ -1,0 +1,47 @@
+# Secrets & local env
+.env
+.env.*.local
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.db
+*.sqlite3
+# Pytest local DB + document root (conftest.py)
+backend/tests/test.db
+backend/tests/phi_dps_doc_store_test/
+
+# Node / web
+web/node_modules/
+web/build/
+npm-debug.log*
+
+# Flutter / mobile
+mobile/.dart_tool/
+mobile/build/
+mobile/.pub/
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/Flutter/Flutter.podspec
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/build/
+mobile/android/local.properties
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Storage / uploads (local dev)
+**/document_storage/
+**/uploads/
