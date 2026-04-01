@@ -1,283 +1,139 @@
-"use client";
-
-import { Droplets, Wrench, ArrowRight, Phone, Activity, Zap, ShieldCheck, Cpu } from "lucide-react";
+import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
-import CTABanner from "@/components/ui/CTABanner";
-import ProcessSteps from "@/components/sections/ProcessSteps";
-import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMPANY } from "@/lib/constants";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { useContent } from "@/lib/content-provider";
+import { COMPANY, CORE_SERVICE_SECTOR_SERVICES } from "@/lib/constants";
+import ServiceAudienceTabs from "@/components/sections/ServiceAudienceTabs";
 
-const plumbingServices = [
+const COMMERCIAL_PLUMBING_CARDS = [
   {
-    icon: Wrench,
-    title: "Hydraulic Repair",
-    description: "Rapid resolution of structural leaks, pressure anomalies, and valve failures.",
-    href: "/services/plumbing/plumbing-repairs",
-    available: true,
+    title: "Commercial plumbing installation",
+    description: "Planned plumbing installations for commercial buildings, estates, and managed properties.",
+    image: "/imagesv2/commercial_plumbing/commercial_plumbing.jpg",
+    imageAlt: "Commercial plumbing installation",
   },
   {
-    icon: Droplets,
-    title: "General Architecture",
-    description: "High-integrity fixture deployment and planned system pipework optimization.",
-    href: "/services/plumbing/general-plumbing",
-    available: true,
+    title: "Commercial plumbing repairs",
+    description: "Fast fault diagnosis and repairs for leaks, failed fixtures, and damaged plumbing components.",
+    image: "/imagesv2/commercial_plumbing/plumbing%20repair.jpeg",
+    imageAlt: "Commercial plumbing repairs",
   },
   {
-    icon: Activity,
-    title: "Leak Diagnostics",
-    description: "Precision ultrasound and thermal leak identification and node resolution.",
-    href: "#",
-    available: false,
+    title: "Pipework upgrades and alterations",
+    description: "Pipe reroutes, upgrades, and distribution changes for changing commercial layouts and demand.",
+    image: "/imagesv2/commercial_plumbing/Pipework%20upgrade.jpg",
+    imageAlt: "Commercial pipework upgrades",
   },
   {
-    icon: Droplets,
-    title: "Aqueous Design",
-    description: "Complete bathroom architecture integration and technical plumbing.",
-    href: "#",
-    available: false,
+    title: "Leak detection and trace & access",
+    description: "Targeted leak detection and remediation to reduce property impact and downtime.",
+    image: "/imagesv2/commercial_plumbing/Leak%20detection.jpg",
+    imageAlt: "Commercial leak tracing",
   },
   {
-    icon: Droplets,
-    title: "Infrastructure Feed",
-    description: "Appliance synchronization, sink integration, and technical pipework.",
-    href: "#",
-    available: false,
+    title: "Valves, pumps and controls servicing",
+    description: "Inspection and servicing of associated plumbing components to keep systems reliable.",
+    image: "/imagesv2/commercial_plumbing/Valves%2C%20pumps%20and%20controls.jpg",
+    imageAlt: "Commercial plumbing valves and pumps servicing",
   },
   {
-    icon: ShieldCheck,
-    title: "Pipework Integrity",
-    description: "Structural repair and reinforcement of damaged hydraulic pathways.",
-    href: "#",
-    available: false,
+    title: "Hot water and cylinder systems",
+    description: "Commercial hot-water system and cylinder plumbing works, including repair and upgrade support.",
+    image: "/imagesv2/commercial_plumbing/Hot%20water%20and%20cylinder%20systems.webp",
+    imageAlt: "Commercial hot water and cylinder plumbing systems",
+  },
+  {
+    title: "Planned preventative plumbing maintenance",
+    description: "Scheduled preventative plumbing checks and servicing to reduce reactive failures.",
+    image: "/imagesv2/commercial_plumbing/Planned%20preventative%20plumbing%20maintenance.jpg",
+    imageAlt: "Commercial preventative plumbing maintenance",
+  },
+  {
+    title: "Reactive callouts and emergency repairs",
+    description: "Rapid commercial callout support for urgent plumbing faults and emergency situations.",
+    image: "/imagesv2/commercial_plumbing/emergency-repairs.png",
+    imageAlt: "Commercial plumbing emergency callouts",
   },
 ];
 
-const plumbingSteps = [
+const DOMESTIC_PLUMBING_CARDS = [
   {
-    icon: "phone" as const,
-    number: "01",
-    title: "Signal Uplink",
-    description: "Transmit your system anomaly or requirements via the secure portal.",
+    title: "General plumbing repairs",
+    description: "Everyday domestic plumbing repairs with prompt attendance and clear pricing.",
+    image: "/imagesv2/domestic%20plumbing/General-Plumbing-Repair.webp",
+    imageAlt: "General domestic plumbing repairs",
   },
   {
-    icon: "search" as const,
-    number: "02",
-    title: "Engineer Deployment",
-    description: "A specialized operative is routed to your coordinates for triage.",
+    title: "Tap, toilet and fixture installation",
+    description: "Installation and replacement of taps, toilets, and fixtures across kitchen and bathroom spaces.",
+    image: "/imagesv2/domestic%20plumbing/Tap_installation.jpeg",
+    imageAlt: "Domestic fixtures installation",
   },
   {
-    icon: "wrench" as const,
-    number: "03",
-    title: "Node Resolution",
-    description: "Precision diagnostics and tactical repair of the hydraulic breach.",
+    title: "Pipework repairs and reroutes",
+    description: "Repairs and pipework changes to address wear, leaks, or renovation requirements.",
+    image: "/imagesv2/domestic%20plumbing/Pipework%20repairs%20and%20reroutes.jpg",
+    imageAlt: "Domestic pipework repairs",
   },
   {
-    icon: "checkCircle" as const,
-    number: "04",
-    title: "System Optimized",
-    description: "Integrity verification and structural testing before sign-off.",
+    title: "Leak detection and repairs",
+    description: "Leak tracing and durable repairs to prevent recurring water damage.",
+    image: "/imagesv2/domestic%20plumbing/leak_detection.jpg",
+    imageAlt: "Domestic leak detection",
+  },
+  {
+    title: "Appliance plumbing connections",
+    description: "Safe plumbing connections for appliances with checks on flow and drainage.",
+    image: "/imagesv2/domestic%20plumbing/Appliance%20plumbing%20connections.jpg",
+    imageAlt: "Domestic appliance plumbing connections",
+  },
+  {
+    title: "Water pressure optimisation",
+    description: "Diagnosis and adjustment works to improve domestic flow and water pressure performance.",
+    image: "/imagesv2/domestic%20plumbing/Water%20pressure%20optimisation.webp",
+    imageAlt: "Domestic water pressure optimisation",
+  },
+  {
+    title: "Hot water cylinder plumbing works",
+    description: "Domestic cylinder-associated plumbing repairs, upgrades, and system-side connections.",
+    image: "/imagesv2/domestic%20plumbing/Hot_water.png",
+    imageAlt: "Domestic hot water cylinder plumbing works",
+  },
+  {
+    title: "Emergency domestic plumbing callouts",
+    description: "Fast domestic response for urgent leaks, failures, and out-of-hours plumbing issues.",
+    image: "/imagesv2/domestic%20plumbing/emergency-repairs.png",
+    imageAlt: "Emergency domestic plumbing callouts",
   },
 ];
 
-export default function PlumbingCategoryPage() {
-  const { company } = useContent();
+export const metadata: Metadata = {
+  title: "Plumbing Services",
+  description: `Commercial and domestic plumbing services including repairs, leak detection, pipework upgrades, and planned maintenance across ${COMPANY.areas}.`,
+};
+
+export default function PlumbingServicesPage() {
+  const services = CORE_SERVICE_SECTOR_SERVICES.plumbing;
+
   return (
     <div className="bg-brand-surface text-brand-text min-h-screen">
       <PageHero
-        title="Hydraulic Engineering"
-        subtitle="Uncompromising aqueous infrastructure and rapid-response plumbing architecture."
+        title="Plumbing Services"
+        subtitle={`Commercial and domestic plumbing services including repairs, leak detection, pipework upgrades, and planned maintenance across ${COMPANY.areas}.`}
         breadcrumbs={[
-          { label: "Core", href: "/" },
+          { label: "Home", href: "/" },
           { label: "Services", href: "/services" },
-          { label: "Hydraulic Engineering" },
+          { label: "Plumbing Services" },
         ]}
-        backgroundImage="/images/blueprints/blueprint-8.png"
+        backgroundImage="/imagesv2/domestic%20plumbing/General-Plumbing-Repair.webp"
         compact
       />
-
-      {/* Intro */}
-      <section className="py-24 relative overflow-hidden bg-brand-surface">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-blue/10 bg-brand-blue/5 mb-8 shadow-sm"
-          >
-            <Activity size={14} className="text-brand-blue" />
-            <span className="text-[9px] font-technical font-bold text-brand-blue uppercase tracking-[0.3em]">Operational Flow Active</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text mb-8 tracking-widest uppercase"
-          >
-            Hydraulic <br />Resolution
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-brand-muted text-[11px] font-technical uppercase tracking-[0.4em] leading-loose max-w-2xl mx-auto"
-          >
-            From emergency breaches to structural architecture, DPS Heating Services LTD provides advanced hydraulic solutions across {COMPANY.areas}. Our engineers are technically equipped for first-visit resolution of critical system failures.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Urgency technical strip */}
-      <section className="py-24 bg-brand-red border-y border-black/10 relative overflow-hidden" aria-label="Urgent hydraulic breach">
-        <div
-          className="absolute inset-0 opacity-10 mix-blend-overlay"
-          style={{
-            backgroundImage: "linear-gradient(var(--color-brand-card-hover) 1px, transparent 1px), linear-gradient(90deg, var(--color-brand-card-hover) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-          <div className="flex items-center gap-8">
-            <div className="w-16 h-16 bg-black/20 backdrop-blur-xl rounded-xl flex items-center justify-center border border-white/10 shadow-2xl">
-              <Zap size={28} className="text-white animate-pulse" />
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-4xl font-technical font-black text-white tracking-widest uppercase mb-1 drop-shadow-lg">
-                Aqueous Breach?
-              </h2>
-              <p className="text-white/80 text-[9px] font-technical font-bold uppercase tracking-[0.4em]">
-                Immediate deployment recommended. Bypassing standard queues now.
-              </p>
-            </div>
-          </div>
-          <a
-            href={`tel:${company.phone}`}
-            className="group relative bg-white text-black px-12 py-6 rounded-xl font-technical font-black text-[12px] uppercase tracking-[0.3em] overflow-hidden shadow-2xl transition-all hover:scale-105"
-          >
-            <span className="relative z-10 transition-colors group-hover:text-brand-red flex items-center gap-4">
-              <Phone size={18} className="animate-pulse" />
-              {company.phone}
-            </span>
-          </a>
-        </div>
-      </section>
-
-      {/* Technical Component Map */}
-      <section className="py-40 bg-brand-surface relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-blue/[0.03] blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="space-y-10 order-2 lg:order-1">
-              <div>
-                <span className="text-brand-blue text-[10px] font-technical font-bold uppercase tracking-[0.4em] mb-4 block">
-                  Hydraulic Infrastructure Map
-                </span>
-                <h2 className="text-4xl md:text-6xl font-technical font-extrabold text-brand-text tracking-widest uppercase leading-none">
-                  Pipe <span className="text-brand-blue">Architecture</span>
-                </h2>
-              </div>
-              <div className="space-y-6">
-                {[
-                  { label: "Supply Lines", detail: "Cold & hot water distribution network" },
-                  { label: "Waste Systems", detail: "Drainage and sewage routing infrastructure" },
-                  { label: "Pressure Nodes", detail: "Booster pumps and pressure regulation" },
-                  { label: "Valve Matrix", detail: "Isolation, check and gate valve arrays" },
-                ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-5 group">
-                    <div className="w-1.5 h-1.5 rounded-full bg-brand-blue/40 group-hover:bg-brand-blue mt-1.5 shrink-0 transition-colors" />
-                    <div>
-                      <p className="text-[10px] font-technical font-extrabold text-brand-text uppercase tracking-widest mb-1">{item.label}</p>
-                      <p className="text-[9px] font-technical text-brand-muted uppercase tracking-[0.2em]">{item.detail}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <BlueprintBillboard
-                src="/images/radiator-pipes.png"
-                alt="Hydraulic pipe infrastructure schematic"
-                theme="cool"
-                versionText="HYDRAULIC_ARCH: V2.0"
-                idHash="SHA: 0xC3F0259F"
-                statusText="FLOW ACTIVE"
-                className="w-full"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services grid */}
-      <section className="py-40 bg-brand-steel" aria-label="Plumbing service options">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-brand-card-border-hover bg-brand-card mb-6">
-              <Cpu size={12} className="text-brand-muted" />
-              <span className="text-[9px] font-technical font-bold text-brand-muted uppercase tracking-[0.3em]">Module: Flow Architecture</span>
-            </div>
-            <h2 className="text-4xl md:text-7xl font-technical font-black text-brand-text tracking-widest uppercase">
-              Operational <span className="text-brand-blue">Nodes</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {plumbingServices.map((service, i) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`bg-brand-card backdrop-blur-xl rounded-[2.5rem] p-12 border transition-all group relative overflow-hidden hover:shadow-xl hover:shadow-brand-blue/5 ${service.available
-                  ? "border-brand-card-border hover:border-brand-blue/20"
-                  : "border-brand-card-border opacity-50 grayscale"
-                  }`}
-              >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                <div className="w-16 h-16 bg-brand-steel border border-brand-card-border rounded-2xl flex items-center justify-center mb-10 group-hover:border-brand-blue/10 transition-all shadow-sm">
-                  <service.icon size={28} className="text-brand-blue" />
-                </div>
-
-                <h3 className="text-xl font-technical font-extrabold text-brand-text mb-6 tracking-widest uppercase">
-                  {service.title}
-                </h3>
-
-                <p className="text-brand-muted text-[10px] font-technical uppercase tracking-[0.2em] leading-loose mb-10">
-                  {service.description}
-                </p>
-
-                {service.available ? (
-                  <Link
-                    href={service.href}
-                    className="inline-flex items-center gap-2 text-brand-blue font-technical font-black text-[10px] uppercase tracking-[0.3em] hover:text-brand-text transition-colors"
-                  >
-                    Initiate Deployment <ArrowRight size={14} />
-                  </Link>
-                ) : (
-                  <span className="text-brand-muted font-technical font-black text-[9px] uppercase tracking-[0.3em]">System Offline</span>
-                )}
-
-                <span className="absolute -bottom-4 -right-4 text-8xl font-technical font-black text-white/[0.02] pointer-events-none group-hover:text-brand-blue/[0.05] transition-colors">
-                  0{i + 1}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ProcessSteps steps={plumbingSteps} title="Operational Protocol" />
-
-      <CTABanner />
+      <ServiceAudienceTabs
+        commercialTitle="Commercial Plumbing Services"
+        domesticTitle="Domestic Plumbing Services"
+        commercialServices={services.commercial}
+        domesticServices={services.domestic}
+        commercialCards={COMMERCIAL_PLUMBING_CARDS}
+        domesticCards={DOMESTIC_PLUMBING_CARDS}
+      />
     </div>
   );
 }

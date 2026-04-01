@@ -9,12 +9,13 @@ import type { CoreServiceSlug } from "@/lib/constants";
 
 const SECTOR_LABELS: Record<CoreServiceSlug, { commercial: string; domestic: string }> = {
   mechanical: { commercial: "Commercial Mechanical Services", domestic: "Domestic Mechanical Services" },
+  plumbing: { commercial: "Commercial Plumbing Services", domestic: "Domestic Plumbing Services" },
   electrical: { commercial: "Commercial Electrical Services", domestic: "Domestic Electrical Services" },
   gas: { commercial: "Commercial Gas Services", domestic: "Domestic Gas Services" },
 };
 
 interface SectorChoiceSectionProps {
-  /** Slug for route: mechanical | electrical | gas */
+  /** Slug for route: mechanical | plumbing | electrical | gas */
   basePath: CoreServiceSlug;
   /** Key for CORE_SERVICES_IMAGES e.g. "Mechanical Services" */
   serviceImageKey: string;

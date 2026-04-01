@@ -102,7 +102,7 @@ Move-File (Join-Path $srcLower "home-staff.png") (Join-Path $srcLower "home\home
 
 # 5) Sectors (homepage grid)
 Move-File (Join-Path $srcLower "warehouse_new.jpg") (Join-Path $srcLower "sectors\warehouse.jpg")
-Move-File (Join-Path $srcLower "office.jpg") (Join-Path $srcLower "sectors\office.jpg")
+Move-File (Join-Path $srcLower "offices.jpg") (Join-Path $srcLower "sectors\offices.jpg")
 Move-File (Join-Path $srcLower "hospital.webp") (Join-Path $srcLower "sectors\hospital.webp")
 Move-File (Join-Path $srcLower "university.jpg") (Join-Path $srcLower "sectors\university.jpg")
 Move-File (Join-Path $srcLower "fire_station.jpeg") (Join-Path $srcLower "sectors\fire_station.jpeg")

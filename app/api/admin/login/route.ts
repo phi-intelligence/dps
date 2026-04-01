@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getAdminCookieName } from "@/lib/admin-auth";
 import { verifyPassword } from "@/lib/password";
+import { randomBytes, createHash } from "crypto";
 
 export const dynamic = "force-dynamic";
 
@@ -29,10 +30,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
+    const token = randomBytes(32).toString("base64url");
+    const tokenHash = createHash("sha256").update(token).digest("hex");
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days
+
+    await prisma.adminSession.create({
+      data: {
+        tokenHash,
+        expiresAt,
+        adminUserId: admin.id,
+      },
+    });
+
     const res = NextResponse.json({ ok: true });
-    res.cookies.set(getAdminCookieName(), "1", {
+    res.cookies.set(getAdminCookieName(), token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: "/",

@@ -109,10 +109,11 @@ export default function PlumbingRepairsPage() {
         },
       ]}
       breadcrumbs={[
-        { label: "Core", href: "/" },
+        { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Hydraulic", href: "/services/plumbing" },
-        { label: "Resolution" },
+        { label: "Plumbing Services", href: "/services/plumbing" },
+        { label: "Plumbing Services", href: "/services/plumbing" },
+        { label: "Plumbing Repairs" },
       ]}
       serviceValue="plumbing-repairs"
       accentColor="red"

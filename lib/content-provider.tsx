@@ -27,8 +27,10 @@ const fallbackNav: NavLinkItem[] = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Commercial Services", href: "/services/commercial" },
-      { label: "Domestic Services", href: "/services/domestic" },
+      { label: "Mechanical Services", href: "/services/mechanical" },
+      { label: "Plumbing Services", href: "/services/plumbing" },
+      { label: "Electrical Services", href: "/services/electrical" },
+      { label: "Gas Services", href: "/services/gas" },
     ],
   },
   { label: "Portfolio", href: "/portfolio" },

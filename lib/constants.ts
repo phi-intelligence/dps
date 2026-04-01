@@ -39,8 +39,10 @@ export const NAV_LINKS = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Commercial Services", href: "/services/commercial" },
-      { label: "Domestic Services", href: "/services/domestic" },
+      { label: "Mechanical Services", href: "/services/mechanical" },
+      { label: "Plumbing Services", href: "/services/plumbing" },
+      { label: "Electrical Services", href: "/services/electrical" },
+      { label: "Gas Services", href: "/services/gas" },
     ],
   },
   { label: "Portfolio", href: "/portfolio" },
@@ -60,6 +62,15 @@ export const CAPABILITY_CORE_SERVICES = [
       "Plant room installations",
       "Pipework systems",
       "Preventative and reactive maintenance",
+    ],
+  },
+  {
+    title: "Plumbing Services",
+    items: [
+      "Commercial and domestic plumbing repairs",
+      "General plumbing installations",
+      "Leak detection and fault diagnostics",
+      "Pipework upgrades and alterations",
     ],
   },
   {
@@ -85,6 +96,7 @@ export const CAPABILITY_CORE_SERVICES = [
 /** Core services hero images for homepage (Mechanical, Electrical, Gas). */
 export const CORE_SERVICES_IMAGES: Record<string, string> = {
   "Mechanical Services": "/imagesv2/home/mechanical_service.webp",
+  "Plumbing Services": "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
   "Electrical Services": "/imagesv2/home/home_electrical.jpg",
   "Gas Services": "/imagesv2/home/home_gas.jpg",
 };
@@ -92,6 +104,7 @@ export const CORE_SERVICES_IMAGES: Record<string, string> = {
 /** Core services hero images for Domestic Services hub (mechanical/electrical/gas). */
 export const CORE_SERVICES_IMAGES_DOMESTIC: Record<string, string> = {
   "Mechanical Services": "/imagesv2/mechanical_plumbing.webp",
+  "Plumbing Services": "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
   "Electrical Services": "/imagesv2/domestic_electric.jpg",
   "Gas Services": "/imagesv2/gas_service.jpg",
 };
@@ -99,6 +112,7 @@ export const CORE_SERVICES_IMAGES_DOMESTIC: Record<string, string> = {
 /** Core services hero images for Commercial Services hub (mechanical/electrical/gas). */
 export const CORE_SERVICES_IMAGES_COMMERCIAL: Record<string, string> = {
   "Mechanical Services": "/imagesv2/commercial_mechanical/commercial_heating.webp",
+  "Plumbing Services": "/imagesv2/commercial_mechanical/commercial_pipework.png",
   "Electrical Services": "/imagesv2/commercial_electrical/commercial_electric.jpg",
   "Gas Services": "/imagesv2/commercial_gas/commercial_boiler.jpg",
 };
@@ -106,26 +120,29 @@ export const CORE_SERVICES_IMAGES_COMMERCIAL: Record<string, string> = {
 /** Core service detail page routes (for Core Services section links — hub pages). */
 export const CORE_SERVICE_HREFS: Record<string, string> = {
   "Mechanical Services": "/services/mechanical",
+  "Plumbing Services": "/services/plumbing",
   "Electrical Services": "/services/electrical",
   "Gas Services": "/services/gas",
 };
 
 /** Core service links from Commercial page — direct to commercial sub-pages. */
 export const CORE_SERVICE_COMMERCIAL_HREFS: Record<string, string> = {
-  "Mechanical Services": "/services/mechanical/commercial",
-  "Electrical Services": "/services/electrical/commercial",
-  "Gas Services": "/services/gas/commercial",
+  "Mechanical Services": "/services/mechanical",
+  "Plumbing Services": "/services/plumbing",
+  "Electrical Services": "/services/electrical",
+  "Gas Services": "/services/gas",
 };
 
 /** Core service links from Domestic page — direct to domestic sub-pages. */
 export const CORE_SERVICE_DOMESTIC_HREFS: Record<string, string> = {
-  "Mechanical Services": "/services/mechanical/domestic",
-  "Electrical Services": "/services/electrical/domestic",
-  "Gas Services": "/services/gas/domestic",
+  "Mechanical Services": "/services/mechanical",
+  "Plumbing Services": "/services/plumbing",
+  "Electrical Services": "/services/electrical",
+  "Gas Services": "/services/gas",
 };
 
-/** Core service type slug for sector sub-routes (mechanical | electrical | gas). */
-export type CoreServiceSlug = "mechanical" | "electrical" | "gas";
+/** Core service type slug for sector sub-routes (mechanical | plumbing | electrical | gas). */
+export type CoreServiceSlug = "mechanical" | "plumbing" | "electrical" | "gas";
 
 /** Service lists for Commercial / Domestic sub-pages under each core service. */
 export const CORE_SERVICE_SECTOR_SERVICES: Record<
@@ -156,6 +173,28 @@ export const CORE_SERVICE_SECTOR_SERVICES: Record<
       "Unvented cylinder works (G3)",
       "Powerflushing",
       "General plumbing & heating repair",
+    ],
+  },
+  plumbing: {
+    commercial: [
+      "Commercial plumbing installation",
+      "Commercial plumbing repairs",
+      "Pipework upgrades and alterations",
+      "Leak detection and trace & access",
+      "Valves, pumps and controls servicing",
+      "Hot water and cylinder systems",
+      "Planned preventative plumbing maintenance",
+      "Reactive callouts and emergency repairs",
+    ],
+    domestic: [
+      "General plumbing repairs",
+      "Tap, toilet and fixture installation",
+      "Pipework repairs and reroutes",
+      "Leak detection and repairs",
+      "Appliance plumbing connections",
+      "Water pressure optimisation",
+      "Hot water cylinder plumbing works",
+      "Emergency domestic plumbing callouts",
     ],
   },
   electrical: {
@@ -238,7 +277,7 @@ export const SECTORS_WE_DEAL_WITH = [
 /** Sectors with hero images for the homepage grid (remaining sectors shown as pills). */
 export const SECTORS_WITH_IMAGES = [
   { label: "Warehouses", image: "/imagesv2/sectors/warehouse.jpg" },
-  { label: "Offices", image: "/imagesv2/sectors/office.jpg" },
+  { label: "Offices", image: "/imagesv2/sectors/offices.jpg" },
   { label: "Hospital", image: "/imagesv2/sectors/hospital.webp" },
   { label: "Universities", image: "/imagesv2/sectors/university.jpg" },
   { label: "Fire Stations", image: "/imagesv2/sectors/fire_station.jpeg" },
@@ -271,26 +310,24 @@ export const ACCREDITATIONS = [
   { title: "Working at Heights", items: [] },
 ] as const
 
-/** Commercial services (9 items) for services hub and nav. */
+/** Commercial services for footer/nav (all routes must exist). */
 export const COMMERCIAL_SERVICES = [
-  { label: "Commercial Boiler Servicing", href: "/services/heating/boiler-servicing" },
-  { label: "Plant Room Maintenance", href: "/services/commercial" },
-  { label: "Gas Safety Inspections", href: "/services/commercial" },
-  { label: "PPM Contracts", href: "/services/commercial" },
-  { label: "Fault Finding & Diagnosis", href: "/services/heating/boiler-repair" },
-  { label: "Commercial Heating Systems", href: "/services/heating/central-heating" },
-  { label: "24 Hour Emergency Breakdowns", href: "/emergency" },
-  { label: "Commercial Facilities Management (3 Tier PPM Packages)", href: "/services/commercial" },
-  { label: "Commercial Facilities Management (Reactive & OOH Callouts)", href: "/services/commercial" },
+  { label: "Mechanical Services (Commercial)", href: "/services/mechanical" },
+  { label: "Plumbing Services (Commercial)", href: "/services/plumbing" },
+  { label: "Electrical Services (Commercial)", href: "/services/electrical" },
+  { label: "Gas Services (Commercial)", href: "/services/gas" },
+  { label: "Emergency Call Outs", href: "/emergency" },
 ] as const
 
-/** Domestic services (5 items) for services hub and nav. */
+/** Domestic services for footer/nav (all routes must exist). */
 export const DOMESTIC_SERVICES = [
-  { label: "Boiler Installation, Servicing & Repairs", href: "/services/heating/boiler-installation" },
-  { label: "System Diagnosis", href: "/services/heating/boiler-repair" },
-  { label: "Landlord Gas Safety Certification (CP12)", href: "/services/heating/boiler-servicing" },
+  { label: "Mechanical Services (Domestic)", href: "/services/mechanical" },
+  { label: "Plumbing Services (Domestic)", href: "/services/plumbing" },
+  { label: "Electrical Services (Domestic)", href: "/services/electrical" },
+  { label: "Gas Services (Domestic)", href: "/services/gas" },
+  { label: "General Plumbing", href: "/services/plumbing/general-plumbing" },
   { label: "Plumbing Repairs", href: "/services/plumbing/plumbing-repairs" },
-  { label: "Emergency Call outs", href: "/emergency" },
+  { label: "Emergency Call Outs", href: "/emergency" },
 ] as const
 
 /**

@@ -194,7 +194,7 @@ async function main() {
       breadcrumbs: JSON.stringify([
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Heating", href: "/services/heating" },
+        { label: "Gas Services", href: "/services/gas" },
         { label: "Boiler Installation" },
       ]),
       backgroundImage: "/images/140d49a2-daf4-4c0f-b0c4-881f971b97c0.jpg",

@@ -24,6 +24,7 @@ ENV DATABASE_URL="file:./prisma/dev.db"
 
 RUN npx prisma generate \
   && npx prisma db push \
+  && npm run db:seed \
   && npm run build
 
 FROM base AS runner

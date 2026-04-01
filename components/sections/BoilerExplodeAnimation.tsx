@@ -121,7 +121,7 @@ export default function BoilerExplodeAnimation() {
             We deconstruct the complexity of modern heating systems. Every component is optimized, monitored, and maintained with industrial precision.
           </p>
           <Link
-            href="/services/heating"
+            href="/services/gas"
             className="inline-flex items-center gap-3 text-white font-semibold hover:text-[#F97316] transition-all text-lg group"
           >
             Explore the Architecture 

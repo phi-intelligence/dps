@@ -100,6 +100,16 @@ model AdminUser {
   passwordHash String
   fullName     String
   createdAt    DateTime @default(now())
+  sessions     AdminSession[]
+}
+
+model AdminSession {
+  id          String   @id @default(cuid())
+  tokenHash   String   @unique
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  adminUserId String
+  adminUser   AdminUser @relation(fields: [adminUserId], references: [id], onDelete: Cascade)
 }
 
 // Service (category or detail page). Slug can be "heating", "heating/boiler-installation", etc.

@@ -27,7 +27,26 @@ export default function ServiceAreasPage() {
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden">
       <PageHero
         title="Service Areas"
-        subtitle={`We provide heating and plumbing services across ${company.areas}. Local engineers, fast response times.`}
+        subtitle={
+          <div className="normal-case tracking-normal">
+            <p className="text-sm md:text-base font-semibold">
+              We provide heating and plumbing services across:
+            </p>
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 list-none text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.3em]">
+              {SERVICE_AREAS.map((area) => (
+                <li key={area} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="text-current text-base leading-none">
+                    •
+                  </span>
+                  <span>{area}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm md:text-base font-semibold">
+              Local engineers, fast response times.
+            </p>
+          </div>
+        }
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Service Areas" }]}
         backgroundImage="/images/service-area-map.jpg"
         variant="luxury"

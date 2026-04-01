@@ -104,7 +104,7 @@ export default function Footer() {
             </ul>
 
             <div className="mt-14 md:mt-20 px-6 py-5 md:px-7 md:py-6 bg-[#05080c] border border-white/25 rounded-[2.4rem] flex flex-col items-center gap-3 premium-shadow">
-              <div className="relative w-20 h-16 sm:w-24 sm:h-18 rounded-2xl bg-brand-navy border border-[#e2c977]/70 flex items-center justify-center overflow-hidden">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-18 rounded-2xl bg-brand-navy flex items-center justify-center overflow-hidden">
                 <Image
                   src="/imagesv2/branding/gas_safe_logo.jpeg"
                   alt="Gas Safe Register"

@@ -4,12 +4,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { Wrench, Zap, Flame, LucideIcon } from "lucide-react";
+import { Wrench, Droplets, Zap, Flame, LucideIcon } from "lucide-react";
 import ScrollSequenceSection from "@/components/sections/ScrollSequenceSection";
 import { CAPABILITY_CORE_SERVICES, CORE_SERVICES_IMAGES, CORE_SERVICE_HREFS } from "@/lib/constants";
 
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   "Mechanical Services": Wrench,
+  "Plumbing Services": Droplets,
   "Electrical Services": Zap,
   "Gas Services": Flame,
 };

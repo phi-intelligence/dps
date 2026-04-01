@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Phone, Flame } from "lucide-react";
@@ -14,7 +15,7 @@ interface Breadcrumb {
 
 interface PageHeroProps {
   title: string;
-  subtitle?: string;
+  subtitle?: ReactNode;
   breadcrumbs: Breadcrumb[];
   backgroundImage?: string;
   variant?: "default" | "luxury";
@@ -240,7 +241,7 @@ export default function PageHero({
           </motion.h1>
 
           {subtitle && (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -265,7 +266,7 @@ export default function PageHero({
               }`}
             >
               {subtitle}
-            </motion.p>
+            </motion.div>
           )}
 
           {showCTA && (

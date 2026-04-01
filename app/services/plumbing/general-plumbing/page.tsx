@@ -111,7 +111,8 @@ export default function GeneralPlumbingPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Plumbing", href: "/services/plumbing" },
+        { label: "Plumbing Services", href: "/services/plumbing" },
+        { label: "Plumbing Services", href: "/services/plumbing" },
         { label: "General Plumbing" },
       ]}
       serviceValue="general-plumbing"

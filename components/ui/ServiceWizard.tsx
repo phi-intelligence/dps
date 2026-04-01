@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Building2, Home, ArrowRight } from "lucide-react";
+import { Wrench, Droplets, Zap, Flame, ArrowRight } from "lucide-react";
 import { SERVICE_MAP } from "@/lib/chat-config";
 import type { ServiceCategory, ServiceItem } from "@/lib/chat-config";
 
 const categories = [
-  { key: "commercial" as const, label: "Commercial", icon: Building2 },
-  { key: "domestic" as const, label: "Domestic", icon: Home },
-];
+  { key: "mechanical", label: "Mechanical", icon: Wrench },
+  { key: "plumbing", label: "Plumbing", icon: Droplets },
+  { key: "electrical", label: "Electrical", icon: Zap },
+  { key: "gas", label: "Gas", icon: Flame },
+] as const;
 
 export default function ServiceWizard() {
   const router = useRouter();

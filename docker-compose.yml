@@ -3,18 +3,30 @@
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: dpsheating:v1.0
+    mem_limit: 512m
+    memswap_limit: 768m
     ports:
-      - "3000:3000"
+      - "80:3000"
     environment:
       DATABASE_URL: file:/data/dev.db
-      # Optional: set GEMINI_API_KEY, OPENAI_API_KEY, ADMIN_REGISTER_SECRET here or use:
-      #   docker compose --env-file .env up -d
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ADMIN_REGISTER_SECRET: ${ADMIN_REGISTER_SECRET:-}
+      NODE_OPTIONS: "--max-old-space-size=256"
     volumes:
       - dps_sqlite:/data
     restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
 volumes:
   dps_sqlite:

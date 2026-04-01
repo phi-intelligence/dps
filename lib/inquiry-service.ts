@@ -25,12 +25,20 @@ export const inquiryService = {
     data: Omit<Inquiry, "id" | "status" | "timestamp">
   ): Promise<Inquiry | undefined> => {
     if (typeof window === "undefined") return undefined;
+    const REQUEST_TIMEOUT_MS = 10000;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => {
+      controller.abort(new Error("Request timeout"));
+    }, REQUEST_TIMEOUT_MS);
+
     try {
       const res = await fetch("/api/content/inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        signal: controller.signal,
       });
+
       if (res.ok) {
         const json = await res.json();
         return {
@@ -42,6 +50,8 @@ export const inquiryService = {
       }
     } catch {
       // fall through to localStorage fallback
+    } finally {
+      window.clearTimeout(timeoutId);
     }
     const inquiries = inquiryService.getInquiries();
     const newInquiry: Inquiry = {

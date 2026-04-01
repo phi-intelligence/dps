@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
@@ -69,8 +69,6 @@ export default function HomePage() {
     registerGSAP();
   }, []);
 
-  const [flippedValueCard, setFlippedValueCard] = useState<string | null>(null);
-
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-hidden relative">
       {/* Hero + quick meta strip — dark theme */}
@@ -129,7 +127,7 @@ export default function HomePage() {
                   </span>{" "}
                   &amp; Plumbing
                 </h1>
-                <p className="max-w-md text-sm md:text-base text-[#b3c0d0] font-medium leading-relaxed">
+                <p className="max-w-md md:max-w-none text-base md:text-lg text-[#b3c0d0] font-semibold leading-relaxed md:whitespace-nowrap">
                   Engineered heating and plumbing for commercial and domestic.
                 </p>
                 <ul className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2 text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.3em] text-[#d6dde7]">
@@ -290,12 +288,11 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -right-40 top-10 h-64 w-64 rotate-6 border border-white/6 rounded-[3rem]" />
           <div className="absolute -left-32 bottom-0 h-52 w-80 -rotate-6 border border-[#e2c977]/20 rounded-[3rem]" />
-          <div className="absolute inset-x-10 top-1/2 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1.6fr)] items-start">
+          <div className="grid gap-10 md:gap-12 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1.85fr)] items-start">
             <div className="space-y-4">
-              <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
+              <span className="text-xs md:text-sm font-technical font-bold uppercase tracking-[0.24em] md:tracking-[0.3em] text-[#e2c977]">
                 Why Clients Choose {COMPANY.name}
               </span>
               <h2 className="mt-4 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
@@ -307,133 +304,44 @@ export default function HomePage() {
                 transparent communication.
               </p>
             </div>
-            <div className="grid gap-5 md:grid-cols-3">
-              {/* Commercial Systems card */}
-              <motion.div
-                initial={{ opacity: 0, y: 12, x: 0 }}
-                whileInView={{ opacity: 1, y: 0, x: [0, -3, 3, -2, 2, 0] }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
-                className="relative group h-52 sm:h-56 md:h-64 [perspective:1200px]"
-                onClick={() =>
-                  setFlippedValueCard(
-                    flippedValueCard === "commercial" ? null : "commercial"
-                  )
-                }
-              >
-                <div
-                  className={`absolute inset-0 rounded-3xl border border-white/12 bg-[#0f151c] px-5 py-6 text-[#d6e0ec] [transform-style:preserve-3d] transition-transform duration-500 group-hover:[transform:rotateY(180deg)] ${
-                    flippedValueCard === "commercial"
-                      ? "[transform:rotateY(180deg)]"
-                      : ""
-                  }`}
+            <ul className="grid gap-4 md:grid-cols-3 md:gap-6">
+              {[
+                {
+                  title: "Commercial Systems",
+                  description:
+                    "Plant rooms, packaged boiler solutions and PPM contracts for offices, retail, and facilities management.",
+                },
+                {
+                  title: "Domestic Excellence",
+                  description:
+                    "Service boilers, fault finding, CP12, and emergency response with respect for your property.",
+                },
+                {
+                  title: "End-to-End Care",
+                  description:
+                    "Design, install, commission and maintain - one point of accountability across the entire lifecycle.",
+                },
+              ].map((item, i) => (
+                <motion.li
+                  key={item.title}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ duration: 0.45, delay: 0.1 + i * 0.06 }}
+                  className="rounded-2xl border border-white/15 bg-white/5 px-4 py-4 md:px-5 md:py-5 min-h-[180px] md:min-h-[205px]"
                 >
-                  {/* Front face */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 [backface-visibility:hidden]">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#e2c977]/70 bg-[#10161f]">
-                      <Building2 size={26} className="text-[#e2c977]" />
-                    </div>
-                    <span className="text-[10px] font-technical font-extrabold uppercase tracking-[0.35em] text-[#e2c977] text-center">
-                      Commercial Systems
+                  <div className="flex items-center gap-3">
+                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#e2c977]" />
+                    <span className="text-[11px] md:text-xs font-technical font-bold uppercase tracking-[0.3em] text-[#e2c977] leading-snug">
+                      {item.title}
                     </span>
                   </div>
-                  {/* Back face */}
-                  <div className="absolute inset-0 flex flex-col justify-center gap-3 px-5 py-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                    <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
-                      Commercial Systems
-                    </span>
-                    <p className="text-sm text-[#c7ced7]">
-                      Plant rooms, packaged boiler solutions and PPM contracts
-                      for offices, retail, and facilities management.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Domestic Excellence card */}
-              <motion.div
-                initial={{ opacity: 0, y: 12, x: 0 }}
-                whileInView={{ opacity: 1, y: 0, x: [0, -3, 3, -2, 2, 0] }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: 0.16 }}
-                className="relative group h-52 sm:h-56 md:h-64 [perspective:1200px]"
-                onClick={() =>
-                  setFlippedValueCard(
-                    flippedValueCard === "domestic" ? null : "domestic"
-                  )
-                }
-              >
-                <div
-                  className={`absolute inset-0 rounded-3xl border border-white/12 bg-[#0f151c] px-5 py-6 text-[#d6e0ec] [transform-style:preserve-3d] transition-transform duration-500 group-hover:[transform:rotateY(180deg)] ${
-                    flippedValueCard === "domestic"
-                      ? "[transform:rotateY(180deg)]"
-                      : ""
-                  }`}
-                >
-                  {/* Front face */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 [backface-visibility:hidden]">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#e2c977]/70 bg-[#10161f]">
-                      <Home size={26} className="text-[#e2c977]" />
-                    </div>
-                    <span className="text-[10px] font-technical font-extrabold uppercase tracking-[0.35em] text-[#e2c977] text-center">
-                      Domestic Excellence
-                    </span>
-                  </div>
-                  {/* Back face */}
-                  <div className="absolute inset-0 flex flex-col justify-center gap-3 px-5 py-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                    <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
-                      Domestic Excellence
-                    </span>
-                    <p className="text-sm text-[#c7ced7]">
-                      Service boilers, fault finding, CP12, and emergency response
-                      with respect for your property.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* End-to-End Care card */}
-              <motion.div
-                initial={{ opacity: 0, y: 12, x: 0 }}
-                whileInView={{ opacity: 1, y: 0, x: [0, -3, 3, -2, 2, 0] }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.7, delay: 0.22 }}
-                className="relative group h-52 sm:h-56 md:h-64 [perspective:1200px]"
-                onClick={() =>
-                  setFlippedValueCard(
-                    flippedValueCard === "endtoend" ? null : "endtoend"
-                  )
-                }
-              >
-                <div
-                  className={`absolute inset-0 rounded-3xl border border-white/18 bg-[#11161d] px-5 py-6 text-[#e4edf7] [transform-style:preserve-3d] transition-transform duration-500 group-hover:[transform:rotateY(180deg)] ${
-                    flippedValueCard === "endtoend"
-                      ? "[transform:rotateY(180deg)]"
-                      : ""
-                  }`}
-                >
-                  {/* Front face */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 [backface-visibility:hidden]">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/40 bg-white/5">
-                      <Zap size={26} className="text-[#e2c977]" />
-                    </div>
-                    <span className="text-[10px] font-technical font-extrabold uppercase tracking-[0.35em] text-[#e2c977] text-center">
-                      End-to-End Care
-                    </span>
-                  </div>
-                  {/* Back face */}
-                  <div className="absolute inset-0 flex flex-col justify-center gap-3 px-5 py-5 [backface-visibility:hidden] [transform:rotateY(180deg)]">
-                    <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
-                      End-to-End Care
-                    </span>
-                    <p className="text-sm text-[#c7d0dd]">
-                      Design, install, commission and maintain — one point of
-                      accountability across the entire lifecycle.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+                  <p className="mt-3 pl-6 text-xs md:text-sm text-[#d3dbe7] leading-relaxed">
+                    {item.description}
+                  </p>
+                </motion.li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -458,7 +366,7 @@ export default function HomePage() {
             <div className="pointer-events-none absolute -left-32 -bottom-20 h-40 w-72 -rotate-6 bg-gradient-to-tr from-[#10141a]/10 via-transparent to-transparent rounded-[3rem]" />
 
             <div className="relative flex flex-col items-center text-center gap-3 mb-8">
-              <span className="text-xs md:text-sm font-technical font-bold uppercase tracking-[0.45em] text-[#b8963a]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#b8963a]">
                 Services
               </span>
               <h2 className="text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.26em] text-[#171b1f]">
@@ -517,7 +425,7 @@ export default function HomePage() {
                     )}
                   </div>
                   <Link
-                  href="/services/commercial"
+                  href="/services"
                   className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-white"
                   >
                     View commercial services
@@ -569,7 +477,7 @@ export default function HomePage() {
                     )}
                   </div>
                   <Link
-                  href="/services/domestic"
+                  href="/services"
                   className="mt-3 inline-flex items-center justify-center gap-2 text-[9px] font-technical font-bold uppercase tracking-[0.3em] text-white"
                   >
                     View domestic services
@@ -640,7 +548,7 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#e2c977]">
                 How We Work
               </span>
               <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
@@ -681,7 +589,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#b8963a]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#b8963a]">
                 Industries
               </span>
               <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-[#171b1f]">
@@ -751,7 +659,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#b8963a]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#b8963a]">
                 Coverage
               </span>
               <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-[#171b1f]">
@@ -852,7 +760,7 @@ export default function HomePage() {
             className="max-w-5xl mx-auto"
           >
             <div className="mb-10 space-y-4">
-              <span className="text-[11px] md:text-xs font-technical font-bold uppercase tracking-[0.45em] text-[#e2c977]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#e2c977]">
                 What Drives Us
               </span>
               <p className="text-sm md:text-base text-[#98a4b4] max-w-3xl leading-relaxed">
@@ -917,7 +825,7 @@ export default function HomePage() {
 
             <div className="relative grid gap-8 lg:grid-cols-[1.1fr_1.3fr] items-center">
               <div className="space-y-5">
-                <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
+                <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#e2c977]">
                   About {COMPANY.name}
                 </span>
                 <h2 className="text-xl md:text-2xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">
@@ -977,7 +885,7 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-[10px] font-technical font-bold uppercase tracking-[0.4em] text-[#e2c977]">
+              <span className="text-base md:text-lg font-technical font-bold uppercase tracking-[0.22em] md:tracking-[0.28em] text-[#e2c977]">
                 Track Record
               </span>
               <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.24em] text-white">

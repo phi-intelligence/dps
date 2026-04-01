@@ -8,6 +8,15 @@ import { COMPANY, SERVICE_AREAS, OPENING_HOURS } from "@/lib/constants";
 import { SERVICE_MAP } from "@/lib/chat-config";
 import type { ChatRequest } from "@/lib/types/chat";
 
+function withTimeout<T>(p: Promise<T>, ms: number, timeoutMessage: string): Promise<T> {
+  return Promise.race([
+    p,
+    new Promise<T>((_resolve, reject) =>
+      setTimeout(() => reject(new Error(timeoutMessage)), ms)
+    ),
+  ]);
+}
+
 /** Prefer key from .env.local on disk so restarts aren't needed when key is updated. */
 function getGeminiApiKey(): string | undefined {
   try {
@@ -83,7 +92,11 @@ async function streamGemini(
   const history = messagesToGeminiHistory(allButLast);
   const chat = model.startChat({ history: history as never[] });
 
-  const result = await chat.sendMessageStream(lastMessage.content);
+  const result = await withTimeout(
+    chat.sendMessageStream(lastMessage.content),
+    25000,
+    "Gemini request timed out"
+  );
 
   const encoder = new TextEncoder();
   return new ReadableStream({
@@ -129,11 +142,15 @@ async function streamOpenAI(
     })),
   ];
 
-  const stream = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: openAIMessages,
-    stream: true,
-  });
+  const stream = await withTimeout(
+    openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: openAIMessages,
+      stream: true,
+    }),
+    25000,
+    "OpenAI request timed out"
+  );
 
   const encoder = new TextEncoder();
   return new ReadableStream({
@@ -174,7 +191,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const systemPrompt = await buildSystemPrompt();
+    const systemPrompt = await withTimeout(
+      buildSystemPrompt(),
+      4000,
+      "System prompt build timed out"
+    );
     // Do not log API key presence, length, or prefixes — ends up in server logs / APM.
     // const geminiKey = getGeminiApiKey();
     // const prefix = geminiKey ? geminiKey.slice(0, 8) + "..." : "none";

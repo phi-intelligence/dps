@@ -2,37 +2,55 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Building2, Home, ArrowRight, Phone, Shield, Zap, Award, Activity, Wrench, Flame } from "lucide-react";
+import { ArrowRight, Phone, Shield, Zap, Award, Activity, Wrench, Flame, Droplets } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
 import BlueprintBillboard from "@/components/ui/BlueprintBillboard";
-import { COMMERCIAL_SERVICES, DOMESTIC_SERVICES, KEY_STRENGTHS } from "@/lib/constants";
+import { KEY_STRENGTHS } from "@/lib/constants";
 import { useQuoteModal } from "@/lib/quote-modal-context";
 import { motion } from "framer-motion";
 import { useContent } from "@/lib/content-provider";
 
 const categories = [
   {
-    icon: Building2,
-    title: "Commercial Services",
+    icon: Wrench,
+    title: "Mechanical Services",
     description:
-      "Commercial boiler servicing, plant room maintenance, PPM contracts, fault finding, commercial heating systems, 24-hour emergency breakdowns, and facilities management across London, Kent, Essex and Surrey.",
-    image: "/imagesv2/commercial_gas/commercial_install.jpg",
-    services: COMMERCIAL_SERVICES.map((s) => s.label),
-    href: "/services/commercial",
-    ctaLabel: "View Commercial Services",
-    accent: "brand-red",
+      "Heating systems, plant room works, pipework upgrades, balancing, powerflushing, and planned mechanical maintenance.",
+    image: "/imagesv2/commercial_mechanical/commercial_heating.webp",
+    services: ["Commercial Mechanical", "Domestic Mechanical", "Plant Room", "Heating Upgrades"],
+    href: "/services/mechanical",
+    ctaLabel: "View Mechanical Services",
   },
   {
-    icon: Home,
-    title: "Domestic Services",
+    icon: Droplets,
+    title: "Plumbing Services",
     description:
-      "Boiler installation, servicing and repairs, system diagnosis, landlord gas safety certification (CP12), plumbing repairs, and emergency callouts. Gas Safe registered engineers.",
-    image: "/images/plumbing-pipes.jpg",
-    services: DOMESTIC_SERVICES.map((s) => s.label),
-    href: "/services/domestic",
-    ctaLabel: "View Domestic Services",
-    accent: "brand-blue",
+      "Commercial and domestic plumbing repairs, leak diagnostics, pipework alterations, fixture installations, and emergency response.",
+    image: "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
+    services: ["Commercial Plumbing", "Domestic Plumbing", "Leak Repairs", "General Plumbing"],
+    href: "/services/plumbing",
+    ctaLabel: "View Plumbing Services",
+  },
+  {
+    icon: Zap,
+    title: "Electrical Services",
+    description:
+      "Control wiring, diagnostics, testing, compliance checks, and electrical support for heating and M&E systems.",
+    image: "/imagesv2/commercial_electrical/commercial_electric.jpg",
+    services: ["Commercial Electrical", "Domestic Electrical", "Fault Finding", "Compliance Checks"],
+    href: "/services/electrical",
+    ctaLabel: "View Electrical Services",
+  },
+  {
+    icon: Flame,
+    title: "Gas Services",
+    description:
+      "Gas boiler installation, servicing, repairs, safety inspections, and gas compliance for both commercial and domestic properties.",
+    image: "/imagesv2/commercial_gas/commercial_boiler.jpg",
+    services: ["Commercial Gas", "Domestic Gas", "Boiler Servicing", "Safety Inspections"],
+    href: "/services/gas",
+    ctaLabel: "View Gas Services",
   },
 ];
 

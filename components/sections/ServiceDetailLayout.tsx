@@ -100,7 +100,7 @@ export default function ServiceDetailLayout({
   const darkSectionBg = isLuxury ? "bg-[#05080c]" : "bg-brand-navy";
 
   return (
-    <div className={isLuxury ? "bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen" : "bg-brand-surface text-brand-text min-h-screen"}>
+    <div className={isLuxury ? "bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen" : "bg-brand-surface text-brand-text overflow-x-hidden min-h-screen"}>
       <PageHero
         title={title}
         subtitle={subtitle}

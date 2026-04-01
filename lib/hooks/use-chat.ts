@@ -13,6 +13,7 @@ export function useChat() {
   const abortRef = useRef<AbortController | null>(null);
 
   const sendMessage = useCallback(async (content: string) => {
+    const REQUEST_TIMEOUT_MS = 20000; // Prevent long-hanging provider requests
     const trimmed = content.trim();
     if (!trimmed || isStreaming) return;
 
@@ -34,6 +35,9 @@ export function useChat() {
 
     abortRef.current = new AbortController();
     const signal = abortRef.current.signal;
+    const timeoutId = window.setTimeout(() => {
+      abortRef.current?.abort(new Error("Request timeout"));
+    }, REQUEST_TIMEOUT_MS);
 
     try {
       const history = [...messages, userMessage].map((m) => ({
@@ -135,6 +139,7 @@ export function useChat() {
         )
       );
     } finally {
+      window.clearTimeout(timeoutId);
       setIsStreaming(false);
       abortRef.current = null;
     }
