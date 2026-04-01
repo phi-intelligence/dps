@@ -128,6 +128,18 @@ export default function Footer() {
             </p>
           </div>
 
+          <p className="text-[10px] font-technical uppercase tracking-widest text-brand-muted text-center">
+            Designed and Maintained by{" "}
+            <a
+              href="https://phiintelligence.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-muted hover:text-brand-text transition-colors"
+            >
+              Phi Intelligence
+            </a>
+          </p>
+
           <div className="flex gap-10 text-[10px] font-technical uppercase tracking-[0.2em]">
             <Link href="/privacy" className="text-brand-muted hover:text-brand-text transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-brand-muted hover:text-brand-text transition-colors">Terms &amp; Conditions</Link>

@@ -1,17 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
-import { getAdminCookieName } from "@/lib/admin-auth";
+import {
+  createStatelessAdminToken,
+  getAdminCookieName,
+  getAdminSessionTtlSeconds,
+} from "@/lib/admin-auth";
 import { verifyPassword } from "@/lib/password";
 import { randomBytes, createHash } from "crypto";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
+  let body: unknown;
   try {
-    const body = await request.json();
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  try {
     const username =
-      typeof body.username === "string" ? body.username.trim() : "";
-    const password = typeof body.password === "string" ? body.password : "";
+      typeof (body as { username?: unknown }).username === "string"
+        ? (body as { username: string }).username.trim()
+        : "";
+    const password =
+      typeof (body as { password?: unknown }).password === "string"
+        ? (body as { password: string }).password
+        : "";
 
     if (!username || !password) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
@@ -30,28 +45,35 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    const token = randomBytes(32).toString("base64url");
-    const tokenHash = createHash("sha256").update(token).digest("hex");
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days
-
-    await prisma.adminSession.create({
-      data: {
-        tokenHash,
-        expiresAt,
-        adminUserId: admin.id,
-      },
-    });
+    const expiresAt = new Date(Date.now() + getAdminSessionTtlSeconds() * 1000);
+    let cookieValue = "";
+    try {
+      const token = randomBytes(32).toString("base64url");
+      const tokenHash = createHash("sha256").update(token).digest("hex");
+      await prisma.adminSession.create({
+        data: {
+          tokenHash,
+          expiresAt,
+          adminUserId: admin.id,
+        },
+      });
+      cookieValue = token;
+    } catch {
+      // Fallback for deployments where DB session writes fail.
+      cookieValue = createStatelessAdminToken(admin.id);
+    }
 
     const res = NextResponse.json({ ok: true });
-    res.cookies.set(getAdminCookieName(), token, {
+    res.cookies.set(getAdminCookieName(), cookieValue, {
       httpOnly: true,
       secure: false,
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      maxAge: getAdminSessionTtlSeconds(),
       path: "/",
     });
     return res;
-  } catch {
-    return NextResponse.json({ error: "Bad request" }, { status: 400 });
+  } catch (error) {
+    console.error("Admin login failed", error);
+    return NextResponse.json({ error: "Login failed" }, { status: 500 });
   }
 }

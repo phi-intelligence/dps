@@ -33,7 +33,7 @@ yarn-error.log*
 # env files — do not commit secrets; commit `.env.example` as a template only
 .env*
 !.env.example
-
+dpsheating.tar
 # vercel
 .vercel
 
