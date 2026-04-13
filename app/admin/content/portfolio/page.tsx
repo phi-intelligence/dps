@@ -22,7 +22,7 @@ interface PortfolioProject {
   category: string;
   location: string;
   description: string;
-  image: string;
+  images: string[];
   stats: { label: string; value: string }[];
   sortOrder: number;
   published: boolean;
@@ -39,7 +39,7 @@ interface Review {
   published: boolean;
 }
 
-const PROJECT_CATEGORIES = ["Heating", "Plumbing"];
+const PROJECT_CATEGORIES = ["gas", "mechanical", "electrical", "plumbing"] as const;
 
 function fetchWithAuth(url: string, options?: RequestInit) {
   return fetch(url, { ...options, credentials: "include" });
@@ -164,7 +164,7 @@ export default function AdminPortfolioPage() {
         <section className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-slate-800 dark:text-slate-200">
-              Completed Projects
+              Works
               <span className="ml-2 text-xs font-normal text-slate-500 dark:text-slate-400">
                 (drag to reorder)
               </span>
@@ -174,7 +174,7 @@ export default function AdminPortfolioPage() {
               className="inline-flex items-center gap-2 rounded-xl border border-brand-red bg-brand-red/10 text-brand-red px-3 py-1.5 text-sm font-medium hover:bg-brand-red/20 transition-colors"
             >
               <Plus size={16} />
-              Add project
+              Add work
             </button>
           </div>
 
@@ -191,8 +191,10 @@ export default function AdminPortfolioPage() {
                   setProjects((p) => [...p, json]);
                   setExpandedProject(null);
                   showMessage("success", "Project added.");
+                  return null;
                 } else {
                   showMessage("error", json.error ?? "Failed to add project.");
+                  return json.error ?? "Failed to add project.";
                 }
               }}
               onCancel={() => setExpandedProject(null)}
@@ -259,8 +261,10 @@ export default function AdminPortfolioPage() {
                         setProjects((p) => p.map((x) => (x.id === project.id ? json : x)));
                         setExpandedProject(null);
                         showMessage("success", "Project updated.");
+                        return null;
                       } else {
                         showMessage("error", json.error ?? "Failed to update.");
+                        return json.error ?? "Failed to update.";
                       }
                     }}
                     onDelete={async () => {
@@ -284,7 +288,7 @@ export default function AdminPortfolioPage() {
 
           {projects.length === 0 && expandedProject !== "new" && (
             <p className="text-sm text-slate-500 dark:text-slate-400 py-6 text-center rounded-xl border border-dashed border-slate-300 dark:border-slate-600">
-              No projects yet. Click &quot;Add project&quot; to add one.
+              No works yet. Click &quot;Add work&quot; to add one.
             </p>
           )}
         </section>
@@ -426,40 +430,73 @@ export default function AdminPortfolioPage() {
 
 interface ProjectFormProps {
   initial?: PortfolioProject | null;
-  onSave: (data: Partial<PortfolioProject>) => Promise<void>;
+  onSave: (data: Partial<PortfolioProject>) => Promise<string | null>;
   onCancel: () => void;
 }
 
 function ProjectForm({ initial, onSave, onCancel }: ProjectFormProps) {
   const [title, setTitle] = useState(initial?.title ?? "");
-  const [category, setCategory] = useState(initial?.category ?? "Heating");
+  const [category, setCategory] = useState(initial?.category ?? "gas");
   const [location, setLocation] = useState(initial?.location ?? "");
   const [description, setDescription] = useState(initial?.description ?? "");
-  const [image, setImage] = useState(initial?.image ?? "");
+  const [images, setImages] = useState<string[]>(
+    initial?.images?.length ? initial.images : []
+  );
   const [stats, setStats] = useState<{ label: string; value: string }[]>(
-    initial?.stats?.length ? initial.stats : [{ label: "", value: "" }]
+    initial?.stats?.length ? initial.stats.slice(0, 4) : [{ label: "", value: "" }]
   );
   const [published, setPublished] = useState(initial?.published ?? true);
+  const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const addStat = () => setStats((s) => [...s, { label: "", value: "" }]);
-  const updateStat = (i: number, key: "label" | "value", val: string) => {
-    setStats((s) => s.map((x, j) => (j === i ? { ...x, [key]: val } : x)));
+  const handleImageUpload = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    const picked = Array.from(files);
+    const overSize = picked.find((f) => f.size > 10 * 1024 * 1024);
+    if (overSize) {
+      alert(`"${overSize.name}" is larger than 10MB.`);
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      for (const file of picked) formData.append("files", file);
+      const res = await fetchWithAuth("/api/admin/portfolio/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || "Upload failed");
+      setImages((prev) => [...prev, ...(Array.isArray(json.urls) ? json.urls : [])]);
+    } catch (error) {
+      alert(String(error));
+    } finally {
+      setUploading(false);
+    }
   };
-  const removeStat = (i: number) => setStats((s) => s.filter((_, j) => j !== i));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+    if (images.length === 0) {
+      alert("Please upload at least one image.");
+      return;
+    }
     setSaving(true);
-    await onSave({
+    const error = await onSave({
       title,
       category,
       location,
       description,
-      image: image || "/images/central-heating.jpg",
-      stats: stats.filter((s) => s.label.trim() || s.value.trim()),
+      images,
+      stats: stats
+        .map((s) => ({ label: s.label.trim(), value: s.value.trim() }))
+        .filter((s) => s.label || s.value),
       published,
     });
+    if (error) setSubmitError(error);
     setSaving(false);
   };
 
@@ -487,7 +524,9 @@ function ProjectForm({ initial, onSave, onCancel }: ProjectFormProps) {
             className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
           >
             {PROJECT_CATEGORIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c} value={c}>
+                {c.charAt(0).toUpperCase() + c.slice(1)}
+              </option>
             ))}
           </select>
         </label>
@@ -512,49 +551,92 @@ function ProjectForm({ initial, onSave, onCancel }: ProjectFormProps) {
           className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
         />
       </label>
-      <label className="block">
-        <span className="text-xs font-medium text-slate-500 block mb-1">Image URL</span>
-        <input
-          type="text"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          placeholder="/images/central-heating.jpg"
-          className="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm"
-        />
-      </label>
       <div>
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-slate-500">Stats (label / value pairs)</span>
-          <button type="button" onClick={addStat} className="text-xs text-brand-red hover:underline">
+        <div className="flex items-center justify-between mb-2 gap-3">
+          <span className="text-xs font-medium text-slate-500">
+            Images (max file size 10MB each, compressed before storing)
+          </span>
+          <label className="inline-flex items-center gap-2 rounded-lg border border-slate-200 dark:border-slate-600 px-3 py-1.5 text-xs cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800">
+            {uploading ? "Uploading..." : "Upload images"}
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/heic,image/heif"
+              multiple
+              className="hidden"
+              onChange={(e) => handleImageUpload(e.target.files)}
+              disabled={uploading}
+            />
+          </label>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {images.map((img) => (
+            <div key={img} className="relative rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img} alt="" className="h-24 w-full object-cover" />
+              <button
+                type="button"
+                onClick={() => setImages((prev) => prev.filter((x) => x !== img))}
+                className="absolute top-1 right-1 rounded-full bg-black/70 text-white p-1"
+                title="Remove image"
+              >
+                <X size={12} />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-medium text-slate-500">Stats (max 4)</span>
+          <button
+            type="button"
+            onClick={() => {
+              if (stats.length >= 4) return;
+              setStats((prev) => [...prev, { label: "", value: "" }]);
+            }}
+            className="text-xs text-brand-red hover:underline disabled:opacity-50"
+            disabled={stats.length >= 4}
+          >
             + Add stat
           </button>
         </div>
         <div className="space-y-2">
-          {stats.map((s, i) => (
-            <div key={i} className="flex gap-2">
+          {stats.map((stat, idx) => (
+            <div key={idx} className="grid grid-cols-[1fr_1fr_auto] gap-2">
               <input
                 type="text"
-                value={s.label}
-                onChange={(e) => updateStat(i, "label", e.target.value)}
+                value={stat.label}
+                onChange={(e) =>
+                  setStats((prev) =>
+                    prev.map((s, i) => (i === idx ? { ...s, label: e.target.value } : s))
+                  )
+                }
                 placeholder="Label"
-                className="flex-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm"
+                className="rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm"
               />
               <input
                 type="text"
-                value={s.value}
-                onChange={(e) => updateStat(i, "value", e.target.value)}
+                value={stat.value}
+                onChange={(e) =>
+                  setStats((prev) =>
+                    prev.map((s, i) => (i === idx ? { ...s, value: e.target.value } : s))
+                  )
+                }
                 placeholder="Value"
-                className="flex-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm"
+                className="rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm"
               />
-              {stats.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => removeStat(i)}
-                  className="p-2 text-slate-400 hover:text-red-500"
-                >
-                  <X size={16} />
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={() =>
+                  setStats((prev) =>
+                    prev.length === 1 ? [{ label: "", value: "" }] : prev.filter((_, i) => i !== idx)
+                  )
+                }
+                className="px-2 text-slate-400 hover:text-red-500"
+                title="Remove stat"
+              >
+                <X size={16} />
+              </button>
             </div>
           ))}
         </div>
@@ -587,6 +669,11 @@ function ProjectForm({ initial, onSave, onCancel }: ProjectFormProps) {
           )}
           Save
         </button>
+        {submitError && (
+          <p className="self-center text-xs text-red-600 dark:text-red-400">
+            {submitError}
+          </p>
+        )}
       </div>
     </form>
   );
@@ -602,7 +689,7 @@ function ProjectCard({
   project: PortfolioProject;
   expanded: boolean;
   onToggle: () => void;
-  onSave: (data: Partial<PortfolioProject>) => Promise<void>;
+  onSave: (data: Partial<PortfolioProject>) => Promise<string | null>;
   onDelete: () => Promise<void>;
 }) {
   return (
@@ -615,7 +702,7 @@ function ProjectCard({
         <div>
           <p className="font-medium text-slate-900 dark:text-slate-100">{project.title}</p>
           <p className="text-xs text-slate-500">
-            {project.category} · {project.location}
+            {project.category} · {project.location} · {project.images?.length ?? 0} images
             {!project.published && (
               <span className="ml-2 text-amber-600 dark:text-amber-400">(unpublished)</span>
             )}

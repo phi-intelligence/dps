@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Lock, User, ArrowRight, ShieldCheck } from "lucide-react";
@@ -136,6 +137,13 @@ export default function AdminLoginPage() {
                 </>
               )}
             </button>
+
+            <Link
+              href="/"
+              className="w-full inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/5 py-3.5 text-sm font-sans font-semibold text-white/90 hover:bg-white/10 transition-colors"
+            >
+              View Site
+            </Link>
           </form>
 
         </div>

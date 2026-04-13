@@ -33,6 +33,22 @@ async function retryOnce<T>(fn: () => Promise<T>, label: string): Promise<T> {
   }
 }
 
+function isTransientGeminiError(error: unknown): boolean {
+  const text = String(error).toLowerCase();
+  return (
+    text.includes("503") ||
+    text.includes("429") ||
+    text.includes("unavailable") ||
+    text.includes("resource_exhausted") ||
+    text.includes("high demand") ||
+    text.includes("timeout")
+  );
+}
+
+function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /** Prefer key from .env.local on disk so restarts aren't needed when key is updated. */
 function getGeminiApiKey(): string | undefined {
   try {
@@ -96,23 +112,43 @@ async function streamGemini(
   if (!apiKey) throw new Error("GEMINI_API_KEY not set");
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-    systemInstruction: systemPrompt,
-  });
-
   const allButLast = messages.slice(0, -1);
   const lastMessage = messages[messages.length - 1];
   if (!lastMessage || lastMessage.role !== "user") throw new Error("No user message");
 
   const history = messagesToGeminiHistory(allButLast);
-  const chat = model.startChat({ history: history as never[] });
+  const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash"];
+  let result:
+    | Awaited<ReturnType<ReturnType<GoogleGenerativeAI["getGenerativeModel"]>["startChat"]>["sendMessageStream"]>
+    | undefined;
+  let lastError: unknown;
 
-  const result = await withTimeout(
-    chat.sendMessageStream(lastMessage.content),
-    25000,
-    "Gemini request timed out"
-  );
+  for (const modelName of modelsToTry) {
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: systemPrompt,
+        });
+        const chat = model.startChat({ history: history as never[] });
+        result = await withTimeout(
+          chat.sendMessageStream(lastMessage.content),
+          25000,
+          `Gemini request timed out (${modelName})`
+        );
+        break;
+      } catch (error) {
+        lastError = error;
+        if (!isTransientGeminiError(error) || attempt === 3) break;
+        await wait(350 * 2 ** (attempt - 1));
+      }
+    }
+    if (result) break;
+  }
+
+  if (!result) {
+    throw new Error(`Gemini unavailable across models: ${String(lastError)}`);
+  }
 
   const encoder = new TextEncoder();
   return new ReadableStream({
@@ -272,6 +308,17 @@ export async function POST(request: NextRequest) {
       });
     } catch {
       // console.error("[chat] Gemini failed:", …);
+      if (!process.env.OPENAI_API_KEY) {
+        console.warn("[chat] OpenAI key missing, using local fallback after Gemini failure");
+        const stream = fallbackSseStream(messages);
+        return new NextResponse(stream, {
+          headers: {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            Connection: "keep-alive",
+          },
+        });
+      }
       try {
         const stream = await retryOnce(
           () => streamOpenAI(systemPrompt, messages),

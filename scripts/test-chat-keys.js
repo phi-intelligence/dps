@@ -37,11 +37,22 @@ async function testGemini() {
   try {
     const { GoogleGenerativeAI } = require("@google/generative-ai");
     const genAI = new GoogleGenerativeAI(geminiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    const result = await model.generateContent("Reply with exactly: OK");
-    const text = result.response?.text?.() ?? "";
-    if (text.trim()) return { ok: true };
-    return { ok: false, error: "Empty response" };
+    const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash"];
+    let lastError = "Unknown error";
+
+    for (const modelName of modelsToTry) {
+      try {
+        const model = genAI.getGenerativeModel({ model: modelName });
+        const result = await model.generateContent("Reply with exactly: OK");
+        const text = result.response?.text?.() ?? "";
+        if (text.trim()) return { ok: true };
+        lastError = `Empty response from ${modelName}`;
+      } catch (e) {
+        lastError = `${modelName}: ${e.message || String(e)}`;
+      }
+    }
+
+    return { ok: false, error: lastError };
   } catch (e) {
     return { ok: false, error: e.message || String(e) };
   }

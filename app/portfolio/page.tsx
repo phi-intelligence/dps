@@ -10,6 +10,8 @@ import Image from "next/image";
 import {
   Flame,
   Wrench,
+  Zap,
+  Cog,
   MapPin,
   Award,
   CheckCircle,
@@ -19,13 +21,17 @@ import {
 } from "lucide-react";
 
 const categoryIcon: Record<string, React.ReactNode> = {
-  Heating: <Flame size={14} />,
-  Plumbing: <Wrench size={14} />,
+  gas: <Flame size={14} />,
+  plumbing: <Wrench size={14} />,
+  electrical: <Zap size={14} />,
+  mechanical: <Cog size={14} />,
 };
 
 const categoryColor: Record<string, string> = {
-  Heating: "bg-brand-red/20 text-brand-red border-brand-red/30",
-  Plumbing: "bg-brand-blue/20 text-brand-blue border-brand-blue/30",
+  gas: "bg-black/75 text-white border-[#f87171]/80",
+  plumbing: "bg-black/75 text-white border-[#60a5fa]/80",
+  electrical: "bg-black/75 text-white border-[#facc15]/80",
+  mechanical: "bg-black/75 text-white border-[#34d399]/80",
 };
 
 const stats = [
@@ -138,12 +144,117 @@ interface ProjectItem {
   category: string;
   location: string;
   description: string;
-  image: string;
+  images: string[];
   stats: { label: string; value: string }[];
 }
 
+function normalizeProject(raw: unknown): ProjectItem | null {
+  if (!raw || typeof raw !== "object") return null;
+  const p = raw as Record<string, unknown>;
+  const title = typeof p.title === "string" ? p.title : "";
+  const category = typeof p.category === "string" ? p.category.toLowerCase() : "";
+  const location = typeof p.location === "string" ? p.location : "";
+  const description = typeof p.description === "string" ? p.description : "";
+  const stats = Array.isArray(p.stats)
+    ? p.stats.filter(
+        (s): s is { label: string; value: string } =>
+          !!s &&
+          typeof s === "object" &&
+          typeof (s as { label?: unknown }).label === "string" &&
+          typeof (s as { value?: unknown }).value === "string"
+      )
+    : [];
+
+  const images = Array.isArray(p.images)
+    ? p.images.filter((img): img is string => typeof img === "string")
+    : typeof p.image === "string"
+    ? [p.image]
+    : [];
+
+  if (!title || !category || !location || !description || images.length === 0) return null;
+  return { title, category, location, description, images, stats };
+}
+
+function PortfolioProjectCard({ project }: { project: ProjectItem }) {
+  const [imageIndex, setImageIndex] = useState(0);
+  const imageCount = project.images.length;
+
+  useEffect(() => {
+    if (imageCount <= 1) return;
+    const interval = setInterval(() => {
+      setImageIndex((prev) => (prev + 1) % imageCount);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, [imageCount]);
+
+  const activeImage = project.images[Math.min(imageIndex, imageCount - 1)];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="group relative overflow-hidden rounded-[1.8rem] border border-[#2d3a46] bg-gradient-to-br from-[#05070b] via-[#0f151c] to-[#020508] text-[#d6e0ec] shadow-[0_22px_60px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(0,0,0,0.7)] transition-all duration-500"
+    >
+      <div className="relative h-56 overflow-hidden">
+        <Image
+          src={activeImage}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        <div className="absolute top-4 left-4 flex gap-2">
+          <span
+            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-[0.25em] border shadow-[0_4px_14px_rgba(0,0,0,0.45)] ${
+              categoryColor[project.category] ||
+              "border-white/70 bg-black/75 text-white"
+            }`}
+          >
+            {categoryIcon[project.category]}
+            {project.category}
+          </span>
+        </div>
+      </div>
+
+      <div className="p-6">
+        <h3 className="text-base sm:text-lg font-bold font-technical uppercase tracking-wide text-white mb-1">
+          {project.title}
+        </h3>
+        <div className="flex items-center gap-1.5 text-[#9aa3b0] text-xs sm:text-sm mb-4">
+          <MapPin size={14} className="text-[#e2c977]" />
+          {project.location}
+        </div>
+        <p className="text-[#b3c0d0] text-xs sm:text-sm md:text-base leading-relaxed mb-4">
+          {project.description}
+        </p>
+        {project.stats.length > 0 && (
+          <div className="grid grid-cols-2 gap-2">
+            {project.stats.slice(0, 4).map((stat) => (
+              <div
+                key={`${stat.label}-${stat.value}`}
+                className="rounded-xl px-3 py-2 text-center border border-white/18 bg-white/5"
+              >
+                <p className="text-sm sm:text-base font-bold text-white font-technical">
+                  {stat.value}
+                </p>
+                <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#b3c0d0]">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function PortfolioPage() {
-  const [projects, setProjects] = useState<ProjectItem[]>(FALLBACK_PROJECTS);
+  const [projects, setProjects] = useState<ProjectItem[]>(
+    FALLBACK_PROJECTS.map((p) => normalizeProject(p)).filter((p): p is ProjectItem => Boolean(p))
+  );
   const [reviews, setReviews] = useState<ReviewItem[]>(FALLBACK_REVIEWS);
 
   useEffect(() => {
@@ -151,7 +262,12 @@ export default function PortfolioPage() {
       fetch("/api/content/portfolio").then((r) => r.json()),
       fetch("/api/content/reviews").then((r) => r.json()),
     ]).then(([projData, revData]) => {
-      if (Array.isArray(projData) && projData.length > 0) setProjects(projData);
+      if (Array.isArray(projData) && projData.length > 0) {
+        const normalized = projData
+          .map((p) => normalizeProject(p))
+          .filter((p): p is ProjectItem => Boolean(p));
+        if (normalized.length > 0) setProjects(normalized);
+      }
       if (Array.isArray(revData) && revData.length > 0) setReviews(revData);
     }).catch(() => {});
   }, []);
@@ -231,7 +347,7 @@ export default function PortfolioPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-20"
+            className="text-center mb-14"
           >
             <span className="inline-block text-xs md:text-sm font-bold uppercase tracking-[0.35em] text-[#b8963a] font-technical mb-4">
               Deployment Log
@@ -239,77 +355,11 @@ export default function PortfolioPage() {
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-technical uppercase tracking-[0.2em] text-[#171b1f]">
               Completed <span className="text-[#b8963a]">Works</span>
             </h2>
-            <p className="mt-6 text-[#3c444b] max-w-2xl mx-auto text-sm md:text-base">
-              A selection of recent installations, repairs, and system upgrades
-              delivered across {COMPANY.areas}.
-            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, i) => (
-              <motion.div
-                key={`${project.title}-${i}`}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
-                className="group relative overflow-hidden rounded-[1.8rem] border border-[#2d3a46] bg-gradient-to-br from-[#05070b] via-[#0f151c] to-[#020508] text-[#d6e0ec] shadow-[0_22px_60px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:shadow-[0_26px_70px_rgba(0,0,0,0.7)] transition-all duration-500"
-              >
-                {/* Project Image */}
-                <div className="relative h-56 overflow-hidden">
-                  <Image
-                    src={project.image || "/images/central-heating.jpg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-[0.25em] border ${
-                        categoryColor[project.category] ||
-                        "border-white/20 bg-white/5 text-[#e2c977]"
-                      }`}
-                    >
-                      {categoryIcon[project.category]}
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-base sm:text-lg font-bold font-technical uppercase tracking-wide text-white mb-1">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center gap-1.5 text-[#9aa3b0] text-xs sm:text-sm mb-4">
-                    <MapPin size={14} className="text-[#e2c977]" />
-                    {project.location}
-                  </div>
-                  <p className="text-[#b3c0d0] text-xs sm:text-sm md:text-base leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-
-                  {/* Stat Pills */}
-                  <div className="flex gap-3">
-                    {project.stats.map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="flex-1 rounded-xl px-3 py-2 text-center border border-white/18 bg-white/5"
-                      >
-                        <p className="text-sm sm:text-base font-bold text-white font-technical">
-                          {stat.value}
-                        </p>
-                        <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-[#b3c0d0]">
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+              <PortfolioProjectCard key={`${project.title}-${i}`} project={project} />
             ))}
           </div>
         </div>

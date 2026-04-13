@@ -70,8 +70,11 @@ model PortfolioProject {
   category    String
   location    String
   description String
-  image       String
-  stats       String   // JSON array of { label, value }
+  image       String?
+  images      String   @default("[]") // JSON array of local image paths
+  statusLabel String   @default("Completed")
+  workStatus  String   @default("completed") // completed | recent
+  stats       String   @default("[]") // legacy JSON array of { label, value }
   published   Boolean  @default(true)
 }
 

@@ -12,11 +12,37 @@ export async function GET() {
     return NextResponse.json(
       projects.map((p) => ({
         title: p.title,
-        category: p.category,
+        category: String(p.category).toLowerCase(),
         location: p.location,
         description: p.description,
-        image: p.image,
-        stats: JSON.parse(p.stats) as { label: string; value: string }[],
+        images:
+          (() => {
+            try {
+              const parsed = JSON.parse(p.images);
+              if (Array.isArray(parsed)) return parsed.filter((x) => typeof x === "string");
+            } catch {
+              // ignore parse errors
+            }
+            return p.image ? [p.image] : [];
+          })(),
+        stats:
+          (() => {
+            try {
+              const parsed = JSON.parse(p.stats);
+              if (Array.isArray(parsed)) {
+                return parsed.filter(
+                  (s) =>
+                    s &&
+                    typeof s === "object" &&
+                    typeof (s as { label?: unknown }).label === "string" &&
+                    typeof (s as { value?: unknown }).value === "string"
+                );
+              }
+            } catch {
+              // ignore parse errors
+            }
+            return [];
+          })(),
       }))
     );
   } catch (e) {
