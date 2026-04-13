@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     const res = NextResponse.json({ ok: true });
     res.cookies.set(getAdminCookieName(), cookieValue, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "lax",
       maxAge: getAdminSessionTtlSeconds(),
       path: "/",

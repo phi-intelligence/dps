@@ -17,6 +17,22 @@ function withTimeout<T>(p: Promise<T>, ms: number, timeoutMessage: string): Prom
   ]);
 }
 
+async function retryOnce<T>(fn: () => Promise<T>, label: string): Promise<T> {
+  try {
+    return await fn();
+  } catch (firstError) {
+    try {
+      return await fn();
+    } catch (secondError) {
+      console.error(`[chat] ${label} failed twice`, {
+        first: String(firstError),
+        second: String(secondError),
+      });
+      throw secondError;
+    }
+  }
+}
+
 /** Prefer key from .env.local on disk so restarts aren't needed when key is updated. */
 function getGeminiApiKey(): string | undefined {
   try {
@@ -180,6 +196,47 @@ async function streamOpenAI(
   });
 }
 
+function buildFallbackMessage(
+  messages: Array<{ role: "user" | "assistant"; content: string }>
+): string {
+  const userMessage = [...messages].reverse().find((m) => m.role === "user")?.content ?? "";
+  const lower = userMessage.toLowerCase();
+
+  if (lower.includes("service")) {
+    return "We offer commercial and domestic Mechanical, Plumbing, Electrical, and Gas services. You can explore all options at [/services](/services), or tell me your issue and I will point you to the right page.";
+  }
+  if (lower.includes("area") || lower.includes("location") || lower.includes("where")) {
+    return "We cover London, Kent, Essex and Surrey. For service-area details, see [/service-areas](/service-areas).";
+  }
+  if (lower.includes("price") || lower.includes("cost") || lower.includes("quote")) {
+    return "Costs depend on the job scope and access. For an accurate quote, please use [/contact](/contact) or call us on +44 07932 403830.";
+  }
+  if (lower.includes("emergency") || lower.includes("gas leak") || lower.includes("smell gas")) {
+    return "If you suspect a gas leak, call 0800 111 999 immediately. For urgent non-gas issues, call +44 07932 403830 and we will assist as quickly as possible.";
+  }
+
+  return "I can help with our services, coverage areas, and booking guidance. Visit [/services](/services) or [/contact](/contact), or call us on +44 07932 403830.";
+}
+
+function fallbackSseStream(
+  messages: Array<{ role: "user" | "assistant"; content: string }>
+): ReadableStream<Uint8Array> {
+  const encoder = new TextEncoder();
+  const fallback = buildFallbackMessage(messages);
+
+  return new ReadableStream({
+    start(controller) {
+      controller.enqueue(
+        encoder.encode(`data: ${JSON.stringify({ content: fallback, done: false })}\n\n`)
+      );
+      controller.enqueue(
+        encoder.encode(`data: ${JSON.stringify({ content: "", done: true })}\n\n`)
+      );
+      controller.close();
+    },
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as ChatRequest;
@@ -202,7 +259,10 @@ export async function POST(request: NextRequest) {
     // console.log("[chat] GEMINI_API_KEY:", geminiKey ? `set (${geminiKey.length} chars)` : "MISSING", "prefix:", prefix);
 
     try {
-      const stream = await streamGemini(systemPrompt, messages);
+      const stream = await retryOnce(
+        () => streamGemini(systemPrompt, messages),
+        "Gemini stream"
+      );
       return new NextResponse(stream, {
         headers: {
           "Content-Type": "text/event-stream",
@@ -213,7 +273,10 @@ export async function POST(request: NextRequest) {
     } catch {
       // console.error("[chat] Gemini failed:", …);
       try {
-        const stream = await streamOpenAI(systemPrompt, messages);
+        const stream = await retryOnce(
+          () => streamOpenAI(systemPrompt, messages),
+          "OpenAI stream"
+        );
         return new NextResponse(stream, {
           headers: {
             "Content-Type": "text/event-stream",
@@ -221,14 +284,18 @@ export async function POST(request: NextRequest) {
             Connection: "keep-alive",
           },
         });
-      } catch {
-        // console.error("[chat] OpenAI failed:", …);
-        return NextResponse.json(
-          {
-            error: "Chat is temporarily unavailable. Please try again or call us.",
+      } catch (openaiError) {
+        console.error("[chat] Both providers unavailable, serving local fallback", {
+          error: String(openaiError),
+        });
+        const stream = fallbackSseStream(messages);
+        return new NextResponse(stream, {
+          headers: {
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            Connection: "keep-alive",
           },
-          { status: 503 }
-        );
+        });
       }
     }
   } catch {

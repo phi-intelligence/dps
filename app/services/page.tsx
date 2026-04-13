@@ -13,6 +13,16 @@ import { useContent } from "@/lib/content-provider";
 
 const categories = [
   {
+    icon: Flame,
+    title: "Gas Services",
+    description:
+      "Gas boiler installation, servicing, repairs, safety inspections, and gas compliance for both commercial and domestic properties.",
+    image: "/imagesv2/commercial_gas/commercial_boiler.jpg",
+    services: ["Commercial Gas", "Domestic Gas", "Boiler Servicing", "Safety Inspections"],
+    href: "/services/gas",
+    ctaLabel: "View Gas Services",
+  },
+  {
     icon: Wrench,
     title: "Mechanical Services",
     description:
@@ -42,16 +52,8 @@ const categories = [
     href: "/services/electrical",
     ctaLabel: "View Electrical Services",
   },
-  {
-    icon: Flame,
-    title: "Gas Services",
-    description:
-      "Gas boiler installation, servicing, repairs, safety inspections, and gas compliance for both commercial and domestic properties.",
-    image: "/imagesv2/commercial_gas/commercial_boiler.jpg",
-    services: ["Commercial Gas", "Domestic Gas", "Boiler Servicing", "Safety Inspections"],
-    href: "/services/gas",
-    ctaLabel: "View Gas Services",
-  },
+  
+  
 ];
 
 export default function ServicesPage() {
@@ -80,7 +82,7 @@ export default function ServicesPage() {
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
       <PageHero
         title="Services"
-        subtitle={`Mechanical, electrical and gas services for commercial estates and domestic homes across ${company.areas}. Heating, plumbing, compliance and emergency support.`}
+        subtitle={`Gas, mechanical and electrical services for commercial estates and domestic homes across ${company.areas}. Heating, plumbing, compliance and emergency support.`}
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
         backgroundImage="/images/blueprint-commercial-system.png"
         variant="luxury"
@@ -333,7 +335,7 @@ export default function ServicesPage() {
               Services Clients Rely On
             </h2>
             <p className="max-w-2xl mx-auto text-sm text-[#3c444b]">
-              A snapshot of the kinds of work we deliver every week across mechanical, electrical and gas.
+              A snapshot of the kinds of work we deliver every week across gas, mechanical and electrical.
             </p>
           </motion.div>
 

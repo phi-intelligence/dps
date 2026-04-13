@@ -11,6 +11,7 @@ import {
   CheckCircle,
   Settings2,
   ArrowRight,
+  Instagram,
 } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import CTABanner from "@/components/ui/CTABanner";
@@ -500,6 +501,27 @@ export default function AboutPage() {
         subtitle="Ready to book a service or get a free quote? Call us today or use our online form."
         backgroundImage="/images/blueprints/blueprint-8.png"
       />
+
+      <section className="bg-[#05080c] border-t border-white/10 py-10" aria-label="Follow DPS on social media">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+            <p className="text-[10px] md:text-xs font-technical font-bold uppercase tracking-[0.35em] text-[#9aa3b0]">
+              Follow us on social media
+            </p>
+            <a
+              href="https://www.instagram.com/dps_heating"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit DPS Heating on Instagram"
+              className="inline-flex items-center gap-3 rounded-full border border-[#E1306C]/40 bg-white/5 px-5 py-3 text-sm font-technical uppercase tracking-[0.2em] text-white transition-all hover:border-[#E1306C] hover:bg-[#E1306C]/10"
+            >
+              <Instagram size={18} className="text-[#E1306C]" />
+              @dps_heating
+              <ArrowRight size={14} className="text-[#9aa3b0]" />
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

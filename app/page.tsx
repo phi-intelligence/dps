@@ -62,8 +62,28 @@ const trustPoints = [
   },
 ];
 
+function prioritizeServices<T extends { label: string }>(
+  services: readonly T[]
+): T[] {
+  const getPriority = (label: string) => {
+    const normalized = label.toLowerCase();
+    if (normalized.includes("gas")) return 0;
+    if (normalized.includes("mechanical")) return 1;
+    if (normalized.includes("electrical")) return 2;
+    return 3;
+  };
+
+  return [...services].sort((a, b) => {
+    const priorityDiff = getPriority(a.label) - getPriority(b.label);
+    if (priorityDiff !== 0) return priorityDiff;
+    return a.label.localeCompare(b.label);
+  });
+}
+
 export default function HomePage() {
   const { openQuoteModal } = useQuoteModal();
+  const prioritizedCommercialServices = prioritizeServices(COMMERCIAL_SERVICES);
+  const prioritizedDomesticServices = prioritizeServices(DOMESTIC_SERVICES);
 
   useEffect(() => {
     registerGSAP();
@@ -115,34 +135,52 @@ export default function HomePage() {
                   alt={COMPANY.name}
                   width={320}
                   height={80}
-                  className="h-14 sm:h-24 md:h-40 w-auto object-contain"
+                  className="h-20 sm:h-24 md:h-40 w-auto object-contain"
                 />
               </motion.div>
 
-              <div className="mt-6 md:mt-8 space-y-3 md:space-y-4">
-                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-[3.1rem] font-technical font-extrabold tracking-[0.22em] md:tracking-[0.24em] leading-[1.15] uppercase text-white">
-                  Precision{" "}
-                  <span className="inline-block text-[#e2c977]">
-                    Heating
-                  </span>{" "}
-                  &amp; Plumbing
+              <div className="mt-6 md:mt-8 space-y-5 md:space-y-6">
+                <h1 className="max-w-5xl text-[1.5rem] sm:text-[2.2rem] md:text-[1.8rem] lg:text-[2.2rem] font-technical font-extrabold leading-[1.12] tracking-[0.05em] text-white">
+                  Commercial Gas &amp; Heating Specialists - 24/7 Emergency
+                  Response Across{" "}
+                  <span className="text-[#e2c977]">
+                    London &amp; The South East
+                  </span>
                 </h1>
-                <p className="max-w-md md:max-w-none text-base md:text-lg text-[#b3c0d0] font-semibold leading-relaxed md:whitespace-nowrap">
-                  Engineered heating and plumbing for commercial and domestic.
-                </p>
-                <ul className="mt-3 grid grid-cols-2 gap-x-2 gap-y-2 text-xs md:text-sm font-technical font-semibold uppercase tracking-[0.3em] text-[#d6dde7]">
-                  {SERVICE_AREAS.map((area) => (
-                    <li key={area} className="flex items-center gap-3">
-                      <Image
-                        src="/imagesv2/branding/logo.png"
-                        alt=""
-                        width={22}
-                        height={30}
-                        className="h-8 w-auto object-contain"
-                      />
-                      <span>{area}</span>
-                    </li>
-                  ))}
+                <ul className="space-y-3 text-base md:text-lg text-[#d6dde7]">
+                  <li className="flex items-start gap-3">
+                    <Image
+                      src="/imagesv2/branding/logo.png"
+                      alt=""
+                      width={24}
+                      height={32}
+                      className="mt-0.5 h-6 md:h-7 w-auto object-contain shrink-0"
+                    />
+                    <span>Reactive maintenance</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Image
+                      src="/imagesv2/branding/logo.png"
+                      alt=""
+                      width={24}
+                      height={32}
+                      className="mt-0.5 h-6 md:h-7 w-auto object-contain shrink-0"
+                    />
+                    <span>Plant room services</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Image
+                      src="/imagesv2/branding/logo.png"
+                      alt=""
+                      width={24}
+                      height={32}
+                      className="mt-0.5 h-6 md:h-7 w-auto object-contain shrink-0"
+                    />
+                    <span>
+                      Gas compliance for commercial and high-end residential
+                      sites.
+                    </span>
+                  </li>
                 </ul>
               </div>
 
@@ -177,6 +215,61 @@ export default function HomePage() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      <section
+        className="relative bg-[#0b1015] py-16 md:py-20 overflow-hidden"
+        aria-label="What we do"
+      >
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -right-24 top-0 h-44 w-72 rotate-6 rounded-[2.5rem] border border-white/8" />
+          <div className="absolute -left-20 bottom-0 h-40 w-64 -rotate-6 rounded-[2.5rem] border border-[#e2c977]/20" />
+          <div className="absolute inset-x-10 top-1/2 h-px bg-gradient-to-r from-transparent via-[#e2c977]/18 to-transparent" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-[2.2rem] border border-white/10 bg-gradient-to-br from-[#060a0f] via-[#0a1118] to-[#05080c] p-6 sm:p-8 md:p-10 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+            <div className="pointer-events-none absolute -right-16 -top-12 h-24 w-44 rotate-6 rounded-[2rem] border border-[#e2c977]/18" />
+            <div className="pointer-events-none absolute -left-12 -bottom-10 h-20 w-36 -rotate-6 rounded-[2rem] border border-white/8" />
+
+            <div className="space-y-7">
+              <div className="text-center">
+                <span className="text-[10px] font-technical font-bold uppercase tracking-[0.35em] text-[#e2c977]">
+                  Services
+                </span>
+                <h2 className="mt-3 text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.2em] text-white">
+                  What We Do
+                </h2>
+              </div>
+
+              <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+                {[
+                  "24/7 emergency breakdown response",
+                  "Commercial gas servicing and fault finding",
+                  "Plant room maintenance and repairs",
+                  "Gas safety inspections and compliance",
+                  "Mechanical repairs (pumps, valves, pipework)",
+                  "Electrical fault finding via approved partner",
+                ].map((item, index) => (
+                  <li
+                    key={item}
+                    className="group rounded-2xl border border-white/12 bg-white/[0.03] px-4 py-4 transition-all duration-300 hover:border-[#e2c977]/35 hover:bg-white/[0.06]"
+                  >
+                    <div className="flex items-start">
+                      <div>
+                        <p className="text-[10px] font-technical uppercase tracking-[0.28em] text-[#e2c977]/80 mb-1">
+                          0{index + 1}
+                        </p>
+                        <p className="text-sm text-[#d6dde7] leading-relaxed">
+                          {item}
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -308,18 +401,30 @@ export default function HomePage() {
               {[
                 {
                   title: "Commercial Systems",
-                  description:
-                    "Plant rooms, packaged boiler solutions and PPM contracts for offices, retail, and facilities management.",
+                  services: [
+                    "Plant rooms",
+                    "Packaged boiler solutions",
+                    "PPM contracts",
+                    "Offices, retail, and facilities management",
+                  ],
                 },
                 {
                   title: "Domestic Excellence",
-                  description:
-                    "Service boilers, fault finding, CP12, and emergency response with respect for your property.",
+                  services: [
+                    "Boiler servicing",
+                    "Fault finding",
+                    "CP12 certificates",
+                    "Emergency response",
+                  ],
                 },
                 {
                   title: "End-to-End Care",
-                  description:
-                    "Design, install, commission and maintain - one point of accountability across the entire lifecycle.",
+                  services: [
+                    "Design",
+                    "Install",
+                    "Commission",
+                    "Maintain",
+                  ],
                 },
               ].map((item, i) => (
                 <motion.li
@@ -330,15 +435,14 @@ export default function HomePage() {
                   transition={{ duration: 0.45, delay: 0.1 + i * 0.06 }}
                   className="rounded-2xl border border-white/15 bg-white/5 px-4 py-4 md:px-5 md:py-5 min-h-[180px] md:min-h-[205px]"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#e2c977]" />
-                    <span className="text-[11px] md:text-xs font-technical font-bold uppercase tracking-[0.3em] text-[#e2c977] leading-snug">
-                      {item.title}
-                    </span>
-                  </div>
-                  <p className="mt-3 pl-6 text-xs md:text-sm text-[#d3dbe7] leading-relaxed">
-                    {item.description}
-                  </p>
+                  <span className="text-[11px] md:text-xs font-technical font-bold uppercase tracking-[0.3em] text-[#e2c977] leading-snug">
+                    {item.title}
+                  </span>
+                  <ul className="mt-3 list-disc pl-5 text-xs md:text-sm text-[#d3dbe7] leading-relaxed space-y-1.5">
+                    {item.services.map((service) => (
+                      <li key={service}>{service}</li>
+                    ))}
+                  </ul>
                 </motion.li>
               ))}
             </ul>
@@ -370,7 +474,7 @@ export default function HomePage() {
                 Services
               </span>
               <h2 className="text-2xl md:text-3xl font-technical font-extrabold uppercase tracking-[0.26em] text-[#171b1f]">
-                Mechanical, Electrical &amp; Gas
+                Gas, Mechanical &amp; Electrical
               </h2>
               <p className="max-w-xl text-sm text-[#3c444b]">
                 Three clear paths into how we work with commercial and
@@ -410,7 +514,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977]">
-                    {COMMERCIAL_SERVICES.slice(0, 4).map((s) => (
+                    {prioritizedCommercialServices.slice(0, 4).map((s) => (
                       <span
                         key={s.label}
                         className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1"
@@ -418,9 +522,9 @@ export default function HomePage() {
                         {s.label}
                       </span>
                     ))}
-                    {COMMERCIAL_SERVICES.length > 4 && (
+                    {prioritizedCommercialServices.length > 4 && (
                       <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1">
-                        + {COMMERCIAL_SERVICES.length - 4} more
+                        + {prioritizedCommercialServices.length - 4} more
                       </span>
                     )}
                   </div>
@@ -462,7 +566,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="mt-1 flex flex-wrap gap-1.5 text-[9px] font-technical uppercase tracking-[0.28em] text-[#e2c977]">
-                    {DOMESTIC_SERVICES.slice(0, 4).map((s) => (
+                    {prioritizedDomesticServices.slice(0, 4).map((s) => (
                       <span
                         key={s.label}
                         className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1"
@@ -470,9 +574,9 @@ export default function HomePage() {
                         {s.label}
                       </span>
                     ))}
-                    {DOMESTIC_SERVICES.length > 4 && (
+                    {prioritizedDomesticServices.length > 4 && (
                       <span className="rounded-full border border-white/20 bg-white/5 px-2.5 py-1">
-                        + {DOMESTIC_SERVICES.length - 4} more
+                        + {prioritizedDomesticServices.length - 4} more
                       </span>
                     )}
                   </div>
@@ -515,16 +619,16 @@ export default function HomePage() {
                   </div>
                   <div className="mt-1 grid grid-cols-2 gap-2 text-[9px] font-technical uppercase tracking-[0.28em]">
                     <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[#e2c977]">
-                      Mechanical
-                    </span>
-                    <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[#e2c977]">
                       Gas
                     </span>
                     <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[#e2c977]">
-                      Plumbing
+                      Mechanical
                     </span>
                     <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[#e2c977]">
                       Electrical
+                    </span>
+                    <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[#e2c977]">
+                      Plumbing
                     </span>
                   </div>
                   <Link

@@ -1,13 +1,10 @@
-# Local / VPS deploy: `docker compose up -d --build`
-# Data persists in volume `dps_sqlite` at /data/dev.db inside the container.
-
 services:
   app:
-    image: dpsheating:v1.0
+    image: dpsheating:v1
     mem_limit: 512m
     memswap_limit: 768m
-    ports:
-      - "80:3000"
+    expose:
+      - "3000"
     environment:
       DATABASE_URL: file:/data/dev.db
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
@@ -22,11 +19,20 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - app
+    restart: unless-stopped
 
 volumes:
   dps_sqlite:

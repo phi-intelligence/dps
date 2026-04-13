@@ -9,6 +9,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@/lib/theme-provider";
 import { useContent } from "@/lib/content-provider";
 
+function getServicePriority(label: string) {
+  const normalized = label.toLowerCase();
+  if (normalized.includes("gas")) return 0;
+  if (normalized.includes("mechanical")) return 1;
+  if (normalized.includes("electrical")) return 2;
+  return 3;
+}
+
 export default function Header() {
   const { company, nav: navLinks } = useContent();
   const [scrolled, setScrolled] = useState(false);
@@ -118,7 +126,15 @@ export default function Header() {
                           exit={{ opacity: 0, y: 10, scale: 0.95 }}
                           className="absolute top-full left-0 mt-6 w-64 bg-brand-navy/70 bg-gray-700 backdrop-blur-2xl border border-brand-card-border rounded-2xl shadow-2xl overflow-hidden p-2"
                         >
-                          {link.children.map((child) => (
+                          {[...link.children]
+                            .sort((a, b) => {
+                              const priorityDiff =
+                                getServicePriority(a.label) -
+                                getServicePriority(b.label);
+                              if (priorityDiff !== 0) return priorityDiff;
+                              return a.label.localeCompare(b.label);
+                            })
+                            .map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
@@ -245,7 +261,15 @@ export default function Header() {
                                   className="overflow-hidden"
                                 >
                                   <div className="pl-4 mt-1 border-l-2 border-[#d4af37]/30 flex flex-col gap-1 pb-2">
-                                    {link.children.map((child) => (
+                                    {[...link.children]
+                                      .sort((a, b) => {
+                                        const priorityDiff =
+                                          getServicePriority(a.label) -
+                                          getServicePriority(b.label);
+                                        if (priorityDiff !== 0) return priorityDiff;
+                                        return a.label.localeCompare(b.label);
+                                      })
+                                      .map((child) => (
                                       <Link
                                         key={child.href}
                                         href={child.href}

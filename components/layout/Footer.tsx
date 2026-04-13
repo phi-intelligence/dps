@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, Shield, Cpu, Zap, Activity, Wrench } from "lucide-react";
+import { Phone, Mail, Instagram, Activity, Wrench } from "lucide-react";
 import { COMMERCIAL_SERVICES, DOMESTIC_SERVICES } from "@/lib/constants";
 import { useContent } from "@/lib/content-provider";
 
@@ -51,6 +51,18 @@ export default function Footer() {
                   <Mail size={18} className="text-brand-blue group-hover:text-white transition-colors" />
                 </div>
                 {company.email}
+              </a>
+              <a
+                href="https://www.instagram.com/dps_heating"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow DPS Heating on Instagram"
+                className="flex items-center gap-4 group text-sm font-bold text-brand-text hover:text-[#E1306C] transition-colors"
+              >
+                <div className="w-11 h-11 rounded-xl bg-brand-navy border border-brand-card-border flex items-center justify-center group-hover:bg-[#E1306C] group-hover:border-[#E1306C] transition-all shadow-sm">
+                  <Instagram size={18} className="text-[#E1306C] group-hover:text-white transition-colors" />
+                </div>
+                @dps_heating
               </a>
             </div>
           </div>

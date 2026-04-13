@@ -21,7 +21,7 @@ export async function POST() {
   res.cookies.set(getAdminCookieName(), "", {
     maxAge: 0,
     path: "/",
-    secure: false,
+    secure: true,
   });
   return res;
 }
