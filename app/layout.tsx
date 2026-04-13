@@ -37,7 +37,11 @@ export async function generateMetadata(): Promise<Metadata> {
     }
   }
   const company = site?.company ?? COMPANY;
+  const metadataBase = new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://dps-heating.co.uk"
+  );
   return {
+    metadataBase,
     title: {
       template: `%s | ${company.name}`,
       default: `${company.name} | DESIGN • ENGINEER • MAINTAIN`,
@@ -47,6 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: "website",
       siteName: company.name,
+    },
+    alternates: {
+      canonical: "/",
     },
     icons: {
       icon: "/imagesv2/branding/logo.png",

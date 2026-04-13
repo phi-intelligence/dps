@@ -33,16 +33,6 @@ const categories = [
     ctaLabel: "View Mechanical Services",
   },
   {
-    icon: Droplets,
-    title: "Plumbing Services",
-    description:
-      "Commercial and domestic plumbing repairs, leak diagnostics, pipework alterations, fixture installations, and emergency response.",
-    image: "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
-    services: ["Commercial Plumbing", "Domestic Plumbing", "Leak Repairs", "General Plumbing"],
-    href: "/services/plumbing",
-    ctaLabel: "View Plumbing Services",
-  },
-  {
     icon: Zap,
     title: "Electrical Services",
     description:
@@ -52,8 +42,16 @@ const categories = [
     href: "/services/electrical",
     ctaLabel: "View Electrical Services",
   },
-  
-  
+  {
+    icon: Droplets,
+    title: "Plumbing Services",
+    description:
+      "Commercial and domestic plumbing repairs, leak diagnostics, pipework alterations, fixture installations, and emergency response.",
+    image: "/imagesv2/domestic_mechanical/domestic_plumbing.jpg",
+    services: ["Commercial Plumbing", "Domestic Plumbing", "Leak Repairs", "General Plumbing"],
+    href: "/services/plumbing",
+    ctaLabel: "View Plumbing Services",
+  },
 ];
 
 export default function ServicesPage() {
@@ -77,6 +75,13 @@ export default function ServicesPage() {
       description: `Trusted by customers across ${company.areas} for reliable, quality work.`,
     },
   ];
+  const londonLandingLinks = [
+    { label: "Commercial Gas Engineer London", href: "/commercial-gas-engineer-london" },
+    { label: "Commercial Heating Engineer London", href: "/commercial-heating-engineer-london" },
+    { label: "Plant Room Maintenance London", href: "/plant-room-maintenance-london" },
+    { label: "Commercial Boiler Repair London", href: "/commercial-boiler-repair-london" },
+    { label: "Emergency Heating Engineer London", href: "/emergency-heating-engineer-london" },
+  ];
 
   return (
     <div className="bg-[#f2ede3] text-brand-text overflow-x-hidden min-h-screen">
@@ -88,6 +93,28 @@ export default function ServicesPage() {
         variant="luxury"
         darkHero
       />
+
+      <section className="relative bg-[#f2ede3] py-10 md:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-[#e0d3b8] bg-white/80 px-5 py-6 md:px-8 md:py-7 shadow-[0_16px_44px_rgba(0,0,0,0.06)]">
+            <h2 className="text-[10px] md:text-xs font-technical font-bold uppercase tracking-[0.35em] text-[#b8963a] mb-4">
+              London Specialist Services
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {londonLandingLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group inline-flex items-center justify-between rounded-xl border border-[#e0d3b8] bg-white px-4 py-3 text-[10px] md:text-xs font-technical font-extrabold uppercase tracking-[0.2em] text-[#2b3136] hover:border-[#b8963a] hover:text-[#171b1f] transition-colors"
+                >
+                  <span>{item.label}</span>
+                  <ArrowRight size={14} className="text-[#b8963a] transition-transform group-hover:translate-x-0.5" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* Key service highlights (moved below Why Choose DPS) */}

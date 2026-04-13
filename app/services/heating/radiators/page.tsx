@@ -112,7 +112,7 @@ export default function RadiatorsPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Heating", href: "/services/heating" },
+        { label: "Heating", href: "/services/gas" },
         { label: "Radiator Services" },
       ]}
       serviceValue="radiators"

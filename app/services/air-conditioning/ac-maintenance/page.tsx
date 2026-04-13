@@ -112,7 +112,7 @@ export default function ACMaintenancePage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Air Conditioning", href: "/services/air-conditioning" },
+        { label: "Air Conditioning", href: "/services/mechanical" },
         { label: "Maintenance Contracts" },
       ]}
       serviceValue="ac-maintenance"

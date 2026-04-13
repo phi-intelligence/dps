@@ -112,7 +112,7 @@ export default function CentralHeatingPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Heating", href: "/services/heating" },
+        { label: "Heating", href: "/services/gas" },
         { label: "Central Heating" },
       ]}
       serviceValue="central-heating"

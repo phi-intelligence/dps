@@ -111,7 +111,7 @@ export default function ACRepairsPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Air Conditioning", href: "/services/air-conditioning" },
+        { label: "Air Conditioning", href: "/services/mechanical" },
         { label: "AC Repairs" },
       ]}
       serviceValue="ac-repairs"

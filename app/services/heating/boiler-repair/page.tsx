@@ -114,7 +114,7 @@ export default function BoilerRepairPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Heating", href: "/services/heating" },
+        { label: "Heating", href: "/services/gas" },
         { label: "Boiler Repair" },
       ]}
       serviceValue="boiler-repair"

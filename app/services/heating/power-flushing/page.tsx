@@ -111,7 +111,7 @@ export default function PowerFlushingPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Heating", href: "/services/heating" },
+        { label: "Heating", href: "/services/gas" },
         { label: "Power Flushing" },
       ]}
       serviceValue="power-flushing"

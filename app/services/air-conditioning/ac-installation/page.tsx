@@ -111,7 +111,7 @@ export default function ACInstallationPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Air Conditioning", href: "/services/air-conditioning" },
+        { label: "Air Conditioning", href: "/services/mechanical" },
         { label: "AC Installation" },
       ]}
       serviceValue="ac-installation"

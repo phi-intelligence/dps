@@ -111,7 +111,7 @@ export default function CommercialACPage() {
       breadcrumbs={[
         { label: "Home", href: "/" },
         { label: "Services", href: "/services" },
-        { label: "Air Conditioning", href: "/services/air-conditioning" },
+        { label: "Air Conditioning", href: "/services/mechanical" },
         { label: "Commercial AC" },
       ]}
       serviceValue="commercial-ac"

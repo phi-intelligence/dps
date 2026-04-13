@@ -11,6 +11,11 @@ const quickLinks = [
   { label: "About Us", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Contact Us", href: "/contact" },
+  { label: "Commercial Gas Engineer London", href: "/commercial-gas-engineer-london" },
+  { label: "Commercial Heating Engineer London", href: "/commercial-heating-engineer-london" },
+  { label: "Plant Room Maintenance London", href: "/plant-room-maintenance-london" },
+  { label: "Commercial Boiler Repair London", href: "/commercial-boiler-repair-london" },
+  { label: "Emergency Heating Engineer London", href: "/emergency-heating-engineer-london" },
 ];
 
 export default function Footer() {
