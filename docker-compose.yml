@@ -10,6 +10,7 @@ services:
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ADMIN_REGISTER_SECRET: ${ADMIN_REGISTER_SECRET:-}
+      NEXT_PUBLIC_CARTO_API_KEY: ${NEXT_PUBLIC_CARTO_API_KEY:-}
       NODE_OPTIONS: "--max-old-space-size=256"
     volumes:
       - dps_sqlite:/data

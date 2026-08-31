@@ -176,7 +176,7 @@ export async function getPortfolio(): Promise<PortfolioProjectItem[]> {
       category: p.category,
       location: p.location,
       description: p.description,
-      image: p.image,
+      image: p.image ?? "",
       stats: JSON.parse(p.stats) as { label: string; value: string }[],
     }));
   } catch {

@@ -9,9 +9,18 @@ import { SERVICE_AREAS } from "@/lib/constants";
 
 /* ── Tile URLs ─────────────────────────────────────────── */
 // Both modes use Voyager — dark mode inverts them via CSS filter
+const CARTO_VOYAGER =
+  "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
+
+function cartoTileUrl(): string {
+  const key = process.env.NEXT_PUBLIC_CARTO_API_KEY?.trim();
+  if (!key) return CARTO_VOYAGER;
+  return `${CARTO_VOYAGER}?key=${encodeURIComponent(key)}`;
+}
+
 const TILES = {
-  light: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-  dark:  "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+  light: cartoTileUrl(),
+  dark: cartoTileUrl(),
 };
 
 /* ── Service area coordinates (London, Kent, Essex, Surrey) ─────────────────────────── */

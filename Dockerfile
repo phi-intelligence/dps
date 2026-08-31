@@ -21,6 +21,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 # Build-time DB for prisma + Next data collection during `next build`
 ENV DATABASE_URL="file:./prisma/dev.db"
+# Inlined into client bundle at build time (ServiceAreasMap)
+ARG NEXT_PUBLIC_CARTO_API_KEY
+ENV NEXT_PUBLIC_CARTO_API_KEY=$NEXT_PUBLIC_CARTO_API_KEY
 
 RUN npx prisma generate \
   && npx prisma db push \

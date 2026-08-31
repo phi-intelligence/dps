@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
             label: s.label.trim(),
             value: s.value.trim(),
           }))
-          .filter((s) => s.label || s.value)
+          .filter((s: { label: string; value: string }) => s.label || s.value)
       : [];
     if (statsArr.length > 4) {
       return NextResponse.json({ error: "Maximum of 4 stats allowed" }, { status: 400 });

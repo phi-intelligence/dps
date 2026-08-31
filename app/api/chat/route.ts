@@ -118,9 +118,13 @@ async function streamGemini(
 
   const history = messagesToGeminiHistory(allButLast);
   const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash"];
-  let result:
-    | Awaited<ReturnType<ReturnType<GoogleGenerativeAI["getGenerativeModel"]>["startChat"]>["sendMessageStream"]>
-    | undefined;
+  let result: Awaited<
+    ReturnType<
+      ReturnType<
+        ReturnType<GoogleGenerativeAI["getGenerativeModel"]>["startChat"]
+      >["sendMessageStream"]
+    >
+  > | undefined;
   let lastError: unknown;
 
   for (const modelName of modelsToTry) {
